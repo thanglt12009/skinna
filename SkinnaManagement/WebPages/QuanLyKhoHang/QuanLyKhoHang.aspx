@@ -1,0 +1,285 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QuanLyKhoHang.aspx.cs" Inherits="SkinnaManagement.WebPages.QuanLyKhoHang.QuanLyKhoHang" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="../../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#TableId').DataTable(
+
+            {
+
+                "columnDefs": [
+
+                  { "width": "5%", "targets": [0] },
+
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
+
+                ],
+
+                "language":
+
+                  {
+
+                      "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+
+                  },
+
+                "processing": true,
+
+                "serverSide": true,
+
+                "ajax":
+
+                  {
+
+                      "url": "QuanLyKhoHang.aspx/GetData",
+
+                      "contentType": "application/json",
+
+                      "type": "GET",
+
+                      "dataType": "JSON",
+
+                      "data": function (d) {
+
+                          return d;
+
+                      },
+
+                      "dataSrc": function (json) {
+
+                          json.draw = json.d.draw;
+
+                          json.recordsTotal = json.d.recordsTotal;
+
+                          json.recordsFiltered = json.d.recordsFiltered;
+
+                          json.data = json.d.data;
+
+                          var return_data = json;
+
+                          return return_data.data;
+
+                      }
+
+                  },
+
+                "columns": [
+
+                      { "data": "ID" },
+
+                      { "data": "MaSanPham" },
+
+                      { "data": "TenSP" },
+
+                      { "data": "NgayNhapHang" },
+
+                      { "data": "SoLuongBan" },
+
+                      { "data": "SoLuongTon" },
+
+                      { "data": "TongTien" }
+
+                ]
+
+            });
+
+        });
+        function pageLoad() {
+            $("#btSelectAll").click(function () {
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            });
+        }
+    </script>
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" AsyncPostBackTimeout="300">
+        </asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
+            <contenttemplate>
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+            <!--<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><svg class="glyph stroked home"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-home"></use></svg></a></li>
+				<li class="active">Icons</li>
+			</ol>
+		</div><!--/.row-->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Quản Lý Kho Hàng Xuất Nhập</h1>
+                </div>
+            </div>
+            <!--/.row-->
+
+            <button type="submit" runat="server" id="btnAdd" onserverclick="btnAdd_ServerClick" class="btn btn-danger">Thêm Mới</button>
+            
+            <br />
+            <br />
+            <table class="table table-striped table-bordered table-hover"  
+ 
+                   id="TableId"  
+ 
+                   cellspacing="0"  
+ 
+                   align="center"  
+ 
+                   width="100%">  
+ 
+                 <thead>  
+ 
+                   <tr>  
+ 
+                      <th>ID</th>
+                <th>Mã SP</th>
+                <th>Tên SP</th>
+                <th>Ngày Nhập Hàng</th>
+                <th>Số lượng Bán</th>
+                <th>Số Lượng Tồn</th>
+                <th>Tổng Tiền Bán</th>
+ 
+                   </tr>  
+ 
+                 </thead>  
+ 
+               </table>  
+      <%--      <table id="tblData" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mã SP</th>
+                <th>Tên SP</th>
+                <th>Ngày Nhập Hàng</th>
+                <th>Số lượng Bán</th>
+                <th>Số Lượng Tồn</th>
+                <th>Tổng Tiền Bán</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            
+        </tfoot>
+        <tbody>
+         
+        </tbody>
+    </table>--%>
+         <%--   <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">Advanced Table</div>-->
+                        <div class="panel-body">
+                            <div class="bootstrap-table">
+                                <div class="fixed-table-toolbar">
+                                    <div class="columns btn-group pull-right">
+                                        <button class="btn btn-default" type="button" name="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+                                        <button class="btn btn-default" type="button" name="toggle" title="Toggle"><i class="glyphicon glyphicon glyphicon-list-alt icon-list-alt"></i></button>
+                                        <div class="keep-open btn-group" title="Columns">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th icon-th"></i><span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <label>
+                                                        <input type="checkbox" data-field="id" value="1" checked="checked">
+                                                        Item ID</label></li>
+                                                <li>
+                                                    <label>
+                                                        <input type="checkbox" data-field="name" value="2" checked="checked">
+                                                        Item Name</label></li>
+                                                <li>
+                                                    <label>
+                                                        <input type="checkbox" data-field="price" value="3" checked="checked">
+                                                        Item Price</label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right search">
+                                        <input class="form-control" type="text" placeholder="Search">
+                                    </div>
+                                </div>
+                                <div class="fixed-table-container">
+                                    <div class="fixed-table-header">
+                                        <table></table>
+                                    </div>
+                                    <div class="fixed-table-body">
+                                        <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
+                                        <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="bs-checkbox " style="width: 36px;">
+                                                        <div class="th-inner ">
+                                                            <input name="btSelectAll" id="btSelectAll" type="checkbox"/>
+                                                        </div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">ID</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Mã SP</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Tên SP</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Ngày Nhập Hàng</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Số lượng Bán</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Số Lượng Tồn</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                    <th style="">
+                                                        <div class="th-inner sortable">Tổng Tiền Bán</div>
+                                                        <div class="fht-cell"></div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody" runat="server">
+                                                <tr class="no-records-found" id="no_records" runat="server">
+                                                    <td colspan="4">Không tìm thấy sản phẩm nào</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="fixed-table-pagination">
+                                         <div class="pull-left pagination-detail">
+                                            <span id="resultLabel" runat="server" class="pagination-info">Showing 1 to 10 of 10 rows</span><span class="page-list"><span class="btn-group dropup">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span runat="server" id="result_number" class="page-size">10</span> <span class="caret"></span></button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a id="Result_10" runat="server" onserverclick="Result_10_ServerClick" href="javascript:void(0)">10</a></li>
+                                                    <li><a id="Result_25" runat="server" onserverclick="Result_25_ServerClick" href="javascript:void(0)">25</a></li>
+                                                    <li><a id="Result_50" runat="server" onserverclick="Result_50_ServerClick" href="javascript:void(0)">50</a></li>
+                                                    <li><a id="Result_100" runat="server" onserverclick="Result_100_ServerClick" href="javascript:void(0)">100</a></li>
+                                                </ul>
+                                            </span>records per page</span>
+                                        </div>
+                                        <div class="pull-right pagination">
+                                            <ul class="pagination">
+                                                <li class="page-first disabled"><a href="javascript:void(0)">&lt;&lt;</a></li>
+                                                <li class="page-pre disabled"><a href="javascript:void(0)">&lt;</a></li>
+                                                <li class="page-next disabled"><a href="javascript:void(0)">&gt;</a></li>
+                                                <li class="page-last disabled"><a href="javascript:void(0)">&gt;&gt;</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>--%>
+            
+             </div>
+             </contenttemplate>
+        </asp:UpdatePanel>
+    </form>
+
+
+</asp:Content>

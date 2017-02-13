@@ -1,0 +1,102 @@
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\csc.exe
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\System.Collections.Immutable.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\System.Reflection.Metadata.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\vbc.exe
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\VBCSCompiler.exe
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\VBCSCompiler.exe.config
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.dll.config
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.pdb
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.pdb
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.csprojResolveAssemblyReference.cache
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.ServiceLocation.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.Unity.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.Unity.Interception.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.pdb
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.xml
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.pdb
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.xml
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.pdb
+E:\WORKING\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.xml
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\csc.exe
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\vbc.exe
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\VBCSCompiler.exe
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.dll.config
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinnaManagement.pdb
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.Unity.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.pdb
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.xml
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.pdb
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.xml
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.pdb
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.xml
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.csprojResolveAssemblyReference.cache
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.dll
+C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\obj\Debug\SkinnaManagement.pdb
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\csc.exe
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\System.Collections.Immutable.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\System.Reflection.Metadata.dll
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\vbc.exe
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\VBCSCompiler.exe
+D:\git\skinnaweb\SkinnaManagement\bin\roslyn\VBCSCompiler.exe.config
+D:\git\skinnaweb\SkinnaManagement\bin\SkinnaManagement.dll.config
+D:\git\skinnaweb\SkinnaManagement\bin\SkinnaManagement.dll
+D:\git\skinnaweb\SkinnaManagement\bin\SkinnaManagement.pdb
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.ServiceLocation.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.Unity.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.Unity.Interception.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+D:\git\skinnaweb\SkinnaManagement\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Data.pdb
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Data.xml
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Entities.pdb
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Entities.xml
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Web.pdb
+D:\git\skinnaweb\SkinnaManagement\bin\SkinCare.Web.xml
+D:\git\skinnaweb\SkinnaManagement\obj\Debug\SkinnaManagement.csprojResolveAssemblyReference.cache
+D:\git\skinnaweb\SkinnaManagement\obj\Debug\SkinnaManagement.dll
+D:\git\skinnaweb\SkinnaManagement\obj\Debug\SkinnaManagement.pdb

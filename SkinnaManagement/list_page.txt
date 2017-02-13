@@ -1,0 +1,13 @@
+﻿Danh sach cac trang :
+
+1/ Login
+2/ Home
+3/ Quan Ly Khach hang
+4/ Nhap/Edit Khach Hang
+5/ Quan Ly Don Hang
+6/ Nhap/Edit Don Hang
+7/ Quan Ly Kho Hang
+8/ Nhap/Edit Kho Hang
+9/ Quan Ly user
+10/ Nhap/Edit User
+ 
