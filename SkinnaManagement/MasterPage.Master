@@ -11,11 +11,6 @@
     <link href="css/datepicker3.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
-
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script> -->
 </head>
 <body>
     <!--Icons-->
@@ -23,14 +18,9 @@
     <script src='<%= ResolveUrl("~/js/jquery-1.11.1.min.js") %>'></script>
     <script src='<%= ResolveUrl("~/js/bootstrap.min.js") %>'></script>
     <script type="text/javascript" src='<%= ResolveUrl("~/js/datatables.min.js") %>'></script>
-    <%--<script src='<%= ResolveUrl("~/js/chart.min.js") %>'></script>
-    <script src='<%= ResolveUrl("~/js/chart-data.js") %>'></script>--%>
-    <%-- <script src='<%= ResolveUrl("~/js/easypiechart.js") %>'></script>  --%>
-    <%--<script src='<%= ResolveUrl("js/easypiechart-data.js") %>'></script>--%>
     <script src='<%= ResolveUrl("js/bootstrap-datepicker.js") %>'></script>
     <script>
-        //$('#calendar').datepicker({
-        //});
+        
 
         !function ($) {
             $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
@@ -114,45 +104,7 @@
             <li class='<%= SetCssClass("QuanLyUser.aspx") %>'><a href="../QuanLyUser/QuanLyUser.aspx">
                 <svg class="glyph stroked pencil">
                     <use xlink:href="#stroked-pencil"></use></svg>
-                User</a></li>
-            <!--<li><a href="panels.html">
-                <svg class="glyph stroked app-window">
-                    <use xlink:href="#stroked-app-window"></use></svg>
-                Alerts &amp; Panels</a></li>
-            <li><a href="icons.html">
-                <svg class="glyph stroked star">
-                    <use xlink:href="#stroked-star"></use></svg>
-                Icons</a></li>
-            <li class="parent ">
-                <a href="#">
-                    <span data-toggle="collapse" href="#sub-item-1">
-                        <svg class="glyph stroked chevron-down">
-                            <use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown 
-				</a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right">
-                                <use xlink:href="#stroked-chevron-right"></use></svg>
-                            Sub Item 1
-						</a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right">
-                                <use xlink:href="#stroked-chevron-right"></use></svg>
-                            Sub Item 2
-						</a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right">
-                                <use xlink:href="#stroked-chevron-right"></use></svg>
-                            Sub Item 3
-						</a>
-                    </li>
-                </ul>
-            </li>-->
+                User</a></li>            
             <li role="presentation" class="divider"></li>
             <li class='<%= SetCssClass("Login.aspx") %>'><a href="../Login/Login.aspx">
                 <svg class="glyph stroked male-user">
