@@ -58,21 +58,25 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="SkinCare.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\SkinCare.Data.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Data.SqlClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\SkinCare.Data.SqlClient.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\SkinCare.Entities.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\SkinCare.Web.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -156,6 +160,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\DAL\DonHangView.cs" />
+    <Compile Include="App\DAL\KhachHangView.cs" />
+    <Compile Include="App\DAL\KhoHangSanPhamView.cs" />
     <Compile Include="MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -264,7 +271,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\DAL\" />
     <Folder Include="tables\" />
     <Folder Include="template_html\css\" />
     <Folder Include="template_html\fonts\" />
