@@ -34,28 +34,28 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                 {
                     case "0":
                         // Setting. 
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.ID).ToList()
-                                                             : data.OrderBy(p => p.ID).ToList();
-                        break;
-                    case "1":
-                        // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaSanPham).ToList()
                                                              : data.OrderBy(p => p.MaSanPham).ToList();
                         break;
-                    case "2":
+                    case "1":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TenSP).ToList()
                                                              : data.OrderBy(p => p.TenSP).ToList();
                         break;
-                    case "3":
+                    case "2":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayNhapHang).ToList()
                                                              : data.OrderBy(p => p.NgayNhapHang).ToList();
                         break;
+                    case "3":
+                        // Setting.  
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.SoLuongBan).ToList()
+                                                             : data.OrderBy(p => p.SoLuongBan).ToList();
+                        break;
                     case "4":
                         // Setting. 
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.SoLuongBan).ToList()
-                                                              : data.OrderBy(p => p.SoLuongBan).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TongTienBan).ToList()
+                                                              : data.OrderBy(p => p.TongTienBan).ToList();
                         break;
                     case "5":
                         // Setting.  
@@ -64,8 +64,8 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                         break;
                     case "6":
                         // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TongTien).ToList()
-                                                             : data.OrderBy(p => p.TongTien).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TongTienTon).ToList()
+                                                             : data.OrderBy(p => p.TongTienTon).ToList();
                         break;
                     default:
                         // Setting.  
@@ -96,8 +96,12 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                 viewItem.TenSP = item.TenSanPham;
                 viewItem.NgayNhapHang = item.NgayNhapHang.ToString();
                 viewItem.SoLuongBan = item.SoLuongBanRa;
-                viewItem.SoLuongTon = item.SoLuongTonKho;
-                viewItem.TongTien = 5000;
+                if (item.SoLuongTonKho <= 5)
+                    viewItem.SoLuongTon = "<label style=\" color: red;\">" + item.SoLuongTonKho + "</label>";
+                else
+                    viewItem.SoLuongTon = item.SoLuongTonKho.ToString();
+                viewItem.TongTienBan = 5000;
+                viewItem.TongTienTon = 5000;
                 viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.MaSanPham + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                 id++;
@@ -134,7 +138,8 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                                 p.NgayNhapHang.ToLower().Contains(search.ToLower()) ||
                                 p.SoLuongBan.ToString().ToLower().Contains(search.ToLower()) ||
                                 p.TenSP.ToLower().Contains(search.ToLower()) ||
-                                p.TongTien.ToString().ToLower().Contains(search.ToLower()) ||
+                                p.TongTienBan.ToString().ToLower().Contains(search.ToLower()) ||
+                                p.TongTienTon.ToString().ToLower().Contains(search.ToLower()) ||
                                 p.SoLuongTon.ToString().ToLower().Contains(search.ToLower())).ToList();
                 }
                 // Sorting.  

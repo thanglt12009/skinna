@@ -1,4 +1,5 @@
 ﻿using SkinCare.Data;
+using SkinCare.Data.Bases;
 using SkinCare.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
     public partial class NewDonHang : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {           
+        {
             if (!this.IsPostBack)
             {
                 ErrorMessage.InnerText = string.Empty;
                 TList<NguonDonHang> nguonDonHanglist = DataRepository.NguonDonHangProvider.GetAll();
-                if(nguonDonHanglist != null && nguonDonHanglist.Count > 0)
+                if (nguonDonHanglist != null && nguonDonHanglist.Count > 0)
                 {
                     //Building an HTML string.
                     StringBuilder html = new StringBuilder();
@@ -30,7 +31,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     }
                 }
                 TList<PhuongThucThanhToan> thanhToanList = DataRepository.PhuongThucThanhToanProvider.GetAll();
-                if(thanhToanList != null && thanhToanList.Count > 0)
+                if (thanhToanList != null && thanhToanList.Count > 0)
                 {
                     //Building an HTML string.
                     StringBuilder html = new StringBuilder();
@@ -49,43 +50,35 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         protected void btnSubmit_ServerClick(object sender, EventArgs e)
         {
-            int makhachHang = 0;
-            int.TryParse(MaKhachHang.Value, out makhachHang);
-            bool validInfo = true;
-            validInfo = ValidateDonHang(makhachHang);
-            if (validInfo)
+            DonHang newDonHang = new DonHang();
+            //newDonHang.MaKhachHang = makhachHang;
+            newDonHang.MaNguonDonHang = int.Parse(ddlNguonDonHang.Value);
+            newDonHang.NguoiDatHang = tenNguoiNhan.Value;
+            newDonHang.MaPhuongThucThanhToan = int.Parse(ThanhToan.Value);
+            newDonHang.CachThucNhanHang = GiaoHang.Value;
+            newDonHang.NgayTaoDonHang = DateTime.Now;
+            newDonHang.MaTrangThaiDonHang = 1;
+            try
             {
-                DonHang newDonHang = new DonHang();
-                newDonHang.MaKhachHang = makhachHang;
-                newDonHang.MaNguonDonHang = int.Parse(ddlNguonDonHang.Value);
-                newDonHang.NguoiDatHang = tenNguoiNhan.Value;
-                newDonHang.MaPhuongThucThanhToan = int.Parse(ThanhToan.Value);
-                newDonHang.CachThucNhanHang = GiaoHang.Value;
-                newDonHang.NgayTaoDonHang = DateTime.Now;
-                newDonHang.MaTrangThaiDonHang = 1;
-                try
-                {
-                    DataRepository.DonHangProvider.Insert(newDonHang);
-                    Response.Redirect("QuanLyDonHang.aspx");
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage.InnerText = "Đã có lỗi khi tạo đơn hàng.";
-                }
+                DataRepository.DonHangProvider.Insert(newDonHang);
+                Response.Redirect("QuanLyDonHang.aspx");
             }
-            else
-                return;
+            catch (Exception ex)
+            {
+                ErrorMessage.InnerText = "Đã có lỗi khi tạo đơn hàng.";
+            }
         }
 
-        private bool ValidateDonHang(int makhachHang)
+        protected void btnSoDienThoai_Click(object sender, EventArgs e)
         {
-            KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(makhachHang);
-            if(khachHang == null)
-            {
-                ErrorMessage.InnerText = "Mã Khách Hàng không tồn tại";
-                return false;
-            }
-            return true;
+            KhachHangParameterBuilder query = new KhachHangParameterBuilder();
+            query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
+            KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
+            TenKhachHang.Text = khachHang.TenKhachHang;
+        }
+        protected void btnAddSanpham_ServerClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

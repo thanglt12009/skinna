@@ -11,18 +11,18 @@ namespace SkinnaManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.Page.User.Identity.IsAuthenticated && !this.Page.Request.FilePath.Contains("Login.aspx"))
-            {
-                Response.Redirect("~/WebPages/Login/Login.aspx");
-            }
-            else if (this.Page.User.Identity.IsAuthenticated && !this.Page.Request.FilePath.Contains("Login.aspx"))
-            {
-                lbUserName.Text = Page.User.Identity.Name;
-            }
-            else
-            {
-                lbUserName.Text = "Anonymous";
-            }
+            //if (!this.Page.User.Identity.IsAuthenticated && !this.Page.Request.FilePath.Contains("Login.aspx"))
+            //{
+            //    Response.Redirect("~/WebPages/Login/Login.aspx");
+            //}
+            //else if (this.Page.User.Identity.IsAuthenticated && !this.Page.Request.FilePath.Contains("Login.aspx"))
+            //{
+            //    lbUserName.Text = Page.User.Identity.Name;
+            //}
+            //else
+            //{
+            //    lbUserName.Text = "Anonymous";
+            //}
         }
 
         //Add the following method

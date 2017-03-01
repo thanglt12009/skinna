@@ -20,8 +20,6 @@
     <script type="text/javascript" src='<%= ResolveUrl("~/js/datatables.min.js") %>'></script>
     <script src='<%= ResolveUrl("js/bootstrap-datepicker.js") %>'></script>
     <script>
-        
-
         !function ($) {
             $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
                 $(this).find('em:first').toggleClass("glyphicon-minus");

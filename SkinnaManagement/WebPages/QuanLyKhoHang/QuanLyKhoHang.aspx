@@ -37,14 +37,14 @@
                           return return_data.data;
                       }
                   },
-                "columns": [
-                      { "data": "ID" },
+                "columns": [                      
                       { "data": "MaSanPham" },
                       { "data": "TenSP" },
                       { "data": "NgayNhapHang" },
                       { "data": "SoLuongBan" },
+                      { "data": "TongTienBan" },
                       { "data": "SoLuongTon" },
-                      { "data": "TongTien" },
+                      { "data": "TongTienTon" },
                       { "data": "Edit" }
                 ]
             });
@@ -68,13 +68,13 @@
             <table class="table table-striped table-bordered table-hover" id="KhoHangTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Mã SP</th>
                         <th>Tên SP</th>
                         <th>Ngày Nhập Hàng</th>
                         <th>Số lượng Bán</th>
-                        <th>Số Lượng Tồn</th>
                         <th>Tổng Tiền Bán</th>
+                        <th>Số Lượng Tồn</th>
+                        <th>Tổng Tiền Tồn</th>
                         <th></th>
                     </tr>
                 </thead>

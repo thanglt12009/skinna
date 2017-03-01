@@ -22,7 +22,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         protected void btnSubmit_ServerClick(object sender, EventArgs e)
         {
             int makhachHang = 0;
-            int.TryParse(maKhachHang.Value, out makhachHang);
+            //int.TryParse(maKhachHang.Value, out makhachHang);
             bool validInfo = true;
             validInfo = ValidateKhachHang(makhachHang);
             if (validInfo)

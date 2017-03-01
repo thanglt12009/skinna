@@ -17,9 +17,11 @@ namespace SkinnaManagement.App.DAL
 
         public int? SoLuongBan { get; set; }
 
-        public int? SoLuongTon { get; set; }
+        public string SoLuongTon { get; set; }
 
-        public double TongTien { get; set; }
+        public double TongTienBan { get; set; }
+
+        public double TongTienTon { get; set; }
 
         public string Edit { get; set; }
     }

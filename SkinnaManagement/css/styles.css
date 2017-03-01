@@ -765,11 +765,6 @@ h1.page-header {
 	margin: 0px;
 }
 
-.panel-body input[type=checkbox]:checked + label { 
-	text-decoration: line-through;
-	color: #777; 
-}
-
 .todo-list-item {
 	list-style: none;
 	line-height: 0.9;

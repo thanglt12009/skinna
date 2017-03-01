@@ -87,12 +87,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +122,8 @@
     <Content Include="list_page.txt" />
     <Content Include="packages.config" />
     <Content Include="MasterPage.Master" />
+    <Content Include="UserControl\LieuTrinh.ascx" />
+    <Content Include="UserControl\SanPhamDaMua.ascx" />
     <Content Include="WebPages\Home\HomeDashBoard.aspx" />
     <Content Include="WebPages\Login\Login.aspx" />
     <Content Include="WebPages\QuanLyDonHang\EditDonHang.aspx" />
@@ -171,6 +173,20 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\LieuTrinh.ascx.cs">
+      <DependentUpon>LieuTrinh.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LieuTrinh.ascx.designer.cs">
+      <DependentUpon>LieuTrinh.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SanPhamDaMua.ascx.cs">
+      <DependentUpon>SanPhamDaMua.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SanPhamDaMua.ascx.designer.cs">
+      <DependentUpon>SanPhamDaMua.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebPages\Home\HomeDashBoard.aspx.cs">
       <DependentUpon>HomeDashBoard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
