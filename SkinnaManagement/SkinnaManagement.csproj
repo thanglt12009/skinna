@@ -64,15 +64,15 @@
     </Reference>
     <Reference Include="SkinCare.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Data.SqlClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.SqlClient.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Entities.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Entities.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -158,6 +158,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\DAL\UserView.cs" />
     <Compile Include="App\DAL\DonHangView.cs" />
     <Compile Include="App\DAL\KhachHangView.cs" />
     <Compile Include="App\DAL\KhoHangSanPhamView.cs" />

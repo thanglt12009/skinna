@@ -19,9 +19,9 @@ namespace SkinnaManagement.App.DAL
 
         public string SoLuongTon { get; set; }
 
-        public double TongTienBan { get; set; }
+        public decimal TongTienBan { get; set; }
 
-        public double TongTienTon { get; set; }
+        public decimal TongTienTon { get; set; }
 
         public string Edit { get; set; }
     }

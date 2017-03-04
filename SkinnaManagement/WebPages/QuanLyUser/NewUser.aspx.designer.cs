@@ -13,13 +13,13 @@ namespace SkinnaManagement.WebPages.QuanLyUser {
     public partial class NewUser {
         
         /// <summary>
-        /// TenUser control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TenUser;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorMessage;
         
         /// <summary>
         /// UserName control.
@@ -31,22 +31,31 @@ namespace SkinnaManagement.WebPages.QuanLyUser {
         protected global::System.Web.UI.HtmlControls.HtmlInputText UserName;
         
         /// <summary>
-        /// NgayTao control.
+        /// Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl NgayTao;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword Password;
         
         /// <summary>
-        /// NgayCapNhap control.
+        /// PasswordConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl NgayCapNhap;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword PasswordConfirm;
+        
+        /// <summary>
+        /// UserRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect UserRole;
         
         /// <summary>
         /// btnSubmit control.

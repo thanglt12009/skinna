@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using SkinCare.Data.Bases;
+using SkinCare.Entities;
+using SkinCare.Data;
+
 namespace SkinnaManagement.WebPages.Login
 {
     public partial class Login : System.Web.UI.Page
@@ -25,8 +29,11 @@ namespace SkinnaManagement.WebPages.Login
         {
             if (username.Value == "" || password.Value == "")
                 return false;
-            if ((username.Value == "Admin" && password.Value == "Admin")
-                || (username.Value == "User" && password.Value == "User"))
+            UserParameterBuilder query = new UserParameterBuilder();
+            query.Append(UserColumn.UserName, username.Value);
+            query.Append(UserColumn.Pwd, password.Value);
+            User user = DataRepository.UserProvider.Find(query.GetParameters())[0];
+            if (user != null)
                 return true;
             return false;
         }

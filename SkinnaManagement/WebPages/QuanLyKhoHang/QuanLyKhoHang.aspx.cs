@@ -100,8 +100,10 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                     viewItem.SoLuongTon = "<label style=\" color: red;\">" + item.SoLuongTonKho + "</label>";
                 else
                     viewItem.SoLuongTon = item.SoLuongTonKho.ToString();
-                viewItem.TongTienBan = 5000;
-                viewItem.TongTienTon = 5000;
+                decimal tongTienBan = item.SoLuongBanRa.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
+                decimal tongTienTon = item.SoLuongTonKho.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
+                viewItem.TongTienBan = tongTienBan;
+                viewItem.TongTienTon = tongTienTon;
                 viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.MaSanPham + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                 id++;

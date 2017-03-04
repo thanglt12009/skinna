@@ -22,15 +22,6 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorMessage;
         
         /// <summary>
-        /// MaSanPham control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText MaSanPham;
-        
-        /// <summary>
         /// tenSanPham control.
         /// </summary>
         /// <remarks>
