@@ -1,0 +1,74 @@
+﻿Microsoft Visual Studio Solution File, Format Version 13.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Entities", "SkinCare.Entities\SkinCare.Entities.csproj", "{6D4E8275-88DA-444F-952A-5BD4572CDF48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data", "SkinCare.Data\SkinCare.Data.csproj", "{BD0ADAB0-9450-420E-8481-44F344820377}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data.SqlClient", "SkinCare.Data.SqlClient\SkinCare.Data.SqlClient.csproj", "{14943E16-ADC4-44EA-9951-3971897DABB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Web", "SkinCare.Web\SkinCare.Web.csproj", "{9E498184-E470-40EB-B4EB-CB574A172C48}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\SkinCare.Website\", "SkinCare.Website", "{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "4.5"
+		ProjectReferences = "{6D4E8275-88DA-444F-952A-5BD4572CDF48}|SkinCare.Entities.dll;{BD0ADAB0-9450-420E-8481-44F344820377}|SkinCare.Data.dll;{14943E16-ADC4-44EA-9951-3971897DABB6}|SkinCare.Data.SqlClient.dll;{9E498184-E470-40EB-B4EB-CB574A172C48}|SkinCare.Web.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/SkinCare.Website"
+		Debug.AspNetCompiler.PhysicalPath = "SkinCare.Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SkinCare.Website\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/SkinCare.Website"
+		Release.AspNetCompiler.PhysicalPath = "SkinCare.Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SkinCare.Website\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2005"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetTiers", "NetTiers", "{F3A10C8D-3227-449F-A2CB-014DE2D7F415}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.cs = AssemblyInfo.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D4E8275-88DA-444F-952A-5BD4572CDF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4E8275-88DA-444F-952A-5BD4572CDF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4E8275-88DA-444F-952A-5BD4572CDF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4E8275-88DA-444F-952A-5BD4572CDF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD0ADAB0-9450-420E-8481-44F344820377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0ADAB0-9450-420E-8481-44F344820377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0ADAB0-9450-420E-8481-44F344820377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0ADAB0-9450-420E-8481-44F344820377}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14943E16-ADC4-44EA-9951-3971897DABB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14943E16-ADC4-44EA-9951-3971897DABB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14943E16-ADC4-44EA-9951-3971897DABB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14943E16-ADC4-44EA-9951-3971897DABB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E498184-E470-40EB-B4EB-CB574A172C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E498184-E470-40EB-B4EB-CB574A172C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E498184-E470-40EB-B4EB-CB574A172C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E498184-E470-40EB-B4EB-CB574A172C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D4E8275-88DA-444F-952A-5BD4572CDF48} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{BD0ADAB0-9450-420E-8481-44F344820377} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{14943E16-ADC4-44EA-9951-3971897DABB6} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{9E498184-E470-40EB-B4EB-CB574A172C48} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{0F673173-5CED-4D09-A5E0-5CDA9DADFC5B} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+	EndGlobalSection
+EndGlobal

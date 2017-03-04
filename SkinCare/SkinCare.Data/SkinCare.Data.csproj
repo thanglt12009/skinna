@@ -1,0 +1,328 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>12.0.21005.1</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B1179DCE-C676-4762-AB8B-EF8A9DD89716}</ProjectGuid>
+    <ProjectType>Local</ProjectType>
+	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OutputType>Library</OutputType>
+    <ApplicationIcon>
+	</ApplicationIcon>
+    <AssemblyKeyContainerName>
+	</AssemblyKeyContainerName>
+    <AssemblyName>SkinCare.Data</AssemblyName>
+    <AssemblyOriginatorKeyFile>..\SkinCare.snk</AssemblyOriginatorKeyFile>
+	<SignAssembly>false</SignAssembly>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <RootNamespace>SkinCare.Data</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject></StartupObject>
+    <FileUpgradeFlags></FileUpgradeFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>SkinCare.Data.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>SkinCare.Data.xml</DocumentationFile>
+	 <DebugType>pdbonly</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'GenerateDebug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>SkinCare.Data.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System"/>
+	<Reference Include="System.Core">
+		<RequiredTargetFramework>4.5</RequiredTargetFramework>
+	</Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"/>
+    <Reference Include="System.Web"/>
+    <Reference Include="System.Data"/>
+    <Reference Include="System.Design"/>
+    <Reference Include="System.Xml"/>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>    
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>      
+    
+     
+	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
+      <Name>SkinCare.Entities</Name>
+      <Project>{B11B750D-5F3A-4EE0-AD33-FF39293979AE}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+	
+	
+	
+	
+    
+    	
+	
+	
+	
+	</ItemGroup>
+	
+		
+	<!-- Custom code folder: C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data\App_Code -->
+	<ItemGroup>	
+		<Folder Include="App_Code\" />
+        <Compile Include="App_Code\**\*.cs">
+          <SubType>Code</SubType>
+        </Compile>		
+	</ItemGroup>
+
+	<!-- Include any user files -->
+	<ItemGroup>	
+		<Compile Include="**\*.user.*" Exclude="**\*.csproj.user;**\.svn\**" >
+          <SubType>Code</SubType>
+        </Compile>		
+	</ItemGroup>
+	
+	<ItemGroup>
+			<Compile Include="Bases\DonHangProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\DonHangProviderBase.generatedCore.cs">
+			  <DependentUpon>DonHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\DonHangChiTietProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\DonHangChiTietProviderBase.generatedCore.cs">
+			  <DependentUpon>DonHangChiTietProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\KhachHangProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\KhachHangProviderBase.generatedCore.cs">
+			  <DependentUpon>KhachHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\KhoHangSanPhamProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\KhoHangSanPhamProviderBase.generatedCore.cs">
+			  <DependentUpon>KhoHangSanPhamProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\KhuyenMaiProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\KhuyenMaiProviderBase.generatedCore.cs">
+			  <DependentUpon>KhuyenMaiProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\LoaiTrangThaiDonHangProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\LoaiTrangThaiDonHangProviderBase.generatedCore.cs">
+			  <DependentUpon>LoaiTrangThaiDonHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\NguonDonHangProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\NguonDonHangProviderBase.generatedCore.cs">
+			  <DependentUpon>NguonDonHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\PhuongThucThanhToanProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\PhuongThucThanhToanProviderBase.generatedCore.cs">
+			  <DependentUpon>PhuongThucThanhToanProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\TrangThaiDonHangProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\TrangThaiDonHangProviderBase.generatedCore.cs">
+			  <DependentUpon>TrangThaiDonHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+		<Compile Include="..\AssemblyInfo.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+			
+
+			<Compile Include="DataRepository.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+
+			<Compile Include="Bases\INetTiersProvider.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\NetTiersProvider.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\NetTiersProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\NetTiersProviderCollection.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\NetTiersServiceSection.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\EntityProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\EntityProviderBaseCore.generated.cs">
+			  <SubType>Code</SubType>
+			  <DependentUpon>EntityProviderBase.cs</DependentUpon>
+			</Compile>
+			
+			<Compile Include="Bases\EntityViewProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\EntityViewProviderBaseCore.generated.cs">
+			  <SubType>Code</SubType>
+			  <DependentUpon>EntityViewProviderBase.cs</DependentUpon>
+			</Compile>
+			
+			<Compile Include="Query\ExpressionParserBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Query\SqlExpressionParser.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Query\SqlStringBuilder.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Query\SqlUtil.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Query\StringTokenizer.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Utility.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="ITransactionManager.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="TransactionManager.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="FileConfigurationSouce.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+            <Compile Include="FileConfigurationSouceElement.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="IEntityProvider.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="IEntityViewProvider.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+		
+		
+
+		
+		
+		
+		
+		 <AppDesigner Include="Properties\" />
+	</ItemGroup>
+	
+	
+	
+	
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+	<PostBuildEvent>
+	</PostBuildEvent>
+  </PropertyGroup>
+
+</Project>

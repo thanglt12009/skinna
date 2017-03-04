@@ -1,0 +1,3189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type='text/xsl' href="scriptsql.xsl"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database includeDrop="true">SkinCare</database>
+<procedures>
+		
+		<procedure owner="dbo" name="tblNguonDonHang_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaNguonDonHang],
+					[TenNguonDonHang]
+				FROM
+					[dbo].[tblNguonDonHang]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblNguonDonHang_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblNguonDonHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaNguonDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaNguonDonHang])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaNguonDonHang]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaNguonDonHang], O.[TenNguonDonHang]
+				FROM
+				    [dbo].[tblNguonDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaNguonDonHang] = PageIndex.[MaNguonDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblNguonDonHang_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenNguonDonHang" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblNguonDonHang]
+					(
+					[MaNguonDonHang]
+					,[TenNguonDonHang]
+					)
+				VALUES
+					(
+					@MaNguonDonHang
+					,@TenNguonDonHang
+					)
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblNguonDonHang_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalMaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenNguonDonHang" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblNguonDonHang]
+				SET
+					[MaNguonDonHang] = @MaNguonDonHang
+					,[TenNguonDonHang] = @TenNguonDonHang
+				WHERE
+[MaNguonDonHang] = @OriginalMaNguonDonHang 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblNguonDonHang_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblNguonDonHang] WITH (ROWLOCK) 
+				WHERE
+					[MaNguonDonHang] = @MaNguonDonHang
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblNguonDonHang_GetByMaNguonDonHang" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblNguonDonHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaNguonDonHang],
+					[TenNguonDonHang]
+				FROM
+					[dbo].[tblNguonDonHang]
+				WHERE
+					[MaNguonDonHang] = @MaNguonDonHang
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblNguonDonHang_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblNguonDonHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenNguonDonHang" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaNguonDonHang]
+	, [TenNguonDonHang]
+    FROM
+	[dbo].[tblNguonDonHang]
+    WHERE 
+	 ([MaNguonDonHang] = @MaNguonDonHang OR @MaNguonDonHang IS NULL)
+	AND ([TenNguonDonHang] = @TenNguonDonHang OR @TenNguonDonHang IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaNguonDonHang]
+	, [TenNguonDonHang]
+    FROM
+	[dbo].[tblNguonDonHang]
+    WHERE 
+	 ([MaNguonDonHang] = @MaNguonDonHang AND @MaNguonDonHang is not null)
+	OR ([TenNguonDonHang] = @TenNguonDonHang AND @TenNguonDonHang is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblNguonDonHang_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblNguonDonHang table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaNguonDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaNguonDonHang] )
+				SELECT TOP {3} [MaNguonDonHang]
+				FROM [dbo].[tblNguonDonHang] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaNguonDonHang], O.[TenNguonDonHang]
+				FROM
+				    [dbo].[tblNguonDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaNguonDonHang] = PageIndex.[MaNguonDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblNguonDonHang] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblDonHang_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaDonHang],
+					[MaKhachHang],
+					[MaNguonDonHang],
+					[MaTrangThaiDonHang],
+					[NguoiDatHang],
+					[MaPhuongThucThanhToan],
+					[CachThucNhanHang],
+					[PhiVanChuyen],
+					[TongTienDonHang],
+					[NgayTaoDonHang],
+					[MaKhuyenMai],
+					[MaVoucher],
+					[GhiChu],
+					[TienChietKhau],
+					[TiLeChietKhau]
+				FROM
+					[dbo].[tblDonHang]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblDonHang_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblDonHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaDonHang])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaDonHang]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau]
+				FROM
+				    [dbo].[tblDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaDonHang] = PageIndex.[MaDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblDonHang_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaDonHang" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@NguoiDatHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@CachThucNhanHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@PhiVanChuyen" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@TongTienDonHang" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@NgayTaoDonHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@MaKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@MaVoucher" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblDonHang]
+					(
+					[MaKhachHang]
+					,[MaNguonDonHang]
+					,[MaTrangThaiDonHang]
+					,[NguoiDatHang]
+					,[MaPhuongThucThanhToan]
+					,[CachThucNhanHang]
+					,[PhiVanChuyen]
+					,[TongTienDonHang]
+					,[NgayTaoDonHang]
+					,[MaKhuyenMai]
+					,[MaVoucher]
+					,[GhiChu]
+					,[TienChietKhau]
+					,[TiLeChietKhau]
+					)
+				VALUES
+					(
+					@MaKhachHang
+					,@MaNguonDonHang
+					,@MaTrangThaiDonHang
+					,@NguoiDatHang
+					,@MaPhuongThucThanhToan
+					,@CachThucNhanHang
+					,@PhiVanChuyen
+					,@TongTienDonHang
+					,@NgayTaoDonHang
+					,@MaKhuyenMai
+					,@MaVoucher
+					,@GhiChu
+					,@TienChietKhau
+					,@TiLeChietKhau
+					)
+				-- Get the identity value
+				SET @MaDonHang = SCOPE_IDENTITY()
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHang_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@NguoiDatHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@CachThucNhanHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@PhiVanChuyen" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@TongTienDonHang" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@NgayTaoDonHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@MaKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@MaVoucher" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblDonHang]
+				SET
+					[MaKhachHang] = @MaKhachHang
+					,[MaNguonDonHang] = @MaNguonDonHang
+					,[MaTrangThaiDonHang] = @MaTrangThaiDonHang
+					,[NguoiDatHang] = @NguoiDatHang
+					,[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
+					,[CachThucNhanHang] = @CachThucNhanHang
+					,[PhiVanChuyen] = @PhiVanChuyen
+					,[TongTienDonHang] = @TongTienDonHang
+					,[NgayTaoDonHang] = @NgayTaoDonHang
+					,[MaKhuyenMai] = @MaKhuyenMai
+					,[MaVoucher] = @MaVoucher
+					,[GhiChu] = @GhiChu
+					,[TienChietKhau] = @TienChietKhau
+					,[TiLeChietKhau] = @TiLeChietKhau
+				WHERE
+[MaDonHang] = @MaDonHang 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHang_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblDonHang] WITH (ROWLOCK) 
+				WHERE
+					[MaDonHang] = @MaDonHang
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHang_GetByMaDonHang" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblDonHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaDonHang],
+					[MaKhachHang],
+					[MaNguonDonHang],
+					[MaTrangThaiDonHang],
+					[NguoiDatHang],
+					[MaPhuongThucThanhToan],
+					[CachThucNhanHang],
+					[PhiVanChuyen],
+					[TongTienDonHang],
+					[NgayTaoDonHang],
+					[MaKhuyenMai],
+					[MaVoucher],
+					[GhiChu],
+					[TienChietKhau],
+					[TiLeChietKhau]
+				FROM
+					[dbo].[tblDonHang]
+				WHERE
+					[MaDonHang] = @MaDonHang
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblDonHang_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblDonHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaNguonDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@NguoiDatHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@CachThucNhanHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@PhiVanChuyen" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@TongTienDonHang" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@NgayTaoDonHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@MaKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@MaVoucher" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault="null"/>
+				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaDonHang]
+	, [MaKhachHang]
+	, [MaNguonDonHang]
+	, [MaTrangThaiDonHang]
+	, [NguoiDatHang]
+	, [MaPhuongThucThanhToan]
+	, [CachThucNhanHang]
+	, [PhiVanChuyen]
+	, [TongTienDonHang]
+	, [NgayTaoDonHang]
+	, [MaKhuyenMai]
+	, [MaVoucher]
+	, [GhiChu]
+	, [TienChietKhau]
+	, [TiLeChietKhau]
+    FROM
+	[dbo].[tblDonHang]
+    WHERE 
+	 ([MaDonHang] = @MaDonHang OR @MaDonHang IS NULL)
+	AND ([MaKhachHang] = @MaKhachHang OR @MaKhachHang IS NULL)
+	AND ([MaNguonDonHang] = @MaNguonDonHang OR @MaNguonDonHang IS NULL)
+	AND ([MaTrangThaiDonHang] = @MaTrangThaiDonHang OR @MaTrangThaiDonHang IS NULL)
+	AND ([NguoiDatHang] = @NguoiDatHang OR @NguoiDatHang IS NULL)
+	AND ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan OR @MaPhuongThucThanhToan IS NULL)
+	AND ([CachThucNhanHang] = @CachThucNhanHang OR @CachThucNhanHang IS NULL)
+	AND ([PhiVanChuyen] = @PhiVanChuyen OR @PhiVanChuyen IS NULL)
+	AND ([TongTienDonHang] = @TongTienDonHang OR @TongTienDonHang IS NULL)
+	AND ([NgayTaoDonHang] = @NgayTaoDonHang OR @NgayTaoDonHang IS NULL)
+	AND ([MaKhuyenMai] = @MaKhuyenMai OR @MaKhuyenMai IS NULL)
+	AND ([MaVoucher] = @MaVoucher OR @MaVoucher IS NULL)
+	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
+	AND ([TienChietKhau] = @TienChietKhau OR @TienChietKhau IS NULL)
+	AND ([TiLeChietKhau] = @TiLeChietKhau OR @TiLeChietKhau IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaDonHang]
+	, [MaKhachHang]
+	, [MaNguonDonHang]
+	, [MaTrangThaiDonHang]
+	, [NguoiDatHang]
+	, [MaPhuongThucThanhToan]
+	, [CachThucNhanHang]
+	, [PhiVanChuyen]
+	, [TongTienDonHang]
+	, [NgayTaoDonHang]
+	, [MaKhuyenMai]
+	, [MaVoucher]
+	, [GhiChu]
+	, [TienChietKhau]
+	, [TiLeChietKhau]
+    FROM
+	[dbo].[tblDonHang]
+    WHERE 
+	 ([MaDonHang] = @MaDonHang AND @MaDonHang is not null)
+	OR ([MaKhachHang] = @MaKhachHang AND @MaKhachHang is not null)
+	OR ([MaNguonDonHang] = @MaNguonDonHang AND @MaNguonDonHang is not null)
+	OR ([MaTrangThaiDonHang] = @MaTrangThaiDonHang AND @MaTrangThaiDonHang is not null)
+	OR ([NguoiDatHang] = @NguoiDatHang AND @NguoiDatHang is not null)
+	OR ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan AND @MaPhuongThucThanhToan is not null)
+	OR ([CachThucNhanHang] = @CachThucNhanHang AND @CachThucNhanHang is not null)
+	OR ([PhiVanChuyen] = @PhiVanChuyen AND @PhiVanChuyen is not null)
+	OR ([TongTienDonHang] = @TongTienDonHang AND @TongTienDonHang is not null)
+	OR ([NgayTaoDonHang] = @NgayTaoDonHang AND @NgayTaoDonHang is not null)
+	OR ([MaKhuyenMai] = @MaKhuyenMai AND @MaKhuyenMai is not null)
+	OR ([MaVoucher] = @MaVoucher AND @MaVoucher is not null)
+	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
+	OR ([TienChietKhau] = @TienChietKhau AND @TienChietKhau is not null)
+	OR ([TiLeChietKhau] = @TiLeChietKhau AND @TiLeChietKhau is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblDonHang_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblDonHang table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaDonHang] )
+				SELECT TOP {3} [MaDonHang]
+				FROM [dbo].[tblDonHang] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau]
+				FROM
+				    [dbo].[tblDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaDonHang] = PageIndex.[MaDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblDonHang] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblLoaiTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaLoaiTrangThai],
+					[TenLoaiTrangThai]
+				FROM
+					[dbo].[tblLoaiTrangThaiDonHang]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblLoaiTrangThaiDonHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaLoaiTrangThai] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaLoaiTrangThai])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaLoaiTrangThai]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblLoaiTrangThaiDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaLoaiTrangThai], O.[TenLoaiTrangThai]
+				FROM
+				    [dbo].[tblLoaiTrangThaiDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaLoaiTrangThai] = PageIndex.[MaLoaiTrangThai]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblLoaiTrangThaiDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblLoaiTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenLoaiTrangThai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblLoaiTrangThaiDonHang]
+					(
+					[MaLoaiTrangThai]
+					,[TenLoaiTrangThai]
+					)
+				VALUES
+					(
+					@MaLoaiTrangThai
+					,@TenLoaiTrangThai
+					)
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblLoaiTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalMaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenLoaiTrangThai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblLoaiTrangThaiDonHang]
+				SET
+					[MaLoaiTrangThai] = @MaLoaiTrangThai
+					,[TenLoaiTrangThai] = @TenLoaiTrangThai
+				WHERE
+[MaLoaiTrangThai] = @OriginalMaLoaiTrangThai 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblLoaiTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblLoaiTrangThaiDonHang] WITH (ROWLOCK) 
+				WHERE
+					[MaLoaiTrangThai] = @MaLoaiTrangThai
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_GetByMaLoaiTrangThai" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblLoaiTrangThaiDonHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaLoaiTrangThai],
+					[TenLoaiTrangThai]
+				FROM
+					[dbo].[tblLoaiTrangThaiDonHang]
+				WHERE
+					[MaLoaiTrangThai] = @MaLoaiTrangThai
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblLoaiTrangThaiDonHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaLoaiTrangThai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenLoaiTrangThai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaLoaiTrangThai]
+	, [TenLoaiTrangThai]
+    FROM
+	[dbo].[tblLoaiTrangThaiDonHang]
+    WHERE 
+	 ([MaLoaiTrangThai] = @MaLoaiTrangThai OR @MaLoaiTrangThai IS NULL)
+	AND ([TenLoaiTrangThai] = @TenLoaiTrangThai OR @TenLoaiTrangThai IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaLoaiTrangThai]
+	, [TenLoaiTrangThai]
+    FROM
+	[dbo].[tblLoaiTrangThaiDonHang]
+    WHERE 
+	 ([MaLoaiTrangThai] = @MaLoaiTrangThai AND @MaLoaiTrangThai is not null)
+	OR ([TenLoaiTrangThai] = @TenLoaiTrangThai AND @TenLoaiTrangThai is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblLoaiTrangThaiDonHang_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblLoaiTrangThaiDonHang table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaLoaiTrangThai] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaLoaiTrangThai] )
+				SELECT TOP {3} [MaLoaiTrangThai]
+				FROM [dbo].[tblLoaiTrangThaiDonHang] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaLoaiTrangThai], O.[TenLoaiTrangThai]
+				FROM
+				    [dbo].[tblLoaiTrangThaiDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaLoaiTrangThai] = PageIndex.[MaLoaiTrangThai]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblLoaiTrangThaiDonHang] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaPhuongThucThanhToan],
+					[TenPhuongThucThanhToan]
+				FROM
+					[dbo].[tblPhuongThucThanhToan]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblPhuongThucThanhToan table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaPhuongThucThanhToan] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaPhuongThucThanhToan])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaPhuongThucThanhToan]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaPhuongThucThanhToan], O.[TenPhuongThucThanhToan]
+				FROM
+				    [dbo].[tblPhuongThucThanhToan] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaPhuongThucThanhToan] = PageIndex.[MaPhuongThucThanhToan]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenPhuongThucThanhToan" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblPhuongThucThanhToan]
+					(
+					[TenPhuongThucThanhToan]
+					)
+				VALUES
+					(
+					@TenPhuongThucThanhToan
+					)
+				-- Get the identity value
+				SET @MaPhuongThucThanhToan = SCOPE_IDENTITY()
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenPhuongThucThanhToan" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblPhuongThucThanhToan]
+				SET
+					[TenPhuongThucThanhToan] = @TenPhuongThucThanhToan
+				WHERE
+[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblPhuongThucThanhToan] WITH (ROWLOCK) 
+				WHERE
+					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblPhuongThucThanhToan table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaPhuongThucThanhToan],
+					[TenPhuongThucThanhToan]
+				FROM
+					[dbo].[tblPhuongThucThanhToan]
+				WHERE
+					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblPhuongThucThanhToan table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaPhuongThucThanhToan" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenPhuongThucThanhToan" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaPhuongThucThanhToan]
+	, [TenPhuongThucThanhToan]
+    FROM
+	[dbo].[tblPhuongThucThanhToan]
+    WHERE 
+	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan OR @MaPhuongThucThanhToan IS NULL)
+	AND ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan OR @TenPhuongThucThanhToan IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaPhuongThucThanhToan]
+	, [TenPhuongThucThanhToan]
+    FROM
+	[dbo].[tblPhuongThucThanhToan]
+    WHERE 
+	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan AND @MaPhuongThucThanhToan is not null)
+	OR ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan AND @TenPhuongThucThanhToan is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblPhuongThucThanhToan_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblPhuongThucThanhToan table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaPhuongThucThanhToan] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaPhuongThucThanhToan] )
+				SELECT TOP {3} [MaPhuongThucThanhToan]
+				FROM [dbo].[tblPhuongThucThanhToan] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaPhuongThucThanhToan], O.[TenPhuongThucThanhToan]
+				FROM
+				    [dbo].[tblPhuongThucThanhToan] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaPhuongThucThanhToan] = PageIndex.[MaPhuongThucThanhToan]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblPhuongThucThanhToan] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhuyenMai_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaKhuyenMai],
+					[MaLoaiKhuyenMai],
+					[TenKhuyenMai],
+					[GiaGiam],
+					[NgayTaoKhuyenMai],
+					[NgayBatDauKhuyenMai],
+					[NgayKetThucKhuyenMai],
+					[Active]
+				FROM
+					[dbo].[tblKhuyenMai]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhuyenMai_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhuyenMai table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaKhuyenMai] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaKhuyenMai])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaKhuyenMai]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaKhuyenMai], O.[MaLoaiKhuyenMai], O.[TenKhuyenMai], O.[GiaGiam], O.[NgayTaoKhuyenMai], O.[NgayBatDauKhuyenMai], O.[NgayKetThucKhuyenMai], O.[Active]
+				FROM
+				    [dbo].[tblKhuyenMai] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaKhuyenMai] = PageIndex.[MaKhuyenMai]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblKhuyenMai_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaLoaiKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GiaGiam" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@NgayTaoKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@NgayBatDauKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@NgayKetThucKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@Active" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblKhuyenMai]
+					(
+					[MaKhuyenMai]
+					,[MaLoaiKhuyenMai]
+					,[TenKhuyenMai]
+					,[GiaGiam]
+					,[NgayTaoKhuyenMai]
+					,[NgayBatDauKhuyenMai]
+					,[NgayKetThucKhuyenMai]
+					,[Active]
+					)
+				VALUES
+					(
+					@MaKhuyenMai
+					,@MaLoaiKhuyenMai
+					,@TenKhuyenMai
+					,@GiaGiam
+					,@NgayTaoKhuyenMai
+					,@NgayBatDauKhuyenMai
+					,@NgayKetThucKhuyenMai
+					,@Active
+					)
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhuyenMai_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalMaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaLoaiKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GiaGiam" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@NgayTaoKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@NgayBatDauKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@NgayKetThucKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@Active" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblKhuyenMai]
+				SET
+					[MaKhuyenMai] = @MaKhuyenMai
+					,[MaLoaiKhuyenMai] = @MaLoaiKhuyenMai
+					,[TenKhuyenMai] = @TenKhuyenMai
+					,[GiaGiam] = @GiaGiam
+					,[NgayTaoKhuyenMai] = @NgayTaoKhuyenMai
+					,[NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai
+					,[NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai
+					,[Active] = @Active
+				WHERE
+[MaKhuyenMai] = @OriginalMaKhuyenMai 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhuyenMai_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblKhuyenMai] WITH (ROWLOCK) 
+				WHERE
+					[MaKhuyenMai] = @MaKhuyenMai
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhuyenMai_GetByMaKhuyenMai" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblKhuyenMai table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaKhuyenMai],
+					[MaLoaiKhuyenMai],
+					[TenKhuyenMai],
+					[GiaGiam],
+					[NgayTaoKhuyenMai],
+					[NgayBatDauKhuyenMai],
+					[NgayKetThucKhuyenMai],
+					[Active]
+				FROM
+					[dbo].[tblKhuyenMai]
+				WHERE
+					[MaKhuyenMai] = @MaKhuyenMai
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblKhuyenMai_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblKhuyenMai table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaLoaiKhuyenMai" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenKhuyenMai" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@GiaGiam" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@NgayTaoKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@NgayBatDauKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@NgayKetThucKhuyenMai" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@Active" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaKhuyenMai]
+	, [MaLoaiKhuyenMai]
+	, [TenKhuyenMai]
+	, [GiaGiam]
+	, [NgayTaoKhuyenMai]
+	, [NgayBatDauKhuyenMai]
+	, [NgayKetThucKhuyenMai]
+	, [Active]
+    FROM
+	[dbo].[tblKhuyenMai]
+    WHERE 
+	 ([MaKhuyenMai] = @MaKhuyenMai OR @MaKhuyenMai IS NULL)
+	AND ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai OR @MaLoaiKhuyenMai IS NULL)
+	AND ([TenKhuyenMai] = @TenKhuyenMai OR @TenKhuyenMai IS NULL)
+	AND ([GiaGiam] = @GiaGiam OR @GiaGiam IS NULL)
+	AND ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai OR @NgayTaoKhuyenMai IS NULL)
+	AND ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai OR @NgayBatDauKhuyenMai IS NULL)
+	AND ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai OR @NgayKetThucKhuyenMai IS NULL)
+	AND ([Active] = @Active OR @Active IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaKhuyenMai]
+	, [MaLoaiKhuyenMai]
+	, [TenKhuyenMai]
+	, [GiaGiam]
+	, [NgayTaoKhuyenMai]
+	, [NgayBatDauKhuyenMai]
+	, [NgayKetThucKhuyenMai]
+	, [Active]
+    FROM
+	[dbo].[tblKhuyenMai]
+    WHERE 
+	 ([MaKhuyenMai] = @MaKhuyenMai AND @MaKhuyenMai is not null)
+	OR ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai AND @MaLoaiKhuyenMai is not null)
+	OR ([TenKhuyenMai] = @TenKhuyenMai AND @TenKhuyenMai is not null)
+	OR ([GiaGiam] = @GiaGiam AND @GiaGiam is not null)
+	OR ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai AND @NgayTaoKhuyenMai is not null)
+	OR ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai AND @NgayBatDauKhuyenMai is not null)
+	OR ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai AND @NgayKetThucKhuyenMai is not null)
+	OR ([Active] = @Active AND @Active is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblKhuyenMai_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhuyenMai table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaKhuyenMai] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaKhuyenMai] )
+				SELECT TOP {3} [MaKhuyenMai]
+				FROM [dbo].[tblKhuyenMai] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaKhuyenMai], O.[MaLoaiKhuyenMai], O.[TenKhuyenMai], O.[GiaGiam], O.[NgayTaoKhuyenMai], O.[NgayBatDauKhuyenMai], O.[NgayKetThucKhuyenMai], O.[Active]
+				FROM
+				    [dbo].[tblKhuyenMai] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaKhuyenMai] = PageIndex.[MaKhuyenMai]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblKhuyenMai] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblDonHangChiTiet_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblDonHangChiTiet table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[ID],
+					[MaDonHang],
+					[MaSanPham],
+					[DonGia],
+					[SoLuong],
+					[ThanhTien]
+				FROM
+					[dbo].[tblDonHangChiTiet]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblDonHangChiTiet_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblDonHangChiTiet table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblDonHangChiTiet]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[MaDonHang], O.[MaSanPham], O.[DonGia], O.[SoLuong], O.[ThanhTien]
+				FROM
+				    [dbo].[tblDonHangChiTiet] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblDonHangChiTiet]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblDonHangChiTiet_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblDonHangChiTiet table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@Id" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@DonGia" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@SoLuong" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@ThanhTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblDonHangChiTiet]
+					(
+					[MaDonHang]
+					,[MaSanPham]
+					,[DonGia]
+					,[SoLuong]
+					,[ThanhTien]
+					)
+				VALUES
+					(
+					@MaDonHang
+					,@MaSanPham
+					,@DonGia
+					,@SoLuong
+					,@ThanhTien
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHangChiTiet_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblDonHangChiTiet table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@Id" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@DonGia" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@SoLuong" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@ThanhTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblDonHangChiTiet]
+				SET
+					[MaDonHang] = @MaDonHang
+					,[MaSanPham] = @MaSanPham
+					,[DonGia] = @DonGia
+					,[SoLuong] = @SoLuong
+					,[ThanhTien] = @ThanhTien
+				WHERE
+[ID] = @Id 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHangChiTiet_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblDonHangChiTiet table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@Id" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblDonHangChiTiet] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblDonHangChiTiet_GetById" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblDonHangChiTiet table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@Id" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[ID],
+					[MaDonHang],
+					[MaSanPham],
+					[DonGia],
+					[SoLuong],
+					[ThanhTien]
+				FROM
+					[dbo].[tblDonHangChiTiet]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblDonHangChiTiet_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblDonHangChiTiet table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@Id" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@DonGia" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@SoLuong" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@ThanhTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [MaDonHang]
+	, [MaSanPham]
+	, [DonGia]
+	, [SoLuong]
+	, [ThanhTien]
+    FROM
+	[dbo].[tblDonHangChiTiet]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([MaDonHang] = @MaDonHang OR @MaDonHang IS NULL)
+	AND ([MaSanPham] = @MaSanPham OR @MaSanPham IS NULL)
+	AND ([DonGia] = @DonGia OR @DonGia IS NULL)
+	AND ([SoLuong] = @SoLuong OR @SoLuong IS NULL)
+	AND ([ThanhTien] = @ThanhTien OR @ThanhTien IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [MaDonHang]
+	, [MaSanPham]
+	, [DonGia]
+	, [SoLuong]
+	, [ThanhTien]
+    FROM
+	[dbo].[tblDonHangChiTiet]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([MaDonHang] = @MaDonHang AND @MaDonHang is not null)
+	OR ([MaSanPham] = @MaSanPham AND @MaSanPham is not null)
+	OR ([DonGia] = @DonGia AND @DonGia is not null)
+	OR ([SoLuong] = @SoLuong AND @SoLuong is not null)
+	OR ([ThanhTien] = @ThanhTien AND @ThanhTien is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblDonHangChiTiet_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblDonHangChiTiet table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [ID] )
+				SELECT TOP {3} [ID]
+				FROM [dbo].[tblDonHangChiTiet] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[ID], O.[MaDonHang], O.[MaSanPham], O.[DonGia], O.[SoLuong], O.[ThanhTien]
+				FROM
+				    [dbo].[tblDonHangChiTiet] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblDonHangChiTiet] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhoHangSanPham_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblKhoHangSanPham table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaSanPham],
+					[TenSanPham],
+					[GiaTien],
+					[SoLuongNhapVao],
+					[SoLuongBanRa],
+					[SoLuongTonKho],
+					[NgayNhapHang],
+					[GhiChu]
+				FROM
+					[dbo].[tblKhoHangSanPham]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhoHangSanPham_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhoHangSanPham table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaSanPham] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaSanPham])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaSanPham]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhoHangSanPham]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaSanPham], O.[TenSanPham], O.[GiaTien], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu]
+				FROM
+				    [dbo].[tblKhoHangSanPham] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaSanPham] = PageIndex.[MaSanPham]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhoHangSanPham]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblKhoHangSanPham_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblKhoHangSanPham table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaSanPham" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenSanPham" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GiaTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@SoLuongNhapVao" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@SoLuongBanRa" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@SoLuongTonKho" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblKhoHangSanPham]
+					(
+					[TenSanPham]
+					,[GiaTien]
+					,[SoLuongNhapVao]
+					,[SoLuongBanRa]
+					,[SoLuongTonKho]
+					,[NgayNhapHang]
+					,[GhiChu]
+					)
+				VALUES
+					(
+					@TenSanPham
+					,@GiaTien
+					,@SoLuongNhapVao
+					,@SoLuongBanRa
+					,@SoLuongTonKho
+					,@NgayNhapHang
+					,@GhiChu
+					)
+				-- Get the identity value
+				SET @MaSanPham = SCOPE_IDENTITY()
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhoHangSanPham_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblKhoHangSanPham table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenSanPham" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@GiaTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
+				<parameter name="@SoLuongNhapVao" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@SoLuongBanRa" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@SoLuongTonKho" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblKhoHangSanPham]
+				SET
+					[TenSanPham] = @TenSanPham
+					,[GiaTien] = @GiaTien
+					,[SoLuongNhapVao] = @SoLuongNhapVao
+					,[SoLuongBanRa] = @SoLuongBanRa
+					,[SoLuongTonKho] = @SoLuongTonKho
+					,[NgayNhapHang] = @NgayNhapHang
+					,[GhiChu] = @GhiChu
+				WHERE
+[MaSanPham] = @MaSanPham 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhoHangSanPham_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblKhoHangSanPham table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblKhoHangSanPham] WITH (ROWLOCK) 
+				WHERE
+					[MaSanPham] = @MaSanPham
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhoHangSanPham_GetByMaSanPham" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblKhoHangSanPham table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaSanPham],
+					[TenSanPham],
+					[GiaTien],
+					[SoLuongNhapVao],
+					[SoLuongBanRa],
+					[SoLuongTonKho],
+					[NgayNhapHang],
+					[GhiChu]
+				FROM
+					[dbo].[tblKhoHangSanPham]
+				WHERE
+					[MaSanPham] = @MaSanPham
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblKhoHangSanPham_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblKhoHangSanPham table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaSanPham" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenSanPham" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@GiaTien" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
+				<parameter name="@SoLuongNhapVao" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@SoLuongBanRa" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@SoLuongTonKho" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaSanPham]
+	, [TenSanPham]
+	, [GiaTien]
+	, [SoLuongNhapVao]
+	, [SoLuongBanRa]
+	, [SoLuongTonKho]
+	, [NgayNhapHang]
+	, [GhiChu]
+    FROM
+	[dbo].[tblKhoHangSanPham]
+    WHERE 
+	 ([MaSanPham] = @MaSanPham OR @MaSanPham IS NULL)
+	AND ([TenSanPham] = @TenSanPham OR @TenSanPham IS NULL)
+	AND ([GiaTien] = @GiaTien OR @GiaTien IS NULL)
+	AND ([SoLuongNhapVao] = @SoLuongNhapVao OR @SoLuongNhapVao IS NULL)
+	AND ([SoLuongBanRa] = @SoLuongBanRa OR @SoLuongBanRa IS NULL)
+	AND ([SoLuongTonKho] = @SoLuongTonKho OR @SoLuongTonKho IS NULL)
+	AND ([NgayNhapHang] = @NgayNhapHang OR @NgayNhapHang IS NULL)
+	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaSanPham]
+	, [TenSanPham]
+	, [GiaTien]
+	, [SoLuongNhapVao]
+	, [SoLuongBanRa]
+	, [SoLuongTonKho]
+	, [NgayNhapHang]
+	, [GhiChu]
+    FROM
+	[dbo].[tblKhoHangSanPham]
+    WHERE 
+	 ([MaSanPham] = @MaSanPham AND @MaSanPham is not null)
+	OR ([TenSanPham] = @TenSanPham AND @TenSanPham is not null)
+	OR ([GiaTien] = @GiaTien AND @GiaTien is not null)
+	OR ([SoLuongNhapVao] = @SoLuongNhapVao AND @SoLuongNhapVao is not null)
+	OR ([SoLuongBanRa] = @SoLuongBanRa AND @SoLuongBanRa is not null)
+	OR ([SoLuongTonKho] = @SoLuongTonKho AND @SoLuongTonKho is not null)
+	OR ([NgayNhapHang] = @NgayNhapHang AND @NgayNhapHang is not null)
+	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblKhoHangSanPham_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhoHangSanPham table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaSanPham] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaSanPham] )
+				SELECT TOP {3} [MaSanPham]
+				FROM [dbo].[tblKhoHangSanPham] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaSanPham], O.[TenSanPham], O.[GiaTien], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu]
+				FROM
+				    [dbo].[tblKhoHangSanPham] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaSanPham] = PageIndex.[MaSanPham]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblKhoHangSanPham] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaTrangThaiDonHang],
+					[MaLoaiTrangThaiDonHang],
+					[TenLoaiTrangThaiDonHang]
+				FROM
+					[dbo].[tblTrangThaiDonHang]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblTrangThaiDonHang_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblTrangThaiDonHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaTrangThaiDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaTrangThaiDonHang])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaTrangThaiDonHang]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblTrangThaiDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaTrangThaiDonHang], O.[MaLoaiTrangThaiDonHang], O.[TenLoaiTrangThaiDonHang]
+				FROM
+				    [dbo].[tblTrangThaiDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaTrangThaiDonHang] = PageIndex.[MaTrangThaiDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblTrangThaiDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaLoaiTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenLoaiTrangThaiDonHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblTrangThaiDonHang]
+					(
+					[MaTrangThaiDonHang]
+					,[MaLoaiTrangThaiDonHang]
+					,[TenLoaiTrangThaiDonHang]
+					)
+				VALUES
+					(
+					@MaTrangThaiDonHang
+					,@MaLoaiTrangThaiDonHang
+					,@TenLoaiTrangThaiDonHang
+					)
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalMaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@MaLoaiTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenLoaiTrangThaiDonHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblTrangThaiDonHang]
+				SET
+					[MaTrangThaiDonHang] = @MaTrangThaiDonHang
+					,[MaLoaiTrangThaiDonHang] = @MaLoaiTrangThaiDonHang
+					,[TenLoaiTrangThaiDonHang] = @TenLoaiTrangThaiDonHang
+				WHERE
+[MaTrangThaiDonHang] = @OriginalMaTrangThaiDonHang 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblTrangThaiDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblTrangThaiDonHang] WITH (ROWLOCK) 
+				WHERE
+					[MaTrangThaiDonHang] = @MaTrangThaiDonHang
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblTrangThaiDonHang_GetByMaTrangThaiDonHang" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblTrangThaiDonHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaTrangThaiDonHang],
+					[MaLoaiTrangThaiDonHang],
+					[TenLoaiTrangThaiDonHang]
+				FROM
+					[dbo].[tblTrangThaiDonHang]
+				WHERE
+					[MaTrangThaiDonHang] = @MaTrangThaiDonHang
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblTrangThaiDonHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaLoaiTrangThaiDonHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenLoaiTrangThaiDonHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaTrangThaiDonHang]
+	, [MaLoaiTrangThaiDonHang]
+	, [TenLoaiTrangThaiDonHang]
+    FROM
+	[dbo].[tblTrangThaiDonHang]
+    WHERE 
+	 ([MaTrangThaiDonHang] = @MaTrangThaiDonHang OR @MaTrangThaiDonHang IS NULL)
+	AND ([MaLoaiTrangThaiDonHang] = @MaLoaiTrangThaiDonHang OR @MaLoaiTrangThaiDonHang IS NULL)
+	AND ([TenLoaiTrangThaiDonHang] = @TenLoaiTrangThaiDonHang OR @TenLoaiTrangThaiDonHang IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaTrangThaiDonHang]
+	, [MaLoaiTrangThaiDonHang]
+	, [TenLoaiTrangThaiDonHang]
+    FROM
+	[dbo].[tblTrangThaiDonHang]
+    WHERE 
+	 ([MaTrangThaiDonHang] = @MaTrangThaiDonHang AND @MaTrangThaiDonHang is not null)
+	OR ([MaLoaiTrangThaiDonHang] = @MaLoaiTrangThaiDonHang AND @MaLoaiTrangThaiDonHang is not null)
+	OR ([TenLoaiTrangThaiDonHang] = @TenLoaiTrangThaiDonHang AND @TenLoaiTrangThaiDonHang is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblTrangThaiDonHang_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblTrangThaiDonHang table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaTrangThaiDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaTrangThaiDonHang] )
+				SELECT TOP {3} [MaTrangThaiDonHang]
+				FROM [dbo].[tblTrangThaiDonHang] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaTrangThaiDonHang], O.[MaLoaiTrangThaiDonHang], O.[TenLoaiTrangThaiDonHang]
+				FROM
+				    [dbo].[tblTrangThaiDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaTrangThaiDonHang] = PageIndex.[MaTrangThaiDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblTrangThaiDonHang] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhachHang_Get_List" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblKhachHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				SELECT
+					[MaKhachHang],
+					[TenKhachHang],
+					[Email],
+					[SoDienThoai],
+					[DiaChi],
+					[Tuoi],
+					[GioiTinh],
+					[TinhTrangDa],
+					[TayTrangToi],
+					[RuaMat],
+					[Toner],
+					[Serum],
+					[Kem],
+					[SanPhamKhac],
+					[LuuY],
+					[ImageLink]
+				FROM
+					[dbo].[tblKhachHang]
+					
+				SELECT @@ROWCOUNT
+			]]></body>
+		</procedure>
+		
+		
+		<procedure owner="dbo" name="tblKhachHang_GetPaged" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhachHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@WhereClause" type="varchar" direction="Input" size="8000" precision="0" scale="0" param="(8000)" />
+				<parameter name="@OrderBy" type="varchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+				<parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+				<parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+			</parameters>
+			<body><![CDATA[
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaKhachHang] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaKhachHang])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaKhachHang]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhachHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[Tuoi], O.[GioiTinh], O.[TinhTrangDa], O.[TayTrangToi], O.[RuaMat], O.[Toner], O.[Serum], O.[Kem], O.[SanPhamKhac], O.[LuuY], O.[ImageLink]
+				FROM
+				    [dbo].[tblKhachHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaKhachHang] = PageIndex.[MaKhachHang]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhachHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			]]></body>
+		</procedure>
+		
+		<procedure owner="dbo" name="tblKhachHang_Insert" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblKhachHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenKhachHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@Email" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@SoDienThoai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@DiaChi" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@Tuoi" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@GioiTinh" type="char" direction="Input" size="1" precision="0" scale="0" param="(1)" nulldefault=""/>
+				<parameter name="@TinhTrangDa" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@TayTrangToi" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@RuaMat" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Toner" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Serum" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Kem" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@SanPhamKhac" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				INSERT INTO [dbo].[tblKhachHang]
+					(
+					[TenKhachHang]
+					,[Email]
+					,[SoDienThoai]
+					,[DiaChi]
+					,[Tuoi]
+					,[GioiTinh]
+					,[TinhTrangDa]
+					,[TayTrangToi]
+					,[RuaMat]
+					,[Toner]
+					,[Serum]
+					,[Kem]
+					,[SanPhamKhac]
+					,[LuuY]
+					,[ImageLink]
+					)
+				VALUES
+					(
+					@TenKhachHang
+					,@Email
+					,@SoDienThoai
+					,@DiaChi
+					,@Tuoi
+					,@GioiTinh
+					,@TinhTrangDa
+					,@TayTrangToi
+					,@RuaMat
+					,@Toner
+					,@Serum
+					,@Kem
+					,@SanPhamKhac
+					,@Luuy
+					,@ImageLink
+					)
+				-- Get the identity value
+				SET @MaKhachHang = SCOPE_IDENTITY()
+									
+							
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhachHang_Update" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblKhachHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@TenKhachHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@Email" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@SoDienThoai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@DiaChi" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@Tuoi" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@GioiTinh" type="char" direction="Input" size="1" precision="0" scale="0" param="(1)" nulldefault=""/>
+				<parameter name="@TinhTrangDa" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@TayTrangToi" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@RuaMat" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Toner" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Serum" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Kem" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@SanPhamKhac" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
+				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblKhachHang]
+				SET
+					[TenKhachHang] = @TenKhachHang
+					,[Email] = @Email
+					,[SoDienThoai] = @SoDienThoai
+					,[DiaChi] = @DiaChi
+					,[Tuoi] = @Tuoi
+					,[GioiTinh] = @GioiTinh
+					,[TinhTrangDa] = @TinhTrangDa
+					,[TayTrangToi] = @TayTrangToi
+					,[RuaMat] = @RuaMat
+					,[Toner] = @Toner
+					,[Serum] = @Serum
+					,[Kem] = @Kem
+					,[SanPhamKhac] = @SanPhamKhac
+					,[LuuY] = @Luuy
+					,[ImageLink] = @ImageLink
+				WHERE
+[MaKhachHang] = @MaKhachHang 
+				
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhachHang_Delete" grant="">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblKhachHang table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				DELETE FROM [dbo].[tblKhachHang] WITH (ROWLOCK) 
+				WHERE
+					[MaKhachHang] = @MaKhachHang
+					
+			]]></body>
+		</procedure>
+		<procedure owner="dbo" name="tblKhachHang_GetByMaKhachHang" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblKhachHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
+			</parameters>
+			<body><![CDATA[
+				SELECT
+					[MaKhachHang],
+					[TenKhachHang],
+					[Email],
+					[SoDienThoai],
+					[DiaChi],
+					[Tuoi],
+					[GioiTinh],
+					[TinhTrangDa],
+					[TayTrangToi],
+					[RuaMat],
+					[Toner],
+					[Serum],
+					[Kem],
+					[SanPhamKhac],
+					[LuuY],
+					[ImageLink]
+				FROM
+					[dbo].[tblKhachHang]
+				WHERE
+					[MaKhachHang] = @MaKhachHang
+				SELECT @@ROWCOUNT
+					
+			]]></body>
+			
+		</procedure>
+		<procedure owner="dbo" name="tblKhachHang_Find" >
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblKhachHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters>
+				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@TenKhachHang" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+				<parameter name="@Email" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault="null"/>
+				<parameter name="@SoDienThoai" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault="null"/>
+				<parameter name="@DiaChi" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault="null"/>
+				<parameter name="@Tuoi" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+				<parameter name="@GioiTinh" type="char" direction="Input" size="1" precision="0" scale="0" param="(1)" nulldefault="null"/>
+				<parameter name="@TinhTrangDa" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault="null"/>
+				<parameter name="@TayTrangToi" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@RuaMat" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@Toner" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@Serum" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@Kem" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@SanPhamKhac" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
+				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault="null"/>
+				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaKhachHang]
+	, [TenKhachHang]
+	, [Email]
+	, [SoDienThoai]
+	, [DiaChi]
+	, [Tuoi]
+	, [GioiTinh]
+	, [TinhTrangDa]
+	, [TayTrangToi]
+	, [RuaMat]
+	, [Toner]
+	, [Serum]
+	, [Kem]
+	, [SanPhamKhac]
+	, [LuuY]
+	, [ImageLink]
+    FROM
+	[dbo].[tblKhachHang]
+    WHERE 
+	 ([MaKhachHang] = @MaKhachHang OR @MaKhachHang IS NULL)
+	AND ([TenKhachHang] = @TenKhachHang OR @TenKhachHang IS NULL)
+	AND ([Email] = @Email OR @Email IS NULL)
+	AND ([SoDienThoai] = @SoDienThoai OR @SoDienThoai IS NULL)
+	AND ([DiaChi] = @DiaChi OR @DiaChi IS NULL)
+	AND ([Tuoi] = @Tuoi OR @Tuoi IS NULL)
+	AND ([GioiTinh] = @GioiTinh OR @GioiTinh IS NULL)
+	AND ([TinhTrangDa] = @TinhTrangDa OR @TinhTrangDa IS NULL)
+	AND ([TayTrangToi] = @TayTrangToi OR @TayTrangToi IS NULL)
+	AND ([RuaMat] = @RuaMat OR @RuaMat IS NULL)
+	AND ([Toner] = @Toner OR @Toner IS NULL)
+	AND ([Serum] = @Serum OR @Serum IS NULL)
+	AND ([Kem] = @Kem OR @Kem IS NULL)
+	AND ([SanPhamKhac] = @SanPhamKhac OR @SanPhamKhac IS NULL)
+	AND ([LuuY] = @Luuy OR @Luuy IS NULL)
+	AND ([ImageLink] = @ImageLink OR @ImageLink IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaKhachHang]
+	, [TenKhachHang]
+	, [Email]
+	, [SoDienThoai]
+	, [DiaChi]
+	, [Tuoi]
+	, [GioiTinh]
+	, [TinhTrangDa]
+	, [TayTrangToi]
+	, [RuaMat]
+	, [Toner]
+	, [Serum]
+	, [Kem]
+	, [SanPhamKhac]
+	, [LuuY]
+	, [ImageLink]
+    FROM
+	[dbo].[tblKhachHang]
+    WHERE 
+	 ([MaKhachHang] = @MaKhachHang AND @MaKhachHang is not null)
+	OR ([TenKhachHang] = @TenKhachHang AND @TenKhachHang is not null)
+	OR ([Email] = @Email AND @Email is not null)
+	OR ([SoDienThoai] = @SoDienThoai AND @SoDienThoai is not null)
+	OR ([DiaChi] = @DiaChi AND @DiaChi is not null)
+	OR ([Tuoi] = @Tuoi AND @Tuoi is not null)
+	OR ([GioiTinh] = @GioiTinh AND @GioiTinh is not null)
+	OR ([TinhTrangDa] = @TinhTrangDa AND @TinhTrangDa is not null)
+	OR ([TayTrangToi] = @TayTrangToi AND @TayTrangToi is not null)
+	OR ([RuaMat] = @RuaMat AND @RuaMat is not null)
+	OR ([Toner] = @Toner AND @Toner is not null)
+	OR ([Serum] = @Serum AND @Serum is not null)
+	OR ([Kem] = @Kem AND @Kem is not null)
+	OR ([SanPhamKhac] = @SanPhamKhac AND @SanPhamKhac is not null)
+	OR ([LuuY] = @Luuy AND @Luuy is not null)
+	OR ([ImageLink] = @ImageLink AND @ImageLink is not null)
+	SELECT @@ROWCOUNT			
+  END
+				]]></body>
+		</procedure>
+
+		
+		<procedure owner="dbo" name="tblKhachHang_Find_Dynamic"  skip="true">
+			<comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhachHang table using a dynamically generated query.
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+			<parameters/>
+			<body><![CDATA[
+				
+				BEGIN
+				
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaKhachHang] int 
+				)
+				
+				-- Insert into the temp table
+				INSERT INTO #PageIndex ( [MaKhachHang] )
+				SELECT TOP {3} [MaKhachHang]
+				FROM [dbo].[tblKhachHang] {0}
+				ORDER BY {1}
+				
+				-- Return paged results
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[Tuoi], O.[GioiTinh], O.[TinhTrangDa], O.[TayTrangToi], O.[RuaMat], O.[Toner], O.[Serum], O.[Kem], O.[SanPhamKhac], O.[LuuY], O.[ImageLink]
+				FROM
+				    [dbo].[tblKhachHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > {2}
+				    AND O.[MaKhachHang] = PageIndex.[MaKhachHang]
+				ORDER BY
+				    PageIndex.IndexId
+				
+
+				-- get total count
+				SELECT COUNT(*) AS TotalRowCount FROM [dbo].[tblKhachHang] {0};
+				
+				DROP TABLE #PageIndex
+				END
+			]]></body>
+		</procedure>
+		
+</procedures>
+</root>
