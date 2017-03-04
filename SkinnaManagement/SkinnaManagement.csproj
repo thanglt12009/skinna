@@ -64,19 +64,15 @@
     </Reference>
     <Reference Include="SkinCare.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Data.SqlClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Data.SqlClient.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="SkinCare.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="SkinCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\SkinCare.Web.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Entities.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -287,6 +283,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="tables\" />
     <Folder Include="template_html\css\" />
     <Folder Include="template_html\fonts\" />

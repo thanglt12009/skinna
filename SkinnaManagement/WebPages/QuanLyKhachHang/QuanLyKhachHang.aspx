@@ -12,7 +12,7 @@
 
                   { "width": "5%", "targets": [0] },
 
-                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5] },
 
                 ],
                 "language":
@@ -39,14 +39,12 @@
                           return return_data.data;
                       }
                   },
-                "columns": [
-                      { "data": "ID" },
+                "columns": [                     
                       { "data": "MaKhachHang" },
                       { "data": "TenKhachHang" },
                       { "data": "SoDienThoai" },
                       { "data": "Email" },
-                      { "data": "DiaChi" },
-                      { "data": "TongTien" },
+                      { "data": "DiaChi" },                      
                       { "data": "Edit" }
                 ]
             });
@@ -69,14 +67,12 @@
             <br />
             <table class="table table-striped table-bordered table-hover" id="KhachHangTable">
                 <thead>
-                    <tr>
-                        <th>ID</th>
+                    <tr>                       
                         <th>Mã KH</th>
                         <th>Họ Tên</th>
                         <th>Số Điện Thoại</th>
                         <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th>Tổng Tiền</th>
+                        <th>Địa chỉ</th>                        
                         <th></th>
                     </tr>
                 </thead>

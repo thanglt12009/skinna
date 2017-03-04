@@ -21,7 +21,7 @@ namespace SkinnaManagement.App.DAL
 
         public string TrangThaiDonHang { get; set; }
 
-        public string NguoiDatHang { get; set; }
+        public string PhuongThucThanhToan { get; set; }
 
         public string Edit { get; set; }
     }

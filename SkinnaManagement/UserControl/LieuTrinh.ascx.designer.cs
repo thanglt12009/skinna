@@ -22,57 +22,57 @@ namespace SkinnaManagement.UserControl {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// TayTrangToi control.
+        /// cbTayTrangToi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox TayTrangToi;
+        protected global::System.Web.UI.WebControls.CheckBox cbTayTrangToi;
         
         /// <summary>
-        /// RuaMat control.
+        /// cbRuaMat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox RuaMat;
+        protected global::System.Web.UI.WebControls.CheckBox cbRuaMat;
         
         /// <summary>
-        /// Toner control.
+        /// cbToner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Toner;
+        protected global::System.Web.UI.WebControls.CheckBox cbToner;
         
         /// <summary>
-        /// Serum control.
+        /// cbSerum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Serum;
+        protected global::System.Web.UI.WebControls.CheckBox cbSerum;
         
         /// <summary>
-        /// Kem control.
+        /// cbKem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Kem;
+        protected global::System.Web.UI.WebControls.CheckBox cbKem;
         
         /// <summary>
-        /// Others control.
+        /// cbOthers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Others;
+        protected global::System.Web.UI.WebControls.CheckBox cbOthers;
     }
 }

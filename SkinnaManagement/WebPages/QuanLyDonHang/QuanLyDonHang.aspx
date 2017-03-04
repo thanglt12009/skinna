@@ -43,9 +43,8 @@
                       { "data": "SoDienThoai" },
                       { "data": "NgayDatHang" },
                       { "data": "TongTien" },
-                      //{ "data": "NguonDonHang" },
                       { "data": "TrangThaiDonHang" },
-                      { "data": "NguoiDatHang" },
+                      { "data": "PhuongThucThanhToan" },
                       { "data": "Edit" }
                 ]
             });
@@ -74,9 +73,8 @@
                         <th>Số điện thoại</th>
                         <th>Ngày Đặt Hàng</th>
                         <th>Tổng tiền</th>
-                        <%--<th>Nguồn Đơn Hàng</th>--%>
                         <th>Trạng thái đơn hàng</th>
-                        <th>Người đặt hàng</th>
+                        <th>Phương thức thanh toán</th>
                         <th></th>
                     </tr>
                 </thead>

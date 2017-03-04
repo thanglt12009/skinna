@@ -22,13 +22,30 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 if (khachHang != null)
                 {
                     hoTen.Value = khachHang.TenKhachHang;
-                    maKhachHang.Value = khachHang.MaKhachHang.ToString();
                     Email.Value = khachHang.Email;
                     DienThoai.Value = khachHang.SoDienThoai;
                     Diachi.Value = khachHang.DiaChi;
-                    TinhThanh.Value = khachHang.TinhThanhPho;
-                    QuanHuyen.Value = khachHang.QuanHuyen;
-                    
+                    Age.Value = khachHang.Tuoi.ToString();
+                    if (khachHang.GioiTinh == "M")
+                        rdbMale.Checked = true;
+                    else
+                        rdbFemale.Checked = true;
+                    TinhTrangDa.Text = khachHang.TinhTrangDa;
+                    Diachi.Value = khachHang.DiaChi;
+                    AnhChup.ImageUrl = khachHang.ImageLink;
+                    CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
+                    cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
+                    CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
+                    cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
+                    CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
+                    cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
+                    CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
+                    cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
+                    CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
+                    cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
+                    CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
+                    cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+                    LuuY.Text = khachHang.Luuy;
                 }
             }
         }
@@ -39,33 +56,45 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         }
 
         protected void btnSubmit_ServerClick(object sender, EventArgs e)
-        {            
-            bool validInfo = true;
-            //validInfo = ValidateKhachHang(makhachHang);
-            if (validInfo)
-            {
-                int id = 0;
-                int.TryParse(Request.QueryString["id"], out id);
-                KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(id);
-                khachHang.TenKhachHang = hoTen.Value;
-                khachHang.Email = Email.Value;
-                khachHang.SoDienThoai = DienThoai.Value;
-                khachHang.DiaChi = Diachi.Value;
-                khachHang.TinhThanhPho = TinhThanh.Value;
-                khachHang.QuanHuyen = QuanHuyen.Value;
-
-                try
-                {
-                    DataRepository.KhachHangProvider.Update(khachHang);
-                    Response.Redirect("QuanLyKhachHang.aspx");
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage.InnerText = "Đã có lỗi khi sửa khách hàng.";
-                }
-            }
+        {
+            int id = 0;
+            int.TryParse(Request.QueryString["id"], out id);
+            KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(id);
+            khachHang.TenKhachHang = hoTen.Value;
+            khachHang.Email = Email.Value;
+            khachHang.SoDienThoai = DienThoai.Value;
+            khachHang.DiaChi = Diachi.Value;
+            khachHang.Tuoi = int.Parse(Age.Value);
+            if (rdbMale.Checked)
+                khachHang.GioiTinh = "M";
             else
-                return;
+                khachHang.GioiTinh = "F";
+            khachHang.TinhTrangDa = TinhTrangDa.Text;
+            khachHang.Luuy = LuuY.Text;
+            CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
+            khachHang.TayTrangToi = cbTayTrangToi.Checked;
+            CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
+            khachHang.RuaMat = cbRuaMat.Checked;
+            CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
+            khachHang.Toner = cbToner.Checked;
+            CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
+            khachHang.Serum = cbSerum.Checked;
+            CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
+            khachHang.Kem = cbKem.Checked;
+            CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
+            khachHang.SanPhamKhac = cbOthers.Checked;
+            khachHang.ImageLink = AnhChup.ImageUrl;
+            bool result = false;
+            try
+            {
+                result = DataRepository.KhachHangProvider.Update(khachHang);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.InnerText = "Đã có lỗi khi sửa khách hàng.";
+            }
+            if (result)
+                Response.Redirect("QuanLyKhachHang.aspx");
         }
 
     }

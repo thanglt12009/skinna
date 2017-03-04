@@ -58,11 +58,6 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TongTien).ToList()
                                                               : data.OrderBy(p => p.TongTien).ToList();
                         break;
-                    //case "5":
-                    //    // Setting.  
-                    //    lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NguonDonHang).ToList()
-                    //                                         : data.OrderBy(p => p.NguonDonHang).ToList();
-                    //    break;
                     case "5":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TrangThaiDonHang).ToList()
@@ -70,8 +65,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         break;
                     case "6":
                         // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NguoiDatHang).ToList()
-                                                             : data.OrderBy(p => p.NguoiDatHang).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.PhuongThucThanhToan).ToList()
+                                                             : data.OrderBy(p => p.PhuongThucThanhToan).ToList();
                         break;                        
                     default:
                         // Setting.  
@@ -99,15 +94,15 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(item.MaKhachHang.GetValueOrDefault(0));
                 NguonDonHang nguonDonHang = DataRepository.NguonDonHangProvider.GetByMaNguonDonHang(item.MaNguonDonHang.GetValueOrDefault(0));
                 TrangThaiDonHang trangThaiDonHang = DataRepository.TrangThaiDonHangProvider.GetByMaTrangThaiDonHang(item.MaTrangThaiDonHang.GetValueOrDefault(0));
+                PhuongThucThanhToan phuongThuc = DataRepository.PhuongThucThanhToanProvider.GetByMaPhuongThucThanhToan(item.MaPhuongThucThanhToan.GetValueOrDefault(0));
                 DonHangView viewItem = new DonHangView();
                 viewItem.MaDonHang = item.MaDonHang;
                 viewItem.TenKhachHang = khachHang.TenKhachHang;
                 viewItem.SoDienThoai = khachHang.SoDienThoai;
                 viewItem.NgayDatHang = item.NgayTaoDonHang.ToString();
                 viewItem.TongTien = item.TongTienDonHang;
-                //viewItem.NguonDonHang = nguonDonHang.TenNguonDonHang;
                 viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;
-                viewItem.NguoiDatHang = item.NguoiDatHang;
+                viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan;
                 viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                 id++;
@@ -147,7 +142,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                                 p.TongTien.ToString().ToLower().Contains(search.ToLower()) ||
                                 //p.NguonDonHang.ToLower().Contains(search.ToLower()) ||
                                 p.TrangThaiDonHang.ToLower().Contains(search.ToLower()) ||
-                                p.NguoiDatHang.ToLower().Contains(search.ToLower())
+                                p.PhuongThucThanhToan.ToLower().Contains(search.ToLower())
                                 ).ToList();
                 }
                 // Sorting.  

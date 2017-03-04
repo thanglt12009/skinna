@@ -37,7 +37,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl DienThoai;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText DienThoai;
         
         /// <summary>
         /// Age control.
@@ -103,60 +103,6 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Diachi;
         
         /// <summary>
-        /// TinhThanh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect TinhThanh;
-        
-        /// <summary>
-        /// QuanHuyen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect QuanHuyen;
-        
-        /// <summary>
-        /// SoThe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText SoThe;
-        
-        /// <summary>
-        /// LoaiThe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect LoaiThe;
-        
-        /// <summary>
-        /// DiemThuong control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl DiemThuong;
-        
-        /// <summary>
-        /// CompareValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator3;
-        
-        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>
@@ -184,6 +130,15 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
+        /// AnhChup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image AnhChup;
+        
+        /// <summary>
         /// LieuTrinh control.
         /// </summary>
         /// <remarks>
@@ -202,12 +157,12 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         protected global::SkinnaManagement.UserControl.SanPhamDaMua SanPhamDaMua;
         
         /// <summary>
-        /// TextBox1 control.
+        /// LuuY control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox LuuY;
     }
 }

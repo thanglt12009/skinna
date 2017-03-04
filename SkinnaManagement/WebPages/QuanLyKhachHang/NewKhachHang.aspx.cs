@@ -17,37 +17,51 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             {
                 ErrorMessage.InnerText = string.Empty;
             }
+            if(IsPostBack && FileUpload1.PostedFile.FileName.Length > 0)
+            {
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + FileUpload1.PostedFile.FileName);
+                AnhChup.ImageUrl = "~/Images/" + FileUpload1.PostedFile.FileName;
+            }
         }
 
         protected void btnSubmit_ServerClick(object sender, EventArgs e)
         {
-            int makhachHang = 0;
-            //int.TryParse(maKhachHang.Value, out makhachHang);
-            bool validInfo = true;
-            validInfo = ValidateKhachHang(makhachHang);
-            if (validInfo)
-            {
-                KhachHang newKhachHang = new KhachHang();
-                newKhachHang.TenKhachHang = hoTen.Value;
-                newKhachHang.MaKhachHang = makhachHang;
-                newKhachHang.Email = Email.Value;
-                newKhachHang.SoDienThoai = DienThoai.Value;
-                newKhachHang.DiaChi = Diachi.Value;
-                newKhachHang.TinhThanhPho = TinhThanh.Value;
-                newKhachHang.QuanHuyen = QuanHuyen.Value;
-
-                try
-                {
-                    DataRepository.KhachHangProvider.Insert(newKhachHang);
-                    Response.Redirect("QuanLyKhachHang.aspx");
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage.InnerText = "Đã có lỗi khi tạo khách hàng.";
-                }
-            }
+            KhachHang newKhachHang = new KhachHang();
+            newKhachHang.TenKhachHang = hoTen.Value;
+            newKhachHang.Email = Email.Value;
+            newKhachHang.SoDienThoai = DienThoai.Value;
+            newKhachHang.DiaChi = Diachi.Value;
+            newKhachHang.Tuoi = int.Parse(Age.Value);
+            if (rdbMale.Checked)
+                newKhachHang.GioiTinh = "M";
             else
-                return;
+                newKhachHang.GioiTinh = "F";
+            newKhachHang.TinhTrangDa = TinhTrangDa.Text;
+            newKhachHang.Luuy = LuuY.Text;            
+            CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
+            newKhachHang.TayTrangToi = cbTayTrangToi.Checked;
+            CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
+            newKhachHang.RuaMat = cbRuaMat.Checked;
+            CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
+            newKhachHang.Toner = cbToner.Checked;
+            CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
+            newKhachHang.Serum = cbSerum.Checked;
+            CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
+            newKhachHang.Kem = cbKem.Checked;
+            CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
+            newKhachHang.SanPhamKhac = cbOthers.Checked;
+            newKhachHang.ImageLink = AnhChup.ImageUrl;
+            bool result = false;
+            try
+            {
+                result = DataRepository.KhachHangProvider.Insert(newKhachHang);               
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage.InnerText = "Đã có lỗi khi tạo khách hàng.";
+            }
+            if(result)
+                Response.Redirect("QuanLyKhachHang.aspx");
         }
 
         protected void btnReset_ServerClick(object sender, EventArgs e)
