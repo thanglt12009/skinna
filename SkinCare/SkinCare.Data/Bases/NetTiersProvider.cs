@@ -30,29 +30,14 @@ namespace SkinCare.Data.Bases
 		public virtual DonHangProviderBase DonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
-		/// Current LoaiTrangThaiDonHangProviderBase instance.
-		///</summary>
-		public virtual LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider{get {throw new NotImplementedException();}}
-		
-		///<summary>
 		/// Current PhuongThucThanhToanProviderBase instance.
 		///</summary>
 		public virtual PhuongThucThanhToanProviderBase PhuongThucThanhToanProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
-		/// Current KhuyenMaiProviderBase instance.
+		/// Current LoaiTrangThaiDonHangProviderBase instance.
 		///</summary>
-		public virtual KhuyenMaiProviderBase KhuyenMaiProvider{get {throw new NotImplementedException();}}
-		
-		///<summary>
-		/// Current DonHangChiTietProviderBase instance.
-		///</summary>
-		public virtual DonHangChiTietProviderBase DonHangChiTietProvider{get {throw new NotImplementedException();}}
-		
-		///<summary>
-		/// Current KhoHangSanPhamProviderBase instance.
-		///</summary>
-		public virtual KhoHangSanPhamProviderBase KhoHangSanPhamProvider{get {throw new NotImplementedException();}}
+		public virtual LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
 		/// Current TrangThaiDonHangProviderBase instance.
@@ -60,9 +45,29 @@ namespace SkinCare.Data.Bases
 		public virtual TrangThaiDonHangProviderBase TrangThaiDonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
+		/// Current DonHangChiTietProviderBase instance.
+		///</summary>
+		public virtual DonHangChiTietProviderBase DonHangChiTietProvider{get {throw new NotImplementedException();}}
+		
+		///<summary>
+		/// Current KhuyenMaiProviderBase instance.
+		///</summary>
+		public virtual KhuyenMaiProviderBase KhuyenMaiProvider{get {throw new NotImplementedException();}}
+		
+		///<summary>
 		/// Current KhachHangProviderBase instance.
 		///</summary>
 		public virtual KhachHangProviderBase KhachHangProvider{get {throw new NotImplementedException();}}
+		
+		///<summary>
+		/// Current UserProviderBase instance.
+		///</summary>
+		public virtual UserProviderBase UserProvider{get {throw new NotImplementedException();}}
+		
+		///<summary>
+		/// Current KhoHangSanPhamProviderBase instance.
+		///</summary>
+		public virtual KhoHangSanPhamProviderBase KhoHangSanPhamProvider{get {throw new NotImplementedException();}}
 		
 		
 	}

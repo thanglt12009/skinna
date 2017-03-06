@@ -67,8 +67,8 @@
       <property name="FindSuffix">_Find</property>
       <property name="GenerateWinLibrary">False</property>
       <property name="RootNameSpace">SkinCare</property>
-      <property name="OutputDirectory">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare</property>
-      <property name="MappingFile">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCareMapping.config</property>
+      <property name="OutputDirectory">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output</property>
+      <property name="MappingFile">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\Mapping.config</property>
       <property name="ComponentLayerNameSpace" />
       <property name="SourceTables">
         <connectionString>$(ConnectionString1)</connectionString>
@@ -110,9 +110,13 @@
         <owner>dbo</owner>
         <name>tblTrangThaiDonHang</name>
       </table>
+      <table>
+        <owner>dbo</owner>
+        <name>tblUser</name>
+      </table>
     </tableList>
       </property>
-      <property name="WebServiceOutputPath">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\WebServices</property>
+      <property name="WebServiceOutputPath">C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\WebServices</property>
       <property name="WebServiceUrl">http://localhost/</property>
       <property name="WebAdminSiteName">SkinCare Application</property>
       <property name="ValidationType">NetTiers</property>

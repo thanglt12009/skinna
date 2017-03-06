@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{983A54D5-8535-40B4-8986-0F06F0CAC5E3}</ProjectGuid>
+    <ProjectGuid>{259424D9-1A61-4B68-A8F1-6F1A657BECF9}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -100,13 +100,13 @@
      
 	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
       <Name>SkinCare.Entities</Name>
-      <Project>{B11B750D-5F3A-4EE0-AD33-FF39293979AE}</Project>
+      <Project>{16754A01-E007-4B6D-B0E1-06471700BE2D}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
     <ProjectReference Include="..\SkinCare.Data\SkinCare.Data.csproj">
         <Name>SkinCare.Data</Name>
-        <Project>{B1179DCE-C676-4762-AB8B-EF8A9DD89716}</Project>
+        <Project>{A1DD5894-B546-4EF0-9472-B202C4197856}</Project>
         <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
@@ -120,7 +120,7 @@
 	</ItemGroup>
 	
 		
-	<!-- Custom code folder: C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Web\App_Code -->
+	<!-- Custom code folder: C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Web\App_Code -->
 	<ItemGroup>	
 		<Folder Include="App_Code\" />
         <Compile Include="App_Code\**\*.cs">
@@ -260,6 +260,12 @@
 			  <SubType>Code</SubType>
 			</Compile>
 			<Compile Include="UI\RepeaterControls\TrangThaiDonHangRepeater.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="DataSourceControls\UserDataSource.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="UI\RepeaterControls\UserRepeater.cs">
 			  <SubType>Code</SubType>
 			</Compile>
 			<Compile Include="UI\FormUtil.cs">

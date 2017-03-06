@@ -269,45 +269,6 @@ namespace SkinCare.Data.SqlClient
 		#endregion
 		
 		
-		#region "LoaiTrangThaiDonHangProvider"
-			
-		private SqlLoaiTrangThaiDonHangProvider innerSqlLoaiTrangThaiDonHangProvider;
-
-		///<summary>
-		/// This class is the Data Access Logic Component for the <see cref="LoaiTrangThaiDonHang"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		/// <value></value>
-		public override LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider
-		{
-			get
-			{
-				if (innerSqlLoaiTrangThaiDonHangProvider == null) 
-				{
-					lock (syncRoot) 
-					{
-						if (innerSqlLoaiTrangThaiDonHangProvider == null)
-						{
-							this.innerSqlLoaiTrangThaiDonHangProvider = new SqlLoaiTrangThaiDonHangProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
-						}
-					}
-				}
-				return innerSqlLoaiTrangThaiDonHangProvider;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the current <see cref="SqlLoaiTrangThaiDonHangProvider"/>.
-		/// </summary>
-		/// <value></value>
-		public SqlLoaiTrangThaiDonHangProvider SqlLoaiTrangThaiDonHangProvider
-		{
-			get {return LoaiTrangThaiDonHangProvider as SqlLoaiTrangThaiDonHangProvider;}
-		}
-		
-		#endregion
-		
-		
 		#region "PhuongThucThanhToanProvider"
 			
 		private SqlPhuongThucThanhToanProvider innerSqlPhuongThucThanhToanProvider;
@@ -347,118 +308,40 @@ namespace SkinCare.Data.SqlClient
 		#endregion
 		
 		
-		#region "KhuyenMaiProvider"
+		#region "LoaiTrangThaiDonHangProvider"
 			
-		private SqlKhuyenMaiProvider innerSqlKhuyenMaiProvider;
+		private SqlLoaiTrangThaiDonHangProvider innerSqlLoaiTrangThaiDonHangProvider;
 
 		///<summary>
-		/// This class is the Data Access Logic Component for the <see cref="KhuyenMai"/> business entity.
+		/// This class is the Data Access Logic Component for the <see cref="LoaiTrangThaiDonHang"/> business entity.
 		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
 		///</summary>
 		/// <value></value>
-		public override KhuyenMaiProviderBase KhuyenMaiProvider
+		public override LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider
 		{
 			get
 			{
-				if (innerSqlKhuyenMaiProvider == null) 
+				if (innerSqlLoaiTrangThaiDonHangProvider == null) 
 				{
 					lock (syncRoot) 
 					{
-						if (innerSqlKhuyenMaiProvider == null)
+						if (innerSqlLoaiTrangThaiDonHangProvider == null)
 						{
-							this.innerSqlKhuyenMaiProvider = new SqlKhuyenMaiProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
+							this.innerSqlLoaiTrangThaiDonHangProvider = new SqlLoaiTrangThaiDonHangProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
 						}
 					}
 				}
-				return innerSqlKhuyenMaiProvider;
+				return innerSqlLoaiTrangThaiDonHangProvider;
 			}
 		}
 		
 		/// <summary>
-		/// Gets the current <see cref="SqlKhuyenMaiProvider"/>.
+		/// Gets the current <see cref="SqlLoaiTrangThaiDonHangProvider"/>.
 		/// </summary>
 		/// <value></value>
-		public SqlKhuyenMaiProvider SqlKhuyenMaiProvider
+		public SqlLoaiTrangThaiDonHangProvider SqlLoaiTrangThaiDonHangProvider
 		{
-			get {return KhuyenMaiProvider as SqlKhuyenMaiProvider;}
-		}
-		
-		#endregion
-		
-		
-		#region "DonHangChiTietProvider"
-			
-		private SqlDonHangChiTietProvider innerSqlDonHangChiTietProvider;
-
-		///<summary>
-		/// This class is the Data Access Logic Component for the <see cref="DonHangChiTiet"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		/// <value></value>
-		public override DonHangChiTietProviderBase DonHangChiTietProvider
-		{
-			get
-			{
-				if (innerSqlDonHangChiTietProvider == null) 
-				{
-					lock (syncRoot) 
-					{
-						if (innerSqlDonHangChiTietProvider == null)
-						{
-							this.innerSqlDonHangChiTietProvider = new SqlDonHangChiTietProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
-						}
-					}
-				}
-				return innerSqlDonHangChiTietProvider;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the current <see cref="SqlDonHangChiTietProvider"/>.
-		/// </summary>
-		/// <value></value>
-		public SqlDonHangChiTietProvider SqlDonHangChiTietProvider
-		{
-			get {return DonHangChiTietProvider as SqlDonHangChiTietProvider;}
-		}
-		
-		#endregion
-		
-		
-		#region "KhoHangSanPhamProvider"
-			
-		private SqlKhoHangSanPhamProvider innerSqlKhoHangSanPhamProvider;
-
-		///<summary>
-		/// This class is the Data Access Logic Component for the <see cref="KhoHangSanPham"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		/// <value></value>
-		public override KhoHangSanPhamProviderBase KhoHangSanPhamProvider
-		{
-			get
-			{
-				if (innerSqlKhoHangSanPhamProvider == null) 
-				{
-					lock (syncRoot) 
-					{
-						if (innerSqlKhoHangSanPhamProvider == null)
-						{
-							this.innerSqlKhoHangSanPhamProvider = new SqlKhoHangSanPhamProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
-						}
-					}
-				}
-				return innerSqlKhoHangSanPhamProvider;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the current <see cref="SqlKhoHangSanPhamProvider"/>.
-		/// </summary>
-		/// <value></value>
-		public SqlKhoHangSanPhamProvider SqlKhoHangSanPhamProvider
-		{
-			get {return KhoHangSanPhamProvider as SqlKhoHangSanPhamProvider;}
+			get {return LoaiTrangThaiDonHangProvider as SqlLoaiTrangThaiDonHangProvider;}
 		}
 		
 		#endregion
@@ -503,6 +386,84 @@ namespace SkinCare.Data.SqlClient
 		#endregion
 		
 		
+		#region "DonHangChiTietProvider"
+			
+		private SqlDonHangChiTietProvider innerSqlDonHangChiTietProvider;
+
+		///<summary>
+		/// This class is the Data Access Logic Component for the <see cref="DonHangChiTiet"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		/// <value></value>
+		public override DonHangChiTietProviderBase DonHangChiTietProvider
+		{
+			get
+			{
+				if (innerSqlDonHangChiTietProvider == null) 
+				{
+					lock (syncRoot) 
+					{
+						if (innerSqlDonHangChiTietProvider == null)
+						{
+							this.innerSqlDonHangChiTietProvider = new SqlDonHangChiTietProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
+						}
+					}
+				}
+				return innerSqlDonHangChiTietProvider;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the current <see cref="SqlDonHangChiTietProvider"/>.
+		/// </summary>
+		/// <value></value>
+		public SqlDonHangChiTietProvider SqlDonHangChiTietProvider
+		{
+			get {return DonHangChiTietProvider as SqlDonHangChiTietProvider;}
+		}
+		
+		#endregion
+		
+		
+		#region "KhuyenMaiProvider"
+			
+		private SqlKhuyenMaiProvider innerSqlKhuyenMaiProvider;
+
+		///<summary>
+		/// This class is the Data Access Logic Component for the <see cref="KhuyenMai"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		/// <value></value>
+		public override KhuyenMaiProviderBase KhuyenMaiProvider
+		{
+			get
+			{
+				if (innerSqlKhuyenMaiProvider == null) 
+				{
+					lock (syncRoot) 
+					{
+						if (innerSqlKhuyenMaiProvider == null)
+						{
+							this.innerSqlKhuyenMaiProvider = new SqlKhuyenMaiProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
+						}
+					}
+				}
+				return innerSqlKhuyenMaiProvider;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the current <see cref="SqlKhuyenMaiProvider"/>.
+		/// </summary>
+		/// <value></value>
+		public SqlKhuyenMaiProvider SqlKhuyenMaiProvider
+		{
+			get {return KhuyenMaiProvider as SqlKhuyenMaiProvider;}
+		}
+		
+		#endregion
+		
+		
 		#region "KhachHangProvider"
 			
 		private SqlKhachHangProvider innerSqlKhachHangProvider;
@@ -537,6 +498,84 @@ namespace SkinCare.Data.SqlClient
 		public SqlKhachHangProvider SqlKhachHangProvider
 		{
 			get {return KhachHangProvider as SqlKhachHangProvider;}
+		}
+		
+		#endregion
+		
+		
+		#region "UserProvider"
+			
+		private SqlUserProvider innerSqlUserProvider;
+
+		///<summary>
+		/// This class is the Data Access Logic Component for the <see cref="User"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		/// <value></value>
+		public override UserProviderBase UserProvider
+		{
+			get
+			{
+				if (innerSqlUserProvider == null) 
+				{
+					lock (syncRoot) 
+					{
+						if (innerSqlUserProvider == null)
+						{
+							this.innerSqlUserProvider = new SqlUserProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
+						}
+					}
+				}
+				return innerSqlUserProvider;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the current <see cref="SqlUserProvider"/>.
+		/// </summary>
+		/// <value></value>
+		public SqlUserProvider SqlUserProvider
+		{
+			get {return UserProvider as SqlUserProvider;}
+		}
+		
+		#endregion
+		
+		
+		#region "KhoHangSanPhamProvider"
+			
+		private SqlKhoHangSanPhamProvider innerSqlKhoHangSanPhamProvider;
+
+		///<summary>
+		/// This class is the Data Access Logic Component for the <see cref="KhoHangSanPham"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		/// <value></value>
+		public override KhoHangSanPhamProviderBase KhoHangSanPhamProvider
+		{
+			get
+			{
+				if (innerSqlKhoHangSanPhamProvider == null) 
+				{
+					lock (syncRoot) 
+					{
+						if (innerSqlKhoHangSanPhamProvider == null)
+						{
+							this.innerSqlKhoHangSanPhamProvider = new SqlKhoHangSanPhamProvider(_connectionString, _useStoredProcedure, _providerInvariantName);
+						}
+					}
+				}
+				return innerSqlKhoHangSanPhamProvider;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the current <see cref="SqlKhoHangSanPhamProvider"/>.
+		/// </summary>
+		/// <value></value>
+		public SqlKhoHangSanPhamProvider SqlKhoHangSanPhamProvider
+		{
+			get {return KhoHangSanPhamProvider as SqlKhoHangSanPhamProvider;}
 		}
 		
 		#endregion

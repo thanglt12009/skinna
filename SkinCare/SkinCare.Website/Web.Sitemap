@@ -12,5 +12,6 @@
 	<siteMapNode url="~/Admin/NguonDonHang.aspx" title="Nguon Don Hang"  description="" />
 	<siteMapNode url="~/Admin/PhuongThucThanhToan.aspx" title="Phuong Thuc Thanh Toan"  description="" />
 	<siteMapNode url="~/Admin/TrangThaiDonHang.aspx" title="Trang Thai Don Hang"  description="" />
+	<siteMapNode url="~/Admin/User.aspx" title="User"  description="" />
         </siteMapNode>              
 </siteMap>

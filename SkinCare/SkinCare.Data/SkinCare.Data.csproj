@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1179DCE-C676-4762-AB8B-EF8A9DD89716}</ProjectGuid>
+    <ProjectGuid>{A1DD5894-B546-4EF0-9472-B202C4197856}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -119,7 +119,7 @@
      
 	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
       <Name>SkinCare.Entities</Name>
-      <Project>{B11B750D-5F3A-4EE0-AD33-FF39293979AE}</Project>
+      <Project>{16754A01-E007-4B6D-B0E1-06471700BE2D}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
@@ -134,7 +134,7 @@
 	</ItemGroup>
 	
 		
-	<!-- Custom code folder: C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\SkinCare\SkinCare.Data\App_Code -->
+	<!-- Custom code folder: C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data\App_Code -->
 	<ItemGroup>	
 		<Folder Include="App_Code\" />
         <Compile Include="App_Code\**\*.cs">
@@ -220,6 +220,14 @@
 			
 			<Compile Include="Bases\TrangThaiDonHangProviderBase.generatedCore.cs">
 			  <DependentUpon>TrangThaiDonHangProviderBase.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="Bases\UserProviderBase.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="Bases\UserProviderBase.generatedCore.cs">
+			  <DependentUpon>UserProviderBase.cs</DependentUpon>
 			  <SubType>Code</SubType>
 			</Compile>
 		<Compile Include="..\AssemblyInfo.cs">
