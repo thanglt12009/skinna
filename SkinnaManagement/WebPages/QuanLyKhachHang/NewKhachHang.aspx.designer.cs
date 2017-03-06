@@ -148,15 +148,6 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         protected global::SkinnaManagement.UserControl.LieuTrinh LieuTrinh;
         
         /// <summary>
-        /// SanPhamDaMua control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::SkinnaManagement.UserControl.SanPhamDaMua SanPhamDaMua;
-        
-        /// <summary>
         /// LuuY control.
         /// </summary>
         /// <remarks>

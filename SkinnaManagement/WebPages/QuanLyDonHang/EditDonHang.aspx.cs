@@ -60,6 +60,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
                         cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
                         LuuY.InnerText = khachHang.Luuy;
+                        SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                     }
                     SoTienChietKhau.Text = donHang.TienChietKhau.ToString();
                     TiLeChietKhau.Text = donHang.TiLeChietKhau.ToString();
@@ -433,7 +434,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     DonGia.Text = donHang.DonGia.ToString();
                     ThanhTien.Text = donHang.ThanhTien.ToString();
                     SoLuong.Text = donHang.SoLuong.ToString();
-                    product.SelectedItem.Value = donHang.MaSanPham.ToString();
+                    product.SelectedValue = donHang.MaSanPham.ToString();
                 }
             }
         }

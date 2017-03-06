@@ -80,9 +80,6 @@
                                 <div class="form-group">
                                    <uc1:LieuTrinh runat="server" ID="LieuTrinh" />
                                 </div>
-                                <div class="form-group">
-                                    <uc1:SanPhamDaMua runat="server" ID="SanPhamDaMua" />
-                                </div>
                                  <div class="form-group">
                                     <label>Lưu ý riêng</label>
                                     <asp:TextBox id="LuuY" class="form-control" TextMode="multiline" Rows="5" runat="server" />

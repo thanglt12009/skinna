@@ -46,6 +46,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
                     cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
                     LuuY.Text = khachHang.Luuy;
+                    SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                 }
             }
         }

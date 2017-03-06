@@ -136,7 +136,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
             cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
             CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-            cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);            
+            cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+            SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);        
         }
 
         protected void btnAddSanpham_Click(object sender,  EventArgs e)
