@@ -171,6 +171,7 @@
       <property name="CustomProcedureStartsWith">_{0}_</property>
       <property name="CSPUseDefaultValForNonNullableTypes">False</property>
       <property name="AllowCustomProcMultipleResults">False</property>
+      <property name="AliasFilePath" />
     </propertySet>
   </propertySets>
 </codeSmith>

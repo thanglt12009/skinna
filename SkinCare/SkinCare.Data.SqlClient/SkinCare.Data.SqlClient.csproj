@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9F203D0B-F091-4859-90DC-030667EBF182}</ProjectGuid>
+    <ProjectGuid>{E9B1CA34-1370-4DC2-BE03-5464FDACEACE}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -117,13 +117,13 @@
      
 	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
       <Name>SkinCare.Entities</Name>
-      <Project>{16754A01-E007-4B6D-B0E1-06471700BE2D}</Project>
+      <Project>{787E8AF0-3765-4CF4-A4FD-45A37E1B7D81}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
     <ProjectReference Include="..\SkinCare.Data\SkinCare.Data.csproj">
         <Name>SkinCare.Data</Name>
-        <Project>{A1DD5894-B546-4EF0-9472-B202C4197856}</Project>
+        <Project>{7DF753C3-A265-4161-826D-19C6B5DEC559}</Project>
         <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	

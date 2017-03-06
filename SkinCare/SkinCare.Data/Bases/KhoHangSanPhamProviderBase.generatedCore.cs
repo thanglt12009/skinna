@@ -159,6 +159,57 @@ namespace SkinCare.Data.Bases
 		#region Custom Methods
 		
 		
+		#region _tblKhoHangSanPham_GetSanPhamFromLastThreeMonth 
+		
+		/// <summary>
+		///	This method wrap the '_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth' stored procedure. 
+		/// </summary>
+		/// <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+		/// <remark>This method is generate from a stored procedure.</remark>
+		/// <returns>A <see cref="DataSet"/> instance.</returns>
+		public DataSet GetSanPhamFromLastThreeMonth(System.Int32? maKhachHang)
+		{
+			return GetSanPhamFromLastThreeMonth(null, 0, int.MaxValue , maKhachHang);
+		}
+		
+		/// <summary>
+		///	This method wrap the '_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth' stored procedure. 
+		/// </summary>
+		/// <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <remark>This method is generate from a stored procedure.</remark>
+		/// <returns>A <see cref="DataSet"/> instance.</returns>
+		public DataSet GetSanPhamFromLastThreeMonth(int start, int pageLength, System.Int32? maKhachHang)
+		{
+			return GetSanPhamFromLastThreeMonth(null, start, pageLength , maKhachHang);
+		}
+				
+		/// <summary>
+		///	This method wrap the '_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth' stored procedure. 
+		/// </summary>
+		/// <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <remark>This method is generate from a stored procedure.</remark>
+		/// <returns>A <see cref="DataSet"/> instance.</returns>
+		public DataSet GetSanPhamFromLastThreeMonth(TransactionManager transactionManager, System.Int32? maKhachHang)
+		{
+			return GetSanPhamFromLastThreeMonth(transactionManager, 0, int.MaxValue , maKhachHang);
+		}
+		
+		/// <summary>
+		///	This method wrap the '_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth' stored procedure. 
+		/// </summary>
+		/// <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <remark>This method is generate from a stored procedure.</remark>
+		/// <returns>A <see cref="DataSet"/> instance.</returns>
+		public abstract DataSet GetSanPhamFromLastThreeMonth(TransactionManager transactionManager, int start, int pageLength , System.Int32? maKhachHang);
+		
+		#endregion
+		
 		#endregion
 
 		#region Helper Functions	

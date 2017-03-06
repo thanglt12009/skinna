@@ -3503,5 +3503,24 @@
 			]]></body>
 		</procedure>
 		
+				
+		<procedure owner="dbo" name="_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth"  skip="true">
+			<comment><![CDATA[-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+anPham AND MaDonHang in 
+(SELECT MaDonHang from tblDonHang where MaKhachHang = @MaKhachHang AND NgayTaoDonHang >= DATEADD(MONTH, -3, GETDATE()))
+END
+
+			]]></body>
+					</procedure>
 </procedures>
 </root>
