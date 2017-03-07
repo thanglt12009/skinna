@@ -69,8 +69,8 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                         break;
                     default:
                         // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.ID).ToList()
-                                                             : data.OrderBy(p => p.ID).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaSanPham).ToList()
+                                                             : data.OrderBy(p => p.MaSanPham).ToList();
                         break;
                 }
             }
@@ -87,26 +87,34 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
             // Initialization.  
             List<KhoHangSanPhamView> lst = new List<KhoHangSanPhamView>();
             TList<KhoHangSanPham> donHanglist = DataRepository.KhoHangSanPhamProvider.GetAll();
-            int id = 0;
+            
             foreach (var item in donHanglist)
             {
                 KhoHangSanPhamView viewItem = new KhoHangSanPhamView();
-                viewItem.ID = id;
-                viewItem.MaSanPham = item.MaSanPham;
-                viewItem.TenSP = item.TenSanPham;
-                viewItem.NgayNhapHang = item.NgayNhapHang.ToString();
-                viewItem.SoLuongBan = item.SoLuongBanRa;
-                if (item.SoLuongTonKho <= 5)
-                    viewItem.SoLuongTon = "<label style=\" color: red;\">" + item.SoLuongTonKho + "</label>";
-                else
-                    viewItem.SoLuongTon = item.SoLuongTonKho.ToString();
                 decimal tongTienBan = item.SoLuongBanRa.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
                 decimal tongTienTon = item.SoLuongTonKho.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
-                viewItem.TongTienBan = tongTienBan;
-                viewItem.TongTienTon = tongTienTon;
+                if (item.SoLuongTonKho <= 5)
+                {
+                    viewItem.SoLuongTon = "<label style=\" color: red;\">" + item.SoLuongTonKho + "</label>";                    
+                    viewItem.TenSP = "<label style=\" color: red;\">" + item.TenSanPham + "</label>"; 
+                    viewItem.NgayNhapHang = "<label style=\" color: red;\">" + item.NgayNhapHang + "</label>"; 
+                    viewItem.SoLuongBan = "<label style=\" color: red;\">" + item.SoLuongBanRa + "</label>";
+                    viewItem.TongTienBan = "<label style=\" color: red;\">" + tongTienBan + "</label>";
+                    viewItem.TongTienTon = "<label style=\" color: red;\">" + tongTienTon + "</label>";
+                }
+                else
+                {
+                    viewItem.SoLuongTon = item.SoLuongTonKho.ToString();                       
+                    viewItem.TenSP = item.TenSanPham;
+                    viewItem.NgayNhapHang = item.NgayNhapHang.ToString();
+                    viewItem.SoLuongBan = item.SoLuongBanRa.ToString();
+                    viewItem.TongTienBan = tongTienBan.ToString();
+                    viewItem.TongTienTon = tongTienTon.ToString();
+                }
+                viewItem.MaSanPham = item.MaSanPham;
                 viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.MaSanPham + "\">Chi tiết</a>";
                 lst.Add(viewItem);
-                id++;
+               
             }
             return lst;
 

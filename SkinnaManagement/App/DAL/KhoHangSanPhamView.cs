@@ -7,21 +7,19 @@ namespace SkinnaManagement.App.DAL
 {
     public class KhoHangSanPhamView
     {
-        public int ID { get; set; }
-
         public int MaSanPham { get; set; }
 
         public string TenSP { get; set; }
 
         public string NgayNhapHang { get; set; }
 
-        public int? SoLuongBan { get; set; }
+        public string SoLuongBan { get; set; }
 
         public string SoLuongTon { get; set; }
 
-        public decimal TongTienBan { get; set; }
+        public string TongTienBan { get; set; }
 
-        public decimal TongTienTon { get; set; }
+        public string TongTienTon { get; set; }
 
         public string Edit { get; set; }
     }
