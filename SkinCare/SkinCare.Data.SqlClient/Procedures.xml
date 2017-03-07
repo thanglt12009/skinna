@@ -2835,8 +2835,9 @@
 				SELECT
 					[UserId],
 					[UserName],
+					[UserRole],
 					[Pwd],
-					[UserRole]
+					[Salt]
 				FROM
 					[dbo].[tblUser]
 					
@@ -2902,7 +2903,7 @@
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[UserId], O.[UserName], O.[Pwd], O.[UserRole]
+				SELECT O.[UserId], O.[UserName], O.[UserRole], O.[Pwd], O.[Salt]
 				FROM
 				    [dbo].[tblUser] O,
 				    #PageIndex PageIndex
@@ -2937,22 +2938,25 @@
 			<parameters>
 				<parameter name="@UserId" type="int" direction="Output" size="4" precision="10" scale="0" param="" nulldefault=""/>
 				<parameter name="@UserName" type="varchar" direction="Input" size="15" precision="0" scale="0" param="(15)" nulldefault=""/>
-				<parameter name="@Pwd" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault=""/>
 				<parameter name="@UserRole" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault=""/>
+				<parameter name="@Pwd" type="varchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@Salt" type="char" direction="Input" size="10" precision="0" scale="0" param="(10)" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
 				INSERT INTO [dbo].[tblUser]
 					(
 					[UserName]
-					,[Pwd]
 					,[UserRole]
+					,[Pwd]
+					,[Salt]
 					)
 				VALUES
 					(
 					@UserName
-					,@Pwd
 					,@UserRole
+					,@Pwd
+					,@Salt
 					)
 				-- Get the identity value
 				SET @UserId = SCOPE_IDENTITY()
@@ -2972,8 +2976,9 @@
 			<parameters>
 				<parameter name="@UserId" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault=""/>
 				<parameter name="@UserName" type="varchar" direction="Input" size="15" precision="0" scale="0" param="(15)" nulldefault=""/>
-				<parameter name="@Pwd" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault=""/>
 				<parameter name="@UserRole" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault=""/>
+				<parameter name="@Pwd" type="varchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@Salt" type="char" direction="Input" size="10" precision="0" scale="0" param="(10)" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -2983,8 +2988,9 @@
 					[dbo].[tblUser]
 				SET
 					[UserName] = @UserName
-					,[Pwd] = @Pwd
 					,[UserRole] = @UserRole
+					,[Pwd] = @Pwd
+					,[Salt] = @Salt
 				WHERE
 [UserId] = @UserId 
 				
@@ -3025,8 +3031,9 @@
 				SELECT
 					[UserId],
 					[UserName],
+					[UserRole],
 					[Pwd],
-					[UserRole]
+					[Salt]
 				FROM
 					[dbo].[tblUser]
 				WHERE
@@ -3049,8 +3056,9 @@
 				<parameter name="@SearchUsingOR" type="bit" direction="Input" size="0" precision="1" scale="0" param="" nulldefault="null"/>
 				<parameter name="@UserId" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
 				<parameter name="@UserName" type="varchar" direction="Input" size="15" precision="0" scale="0" param="(15)" nulldefault="null"/>
-				<parameter name="@Pwd" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault="null"/>
 				<parameter name="@UserRole" type="varchar" direction="Input" size="25" precision="0" scale="0" param="(25)" nulldefault="null"/>
+				<parameter name="@Pwd" type="varchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault="null"/>
+				<parameter name="@Salt" type="char" direction="Input" size="10" precision="0" scale="0" param="(10)" nulldefault="null"/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -3059,15 +3067,17 @@
     SELECT
 	  [UserId]
 	, [UserName]
-	, [Pwd]
 	, [UserRole]
+	, [Pwd]
+	, [Salt]
     FROM
 	[dbo].[tblUser]
     WHERE 
 	 ([UserId] = @UserId OR @UserId IS NULL)
 	AND ([UserName] = @UserName OR @UserName IS NULL)
-	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
 	AND ([UserRole] = @UserRole OR @UserRole IS NULL)
+	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
+	AND ([Salt] = @Salt OR @Salt IS NULL)
 						
   END
   ELSE
@@ -3075,15 +3085,17 @@
     SELECT
 	  [UserId]
 	, [UserName]
-	, [Pwd]
 	, [UserRole]
+	, [Pwd]
+	, [Salt]
     FROM
 	[dbo].[tblUser]
     WHERE 
 	 ([UserId] = @UserId AND @UserId is not null)
 	OR ([UserName] = @UserName AND @UserName is not null)
-	OR ([Pwd] = @Pwd AND @Pwd is not null)
 	OR ([UserRole] = @UserRole AND @UserRole is not null)
+	OR ([Pwd] = @Pwd AND @Pwd is not null)
+	OR ([Salt] = @Salt AND @Salt is not null)
 	SELECT @@ROWCOUNT			
   END
 				]]></body>
@@ -3118,7 +3130,7 @@
 				ORDER BY {1}
 				
 				-- Return paged results
-				SELECT O.[UserId], O.[UserName], O.[Pwd], O.[UserRole]
+				SELECT O.[UserId], O.[UserName], O.[UserRole], O.[Pwd], O.[Salt]
 				FROM
 				    [dbo].[tblUser] O,
 				    #PageIndex PageIndex

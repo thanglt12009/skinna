@@ -3645,8 +3645,9 @@ AS
 				SELECT
 					[UserId],
 					[UserName],
+					[UserRole],
 					[Pwd],
-					[UserRole]
+					[Salt]
 				FROM
 					[dbo].[tblUser]
 					
@@ -3732,7 +3733,7 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[UserId], O.[UserName], O.[Pwd], O.[UserRole]
+				SELECT O.[UserId], O.[UserName], O.[UserRole], O.[Pwd], O.[Salt]
 				FROM
 				    [dbo].[tblUser] O,
 				    #PageIndex PageIndex
@@ -3785,9 +3786,11 @@ CREATE PROCEDURE dbo.tblUser_Insert
 
 	@UserName varchar (15)  ,
 
-	@Pwd varchar (25)  ,
+	@UserRole varchar (25)  ,
 
-	@UserRole varchar (25)  
+	@Pwd varchar (50)  ,
+
+	@Salt char (10)  
 )
 AS
 
@@ -3796,14 +3799,16 @@ AS
 				INSERT INTO [dbo].[tblUser]
 					(
 					[UserName]
-					,[Pwd]
 					,[UserRole]
+					,[Pwd]
+					,[Salt]
 					)
 				VALUES
 					(
 					@UserName
-					,@Pwd
 					,@UserRole
+					,@Pwd
+					,@Salt
 					)
 				-- Get the identity value
 				SET @UserId = SCOPE_IDENTITY()
@@ -3842,9 +3847,11 @@ CREATE PROCEDURE dbo.tblUser_Update
 
 	@UserName varchar (15)  ,
 
-	@Pwd varchar (25)  ,
+	@UserRole varchar (25)  ,
 
-	@UserRole varchar (25)  
+	@Pwd varchar (50)  ,
+
+	@Salt char (10)  
 )
 AS
 
@@ -3856,8 +3863,9 @@ AS
 					[dbo].[tblUser]
 				SET
 					[UserName] = @UserName
-					,[Pwd] = @Pwd
 					,[UserRole] = @UserRole
+					,[Pwd] = @Pwd
+					,[Salt] = @Salt
 				WHERE
 [UserId] = @UserId 
 				
@@ -3936,8 +3944,9 @@ AS
 				SELECT
 					[UserId],
 					[UserName],
+					[UserRole],
 					[Pwd],
-					[UserRole]
+					[Salt]
 				FROM
 					[dbo].[tblUser]
 				WHERE
@@ -3979,9 +3988,11 @@ CREATE PROCEDURE dbo.tblUser_Find
 
 	@UserName varchar (15)  = null ,
 
-	@Pwd varchar (25)  = null ,
+	@UserRole varchar (25)  = null ,
 
-	@UserRole varchar (25)  = null 
+	@Pwd varchar (50)  = null ,
+
+	@Salt char (10)  = null 
 )
 AS
 
@@ -3992,15 +4003,17 @@ AS
     SELECT
 	  [UserId]
 	, [UserName]
-	, [Pwd]
 	, [UserRole]
+	, [Pwd]
+	, [Salt]
     FROM
 	[dbo].[tblUser]
     WHERE 
 	 ([UserId] = @UserId OR @UserId IS NULL)
 	AND ([UserName] = @UserName OR @UserName IS NULL)
-	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
 	AND ([UserRole] = @UserRole OR @UserRole IS NULL)
+	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
+	AND ([Salt] = @Salt OR @Salt IS NULL)
 						
   END
   ELSE
@@ -4008,15 +4021,17 @@ AS
     SELECT
 	  [UserId]
 	, [UserName]
-	, [Pwd]
 	, [UserRole]
+	, [Pwd]
+	, [Salt]
     FROM
 	[dbo].[tblUser]
     WHERE 
 	 ([UserId] = @UserId AND @UserId is not null)
 	OR ([UserName] = @UserName AND @UserName is not null)
-	OR ([Pwd] = @Pwd AND @Pwd is not null)
 	OR ([UserRole] = @UserRole AND @UserRole is not null)
+	OR ([Pwd] = @Pwd AND @Pwd is not null)
+	OR ([Salt] = @Salt AND @Salt is not null)
 	SELECT @@ROWCOUNT			
   END
 				
