@@ -59,7 +59,7 @@
                                 <svg class="glyph stroked gear">
                                     <use xlink:href="#stroked-gear"></use></svg>
                                 Settings</a></li>
-                            <li><a href="#">
+                            <li><a href="../Login/Login.aspx">
                                 <svg class="glyph stroked cancel">
                                     <use xlink:href="#stroked-cancel"></use></svg>
                                 Logout</a></li>

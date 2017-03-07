@@ -40,6 +40,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </div>
                                 <asp:Button ID="btnLogin" class="btn btn-primary" runat="server" Text="Login" OnClick="btnLogin_Click" />
+                                <label id="ErrorMessage" runat="server" visible="false" class="error">Username or Password is not correct. Try login again.</label>
                             </fieldset>
                         </form>
                     </div>

@@ -1,11 +1,8 @@
 ﻿using SkinCare.Data;
 using SkinCare.Entities;
+using SkinnaManagement.App;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Text;
 
 namespace SkinnaManagement.WebPages.QuanLyUser
 {
@@ -20,8 +17,11 @@ namespace SkinnaManagement.WebPages.QuanLyUser
         {
             User newUser = new User();
             newUser.UserName = UserName.Value;
-            newUser.UserRole = UserRole.Value;
-            newUser.Pwd = Password.Value;
+            newUser.UserRole = UserRole.Value;           
+            string salt = CommonCode.CreateSaltValue();
+            newUser.Salt = salt;
+            string hashValue = CommonCode.HashStringValue(Password.Value, salt);
+            newUser.Pwd = hashValue;
             bool result = false;
             try
             {
@@ -33,8 +33,8 @@ namespace SkinnaManagement.WebPages.QuanLyUser
             }
             if (result)
                 Response.Redirect("QuanLyUser.aspx");
-        }
-
+        }      
+        
         protected void btnReset_ServerClick(object sender, EventArgs e)
         {
             Response.Redirect("QuanLyUser.aspx");

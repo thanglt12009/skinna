@@ -8,6 +8,7 @@ using System.Web.Security;
 using SkinCare.Data.Bases;
 using SkinCare.Entities;
 using SkinCare.Data;
+using SkinnaManagement.App;
 
 namespace SkinnaManagement.WebPages.Login
 {
@@ -23,7 +24,10 @@ namespace SkinnaManagement.WebPages.Login
             {
                 FormsAuthentication.RedirectFromLoginPage(username.Value, true);
                 Response.Redirect("~/WebPages/Home/HomeDashBoard.aspx");
+                ErrorMessage.Visible = false;
             }
+            else
+                ErrorMessage.Visible = true;
         }
         protected bool ValidateUser()
         {
@@ -31,10 +35,15 @@ namespace SkinnaManagement.WebPages.Login
                 return false;
             UserParameterBuilder query = new UserParameterBuilder();
             query.Append(UserColumn.UserName, username.Value);
-            query.Append(UserColumn.Pwd, password.Value);
             User user = DataRepository.UserProvider.Find(query.GetParameters())[0];
             if (user != null)
-                return true;
+            {
+                string hashedValue = "";
+                hashedValue = CommonCode.HashStringValue(password.Value, user.Salt);
+                if (hashedValue.Equals(user.Pwd))
+                    return true;
+                return false;
+            }
             return false;
         }
     }

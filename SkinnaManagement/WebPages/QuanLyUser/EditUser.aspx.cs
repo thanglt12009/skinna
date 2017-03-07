@@ -1,11 +1,7 @@
 ﻿using SkinCare.Data;
 using SkinCare.Entities;
+using SkinnaManagement.App;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SkinnaManagement.WebPages.QuanLyUser
 {
@@ -33,7 +29,10 @@ namespace SkinnaManagement.WebPages.QuanLyUser
             int.TryParse(Request.QueryString["id"], out id);
             User user = DataRepository.UserProvider.GetByUserId(id);
             user.UserRole = UserRole.Value;
-            user.Pwd = Password.Value;
+            string salt = CommonCode.CreateSaltValue();
+            user.Salt = salt;
+            string hashValue = CommonCode.HashStringValue(Password.Value, salt);
+            user.Pwd = hashValue;
             bool result = false;
             try
             {
