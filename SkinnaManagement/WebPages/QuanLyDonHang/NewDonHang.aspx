@@ -50,9 +50,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <form role="form" runat="server">
-                    <%--<asp:ScriptManager ID="ScriptManager1" runat="server" />
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" />
                       <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-                                    <contenttemplate>--%>
+                                    <contenttemplate>
                     <label id="ErrorMessage" runat="server" class="error"></label>
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -183,8 +183,8 @@
                                 </div>
                             </div>
                         </div>
-                        <%--</contenttemplate>
-                                </asp:UpdatePanel> --%>
+                        </contenttemplate>
+                                </asp:UpdatePanel> 
                 </form>
             </div>
 

@@ -115,29 +115,33 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         {
             KhachHangParameterBuilder query = new KhachHangParameterBuilder();
             query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
-            KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
-            TenKhachHang.Value = khachHang.TenKhachHang;
-            if (khachHang.GioiTinh == "M")
-                rdbMale.Checked = true;
-            else
-                rdbFemale.Checked = true;
-            Age.Value = khachHang.Tuoi.ToString();
-            TinhTrangDa.Value = khachHang.TinhTrangDa;
-            LuuY.Value = khachHang.Luuy;
-            AnhChup.ImageUrl = khachHang.ImageLink;
-            CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-            cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
-            CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-            cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
-            CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-            cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
-            CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-            cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
-            CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-            cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
-            CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-            cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
-            SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);        
+            TList<KhachHang> list = DataRepository.KhachHangProvider.Find(query.GetParameters());
+            if (list != null && list.Count > 0)
+            {
+                KhachHang khachHang = list[0];
+                TenKhachHang.Value = khachHang.TenKhachHang;
+                if (khachHang.GioiTinh == "M")
+                    rdbMale.Checked = true;
+                else
+                    rdbFemale.Checked = true;
+                Age.Value = khachHang.Tuoi.ToString();
+                TinhTrangDa.Value = khachHang.TinhTrangDa;
+                LuuY.Value = khachHang.Luuy;
+                AnhChup.ImageUrl = khachHang.ImageLink;
+                CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
+                cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
+                CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
+                cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
+                CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
+                cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
+                CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
+                cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
+                CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
+                cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
+                CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
+                cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+                SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
+            }
         }
 
         protected void btnAddSanpham_Click(object sender,  EventArgs e)
