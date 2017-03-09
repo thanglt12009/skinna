@@ -141,24 +141,26 @@
                                 <div class="form-group">
                                    <asp:Gridview ID="gvProducts" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowCommand="gvProducts_RowCommand" >
                                         <columns>                
-                                            <asp:BoundField DataField="MaSanPham" Visible="false" />                                                               
-                                            <asp:BoundField DataField="TenSanPham" HeaderText="Tên sản phẩm" />  
-                                            <asp:BoundField DataField="DonGia" HeaderText="Đơn giá" /> 
-                                            <asp:BoundField DataField="SoLuong" HeaderText="Số lượng" /> 
-                                            <asp:BoundField DataField="ThanhTien" HeaderText="Thành tiền" />         
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="MaSanPham" Visible="false" />                                                               
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="TenSanPham" HeaderText="Tên sản phẩm" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="SoLuong" HeaderText="Số lượng" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTien" HeaderText="Thành tiền" />         
+                                            <asp:TemplateField>
                                                  <ItemTemplate>
                                                     <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtEdit" causesvalidation="false" runat="server" ID="lbtEdit" Text="Sửa"></asp:LinkButton>
                                                  </ItemTemplate>
-                                                 <ItemStyle HorizontalAlign="Center" />
+                                                 <ItemStyle/>
                                             </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                            <asp:TemplateField>
                                                  <ItemTemplate>
                                                      <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtRemove"  causesvalidation="false" runat="server" ID="lbtRemove" Text="Xóa"></asp:LinkButton>
                                                  </ItemTemplate>
-                                                <ItemStyle HorizontalAlign="Center" />
+                                                <ItemStyle/>
                                             </asp:TemplateField>                                                         
                                         </columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <RowStyle HorizontalAlign="Center" />
                                     </asp:Gridview>
                                      <asp:Label ID="Label2" runat="server" Text="Tổng tiền" Font-Bold="true"></asp:Label>: 
                                      <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
