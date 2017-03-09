@@ -15,6 +15,26 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 {
     public partial class NewDonHang : System.Web.UI.Page
     {
+        private DataTable ItemList
+        {
+            set { ViewState["ItemList"] = value; }
+            get
+            {
+                if (ViewState["ItemList"] != null) return (DataTable)ViewState["ItemList"];
+                else return null;
+            }
+        }
+
+        private string SelectedItem
+        {
+            set { ViewState["SelectedItem"] = value; }
+            get
+            {
+                if (ViewState["ItemList"] != null) return (string)ViewState["SelectedItem"];
+                else return null;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (ChietKhau.Checked)
@@ -34,20 +54,29 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         ThanhToan.Items.Add(new ListItem(item.TenPhuongThucThanhToan, item.MaPhuongThucThanhToan.ToString()));
                     }
                 }
-               
+
                 CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-                CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");          
-                CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");                
-                CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");               
-                CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");               
-                CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");                
+                CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
+                CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
+                CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
+                CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
+                CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
                 cbTayTrangToi.Enabled = false;
                 cbRuaMat.Enabled = false;
                 cbToner.Enabled = false;
                 cbSerum.Enabled = false;
                 cbKem.Enabled = false;
                 cbOthers.Enabled = false;
-                SetInitialRow();
+                LoadSanPhamList();
+                DataTable dt = new DataTable();
+                dt.Columns.Add(new DataColumn("MaSanPham", typeof(string)));
+                dt.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
+                dt.Columns.Add(new DataColumn("DonGia", typeof(string)));
+                dt.Columns.Add(new DataColumn("SoLuong", typeof(string)));
+                dt.Columns.Add(new DataColumn("ThanhTien", typeof(string)));
+                ItemList = dt;
+                gvProducts.DataSource = ItemList;
+                gvProducts.DataBind();
             }
         }
 
@@ -60,10 +89,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         {
             KhachHangParameterBuilder query = new KhachHangParameterBuilder();
             query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
-            KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];                  
+            KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
             DonHang newDonHang = new DonHang();
             newDonHang.MaKhachHang = khachHang.MaKhachHang;
-            newDonHang.MaPhuongThucThanhToan = int.Parse(ThanhToan.Value);            
+            newDonHang.MaPhuongThucThanhToan = int.Parse(ThanhToan.Value);
             newDonHang.NgayTaoDonHang = DateTime.Now;
             newDonHang.MaTrangThaiDonHang = 1;
             decimal tienChietKhau = 0;
@@ -73,7 +102,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             decimal.TryParse(SoTienChietKhau.Text, out tienChietKhau);
             float.TryParse(TiLeChietKhau.Text, out tiLeChietKhau);
             decimal.TryParse(TienGiaoHang.Text, out phiGiaoHang);
-            decimal.TryParse(TongTien.Text, out tongtien);
+            decimal.TryParse(lblTotalCredits.Text, out tongtien);
             newDonHang.TienChietKhau = tienChietKhau;
             newDonHang.TiLeChietKhau = tiLeChietKhau;
             newDonHang.TongTienDonHang = tongtien;
@@ -82,32 +111,28 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             try
             {
                 result = DataRepository.DonHangProvider.Insert(newDonHang);
-                foreach (GridViewRow row in gvProducts.Rows)
+                DataTable itemList = ItemList;
+                if (itemList.Rows.Count > 0)
                 {
-                    DropDownList ddl = (DropDownList)row.Cells[2].FindControl("SanPham");
-                    Label lb = (Label)row.Cells[3].FindControl("DonGia");
-                    TextBox txt = (TextBox)row.Cells[4].FindControl("SoLuong");                   
-                    Label lb1 = (Label)row.Cells[5].FindControl("ThanhTien");
-                    LinkButton lb2 = (LinkButton)row.Cells[6].FindControl("LinkButton1");
-                    if (lb2.Visible)
+                    foreach (DataRow row in itemList.Rows)
                     {
                         DonHangChiTiet sanpham = new DonHangChiTiet();
                         sanpham.MaDonHang = newDonHang.MaDonHang;
-                        sanpham.MaSanPham = int.Parse(ddl.SelectedItem.Value);
-                        sanpham.DonGia = decimal.Parse(lb.Text);
+                        sanpham.MaSanPham = int.Parse(row["MaSanPham"].ToString());
+                        sanpham.DonGia = decimal.Parse(row["DonGia"].ToString());
                         int soluong = 0;
-                        int.TryParse(txt.Text, out soluong);
+                        int.TryParse(row["SoLuong"].ToString(), out soluong);
                         sanpham.SoLuong = soluong;
-                        sanpham.ThanhTien = decimal.Parse(lb1.Text);
+                        sanpham.ThanhTien = decimal.Parse(row["ThanhTien"].ToString());
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
-                    }
+                    }                  
                 }
             }
             catch (Exception ex)
             {
                 ErrorMessage.InnerText = "Đã có lỗi khi tạo đơn hàng.";
             }
-            if(result)
+            if (result)
                 Response.Redirect("QuanLyDonHang.aspx");
         }
 
@@ -144,263 +169,139 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
         }
 
-        protected void btnAddSanpham_Click(object sender,  EventArgs e)
-        {
-            if (ViewState["CurrentTable"] != null)
-            {
-
-                DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
-                DataRow drCurrentRow = null;
-
-                if (dtCurrentTable.Rows.Count > 0)
-                {
-                    drCurrentRow = dtCurrentTable.NewRow();
-                    drCurrentRow["RowNumber"] = dtCurrentTable.Rows.Count + 1;
-
-                    //add new row to DataTable   
-                    dtCurrentTable.Rows.Add(drCurrentRow);
-                    //Store the current data to ViewState for future reference   
-
-                    ViewState["CurrentTable"] = dtCurrentTable;
-                    for (int i = 0; i < dtCurrentTable.Rows.Count - 1; i++)
-                    {
-                        //extract the TextBox values   
-
-                        DropDownList ddl = (DropDownList)gvProducts.Rows[i].Cells[2].FindControl("SanPham");
-                        Label lb = (Label)gvProducts.Rows[i].Cells[3].FindControl("DonGia");
-                        TextBox txt = (TextBox)gvProducts.Rows[i].Cells[4].FindControl("SoLuong");
-                        Label lb1 = (Label)gvProducts.Rows[i].Cells[5].FindControl("ThanhTien");
-
-                        dtCurrentTable.Rows[i]["Column2"] = ddl.SelectedItem.Text;
-                        dtCurrentTable.Rows[i]["Column3"] = lb.Text;
-                        dtCurrentTable.Rows[i]["Column4"] = txt.Text;
-                        dtCurrentTable.Rows[i]["Column5"] = lb1.Text;
-                    }
-
-                    //Rebind the Grid with the current data to reflect changes   
-                    gvProducts.DataSource = dtCurrentTable;
-                    gvProducts.DataBind();                   
-                }
-            }
-            else
-            {
-                Response.Write("ViewState is null");
-
-            }
-            //Set Previous Data on Postbacks   
-            SetPreviousData();
-            TinhTongTien();
-        }
-
-        private void SetPreviousData()
-        {
-
-            int rowIndex = 0;
-            if (ViewState["CurrentTable"] != null)
-            {
-
-                DataTable dt = (DataTable)ViewState["CurrentTable"];
-                if (dt.Rows.Count > 0)
-                {
-
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-
-                        DropDownList ddl = (DropDownList)gvProducts.Rows[i].Cells[2].FindControl("SanPham");
-                        Label lb = (Label)gvProducts.Rows[i].Cells[3].FindControl("DonGia");
-                        TextBox txt = (TextBox)gvProducts.Rows[i].Cells[4].FindControl("SoLuong");
-                        Label lb1 = (Label)gvProducts.Rows[i].Cells[5].FindControl("ThanhTien");
-
-                        TList<KhoHangSanPham> sanPhamList = DataRepository.KhoHangSanPhamProvider.GetAll();
-                        if (sanPhamList != null && sanPhamList.Count > 0)
-                        {
-                            //Building an HTML string.
-                            StringBuilder html = new StringBuilder();
-                            foreach (var item in sanPhamList)
-                            {
-                                ddl.Items.Add(new ListItem(item.TenSanPham, item.MaSanPham.ToString()));
-                            }
-                        }
-                       
-                        if (i < dt.Rows.Count - 1)
-                        {
-                            //Assign the value from DataTable to the TextBox   
-                            lb.Text = dt.Rows[i]["Column3"].ToString();
-                            txt.Text = dt.Rows[i]["Column4"].ToString();
-                            lb1.Text = dt.Rows[i]["Column5"].ToString();
-                            //Set the Previous Selected Items on Each DropDownList  on Postbacks   
-                            ddl.ClearSelection();
-                            ddl.Items.FindByText(dt.Rows[i]["Column2"].ToString()).Selected = true;
-                        }
-                        else
-                        {
-                            KhoHangSanPham sanpham = sanPhamList[0];
-                            lb.Text = sanpham.GiaTien.ToString();
-                            txt.Text = "1";
-                            lb1.Text = sanpham.GiaTien.ToString();
-                        }
-                        rowIndex++;
-                    }
-                }
-            }
-        }
-
         protected void SanPham_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList ddl = (DropDownList)sender;
-            GridViewRow row = (GridViewRow)ddl.Parent.Parent;
-            int idx = row.RowIndex;
-            int maSanPham = int.Parse(ddl.SelectedItem.Value);
-            KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(maSanPham);
-            Label DonGia = (Label)gvProducts.Rows[idx].Cells[3].FindControl("DonGia");
-            Label ThanhTien = (Label)gvProducts.Rows[idx].Cells[5].FindControl("ThanhTien");
-            TextBox SoLuong = (TextBox)gvProducts.Rows[idx].Cells[4].FindControl("SoLuong");
-            int num = 0;
-            int.TryParse(SoLuong.Text, out num);
-            DonGia.Text = sanPham.GiaTien.ToString();
-            ThanhTien.Text = (num * sanPham.GiaTien).ToString();
-            TinhTongTien();      
+            if (SanPham.SelectedIndex != -1)
+            {
+                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(int.Parse(SanPham.SelectedValue));
+                if (sanPham != null)
+                    DonGia.Value = sanPham.GiaTien.ToString();
+            }
+
         }
 
         protected void TinhTongTien()
         {
             decimal tongtien = 0;
-            foreach (GridViewRow rw in gvProducts.Rows)
+            DataTable itemList = ItemList;
+            foreach (DataRow dr in ItemList.Rows)
             {
-                Label lb1 = (Label)rw.Cells[5].FindControl("ThanhTien");
-                LinkButton lb = (LinkButton)rw.Cells[6].FindControl("LinkButton1");
-                if (lb.Visible)
-                    tongtien += decimal.Parse(lb1.Text);
+                tongtien += decimal.Parse(dr["ThanhTien"].ToString());
             }
-            TongTien.Text = tongtien.ToString();
+            lblTotalCredits.Text = tongtien.ToString();
         }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
+        protected void btnAdd_Click(object sender, EventArgs e)
         {
-            LinkButton lb = (LinkButton)sender;
-            GridViewRow gvRow = (GridViewRow)lb.NamingContainer;
-            int rowID = gvRow.RowIndex;
-            if (ViewState["CurrentTable"] != null)
+            int soLuong = 0;
+            if (SanPham.SelectedIndex != -1 && !string.IsNullOrEmpty(DonGia.Value) && int.TryParse(SoLuong.Value, out soLuong))
             {
-
-                DataTable dt = (DataTable)ViewState["CurrentTable"];
-                if (dt.Rows.Count > 1)
+                DataTable itemList = ItemList;
+                if (btnAdd.Text == "Sửa Sản Phẩm")
                 {
-                    if (gvRow.RowIndex < dt.Rows.Count - 1)
+                    foreach(DataRow dr in ItemList.Rows)
                     {
-                        //Remove the Selected Row data and reset row number  
-                        dt.Rows.Remove(dt.Rows[rowID]);
-                        ResetRowID(dt);
-                    }
-                }
-
-                //Store the current data in ViewState for future reference  
-                ViewState["CurrentTable"] = dt;
-
-                //Re bind the GridView for the updated data  
-                gvProducts.DataSource = dt;
-                gvProducts.DataBind();
-            }
-
-            //Set Previous Data on Postbacks  
-            SetPreviousData();
-            TinhTongTien();
-        }
-
-        protected void Gridview1_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                DataTable dt = (DataTable)ViewState["CurrentTable"];
-                LinkButton lb = (LinkButton)e.Row.FindControl("LinkButton1");
-                if (lb != null)
-                {
-                    if (dt.Rows.Count > 1)
-                    {
-                        if (e.Row.RowIndex == dt.Rows.Count - 1)
+                        if(dr["MaSanPham"].ToString() == SelectedItem)
                         {
-                            lb.Visible = false;
+                            dr["MaSanPham"] = SanPham.SelectedValue;
+                            dr["TenSanPham"] = SanPham.SelectedItem.Text;
+                            dr["DonGia"] = DonGia.Value;
+                            dr["SoLuong"] = SoLuong.Value;
+                            dr["ThanhTien"] = (decimal.Parse(DonGia.Value) * soLuong).ToString();                           
                         }
                     }
-                    else
-                    {
-                        lb.Visible = false;
-                    }
                 }
-            }
-        }
-
-        private void ResetRowID(DataTable dt)
-        {
-            int rowNumber = 1;
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow row in dt.Rows)
+                else
                 {
-                    row[0] = rowNumber;
-                    rowNumber++;
+                    DataRow dr = null;
+                    dr = itemList.NewRow();
+                    dr["MaSanPham"] = SanPham.SelectedValue;
+                    dr["TenSanPham"] = SanPham.SelectedItem.Text;
+                    dr["DonGia"] = DonGia.Value;
+                    dr["SoLuong"] = SoLuong.Value;
+                    dr["ThanhTien"] = (decimal.Parse(DonGia.Value) * soLuong).ToString();
+                    itemList.Rows.Add(dr);
                 }
+                ItemList = itemList;
+                gvProducts.DataSource = ItemList;
+                gvProducts.DataBind();
             }
-        }
-
-        protected void SoLuong_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = (TextBox)sender;
-            GridViewRow row = (GridViewRow)textbox.Parent.Parent;
-            int idx = row.RowIndex;           
-            Label DonGia = (Label)gvProducts.Rows[idx].Cells[3].FindControl("DonGia");
-            Label ThanhTien = (Label)gvProducts.Rows[idx].Cells[5].FindControl("ThanhTien");
-            DropDownList ddl = (DropDownList)gvProducts.Rows[idx].Cells[2].FindControl("SanPham");
-            int maSanPham = int.Parse(ddl.SelectedItem.Value);
-            KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(maSanPham);
-            int num = 0;
-            int.TryParse(textbox.Text, out num);
-            DonGia.Text = sanPham.GiaTien.ToString();
-            ThanhTien.Text = (num * sanPham.GiaTien).ToString();
+            ResetItemDetails();
             TinhTongTien();
         }
 
-        private void SetInitialRow()
+        protected void btnCancel_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
-            dt.Columns.Add(new DataColumn("RowNumber", typeof(string)));
-            dt.Columns.Add(new DataColumn("Column1", typeof(string)));
-            dt.Columns.Add(new DataColumn("Column2", typeof(string)));
-            dt.Columns.Add(new DataColumn("Column3", typeof(string)));
-            dt.Columns.Add(new DataColumn("Column4", typeof(string)));
-            dt.Columns.Add(new DataColumn("Column5", typeof(string)));
-            dr = dt.NewRow();
-            dr["RowNumber"] = 1;
-            dr["Column1"] = string.Empty;
-            dr["Column2"] = string.Empty;
-            dr["Column3"] = string.Empty;
-            dr["Column4"] = string.Empty;
-            dr["Column5"] = string.Empty;
-            dt.Rows.Add(dr);
-            
-            ViewState["CurrentTable"] = dt;
+            ResetItemDetails();            
+        }
 
-            gvProducts.DataSource = dt;
-            gvProducts.DataBind();
-            DropDownList product = (DropDownList)gvProducts.Rows[0].Cells[2].FindControl("SanPham");
-            Label DonGia = (Label)gvProducts.Rows[0].Cells[3].FindControl("DonGia");
-            Label ThanhTien = (Label)gvProducts.Rows[0].Cells[5].FindControl("ThanhTien");
-            TextBox SoLuong = (TextBox)gvProducts.Rows[0].Cells[4].FindControl("SoLuong");          
+        protected void ResetItemDetails()
+        {
+            SanPham.SelectedIndex = -1;
+            DonGia.Value = string.Empty;
+            SoLuong.Value = string.Empty;
+            btnAdd.Text = "Thêm Sản Phẩm";
+        }
+
+        private void LoadSanPhamList()
+        {
             TList<KhoHangSanPham> sanPhamList = DataRepository.KhoHangSanPhamProvider.GetAll();
             if (sanPhamList != null && sanPhamList.Count > 0)
             {
-                //Building an HTML string.
-                StringBuilder html = new StringBuilder();
+                SanPham.Items.Add(new ListItem("Chọn sản phẩm", "-1"));
                 foreach (var item in sanPhamList)
                 {
-                    product.Items.Add(new ListItem(item.TenSanPham, item.MaSanPham.ToString()));
+                    SanPham.Items.Add(new ListItem(item.TenSanPham, item.MaSanPham.ToString()));
                 }
             }
-            KhoHangSanPham sanpham = sanPhamList[0];
-            DonGia.Text = sanpham.GiaTien.ToString();
-            ThanhTien.Text = sanpham.GiaTien.ToString();
-            SoLuong.Text = "1";
+
         }
+
+        protected void gvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "lbtEdit")
+            {
+                LinkButton lnkEdit = (LinkButton)e.CommandSource;
+                string MaSanPham = lnkEdit.CommandArgument;
+                DataTable itemList = ItemList;
+                if (itemList.Rows.Count > 0)
+                {
+                    foreach (DataRow row in itemList.Rows)
+                    {
+                        if (row["MaSanPham"].ToString() == MaSanPham)
+                        {
+                            SanPham.SelectedIndex = int.Parse(MaSanPham);
+                            SoLuong.Value = row["SoLuong"].ToString();
+                            DonGia.Value = row["DonGia"].ToString();
+                            btnAdd.Text = "Sửa Sản Phẩm";
+                            SelectedItem = row["MaSanPham"].ToString();
+                        }
+                    }
+                }
+            }
+            else if (e.CommandName == "lbtRemove")
+            {
+                LinkButton lnkRemove = (LinkButton)e.CommandSource;
+                string MaSanPham = lnkRemove.CommandArgument;
+                DataTable itemList = ItemList;
+                if (itemList.Rows.Count > 0)
+                {
+                    for(int i = itemList.Rows.Count - 1; i >= 0; i--)
+                    {
+                        DataRow dr = itemList.Rows[i];
+                        if (dr["MaSanPham"].ToString() == MaSanPham)
+                        {
+                            dr.Delete();
+                            break;
+                        }
+                    }
+                }
+                ItemList = itemList;
+                gvProducts.DataSource = ItemList;
+                gvProducts.DataBind();
+                TinhTongTien();
+            }
+        }
+        
     }
 }

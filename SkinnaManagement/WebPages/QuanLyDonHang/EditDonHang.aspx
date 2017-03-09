@@ -46,9 +46,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <form role="form" runat="server">
-                    <%--<asp:ScriptManager ID="ScriptManager1" runat="server" />
-                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
-                                    <contenttemplate>--%>
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
+                                    <contenttemplate>
                     <label id="ErrorMessage" runat="server" class="error"></label>
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -103,11 +103,7 @@
                                 <div class="form-group">
                                     <label>Tình trạng da</label>
                                     <textarea id="TinhTrangDa" runat="server" class="form-control" rows="5" readonly placeholder="" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Tổng tiền</label>
-                                    <asp:TextBox id="TongTien" class="form-control" runat="server"></asp:TextBox>
-                                </div>
+                                </div>                             
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -124,61 +120,57 @@
                                     <label>Lưu ý riêng</label>
                                     <textarea id="LuuY" runat="server" class="form-control" rows="5" readonly placeholder="" />
                                 </div>
+                                 <div class="form-group">
+                                    <label>Tên sản phẩm</label>
+                                    <asp:DropDownList class="form-control" onselectedindexchanged="SanPham_SelectedIndexChanged" ID="SanPham" runat="server" AutoPostBack="true"></asp:DropDownList>                                                            
+                                </div>
+                                <div class="form-group">
+                                    <label>Đơn giá</label>
+                                    <input id="DonGia" runat="server" class="form-control" readonly placeholder="" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Số lượng</label>
+                                    <input id="SoLuong" runat="server" class="form-control" placeholder="" />
+                                </div>
+                                 <div class="form-group">
+                                    <asp:Button ID="btnAdd" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnAdd_Click" Text="Thêm sản phẩm" ValidationGroup="DetailGroup" />
+                                    <asp:Button ID="btnCancel" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnCancel_Click" Text="Hủy sản phẩm" ValidationGroup="DetailGroup" />                            
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Chi tiết đơn hàng</label>
-                                    <br />
-                                    <asp:Gridview ID="gvProducts" OnRowCreated="Gridview1_RowCreated" runat="server" ShowFooter="true" AutoGenerateColumns="false">
-                                        <columns>    
-                                            <asp:BoundField DataField="RowNumber" HeaderText="STT" />                                                                                   
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="center" HeaderText="Barcode">
-                                                <ItemTemplate>
-                                                    <input id="Barcode" runat="server" class="form-control" placeholder="Nhập barcode" />
-                                                </ItemTemplate>
+                                   <asp:Gridview ID="gvProducts" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowCommand="gvProducts_RowCommand" >
+                                        <columns>                
+                                            <asp:BoundField DataField="MaSanPham" Visible="false" />                                                               
+                                            <asp:BoundField DataField="TenSanPham" HeaderText="Tên sản phẩm" />  
+                                            <asp:BoundField DataField="DonGia" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField DataField="SoLuong" HeaderText="Số lượng" /> 
+                                            <asp:BoundField DataField="ThanhTien" HeaderText="Thành tiền" />         
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                 <ItemTemplate>
+                                                    <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtEdit" causesvalidation="false" runat="server" ID="lbtEdit" Text="Sửa"></asp:LinkButton>
+                                                 </ItemTemplate>
+                                                 <ItemStyle HorizontalAlign="Center" />
                                             </asp:TemplateField>
-                                             <asp:TemplateField ItemStyle-HorizontalAlign="center" HeaderText="Tên sản phẩm">
-                                                <ItemTemplate>
-                                                    <asp:DropDownList class="form-control" onselectedindexchanged="SanPham_SelectedIndexChanged" ID="SanPham" runat="server" AutoPostBack="true"></asp:DropDownList>                                                            
-                                                </ItemTemplate>
-                                             </asp:TemplateField>
-                                             <asp:TemplateField ItemStyle-HorizontalAlign="center" ItemStyle-Width="50px"  HeaderText="Đơn giá">
-                                                <ItemTemplate>
-                                                   <asp:Label ID="DonGia" runat="server"></asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                             <asp:TemplateField ItemStyle-HorizontalAlign="center" HeaderText="Số lượng">
-                                                <ItemTemplate>
-                                                   <asp:TextBox id="SoLuong" class="form-control" AutoPostBack="true" ontextchanged="SoLuong_TextChanged" runat="server"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                             <asp:TemplateField ItemStyle-HorizontalAlign="center" HeaderText="Thành tiền">
-                                                <ItemTemplate>
-                                                   <asp:Label ID="ThanhTien" runat="server"></asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                             <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>  
-                                                      <asp:LinkButton AutoPostBack="true" causesvalidation="false" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Xóa</asp:LinkButton>  
-                                                    </ItemTemplate>  
-                                             <FooterStyle HorizontalAlign="Right" />
-                                                <FooterTemplate>
-                                                     <asp:Button causesvalidation="false" id="btnAddSanpham" OnClick="btnAddSanpham_Click" class="btn btn-primary" runat="server" Text="Thêm sản phẩm" />
-                                                </FooterTemplate>
-                                             </asp:TemplateField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                 <ItemTemplate>
+                                                     <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtRemove"  causesvalidation="false" runat="server" ID="lbtRemove" Text="Xóa"></asp:LinkButton>
+                                                 </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center" />
+                                            </asp:TemplateField>                                                         
                                         </columns>
                                     </asp:Gridview>
-
-
+                                     <asp:Label ID="Label2" runat="server" Text="Tổng tiền" Font-Bold="true"></asp:Label>: 
+                                     <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" runat="server" id="btnSubmit" onserverclick="btnSubmit_ServerClick" class="btn btn-primary">Sửa Đơn hàng</button>
+                                    <asp:Button ID="Button1" causesvalidation="false" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Đơn hàng" />                                       
                                     <button type="reset" runat="server" causesvalidation="false" id="btnReset" onserverclick="btnReset_ServerClick" class="btn btn-default">Quay Về</button>
                                 </div>
                             </div>
                         </div>
-                        <%--</contenttemplate>
-                                </asp:UpdatePanel> --%>
+                        </contenttemplate>
+                                </asp:UpdatePanel> 
                 </form>
             </div>
 
