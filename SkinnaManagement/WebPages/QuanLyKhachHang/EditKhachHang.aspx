@@ -2,10 +2,11 @@
 
 <%@ Register Src="~/UserControl/LieuTrinh.ascx" TagPrefix="uc1" TagName="LieuTrinh" %>
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <ol class="breadcrumb">
@@ -44,9 +45,9 @@
                                      <asp:RequiredFieldValidator CssClass="error" ControlToValidate="DienThoai" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tuổi <span style="color: red">*</span></label>
-                                    <input id="Age" type="number" runat="server" class="form-control" placeholder="" />
-                                    <asp:RequiredFieldValidator CssClass="error" ControlToValidate="Age" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                                    <label>Ngày sinh <span style="color: red">*</span></label>                                    
+                                    <input id="DOB" type="date" runat="server" class="form-control" placeholder="" />                                    
+                                    <asp:RequiredFieldValidator CssClass="error" ControlToValidate="DOB" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <label>Giới tính</label>

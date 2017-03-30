@@ -25,7 +25,11 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     Email.Value = khachHang.Email;
                     DienThoai.Value = khachHang.SoDienThoai;
                     Diachi.Value = khachHang.DiaChi;
-                    Age.Value = khachHang.Tuoi.ToString();
+                    string pattern = "yyyy-MM-dd";
+                    DateTime parsedDate =new DateTime();
+                    parsedDate = khachHang.Ngaysinh.GetValueOrDefault();                   
+                    DOB.Value = parsedDate.ToString(pattern);
+
                     if (khachHang.GioiTinh == "M")
                         rdbMale.Checked = true;
                     else
@@ -65,7 +69,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             khachHang.Email = Email.Value;
             khachHang.SoDienThoai = DienThoai.Value;
             khachHang.DiaChi = Diachi.Value;
-            khachHang.Tuoi = int.Parse(Age.Value);
+            khachHang.Ngaysinh = DateTime.Parse(DOB.Value);
             if (rdbMale.Checked)
                 khachHang.GioiTinh = "M";
             else
@@ -90,7 +94,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             {
                 result = DataRepository.KhachHangProvider.Update(khachHang);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ErrorMessage.InnerText = "Đã có lỗi khi sửa khách hàng.";
             }

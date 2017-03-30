@@ -15,11 +15,11 @@ namespace SkinnaManagement.App.DAL
 
         public string SoDienThoai { get; set; }
 
-        public string Email { get; set; }
+        public string NgaySinh { get; set; }
 
         public string DiaChi { get; set; }
 
-        public double TongTien { get; set; }
+        public string TongTien { get; set; }
 
         public string Edit { get; set; }
     }

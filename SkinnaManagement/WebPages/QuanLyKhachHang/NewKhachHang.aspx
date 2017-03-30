@@ -43,9 +43,9 @@
                                      <asp:RequiredFieldValidator CssClass="error" ControlToValidate="DienThoai" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tuổi <span style="color: red">*</span></label>
-                                    <input id="Age" type="number" runat="server" class="form-control" placeholder="" />
-                                    <asp:RequiredFieldValidator CssClass="error" ControlToValidate="Age" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                                    <label>Ngày sinh <span style="color: red">*</span></label>
+                                    <input id="DOB" type="date" runat="server" class="form-control" placeholder="" />
+                                    <asp:RequiredFieldValidator CssClass="error" ControlToValidate="DOB" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group">
                                     <label>Giới tính</label>

@@ -112,7 +112,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                     viewItem.TongTienTon = tongTienTon.ToString();
                 }
                 viewItem.MaSanPham = item.MaSanPham;
-                viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.MaSanPham + "\">Chi tiết</a>";
+                viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.Id + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                
             }

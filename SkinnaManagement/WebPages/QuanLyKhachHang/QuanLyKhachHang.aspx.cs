@@ -9,6 +9,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 using SkinnaManagement.App.DAL;
+using SkinCare.Data.Bases;
 
 namespace SkinnaManagement.WebPages.QuanLyKhachHang
 {
@@ -23,7 +24,17 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         {
             Response.Redirect("NewKhachHang.aspx"); 
         }
-       
+
+        protected void btnSendMail_ServerClick(object sender, EventArgs e)
+        { 
+            
+        }
+
+        protected void btnDownload_ServerClick(object sender, EventArgs e)
+        {
+            
+        }
+
         private static List<KhachHangView> SortByColumnWithOrder(string order, string orderDir, List<KhachHangView> data)
         {
             // Initialization.  
@@ -50,14 +61,19 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                         break;
                     case "3":
                         // Setting. 
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.Email).ToList()
-                                                              : data.OrderBy(p => p.Email).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgaySinh).ToList()
+                                                              : data.OrderBy(p => p.NgaySinh).ToList();
                         break;
                     case "4":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.DiaChi).ToList()
+                                                             : data.OrderBy(p => p.TongTien).ToList();
+                        break;
+                    case "5":
+                        // Setting.  
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.DiaChi).ToList()
                                                              : data.OrderBy(p => p.DiaChi).ToList();
-                        break;                    
+                        break;
                     default:
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaKhachHang).ToList()
@@ -65,7 +81,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
             }
@@ -80,11 +96,20 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             TList<KhachHang> khachHanglist = DataRepository.KhachHangProvider.GetAll();           
             foreach (var item in khachHanglist)
             {
+                DonHangParameterBuilder query = new DonHangParameterBuilder();
+                query.Append(DonHangColumn.MaKhachHang, item.MaKhachHang.ToString());
+                TList<DonHang> donHangList = DataRepository.DonHangProvider.Find(query.GetParameters());
+                decimal tongTien = 0;
+                foreach(var donHang in donHangList)
+                {
+                    tongTien += donHang.TongTienDonHang.GetValueOrDefault(0);
+                }
                 KhachHangView viewItem = new KhachHangView();               
                 viewItem.MaKhachHang  = item.MaKhachHang;
                 viewItem.TenKhachHang = item.TenKhachHang;
                 viewItem.SoDienThoai = item.SoDienThoai;
-                viewItem.Email = item.Email;
+                viewItem.NgaySinh = item.Ngaysinh.ToString();
+                viewItem.TongTien = tongTien.ToString();
                 viewItem.DiaChi = item.DiaChi;                            
                 viewItem.Edit = "<a href=\"EditKhachHang.aspx?id=" + item.MaKhachHang + "\">Chi tiết</a>";
                 lst.Add(viewItem);              
@@ -122,7 +147,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                                 p.TenKhachHang.ToLower().Contains(search.ToLower()) ||
                                 p.SoDienThoai.ToLower().Contains(search.ToLower()) ||
                                 p.DiaChi.ToLower().Contains(search.ToLower()) ||                                
-                                p.Email.ToLower().Contains(search.ToLower())                             
+                                p.NgaySinh.ToLower().Contains(search.ToLower())                             
                                 ).ToList();
                 }
                 // Sorting.  

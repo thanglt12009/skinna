@@ -149,7 +149,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     rdbMale.Checked = true;
                 else
                     rdbFemale.Checked = true;
-                Age.Value = khachHang.Tuoi.ToString();
+                DOB.Value = khachHang.Ngaysinh.ToString();
                 TinhTrangDa.Value = khachHang.TinhTrangDa;
                 LuuY.Value = khachHang.Luuy;
                 AnhChup.ImageUrl = khachHang.ImageLink;
@@ -173,7 +173,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         {
             if (SanPham.SelectedIndex != -1)
             {
-                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(int.Parse(SanPham.SelectedValue));
+                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(int.Parse(SanPham.SelectedValue));
                 if (sanPham != null)
                     DonGia.Value = sanPham.GiaTien.ToString();
             }

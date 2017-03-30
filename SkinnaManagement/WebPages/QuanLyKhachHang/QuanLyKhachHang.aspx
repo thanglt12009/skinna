@@ -42,8 +42,9 @@
                 "columns": [                     
                       { "data": "MaKhachHang" },
                       { "data": "TenKhachHang" },
-                      { "data": "SoDienThoai" },
-                      { "data": "Email" },
+                      { "data": "SoDienThoai" },                      
+                      { "data": "NgaySinh" },
+                      { "data": "TongTien" },
                       { "data": "DiaChi" },                      
                       { "data": "Edit" }
                 ]
@@ -63,6 +64,8 @@
                 </div>
             </div>
             <button type="submit" runat="server" id="btnAdd" onserverclick="btnAdd_ServerClick" class="btn btn-danger">Thêm Mới</button>
+            <button type="submit" runat="server" id="btnSendMail" onserverclick="btnSendMail_ServerClick" class="btn btn-danger">Gửi Mail</button>
+            <button type="submit" runat="server" id="btnDownload" onserverclick="btnDownload_ServerClick" class="btn btn-danger">DOWNLOAD</button>
             <br />
             <br />
             <table class="table table-striped table-bordered table-hover" id="KhachHangTable">
@@ -71,7 +74,8 @@
                         <th>Mã KH</th>
                         <th>Họ Tên</th>
                         <th>Số Điện Thoại</th>
-                        <th>Email</th>
+                        <th>Ngày sinh</th>
+                        <th>Tổng tiền đã mua</th>
                         <th>Địa chỉ</th>                        
                         <th></th>
                     </tr>

@@ -65,7 +65,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                             rdbMale.Checked = true;
                         else
                             rdbFemale.Checked = true;
-                        Age.Value = khachHang.Tuoi.ToString();
+                        DOB.Value = khachHang.Ngaysinh.ToString();
                         TinhTrangDa.InnerText = khachHang.TinhTrangDa;
                         AnhChup.ImageUrl = khachHang.ImageLink;
                         CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
@@ -102,7 +102,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     {
                         foreach (var donhang in list)
                         {
-                            KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(donhang.MaSanPham.GetValueOrDefault(-1));
+                            KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(donhang.MaSanPham.GetValueOrDefault(-1));
                             dr = dt.NewRow();                         
                             dr["MaSanPham"] = sanPham.MaSanPham.ToString();
                             dr["TenSanPham"] = sanPham.TenSanPham;
@@ -181,7 +181,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         {
             if (SanPham.SelectedIndex != -1)
             {
-                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(int.Parse(SanPham.SelectedValue));
+                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(int.Parse(SanPham.SelectedValue));
                 if (sanPham != null)
                     DonGia.Value = sanPham.GiaTien.ToString();
             }

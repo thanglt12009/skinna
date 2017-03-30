@@ -103,8 +103,8 @@
                                    <asp:RadioButton ID="rdbFemale" GroupName="Gender" Enabled="false" Text="Nữ" runat="server" />
                                 </div>
                                 <div class="form-group">
-                                    <label>Tuổi</label>
-                                    <input id="Age" runat="server" class="form-control" readonly placeholder="" />
+                                    <label>Ngày sinh</label>
+                                    <input id="DOB" runat="server" class="form-control" readonly placeholder="" />
                                 </div>
                                 <div class="form-group">
                                     <label>Tình trạng da</label>

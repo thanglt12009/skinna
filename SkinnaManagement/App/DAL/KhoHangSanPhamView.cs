@@ -7,7 +7,9 @@ namespace SkinnaManagement.App.DAL
 {
     public class KhoHangSanPhamView
     {
-        public int MaSanPham { get; set; }
+        public int ID { get; set; }
+
+        public string MaSanPham { get; set; }
 
         public string TenSP { get; set; }
 

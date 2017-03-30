@@ -31,7 +31,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             newKhachHang.Email = Email.Value;
             newKhachHang.SoDienThoai = DienThoai.Value;
             newKhachHang.DiaChi = Diachi.Value;
-            newKhachHang.Tuoi = int.Parse(Age.Value);
+            newKhachHang.Ngaysinh = DateTime.Parse(DOB.Value);
             if (rdbMale.Checked)
                 newKhachHang.GioiTinh = "M";
             else

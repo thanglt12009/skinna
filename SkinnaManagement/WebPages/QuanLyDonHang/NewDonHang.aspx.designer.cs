@@ -139,13 +139,13 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang {
         protected global::System.Web.UI.WebControls.RadioButton rdbFemale;
         
         /// <summary>
-        /// Age control.
+        /// DOB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Age;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText DOB;
         
         /// <summary>
         /// TinhTrangDa control.

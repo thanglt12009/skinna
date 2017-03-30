@@ -18,7 +18,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                 ErrorMessage.InnerText = string.Empty;
                 int id = 0;
                 int.TryParse(Request.QueryString["id"], out id);
-                KhoHangSanPham khoHang = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(id);
+                KhoHangSanPham khoHang = DataRepository.KhoHangSanPhamProvider.GetById(id);
                 if (khoHang != null)
                 {
                     tenSanPham.Value = khoHang.TenSanPham;
@@ -35,7 +35,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
 
             int id = 0;
             int.TryParse(Request.QueryString["id"], out id);
-            KhoHangSanPham khoHang = DataRepository.KhoHangSanPhamProvider.GetByMaSanPham(id);
+            KhoHangSanPham khoHang = DataRepository.KhoHangSanPhamProvider.GetById(id);
             khoHang.TenSanPham = tenSanPham.Value;
             khoHang.NgayNhapHang = DateTime.Parse(NgayNhap.Value);
             khoHang.SoLuongBanRa = int.Parse(SoLuongBan.Value);
