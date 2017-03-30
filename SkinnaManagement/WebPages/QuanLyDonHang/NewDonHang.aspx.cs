@@ -149,7 +149,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     rdbMale.Checked = true;
                 else
                     rdbFemale.Checked = true;
-                DOB.Value = khachHang.Ngaysinh.ToString();
+                DOB.Value = khachHang.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
                 TinhTrangDa.Value = khachHang.TinhTrangDa;
                 LuuY.Value = khachHang.Luuy;
                 AnhChup.ImageUrl = khachHang.ImageLink;
@@ -166,6 +166,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
                 cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
                 SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
+                ErrorMessage.InnerText = "";
+            }
+            else
+            {
+                ErrorMessage.InnerText = "Không tìm được khách hàng có số điện thoại này";
             }
         }
 
@@ -251,7 +256,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 SanPham.Items.Add(new ListItem("Chọn sản phẩm", "-1"));
                 foreach (var item in sanPhamList)
                 {
-                    SanPham.Items.Add(new ListItem(item.TenSanPham, item.MaSanPham.ToString()));
+                    SanPham.Items.Add(new ListItem(item.TenSanPham, item.Id.ToString()));
                 }
             }
 

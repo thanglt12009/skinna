@@ -11,11 +11,11 @@ namespace SkinnaManagement.App.DAL
 
         public string TenKhachHang { get; set; }
 
-        public string SoDienThoai { get; set; }
+        public string PhiVanChuyen { get; set; }
 
         public string NgayDatHang { get; set; }
 
-        public decimal? TongTien { get; set; }
+        public string TongTien { get; set; }
 
         //public string NguonDonHang { get; set; }
 

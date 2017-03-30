@@ -4,11 +4,7 @@
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        function EnterEvent(e) {
-            if (e.keyCode == 13)
-                __doPostBack('<%=btnSoDienThoai.UniqueID%>', "");
-        }
+    <script type="text/javascript">       
         $(document).ready(function () {
             $('#head_ChietKhau').change(function () {
                 if ($(this).is(":checked")) {
@@ -25,7 +21,15 @@
                 else {
                     $('#divGiaoHang').hide();
                 }
-            });
+            });            
+            $("#SoDienThoai").keydown(function (e) {
+                var code = e.keyCode || e.which;
+                if(code === 9 || code === 13)
+                {
+                    e.preventDefault();
+                    __doPostBack('<%=btnSoDienThoai.UniqueID%>', "");
+                }
+            });            
         });
     </script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -59,7 +63,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Số Điện thoại<span style="color: red">*</span></label>
-                                    <asp:TextBox id="SoDienThoai" clientidmode="Static" onkeypress="return EnterEvent(event)" class="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox id="SoDienThoai" clientidmode="Static" class="form-control" runat="server"></asp:TextBox>
                                     <asp:Button ID="btnSoDienThoai" causesvalidation="false" runat="server" style="display: none" onclick="btnSoDienThoai_Click" />
                                     <asp:RequiredFieldValidator CssClass="error" ControlToValidate="SoDienThoai" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>

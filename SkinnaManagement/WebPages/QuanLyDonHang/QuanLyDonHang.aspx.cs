@@ -9,6 +9,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 using SkinnaManagement.App.DAL;
+using System.Globalization;
 
 namespace SkinnaManagement.WebPages.QuanLyDonHang
 {
@@ -42,21 +43,21 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TenKhachHang).ToList()
                                                              : data.OrderBy(p => p.TenKhachHang).ToList();
-                        break;
+                        break;                   
                     case "2":
-                        // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.SoDienThoai).ToList()
-                                                             : data.OrderBy(p => p.SoDienThoai).ToList();
-                        break;
-                    case "3":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayDatHang).ToList()
                                                              : data.OrderBy(p => p.NgayDatHang).ToList();
                         break;
-                    case "4":
+                    case "3":
                         // Setting. 
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TongTien).ToList()
                                                               : data.OrderBy(p => p.TongTien).ToList();
+                        break;
+                    case "4":
+                        // Setting.  
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.PhiVanChuyen).ToList()
+                                                             : data.OrderBy(p => p.PhiVanChuyen).ToList();
                         break;
                     case "5":
                         // Setting.  
@@ -85,6 +86,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         private static List<DonHangView> LoadData()
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";
             // Initialization.  
             List<DonHangView> lst = new List<DonHangView>();
             TList<DonHang> donHanglist = DataRepository.DonHangProvider.GetAll();
@@ -98,9 +103,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 DonHangView viewItem = new DonHangView();
                 viewItem.MaDonHang = item.MaDonHang;
                 viewItem.TenKhachHang = khachHang.TenKhachHang;
-                viewItem.SoDienThoai = khachHang.SoDienThoai;
-                viewItem.NgayDatHang = item.NgayTaoDonHang.ToString();
-                viewItem.TongTien = item.TongTienDonHang;
+                string phiVanChuyenView = item.PhiVanChuyen.GetValueOrDefault().ToString("C", nfi);
+                viewItem.PhiVanChuyen = phiVanChuyenView.Substring(0, phiVanChuyenView.Length - 3);
+                viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") +  ConvertTime(item.NgayTaoDonHang.ToString());
+                string tongTienView = item.TongTienDonHang.GetValueOrDefault().ToString("C", nfi);
+                viewItem.TongTien = tongTienView.Substring(0, tongTienView.Length - 3);
                 viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;
                 viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan;
                 viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
@@ -109,6 +116,14 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
             return lst;
 
+        }
+
+        private static string ConvertTime(string date)
+        {
+            string time = date.Substring(date.Length - 2, 2);
+            if (time == "AM")
+                return " Sáng";
+            else return " Chiều";
         }
 
         #region Get data method. 
@@ -137,10 +152,9 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     // Apply search  
                     data = data.Where(p => p.MaDonHang.ToString().ToLower().Contains(search.ToLower()) ||
                                 p.TenKhachHang.ToLower().Contains(search.ToLower()) ||
-                                p.SoDienThoai.ToLower().Contains(search.ToLower()) ||
+                                p.PhiVanChuyen.ToLower().Contains(search.ToLower()) ||
                                 p.NgayDatHang.ToLower().Contains(search.ToLower()) ||
-                                p.TongTien.ToString().ToLower().Contains(search.ToLower()) ||
-                                //p.NguonDonHang.ToLower().Contains(search.ToLower()) ||
+                                p.TongTien.ToString().ToLower().Contains(search.ToLower()) ||                               
                                 p.TrangThaiDonHang.ToLower().Contains(search.ToLower()) ||
                                 p.PhuongThucThanhToan.ToLower().Contains(search.ToLower())
                                 ).ToList();

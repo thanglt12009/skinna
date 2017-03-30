@@ -17,10 +17,10 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             {
                 ErrorMessage.InnerText = string.Empty;
             }
-            if(IsPostBack && FileUpload1.PostedFile.FileName.Length > 0)
+            if (IsPostBack && FileUpload1.PostedFile.FileName.Length > 0)
             {
-                FileUpload1.SaveAs(Server.MapPath("~/Images/") + FileUpload1.PostedFile.FileName);
-                AnhChup.ImageUrl = "~/Images/" + FileUpload1.PostedFile.FileName;
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + Email.Value + ".jpg");
+                AnhChup.ImageUrl = "~/Images/" + Email.Value + ".jpg";
             }
         }
 

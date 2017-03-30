@@ -39,10 +39,10 @@
                   },
                 "columns": [
                       { "data": "MaDonHang" },
-                      { "data": "TenKhachHang" },
-                      { "data": "SoDienThoai" },
+                      { "data": "TenKhachHang" },                     
                       { "data": "NgayDatHang" },
                       { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
                       { "data": "TrangThaiDonHang" },
                       { "data": "PhuongThucThanhToan" },
                       { "data": "Edit" }
@@ -63,16 +63,18 @@
                 </div>
             </div>
             <button type="submit" runat="server" id="btnAdd" onserverclick="btnAdd_ServerClick" class="btn btn-danger">Thêm Mới</button>
+            <asp:Label ID="Label2" runat="server" Text="Tổng thu:" Font-Bold="true"></asp:Label>
+            <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
             <br />
             <br />
             <table class="table table-striped table-bordered table-hover" id="DonHangTable">
                 <thead>
                     <tr>
                         <th>Mã Đơn Hàng</th>
-                        <th>Tên Khách Hàng</th>
-                        <th>Số điện thoại</th>
+                        <th>Tên Khách Hàng</th>                        
                         <th>Ngày Đặt Hàng</th>
                         <th>Tổng tiền</th>
+                        <th>Phí ship</th>
                         <th>Trạng thái đơn hàng</th>
                         <th>Phương thức thanh toán</th>
                         <th></th>

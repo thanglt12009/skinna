@@ -53,6 +53,11 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                 }
             }
+            if (IsPostBack && FileUpload1.PostedFile.FileName.Length > 0)
+            {
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + Email.Value + ".jpg");
+                AnhChup.ImageUrl = "~/Images/" + Email.Value + ".jpg";
+            }
         }
 
         protected void btnReset_ServerClick(object sender, EventArgs e)

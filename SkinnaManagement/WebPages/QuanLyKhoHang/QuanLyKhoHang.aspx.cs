@@ -9,6 +9,8 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 using SkinnaManagement.App.DAL;
+using System.Globalization;
+
 namespace SkinnaManagement.WebPages.QuanLyKhoHang
 {
     public partial class QuanLyKhoHang : System.Web.UI.Page
@@ -84,6 +86,10 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
 
         private static List<KhoHangSanPhamView> LoadData()
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";
             // Initialization.  
             List<KhoHangSanPhamView> lst = new List<KhoHangSanPhamView>();
             TList<KhoHangSanPham> donHanglist = DataRepository.KhoHangSanPhamProvider.GetAll();
@@ -93,23 +99,25 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                 KhoHangSanPhamView viewItem = new KhoHangSanPhamView();
                 decimal tongTienBan = item.SoLuongBanRa.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
                 decimal tongTienTon = item.SoLuongTonKho.GetValueOrDefault(0) * item.GiaTien.GetValueOrDefault(0);
+                string tongTienBanView = tongTienBan.ToString("C", nfi);
+                string tongTienTonView = tongTienTon.ToString("C", nfi);
                 if (item.SoLuongTonKho <= 5)
                 {
                     viewItem.SoLuongTon = "<label style=\" color: red;\">" + item.SoLuongTonKho + "</label>";                    
                     viewItem.TenSP = "<label style=\" color: red;\">" + item.TenSanPham + "</label>"; 
-                    viewItem.NgayNhapHang = "<label style=\" color: red;\">" + item.NgayNhapHang + "</label>"; 
+                    viewItem.NgayNhapHang = "<label style=\" color: red;\">" + item.NgayNhapHang.GetValueOrDefault().ToString("dd/MM/yyyy") + "</label>"; 
                     viewItem.SoLuongBan = "<label style=\" color: red;\">" + item.SoLuongBanRa + "</label>";
-                    viewItem.TongTienBan = "<label style=\" color: red;\">" + tongTienBan + "</label>";
-                    viewItem.TongTienTon = "<label style=\" color: red;\">" + tongTienTon + "</label>";
+                    viewItem.TongTienBan = "<label style=\" color: red;\">" + tongTienBanView.Substring(0, tongTienBanView.Length - 3) + "</label>";
+                    viewItem.TongTienTon = "<label style=\" color: red;\">" + tongTienTonView.Substring(0, tongTienTonView.Length - 3) + "</label>";
                 }
                 else
                 {
                     viewItem.SoLuongTon = item.SoLuongTonKho.ToString();                       
                     viewItem.TenSP = item.TenSanPham;
-                    viewItem.NgayNhapHang = item.NgayNhapHang.ToString();
-                    viewItem.SoLuongBan = item.SoLuongBanRa.ToString();
-                    viewItem.TongTienBan = tongTienBan.ToString();
-                    viewItem.TongTienTon = tongTienTon.ToString();
+                    viewItem.NgayNhapHang = item.NgayNhapHang.GetValueOrDefault().ToString("dd/MM/yyyy");
+                    viewItem.SoLuongBan = item.SoLuongBanRa.ToString();                    
+                    viewItem.TongTienBan = tongTienBanView.Substring(0, tongTienBanView.Length - 3); 
+                    viewItem.TongTienTon = tongTienTonView.Substring(0, tongTienTonView.Length - 3); 
                 }
                 viewItem.MaSanPham = item.MaSanPham;
                 viewItem.Edit = "<a href=\"EditKhoHang.aspx?id=" + item.Id + "\">Chi tiết</a>";

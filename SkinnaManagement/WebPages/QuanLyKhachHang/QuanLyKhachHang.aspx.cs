@@ -10,6 +10,7 @@ using System.Web.Services;
 using System.Web.UI.WebControls;
 using SkinnaManagement.App.DAL;
 using SkinCare.Data.Bases;
+using System.Globalization;
 
 namespace SkinnaManagement.WebPages.QuanLyKhachHang
 {
@@ -91,6 +92,10 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
 
         private static List<KhachHangView> LoadData()
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";
             // Initialization.  
             List<KhachHangView> lst = new List<KhachHangView>();
             TList<KhachHang> khachHanglist = DataRepository.KhachHangProvider.GetAll();           
@@ -108,8 +113,9 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 viewItem.MaKhachHang  = item.MaKhachHang;
                 viewItem.TenKhachHang = item.TenKhachHang;
                 viewItem.SoDienThoai = item.SoDienThoai;
-                viewItem.NgaySinh = item.Ngaysinh.ToString();
-                viewItem.TongTien = tongTien.ToString();
+                viewItem.NgaySinh = item.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
+                string tongTienView = tongTien.ToString("C", nfi);
+                viewItem.TongTien = tongTienView.Substring(0, tongTienView.Length - 3);                
                 viewItem.DiaChi = item.DiaChi;                            
                 viewItem.Edit = "<a href=\"EditKhachHang.aspx?id=" + item.MaKhachHang + "\">Chi tiết</a>";
                 lst.Add(viewItem);              
