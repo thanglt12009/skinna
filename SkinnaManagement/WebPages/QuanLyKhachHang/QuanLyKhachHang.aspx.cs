@@ -13,7 +13,8 @@ using SkinCare.Data.Bases;
 using System.Globalization;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.IO;
-using System.Configuration;
+using ClosedXML.Excel;
+
 namespace SkinnaManagement.WebPages.QuanLyKhachHang
 {
     public partial class QuanLyKhachHang : System.Web.UI.Page
@@ -69,7 +70,30 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
 
         protected void btnDownload_ServerClick(object sender, EventArgs e)
         {
-            
+            TList<KhachHang> khachHanglist = DataRepository.KhachHangProvider.GetAll();
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] { new DataColumn("Tên"), new DataColumn("Số Điện Thoại") });
+            foreach(var khachHang in khachHanglist)
+            {
+                dt.Rows.Add(khachHang.TenKhachHang, khachHang.SoDienThoai);
+            }           
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt, "Customers");
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=Export.xlsx");
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
         }
 
         private static List<KhachHangView> SortByColumnWithOrder(string order, string orderDir, List<KhachHangView> data)
