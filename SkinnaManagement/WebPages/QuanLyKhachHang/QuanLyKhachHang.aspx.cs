@@ -11,7 +11,9 @@ using System.Web.UI.WebControls;
 using SkinnaManagement.App.DAL;
 using SkinCare.Data.Bases;
 using System.Globalization;
-
+using Outlook = Microsoft.Office.Interop.Outlook;
+using System.IO;
+using System.Configuration;
 namespace SkinnaManagement.WebPages.QuanLyKhachHang
 {
     public partial class QuanLyKhachHang : System.Web.UI.Page
@@ -27,8 +29,42 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         }
 
         protected void btnSendMail_ServerClick(object sender, EventArgs e)
-        { 
-            
+        {
+            try
+            {
+                List<string> lstAllRecipients = new List<string>();
+                //Below is hardcoded - can be replaced with db data
+                TList<KhachHang> khachHanglist = DataRepository.KhachHangProvider.GetAll();
+                
+                lstAllRecipients.Add(khachHanglist[0].Email);              
+
+                Outlook.Application outlookApp = new Outlook.Application();
+                Outlook._MailItem oMailItem = (Outlook._MailItem)outlookApp.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Inspector oInspector = oMailItem.GetInspector;
+               
+                // Recipient
+                Outlook.Recipients oRecips = (Outlook.Recipients)oMailItem.Recipients;
+                foreach (String recipient in lstAllRecipients)
+                {
+                    Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(recipient);
+                    oRecip.Resolve();
+                }
+
+                //Add CC
+                for(int i = 1; i< khachHanglist.Count; i++)
+                {
+                    Outlook.Recipient oCCRecip = oRecips.Add(khachHanglist[i].Email);
+                    oCCRecip.Type = (int)Outlook.OlMailRecipientType.olCC;
+                    oCCRecip.Resolve();
+                }                              
+
+                //Display the mailbox
+                oMailItem.Display(true);
+            }
+            catch (Exception )
+            {
+                
+            }
         }
 
         protected void btnDownload_ServerClick(object sender, EventArgs e)
