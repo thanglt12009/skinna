@@ -65,8 +65,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                             rdbMale.Checked = true;
                         else
                             rdbFemale.Checked = true;
-                        DOB.Value = khachHang.Ngaysinh.ToString();
-                        TinhTrangDa.InnerText = khachHang.TinhTrangDa;
+                        DOB.Value = khachHang.Ngaysinh.ToString();                       
                         AnhChup.ImageUrl = khachHang.ImageLink;
                         CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
                         cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);

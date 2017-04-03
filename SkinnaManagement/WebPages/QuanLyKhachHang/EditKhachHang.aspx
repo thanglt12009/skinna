@@ -2,11 +2,9 @@
 
 <%@ Register Src="~/UserControl/LieuTrinh.ascx" TagPrefix="uc1" TagName="LieuTrinh" %>
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
+
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <ol class="breadcrumb">
@@ -28,6 +26,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <form role="form" runat="server">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <contenttemplate>
                     <label id="ErrorMessage" runat="server" class="error"></label>
                     <div class="panel panel-default">
                         <!--<div class="panel-heading">Nhập Thông Tin </div>-->
@@ -123,6 +124,8 @@
                             </div>
                         </div>
                     </div>
+                                          </contenttemplate>
+                    </asp:UpdatePanel>
                 </form>
             </div>
         </div>

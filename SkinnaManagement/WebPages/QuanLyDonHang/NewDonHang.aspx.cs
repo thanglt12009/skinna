@@ -149,8 +149,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     rdbMale.Checked = true;
                 else
                     rdbFemale.Checked = true;
-                DOB.Value = khachHang.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
-                TinhTrangDa.Value = khachHang.TinhTrangDa;
+                DOB.Value = khachHang.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");                
                 LuuY.Value = khachHang.Luuy;
                 AnhChup.ImageUrl = khachHang.ImageLink;
                 CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");

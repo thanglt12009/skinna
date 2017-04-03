@@ -75,17 +75,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Data, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Data, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Data.SqlClient, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Data.SqlClient, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Data.SqlClient.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Data.SqlClient.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Entities, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Entities, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Data.SqlClient\bin\Debug\SkinCare.Entities.dll</HintPath>
+      <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Entities.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -114,7 +114,6 @@
     <Content Include="css\datepicker.css" />
     <Content Include="css\datepicker3.css" />
     <Content Include="css\styles.css" />
-    <Content Include="Images\profile-pictures.png" />
     <Content Include="js\datatables.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="js\bootstrap-datepicker.js" />
@@ -299,6 +298,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="tables\" />
     <Folder Include="template_html\css\" />
     <Folder Include="template_html\fonts\" />

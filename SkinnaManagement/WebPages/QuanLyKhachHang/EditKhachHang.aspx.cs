@@ -33,8 +33,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     if (khachHang.GioiTinh == "M")
                         rdbMale.Checked = true;
                     else
-                        rdbFemale.Checked = true;
-                    TinhTrangDa.Text = khachHang.TinhTrangDa;
+                        rdbFemale.Checked = true;                   
                     Diachi.Value = khachHang.DiaChi;
                     AnhChup.ImageUrl = khachHang.ImageLink;
                     CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
@@ -53,7 +52,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                 }
             }
-            if (IsPostBack && FileUpload1.PostedFile.FileName.Length > 0)
+            if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
             {
                 FileUpload1.SaveAs(Server.MapPath("~/Images/") + Email.Value + ".jpg");
                 AnhChup.ImageUrl = "~/Images/" + Email.Value + ".jpg";
@@ -79,7 +78,6 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 khachHang.GioiTinh = "M";
             else
                 khachHang.GioiTinh = "F";
-            khachHang.TinhTrangDa = TinhTrangDa.Text;
             khachHang.Luuy = LuuY.Text;
             CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
             khachHang.TayTrangToi = cbTayTrangToi.Checked;
