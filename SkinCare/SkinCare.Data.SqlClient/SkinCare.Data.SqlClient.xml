@@ -569,7 +569,7 @@
             <summary>
             	Deletes a row from the DataSource.
             </summary>
-            <param name="_maSanPham">. Primary Key.</param>	
+            <param name="_id">. Primary Key.</param>	
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
             <remarks>Deletes based on primary key(s).</remarks>
             <returns>Returns true if operation suceeded.</returns>
@@ -628,9 +628,24 @@
             <remarks></remarks>
             <returns>Returns a typed collection of SkinCare.Entities.KhoHangSanPham objects.</returns>
         </member>
-        <member name="M:SkinCare.Data.SqlClient.SqlKhoHangSanPhamProviderBase.GetByMaSanPham(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
+        <member name="M:SkinCare.Data.SqlClient.SqlKhoHangSanPhamProviderBase.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
             <summary>
             	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out parameter to get total records for query.</param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+            <remarks></remarks>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlKhoHangSanPhamProviderBase.GetByMaSanPham(SkinCare.Data.TransactionManager,System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
             <param name="_maSanPham"></param>
@@ -1375,6 +1390,176 @@
             <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
             <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
         </member>
+        <member name="T:SkinCare.Data.SqlClient.SqlTinhTrangDaProvider">
+            <summary>
+             This class is the SqlClient Data Access Logic Component implementation for the <see cref="T:SkinCare.Entities.TinhTrangDa"/> entity.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProvider.#ctor(System.String,System.Boolean,System.String)">
+            <summary>
+            Creates a new <see cref="T:SkinCare.Data.SqlClient.SqlTinhTrangDaProvider"/> instance.
+            Uses connection string to connect to datasource.
+            </summary>
+            <param name="connectionString">The connection string to the database.</param>
+            <param name="useStoredProcedure">A boolean value that indicates if we use the stored procedures or embedded queries.</param>
+            <param name="providerInvariantName">Name of the invariant provider use by the DbProviderFactory.</param>
+        </member>
+        <member name="T:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase">
+            <summary>
+             This class is the SqlClient Data Access Logic Component implementation for the <see cref="T:SkinCare.Entities.TinhTrangDa"/> entity.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.#ctor">
+            <summary>
+            Creates a new <see cref="T:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase"/> instance.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.#ctor(System.String,System.Boolean,System.String)">
+            <summary>
+            Creates a new <see cref="T:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase"/> instance.
+            Uses connection string to connect to datasource.
+            </summary>
+            <param name="connectionString">The connection string to the database.</param>
+            <param name="useStoredProcedure">A boolean value that indicates if we should use stored procedures or embedded queries.</param>
+            <param name="providerInvariantName">Name of the invariant provider use by the DbProviderFactory.</param>
+        </member>
+        <member name="P:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.ConnectionString">
+            <summary>
+            Gets or sets the connection string.
+            </summary>
+            <value>The connection string.</value>
+        </member>
+        <member name="P:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.UseStoredProcedure">
+            <summary>
+            Gets or sets a value indicating whether to use stored procedures.
+            </summary>
+            <value><c>true</c> if we choose to use use stored procedures; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.ProviderInvariantName">
+            <summary>
+            Gets or sets the invariant provider name listed in the DbProviderFactories machine.config section.
+            </summary>
+            <value>The name of the provider invariant.</value>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.Delete(SkinCare.Data.TransactionManager,System.Int32)">
+            <summary>
+            	Deletes a row from the DataSource.
+            </summary>
+            <param name="_id">. Primary Key.</param>	
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remarks>Deletes based on primary key(s).</remarks>
+            <returns>Returns true if operation suceeded.</returns>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.Find(SkinCare.Data.TransactionManager,System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Returns rows meeting the whereClause condition from the DataSource.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="whereClause">Specifies the condition for the rows returned by a query (Name='John Doe', Name='John Doe' AND Id='1', Name='John Doe' OR Id='1').</param>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out. The number of rows that match this query.</param>
+            <remarks>Operators must be capitalized (OR, AND).</remarks>
+            <returns>Returns a typed collection of SkinCare.Entities.TinhTrangDa objects.</returns>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.Find(SkinCare.Data.TransactionManager,SkinCare.Data.IFilterParameterCollection,System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Returns rows from the DataSource that meet the parameter conditions.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="parameters">A collection of <see cref="T:SkinCare.Data.SqlFilterParameter"/> objects.</param>
+            <param name="orderBy">Specifies the sort criteria for the rows in the DataSource (Name ASC; BirthDay DESC, Name ASC);</param>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out. The number of rows that match this query.</param>
+            <returns>Returns a typed collection of SkinCare.Entities.TinhTrangDa objects.</returns>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.GetAll(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets All rows from the DataSource.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out. The number of rows that match this query.</param>
+            <remarks></remarks>
+            <returns>Returns a typed collection of SkinCare.Entities.TinhTrangDa objects.</returns>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.GetPaged(SkinCare.Data.TransactionManager,System.String,System.String,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Gets a page of rows from the DataSource.
+            </summary>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">Number of rows in the DataSource.</param>
+            <param name="whereClause">Specifies the condition for the rows returned by a query (Name='John Doe', Name='John Doe' AND Id='1', Name='John Doe' OR Id='1').</param>
+            <param name="orderBy">Specifies the sort criteria for the rows in the DataSource (Name ASC; BirthDay DESC, Name ASC);</param>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remarks></remarks>
+            <returns>Returns a typed collection of SkinCare.Entities.TinhTrangDa objects.</returns>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out parameter to get total records for query.</param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+            <remarks></remarks>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.BulkInsert(SkinCare.Data.TransactionManager,SkinCare.Entities.TList{SkinCare.Entities.TinhTrangDa})">
+            <summary>
+            Lets you efficiently bulk insert many entities to the database.
+            </summary>
+            <param name="transactionManager">The transaction manager.</param>
+            <param name="entities">The entities.</param>
+            <remarks>
+            	After inserting into the datasource, the SkinCare.Entities.TinhTrangDa object will be updated
+            	to refelect any changes made by the datasource. (ie: identity or computed columns)
+            </remarks>	
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.Insert(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            	Inserts a SkinCare.Entities.TinhTrangDa object into the datasource using a transaction.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="entity">SkinCare.Entities.TinhTrangDa object to insert.</param>
+            <remarks>
+            	After inserting into the datasource, the SkinCare.Entities.TinhTrangDa object will be updated
+            	to refelect any changes made by the datasource. (ie: identity or computed columns)
+            </remarks>	
+            <returns>Returns true if operation is successful.</returns>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
+        <member name="M:SkinCare.Data.SqlClient.SqlTinhTrangDaProviderBase.Update(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            	Update an existing row in the datasource.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="entity">SkinCare.Entities.TinhTrangDa object to update.</param>
+            <remarks>
+            	After updating the datasource, the SkinCare.Entities.TinhTrangDa object will be updated
+            	to refelect any changes made by the datasource. (ie: identity or computed columns)
+            </remarks>
+            <returns>Returns true if operation is successful.</returns>
+            <exception cref="T:System.Exception">The command could not be executed.</exception>
+            <exception cref="T:System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+            <exception cref="T:System.Data.Common.DbException">The command could not be executed.</exception>
+        </member>
         <member name="T:SkinCare.Data.SqlClient.SqlTrangThaiDonHangProvider">
             <summary>
              This class is the SqlClient Data Access Logic Component implementation for the <see cref="T:SkinCare.Entities.TrangThaiDonHang"/> entity.
@@ -1766,16 +1951,16 @@
              Indicates if the current <see cref="T:SkinCare.Data.Bases.NetTiersProvider"/> implementation supports Transacton.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.NguonDonHangProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.PhuongThucThanhToanProvider">
             <summary>
-             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.NguonDonHang"/> business entity.
+             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
              <value></value>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlNguonDonHangProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlPhuongThucThanhToanProvider">
             <summary>
-            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlNguonDonHangProvider"/>.
+            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlPhuongThucThanhToanProvider"/>.
             </summary>
             <value></value>
         </member>
@@ -1792,29 +1977,29 @@
             </summary>
             <value></value>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.PhuongThucThanhToanProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.TinhTrangDaProvider">
             <summary>
-             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> business entity.
+             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.TinhTrangDa"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
              <value></value>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlPhuongThucThanhToanProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlTinhTrangDaProvider">
             <summary>
-            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlPhuongThucThanhToanProvider"/>.
+            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlTinhTrangDaProvider"/>.
             </summary>
             <value></value>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.LoaiTrangThaiDonHangProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.NguonDonHangProvider">
             <summary>
-             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> business entity.
+             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.NguonDonHang"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
              <value></value>
         </member>
-        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlLoaiTrangThaiDonHangProvider">
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlNguonDonHangProvider">
             <summary>
-            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlLoaiTrangThaiDonHangProvider"/>.
+            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlNguonDonHangProvider"/>.
             </summary>
             <value></value>
         </member>
@@ -1828,6 +2013,19 @@
         <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlTrangThaiDonHangProvider">
             <summary>
             Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlTrangThaiDonHangProvider"/>.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.LoaiTrangThaiDonHangProvider">
+            <summary>
+             This class is the Data Access Logic Component for the <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> business entity.
+             It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+            </summary>
+             <value></value>
+        </member>
+        <member name="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlLoaiTrangThaiDonHangProvider">
+            <summary>
+            Gets the current <see cref="P:SkinCare.Data.SqlClient.SqlNetTiersProvider.SqlLoaiTrangThaiDonHangProvider"/>.
             </summary>
             <value></value>
         </member>

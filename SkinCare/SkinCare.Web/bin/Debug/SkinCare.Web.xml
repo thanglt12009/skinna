@@ -5227,6 +5227,11 @@
             Represents the Find method.
             </summary>
         </member>
+        <member name="F:SkinCare.Web.Data.KhoHangSanPhamSelectMethod.GetById">
+            <summary>
+            Represents the GetById method.
+            </summary>
+        </member>
         <member name="F:SkinCare.Web.Data.KhoHangSanPhamSelectMethod.GetByMaSanPham">
             <summary>
             Represents the GetByMaSanPham method.
@@ -5988,6 +5993,191 @@
             <summary>
             A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.ChildEntityProperty`1"/> class
             that is used exclusively with a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> object.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaDataSource">
+            <summary>
+            Represents the DataRepository.TinhTrangDaProvider object that provides
+            data to data-bound controls in multi-tier Web application architectures.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSource.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaDataSource class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSource.TinhTrangDaView">
+            <summary>
+            Gets a reference to the TinhTrangDaDataSourceView used by the TinhTrangDaDataSource.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSource.SelectMethod">
+            <summary>
+            Gets or sets the name of the method or function that
+            the TinhTrangDaDataSource control invokes to retrieve data.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSource.GetNewDataSourceView">
+            <summary>
+            Creates a new instance of the TinhTrangDaDataSourceView class that is to be
+            used by the TinhTrangDaDataSource.
+            </summary>
+            <returns>An instance of the TinhTrangDaDataSourceView class.</returns>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSource.CacheHashKey(System.Int32,System.Int32)">
+            <summary>
+            Creates a cache hashing key based on the startIndex, pageSize and the SelectMethod being used.
+            </summary>
+            <param name="startIndex">The current start row index.</param>
+            <param name="pageSize">The current page size.</param>
+            <returns>A string that can be used as a key for caching purposes.</returns>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaDataSourceView">
+            <summary>
+            Supports the TinhTrangDaDataSource control and provides an interface for
+            data-bound controls to perform data operations with business and data objects.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceView.#ctor(SkinCare.Web.Data.TinhTrangDaDataSource,System.String)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaDataSourceView class.
+            </summary>
+            <param name="owner">A reference to the TinhTrangDaDataSource which created this instance.</param>
+            <param name="viewName">The name of the view.</param>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceView.TinhTrangDaOwner">
+            <summary>
+            Gets a strongly-typed reference to the Owner property.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceView.SelectMethod">
+            <summary>
+            Gets or sets the name of the method or function that
+            the DataSource control invokes to retrieve data.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceView.TinhTrangDaProvider">
+            <summary>
+            Gets a strongly typed reference to the Provider property.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceView.GetSelectData(System.Collections.IDictionary,System.Int32@)">
+            <summary>
+            Gets a collection of Entity objects based on the value of the SelectMethod property.
+            </summary>
+            <param name="count">The total number of rows in the DataSource.</param>
+            <param name="values"></param>
+            <returns>A collection of Entity objects.</returns>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceView.GetSelectParameters(System.Collections.IDictionary)">
+            <summary>
+            Gets the values of any supplied parameters for internal caching.
+            </summary>
+            <param name="values">An IDictionary object of name/value pairs.</param>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceView.DeepLoad">
+            <summary>
+            Performs a DeepLoad operation for the current entity if it has
+            not already been performed.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceView.DeepLoad(SkinCare.Entities.TList{SkinCare.Entities.TinhTrangDa},SkinCare.Web.Data.ProviderDataSourceDeepLoadList)">
+            <summary>
+            Performs a DeepLoad operation on the specified entity collection.
+            </summary>
+            <param name="entityList"></param>
+            <param name="properties"></param>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaDataSourceDesigner">
+            <summary>
+            Provides design-time support in a design host for the TinhTrangDaDataSource class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceDesigner.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaDataSourceDesigner class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceDesigner.SelectMethod">
+            <summary>
+            Gets or sets the SelectMethod property.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceDesigner.ActionLists">
+            <summary>Gets the designer action list collection for this designer.</summary>
+            <returns>The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection"/>
+            associated with this designer.</returns>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaDataSourceActionList">
+            <summary>
+            Supports the TinhTrangDaDataSourceDesigner class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceActionList.#ctor(SkinCare.Web.Data.TinhTrangDaDataSourceDesigner)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaDataSourceActionList class.
+            </summary>
+            <param name="designer"></param>
+        </member>
+        <member name="P:SkinCare.Web.Data.TinhTrangDaDataSourceActionList.SelectMethod">
+            <summary>
+            Gets or sets the SelectMethod property.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.Data.TinhTrangDaDataSourceActionList.GetSortedActionItems">
+            <summary>
+            Returns the collection of <see cref="T:System.ComponentModel.Design.DesignerActionItem"/>
+            objects contained in the list.
+            </summary>
+            <returns>A <see cref="T:System.ComponentModel.Design.DesignerActionItem"/>
+            array that contains the items in this list.</returns>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaSelectMethod">
+            <summary>
+            Enumeration of method names available for the TinhTrangDaDataSource.SelectMethod property.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Web.Data.TinhTrangDaSelectMethod.Get">
+            <summary>
+            Represents the Get method.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Web.Data.TinhTrangDaSelectMethod.GetAll">
+            <summary>
+            Represents the GetAll method.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Web.Data.TinhTrangDaSelectMethod.GetPaged">
+            <summary>
+            Represents the GetPaged method.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Web.Data.TinhTrangDaSelectMethod.Find">
+            <summary>
+            Represents the Find method.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Web.Data.TinhTrangDaSelectMethod.GetById">
+            <summary>
+            Represents the GetById method.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaFilter">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Web.Data.SqlFilter`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaExpressionBuilder">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Web.Data.SqlExpressionBuilder`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Web.Data.TinhTrangDaProperty">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.ChildEntityProperty`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
             </summary>
         </member>
         <member name="T:SkinCare.Web.Data.TrangThaiDonHangDataSource">
@@ -6864,23 +7054,11 @@
             </summary>
             <value>The DiaChi.</value>
         </member>
-        <member name="P:SkinCare.Web.UI.KhachHangItem.Tuoi">
-            <summary>
-            Gets the Tuoi
-            </summary>
-            <value>The Tuoi.</value>
-        </member>
         <member name="P:SkinCare.Web.UI.KhachHangItem.GioiTinh">
             <summary>
             Gets the GioiTinh
             </summary>
             <value>The GioiTinh.</value>
-        </member>
-        <member name="P:SkinCare.Web.UI.KhachHangItem.TinhTrangDa">
-            <summary>
-            Gets the TinhTrangDa
-            </summary>
-            <value>The TinhTrangDa.</value>
         </member>
         <member name="P:SkinCare.Web.UI.KhachHangItem.TayTrangToi">
             <summary>
@@ -6929,6 +7107,12 @@
             Gets the ImageLink
             </summary>
             <value>The ImageLink.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.KhachHangItem.Ngaysinh">
+            <summary>
+            Gets the Ngaysinh
+            </summary>
+            <value>The Ngaysinh.</value>
         </member>
         <member name="P:SkinCare.Web.UI.KhachHangItem.Entity">
             <summary>
@@ -7048,6 +7232,12 @@
             Initializes a new instance of the <see cref="T:KhoHangSanPhamItem"/> class.
             </summary>
         </member>
+        <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.Id">
+            <summary>
+            Gets the Id
+            </summary>
+            <value>The Id.</value>
+        </member>
         <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.MaSanPham">
             <summary>
             Gets the MaSanPham
@@ -7059,12 +7249,6 @@
             Gets the TenSanPham
             </summary>
             <value>The TenSanPham.</value>
-        </member>
-        <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.GiaTien">
-            <summary>
-            Gets the GiaTien
-            </summary>
-            <value>The GiaTien.</value>
         </member>
         <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.SoLuongNhapVao">
             <summary>
@@ -7095,6 +7279,12 @@
             Gets the GhiChu
             </summary>
             <value>The GhiChu.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.GiaTien">
+            <summary>
+            Gets the GiaTien
+            </summary>
+            <value>The GiaTien.</value>
         </member>
         <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.Entity">
             <summary>
@@ -7655,6 +7845,148 @@
         <member name="P:SkinCare.Web.UI.PhuongThucThanhToanItem.Entity">
             <summary>
             Gets a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"></see> object
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:SkinCare.Web.UI.TinhTrangDaRepeaterDesigner">
+            <summary>
+            A designer class for a strongly typed repeater <c>TinhTrangDaRepeater</c>
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeaterDesigner.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaRepeaterDesigner"/> class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeaterDesigner.Initialize(System.ComponentModel.IComponent)">
+            <summary>
+            Initializes the control designer and loads the specified component.
+            </summary>
+            <param name="component">The control being designed.</param>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeaterDesigner.GetDesignTimeHtml">
+            <summary>
+            Generate HTML for the designer
+            </summary>
+            <returns>a string of design time HTML</returns>
+        </member>
+        <member name="T:SkinCare.Web.UI.TinhTrangDaRepeater">
+            <summary>
+            A strongly typed repeater control for the <see cref="T:SkinCare.Web.UI.TinhTrangDaRepeater"/> Type.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaRepeater"/> class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.Controls">
+            <summary>
+            Gets a <see cref="T:System.Web.UI.ControlCollection"></see> object that represents the child controls for a specified server control in the UI hierarchy.
+            </summary>
+            <value></value>
+            <returns>The collection of child controls for the specified server control.</returns>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.HeaderTemplate">
+            <summary>
+            Gets or sets the header template.
+            </summary>
+            <value>The header template.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.ItemTemplate">
+            <summary>
+            Gets or sets the item template.
+            </summary>
+            <value>The item template.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.SeperatorTemplate">
+            <summary>
+            Gets or sets the Seperator Template
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.AlternatingItemTemplate">
+            <summary>
+            Gets or sets the alternating item template.
+            </summary>
+            <value>The alternating item template.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaRepeater.FooterTemplate">
+            <summary>
+            Gets or sets the footer template.
+            </summary>
+            <value>The footer template.</value>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.RenderBeginTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Overridden and Empty so that span tags are not written
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.RenderEndTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Overridden and Empty so that span tags are not written
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.CreateChildControls(System.Collections.IEnumerable,System.Boolean)">
+            <summary>
+            Called by the ASP.NET page framework to notify server controls that use composition-based implementation to create any child controls they contain in preparation for posting back or rendering.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.OnPreRender(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Web.UI.Control.PreRender"></see> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"></see> object that contains the event data.</param>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaRepeater.RenderAtDesignTime">
+            <summary>
+            Renders at design time.
+            </summary>
+            <returns>a  string of the Designed HTML</returns>
+        </member>
+        <member name="T:SkinCare.Web.UI.TinhTrangDaItem">
+            <summary>
+            A wrapper type for the entity
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaItem"/> class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Web.UI.TinhTrangDaItem.#ctor(SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaItem"/> class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaItem.Id">
+            <summary>
+            Gets the Id
+            </summary>
+            <value>The Id.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaItem.MaKhachHang">
+            <summary>
+            Gets the MaKhachHang
+            </summary>
+            <value>The MaKhachHang.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaItem.Ngay">
+            <summary>
+            Gets the Ngay
+            </summary>
+            <value>The Ngay.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaItem.TinhTrang">
+            <summary>
+            Gets the TinhTrang
+            </summary>
+            <value>The TinhTrang.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.TinhTrangDaItem.Entity">
+            <summary>
+            Gets a <see cref="T:SkinCare.Entities.TinhTrangDa"></see> object
             </summary>
             <value></value>
         </member>

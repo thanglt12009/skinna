@@ -224,9 +224,7 @@ namespace SkinCare.Data.Bases
 					c.Email = (reader.IsDBNull(((int)KhachHangColumn.Email - 1)))?null:(System.String)reader[((int)KhachHangColumn.Email - 1)];
 					c.SoDienThoai = (reader.IsDBNull(((int)KhachHangColumn.SoDienThoai - 1)))?null:(System.String)reader[((int)KhachHangColumn.SoDienThoai - 1)];
 					c.DiaChi = (reader.IsDBNull(((int)KhachHangColumn.DiaChi - 1)))?null:(System.String)reader[((int)KhachHangColumn.DiaChi - 1)];
-					c.Tuoi = (reader.IsDBNull(((int)KhachHangColumn.Tuoi - 1)))?null:(System.Int32?)reader[((int)KhachHangColumn.Tuoi - 1)];
 					c.GioiTinh = (reader.IsDBNull(((int)KhachHangColumn.GioiTinh - 1)))?null:(System.String)reader[((int)KhachHangColumn.GioiTinh - 1)];
-					c.TinhTrangDa = (reader.IsDBNull(((int)KhachHangColumn.TinhTrangDa - 1)))?null:(System.String)reader[((int)KhachHangColumn.TinhTrangDa - 1)];
 					c.TayTrangToi = (reader.IsDBNull(((int)KhachHangColumn.TayTrangToi - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.TayTrangToi - 1)];
 					c.RuaMat = (reader.IsDBNull(((int)KhachHangColumn.RuaMat - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.RuaMat - 1)];
 					c.Toner = (reader.IsDBNull(((int)KhachHangColumn.Toner - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.Toner - 1)];
@@ -235,6 +233,7 @@ namespace SkinCare.Data.Bases
 					c.SanPhamKhac = (reader.IsDBNull(((int)KhachHangColumn.SanPhamKhac - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.SanPhamKhac - 1)];
 					c.Luuy = (reader.IsDBNull(((int)KhachHangColumn.Luuy - 1)))?null:(System.String)reader[((int)KhachHangColumn.Luuy - 1)];
 					c.ImageLink = (reader.IsDBNull(((int)KhachHangColumn.ImageLink - 1)))?null:(System.String)reader[((int)KhachHangColumn.ImageLink - 1)];
+					c.Ngaysinh = (reader.IsDBNull(((int)KhachHangColumn.Ngaysinh - 1)))?null:(System.DateTime?)reader[((int)KhachHangColumn.Ngaysinh - 1)];
 					c.EntityTrackingKey = key;
 					c.AcceptChanges();
 					c.SuppressEntityEvents = false;
@@ -257,9 +256,7 @@ namespace SkinCare.Data.Bases
 			entity.Email = (reader.IsDBNull(((int)KhachHangColumn.Email - 1)))?null:(System.String)reader[((int)KhachHangColumn.Email - 1)];
 			entity.SoDienThoai = (reader.IsDBNull(((int)KhachHangColumn.SoDienThoai - 1)))?null:(System.String)reader[((int)KhachHangColumn.SoDienThoai - 1)];
 			entity.DiaChi = (reader.IsDBNull(((int)KhachHangColumn.DiaChi - 1)))?null:(System.String)reader[((int)KhachHangColumn.DiaChi - 1)];
-			entity.Tuoi = (reader.IsDBNull(((int)KhachHangColumn.Tuoi - 1)))?null:(System.Int32?)reader[((int)KhachHangColumn.Tuoi - 1)];
 			entity.GioiTinh = (reader.IsDBNull(((int)KhachHangColumn.GioiTinh - 1)))?null:(System.String)reader[((int)KhachHangColumn.GioiTinh - 1)];
-			entity.TinhTrangDa = (reader.IsDBNull(((int)KhachHangColumn.TinhTrangDa - 1)))?null:(System.String)reader[((int)KhachHangColumn.TinhTrangDa - 1)];
 			entity.TayTrangToi = (reader.IsDBNull(((int)KhachHangColumn.TayTrangToi - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.TayTrangToi - 1)];
 			entity.RuaMat = (reader.IsDBNull(((int)KhachHangColumn.RuaMat - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.RuaMat - 1)];
 			entity.Toner = (reader.IsDBNull(((int)KhachHangColumn.Toner - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.Toner - 1)];
@@ -268,6 +265,7 @@ namespace SkinCare.Data.Bases
 			entity.SanPhamKhac = (reader.IsDBNull(((int)KhachHangColumn.SanPhamKhac - 1)))?null:(System.Boolean?)reader[((int)KhachHangColumn.SanPhamKhac - 1)];
 			entity.Luuy = (reader.IsDBNull(((int)KhachHangColumn.Luuy - 1)))?null:(System.String)reader[((int)KhachHangColumn.Luuy - 1)];
 			entity.ImageLink = (reader.IsDBNull(((int)KhachHangColumn.ImageLink - 1)))?null:(System.String)reader[((int)KhachHangColumn.ImageLink - 1)];
+			entity.Ngaysinh = (reader.IsDBNull(((int)KhachHangColumn.Ngaysinh - 1)))?null:(System.DateTime?)reader[((int)KhachHangColumn.Ngaysinh - 1)];
 			entity.AcceptChanges();
 		}
 		
@@ -285,9 +283,7 @@ namespace SkinCare.Data.Bases
 			entity.Email = Convert.IsDBNull(dataRow["Email"]) ? null : (System.String)dataRow["Email"];
 			entity.SoDienThoai = Convert.IsDBNull(dataRow["SoDienThoai"]) ? null : (System.String)dataRow["SoDienThoai"];
 			entity.DiaChi = Convert.IsDBNull(dataRow["DiaChi"]) ? null : (System.String)dataRow["DiaChi"];
-			entity.Tuoi = Convert.IsDBNull(dataRow["Tuoi"]) ? null : (System.Int32?)dataRow["Tuoi"];
 			entity.GioiTinh = Convert.IsDBNull(dataRow["GioiTinh"]) ? null : (System.String)dataRow["GioiTinh"];
-			entity.TinhTrangDa = Convert.IsDBNull(dataRow["TinhTrangDa"]) ? null : (System.String)dataRow["TinhTrangDa"];
 			entity.TayTrangToi = Convert.IsDBNull(dataRow["TayTrangToi"]) ? null : (System.Boolean?)dataRow["TayTrangToi"];
 			entity.RuaMat = Convert.IsDBNull(dataRow["RuaMat"]) ? null : (System.Boolean?)dataRow["RuaMat"];
 			entity.Toner = Convert.IsDBNull(dataRow["Toner"]) ? null : (System.Boolean?)dataRow["Toner"];
@@ -296,6 +292,7 @@ namespace SkinCare.Data.Bases
 			entity.SanPhamKhac = Convert.IsDBNull(dataRow["SanPhamKhac"]) ? null : (System.Boolean?)dataRow["SanPhamKhac"];
 			entity.Luuy = Convert.IsDBNull(dataRow["LuuY"]) ? null : (System.String)dataRow["LuuY"];
 			entity.ImageLink = Convert.IsDBNull(dataRow["ImageLink"]) ? null : (System.String)dataRow["ImageLink"];
+			entity.Ngaysinh = Convert.IsDBNull(dataRow["Ngaysinh"]) ? null : (System.DateTime?)dataRow["Ngaysinh"];
 			entity.AcceptChanges();
 		}
 		#endregion 

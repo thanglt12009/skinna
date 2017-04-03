@@ -697,7 +697,7 @@
             <summary>
             	Deletes a row from the DataSource.
             </summary>
-            <param name="_maSanPham">. Primary Key.</param>
+            <param name="_id">. Primary Key.</param>
             <remarks>Deletes based on primary key(s).</remarks>
             <returns>Returns true if operation suceeded.</returns>
         </member>
@@ -706,7 +706,7 @@
             	Deletes a row from the DataSource.
             </summary>
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
-            <param name="_maSanPham">. Primary Key.</param>
+            <param name="_id">. Primary Key.</param>
             <remarks>Deletes based on primary key(s).</remarks>
             <returns>Returns true if operation suceeded.</returns>
         </member>
@@ -720,16 +720,75 @@
             <param name="pageLength">Number of rows to return.</param>
             <returns>Returns an instance of the Entity class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.Int32)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(System.Int32)">
             <summary>
             	Gets rows from the datasource based on the primary key PK_tblKhoHangSanPham index.
             </summary>
+            <param name="_id"></param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out parameter to get total records for query</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">The total number of records.</param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.String)">
+            <summary>
+            	Gets rows from the datasource based on the primary key UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+            </summary>
             <param name="_maSanPham"></param>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.Int32,System.Int32,System.Int32)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.String,System.Int32,System.Int32)">
             <summary>
-            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="_maSanPham"></param>
             <param name="start">Row number at which to start reading, the first row is 0.</param>
@@ -737,18 +796,18 @@
             <remarks></remarks>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.Int32)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.String)">
             <summary>
-            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
             <param name="_maSanPham"></param>
             <remarks></remarks>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.String,System.Int32,System.Int32)">
             <summary>
-            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
             <param name="_maSanPham"></param>
@@ -757,9 +816,9 @@
             <remarks></remarks>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.Int32,System.Int32,System.Int32,System.Int32@)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(System.String,System.Int32,System.Int32,System.Int32@)">
             <summary>
-            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="_maSanPham"></param>
             <param name="start">Row number at which to start reading, the first row is 0.</param>
@@ -768,9 +827,9 @@
             <remarks></remarks>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhoHangSanPham"/> class.</returns>
         </member>
-        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
+        <member name="M:SkinCare.Data.Bases.KhoHangSanPhamProviderBaseCore.GetByMaSanPham(SkinCare.Data.TransactionManager,System.String,System.Int32,System.Int32,System.Int32@)">
             <summary>
-            	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+            	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
             </summary>
             <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
             <param name="_maSanPham"></param>
@@ -1826,6 +1885,229 @@
             Initializes a new instance of the PhuongThucThanhToanSqlSortBuilder class.
             </summary>
         </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaProviderBase">
+            <summary>
+             This class is the base class for any <see cref="T:SkinCare.Data.Bases.TinhTrangDaProviderBase"/> implementation.
+             It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore">
+            <summary>
+             This class is the base class for any <see cref="T:SkinCare.Data.Bases.TinhTrangDaProviderBase"/> implementation.
+             It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.Delete(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDaKey)">
+            <summary>
+            	Deletes a row from the DataSource.
+            </summary>
+            <param name="transactionManager">A <see cref="T:SkinCare.Data.TransactionManager"/> object.</param>
+            <param name="key">The unique identifier of the row to delete.</param>
+            <returns>Returns true if operation suceeded.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.Delete(System.Int32)">
+            <summary>
+            	Deletes a row from the DataSource.
+            </summary>
+            <param name="_id">. Primary Key.</param>
+            <remarks>Deletes based on primary key(s).</remarks>
+            <returns>Returns true if operation suceeded.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.Delete(SkinCare.Data.TransactionManager,System.Int32)">
+            <summary>
+            	Deletes a row from the DataSource.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id">. Primary Key.</param>
+            <remarks>Deletes based on primary key(s).</remarks>
+            <returns>Returns true if operation suceeded.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.Get(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDaKey,System.Int32,System.Int32)">
+            <summary>
+            	Gets a row from the DataSource based on its primary key.
+            </summary>
+            <param name="transactionManager">A <see cref="T:SkinCare.Data.TransactionManager"/> object.</param>
+            <param name="key">The unique identifier of the row to retrieve.</param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <returns>Returns an instance of the Entity class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the primary key PK_tblTinhTrangDa index.
+            </summary>
+            <param name="_id"></param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">out parameter to get total records for query</param>
+            <remarks></remarks>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.GetById(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            	Gets rows from the datasource based on the PK_tblTinhTrangDa index.
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="_id"></param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="count">The total number of records.</param>
+            <returns>Returns an instance of the <see cref="T:SkinCare.Entities.TinhTrangDa"/> class.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.Fill(System.Data.IDataReader,SkinCare.Entities.TList{SkinCare.Entities.TinhTrangDa},System.Int32,System.Int32)">
+            <summary>
+            Fill a TList&lt;TinhTrangDa&gt; From a DataReader.
+            </summary>
+            <param name="reader">Datareader</param>
+            <param name="rows">The collection to fill</param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">number of rows.</param>
+            <returns>a <see cref="T:SkinCare.Entities.TList`1"/></returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.RefreshEntity(System.Data.IDataReader,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Refreshes the <see cref="T:SkinCare.Entities.TinhTrangDa"/> object from the <see cref="T:System.Data.IDataReader"/>.
+            </summary>
+            <param name="reader">The <see cref="T:System.Data.IDataReader"/> to read from.</param>
+            <param name="entity">The <see cref="T:SkinCare.Entities.TinhTrangDa"/> object to refresh.</param>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.RefreshEntity(System.Data.DataSet,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Refreshes the <see cref="T:SkinCare.Entities.TinhTrangDa"/> object from the <see cref="T:System.Data.DataSet"/>.
+            </summary>
+            <param name="dataSet">The <see cref="T:System.Data.DataSet"/> to read from.</param>
+            <param name="entity">The <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.</param>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.DeepLoad(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDa,System.Boolean,SkinCare.Data.DeepLoadType,System.Type[],SkinCare.Data.Bases.DeepSession)">
+            <summary>
+            Deep Loads the <see cref="T:SkinCare.Entities.IEntity"/> object with criteria based of the child 
+            property collections only N Levels Deep based on the <see cref="T:SkinCare.Data.DeepLoadType"/>.
+            </summary>
+            <remarks>
+            Use this method with caution as it is possible to DeepLoad with Recursion and traverse an entire object graph.
+            </remarks>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <param name="entity">The <see cref="T:SkinCare.Entities.TinhTrangDa"/> object to load.</param>
+            <param name="deep">Boolean. A flag that indicates whether to recursively save all Property Collection that are descendants of this instance. If True, saves the complete object graph below this object. If False, saves this object only. </param>
+            <param name="deepLoadType">DeepLoadType Enumeration to Include/Exclude object property collections from Load.</param>
+            <param name="childTypes">SkinCare.Entities.TinhTrangDa Property Collection Type Array To Include or Exclude from Load</param>
+            <param name="innerList">A collection of child types for easy access.</param>
+            <exception cref="T:System.ArgumentNullException">entity or childTypes is null.</exception>
+            <exception cref="T:System.ArgumentException">deepLoadType has invalid value.</exception>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaProviderBaseCore.DeepSave(SkinCare.Data.TransactionManager,SkinCare.Entities.TinhTrangDa,SkinCare.Data.DeepSaveType,System.Type[],SkinCare.Data.Bases.DeepSession)">
+            <summary>
+            Deep Save the entire object graph of the SkinCare.Entities.TinhTrangDa object with criteria based of the child 
+            Type property array and DeepSaveType.
+            </summary>
+            <param name="transactionManager">The transaction manager.</param>
+            <param name="entity">SkinCare.Entities.TinhTrangDa instance</param>
+            <param name="deepSaveType">DeepSaveType Enumeration to Include/Exclude object property collections from Save.</param>
+            <param name="childTypes">SkinCare.Entities.TinhTrangDa Property Collection Type Array To Include or Exclude from Save</param>
+            <param name="innerList">A Hashtable of child types for easy access.</param>
+        </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaChildEntityTypes">
+            <summary>
+             Enumeration used to expose the different child entity types 
+             for child properties in <c>SkinCare.Entities.TinhTrangDa</c>
+            </summary>
+        </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaFilterBuilder">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlFilterBuilder`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaFilterBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaFilterBuilder class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaFilterBuilder.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaFilterBuilder class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaFilterBuilder.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaFilterBuilder class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+        </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaParameterBuilder">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.ParameterizedSqlFilterBuilder`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaParameterBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaParameterBuilder class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaParameterBuilder.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaParameterBuilder class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaParameterBuilder.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaParameterBuilder class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+        </member>
+        <member name="T:SkinCare.Data.Bases.TinhTrangDaSortBuilder">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlSortBuilder`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.Bases.TinhTrangDaSortBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaSqlSortBuilder class.
+            </summary>
+        </member>
         <member name="T:SkinCare.Data.Bases.TrangThaiDonHangProviderBase">
             <summary>
              This class is the base class for any <see cref="T:SkinCare.Data.Bases.TrangThaiDonHangProviderBase"/> implementation.
@@ -2543,9 +2825,9 @@
              The base class to implements to create a .NetTiers provider.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.Bases.NetTiersProvider.NguonDonHangProvider">
+        <member name="P:SkinCare.Data.Bases.NetTiersProvider.PhuongThucThanhToanProvider">
             <summary>
-             Current NguonDonHangProviderBase instance.
+             Current PhuongThucThanhToanProviderBase instance.
             </summary>
         </member>
         <member name="P:SkinCare.Data.Bases.NetTiersProvider.DonHangProvider">
@@ -2553,19 +2835,24 @@
              Current DonHangProviderBase instance.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.Bases.NetTiersProvider.PhuongThucThanhToanProvider">
+        <member name="P:SkinCare.Data.Bases.NetTiersProvider.TinhTrangDaProvider">
             <summary>
-             Current PhuongThucThanhToanProviderBase instance.
+             Current TinhTrangDaProviderBase instance.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.Bases.NetTiersProvider.LoaiTrangThaiDonHangProvider">
+        <member name="P:SkinCare.Data.Bases.NetTiersProvider.NguonDonHangProvider">
             <summary>
-             Current LoaiTrangThaiDonHangProviderBase instance.
+             Current NguonDonHangProviderBase instance.
             </summary>
         </member>
         <member name="P:SkinCare.Data.Bases.NetTiersProvider.TrangThaiDonHangProvider">
             <summary>
              Current TrangThaiDonHangProviderBase instance.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Data.Bases.NetTiersProvider.LoaiTrangThaiDonHangProvider">
+            <summary>
+             Current LoaiTrangThaiDonHangProviderBase instance.
             </summary>
         </member>
         <member name="P:SkinCare.Data.Bases.NetTiersProvider.DonHangChiTietProvider">
@@ -4457,9 +4744,9 @@
             Instantiates the configured providers based on the supplied connection string.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.DataRepository.NguonDonHangProvider">
+        <member name="P:SkinCare.Data.DataRepository.PhuongThucThanhToanProvider">
             <summary>
-             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.NguonDonHang"/> business entity.
+             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
@@ -4469,21 +4756,27 @@
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.DataRepository.PhuongThucThanhToanProvider">
+        <member name="P:SkinCare.Data.DataRepository.TinhTrangDaProvider">
             <summary>
-             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> business entity.
+             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.TinhTrangDa"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
-        <member name="P:SkinCare.Data.DataRepository.LoaiTrangThaiDonHangProvider">
+        <member name="P:SkinCare.Data.DataRepository.NguonDonHangProvider">
             <summary>
-             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> business entity.
+             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.NguonDonHang"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
         <member name="P:SkinCare.Data.DataRepository.TrangThaiDonHangProvider">
             <summary>
              Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.TrangThaiDonHang"/> business entity.
+             It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Data.DataRepository.LoaiTrangThaiDonHangProvider">
+            <summary>
+             Gets the current instance of the Data Access Logic Component for the <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> business entity.
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
@@ -4517,50 +4810,50 @@
              It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
             </summary>
         </member>
-        <member name="T:SkinCare.Data.NguonDonHangFilters">
+        <member name="T:SkinCare.Data.PhuongThucThanhToanFilters">
             <summary>
             A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlFilterBuilder`1"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.NguonDonHang"/> object.
+            that is used exclusively with a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> object.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor">
             <summary>
-            Initializes a new instance of the NguonDonHangFilters class.
+            Initializes a new instance of the PhuongThucThanhToanFilters class.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor(System.Boolean)">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the NguonDonHangFilters class.
+            Initializes a new instance of the PhuongThucThanhToanFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor(System.Boolean,System.Boolean)">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the NguonDonHangFilters class.
+            Initializes a new instance of the PhuongThucThanhToanFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
         </member>
-        <member name="T:SkinCare.Data.NguonDonHangQuery">
+        <member name="T:SkinCare.Data.PhuongThucThanhToanQuery">
             <summary>
-            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.NguonDonHangParameterBuilder"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.NguonDonHang"/> object.
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.PhuongThucThanhToanParameterBuilder"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> object.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor">
             <summary>
-            Initializes a new instance of the NguonDonHangQuery class.
+            Initializes a new instance of the PhuongThucThanhToanQuery class.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor(System.Boolean)">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the NguonDonHangQuery class.
+            Initializes a new instance of the PhuongThucThanhToanQuery class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
         </member>
-        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor(System.Boolean,System.Boolean)">
+        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the NguonDonHangQuery class.
+            Initializes a new instance of the PhuongThucThanhToanQuery class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
@@ -4613,98 +4906,98 @@
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
         </member>
-        <member name="T:SkinCare.Data.PhuongThucThanhToanFilters">
+        <member name="T:SkinCare.Data.TinhTrangDaFilters">
             <summary>
             A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlFilterBuilder`1"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> object.
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor">
+        <member name="M:SkinCare.Data.TinhTrangDaFilters.#ctor">
             <summary>
-            Initializes a new instance of the PhuongThucThanhToanFilters class.
+            Initializes a new instance of the TinhTrangDaFilters class.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor(System.Boolean)">
+        <member name="M:SkinCare.Data.TinhTrangDaFilters.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the PhuongThucThanhToanFilters class.
-            </summary>
-            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-        </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanFilters.#ctor(System.Boolean,System.Boolean)">
-            <summary>
-            Initializes a new instance of the PhuongThucThanhToanFilters class.
-            </summary>
-            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-        </member>
-        <member name="T:SkinCare.Data.PhuongThucThanhToanQuery">
-            <summary>
-            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.PhuongThucThanhToanParameterBuilder"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.PhuongThucThanhToan"/> object.
-            </summary>
-        </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor">
-            <summary>
-            Initializes a new instance of the PhuongThucThanhToanQuery class.
-            </summary>
-        </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the PhuongThucThanhToanQuery class.
+            Initializes a new instance of the TinhTrangDaFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
         </member>
-        <member name="M:SkinCare.Data.PhuongThucThanhToanQuery.#ctor(System.Boolean,System.Boolean)">
+        <member name="M:SkinCare.Data.TinhTrangDaFilters.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the PhuongThucThanhToanQuery class.
+            Initializes a new instance of the TinhTrangDaFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
         </member>
-        <member name="T:SkinCare.Data.LoaiTrangThaiDonHangFilters">
+        <member name="T:SkinCare.Data.TinhTrangDaQuery">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.TinhTrangDaParameterBuilder"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.TinhTrangDaQuery.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaQuery class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.TinhTrangDaQuery.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaQuery class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+        </member>
+        <member name="M:SkinCare.Data.TinhTrangDaQuery.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaQuery class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+        </member>
+        <member name="T:SkinCare.Data.NguonDonHangFilters">
             <summary>
             A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlFilterBuilder`1"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> object.
+            that is used exclusively with a <see cref="T:SkinCare.Entities.NguonDonHang"/> object.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor">
+        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            Initializes a new instance of the NguonDonHangFilters class.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor(System.Boolean)">
+        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            Initializes a new instance of the NguonDonHangFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor(System.Boolean,System.Boolean)">
+        <member name="M:SkinCare.Data.NguonDonHangFilters.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            Initializes a new instance of the NguonDonHangFilters class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
         </member>
-        <member name="T:SkinCare.Data.LoaiTrangThaiDonHangQuery">
+        <member name="T:SkinCare.Data.NguonDonHangQuery">
             <summary>
-            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.LoaiTrangThaiDonHangParameterBuilder"/> class
-            that is used exclusively with a <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> object.
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.NguonDonHangParameterBuilder"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.NguonDonHang"/> object.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor">
+        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
+            Initializes a new instance of the NguonDonHangQuery class.
             </summary>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor(System.Boolean)">
+        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor(System.Boolean)">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
+            Initializes a new instance of the NguonDonHangQuery class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
         </member>
-        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor(System.Boolean,System.Boolean)">
+        <member name="M:SkinCare.Data.NguonDonHangQuery.#ctor(System.Boolean,System.Boolean)">
             <summary>
-            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
+            Initializes a new instance of the NguonDonHangQuery class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
@@ -4753,6 +5046,54 @@
         <member name="M:SkinCare.Data.TrangThaiDonHangQuery.#ctor(System.Boolean,System.Boolean)">
             <summary>
             Initializes a new instance of the TrangThaiDonHangQuery class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+        </member>
+        <member name="T:SkinCare.Data.LoaiTrangThaiDonHangFilters">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.SqlFilterBuilder`1"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangFilters.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangFilters class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+            <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+        </member>
+        <member name="T:SkinCare.Data.LoaiTrangThaiDonHangQuery">
+            <summary>
+            A strongly-typed instance of the <see cref="T:SkinCare.Data.Bases.LoaiTrangThaiDonHangParameterBuilder"/> class
+            that is used exclusively with a <see cref="T:SkinCare.Entities.LoaiTrangThaiDonHang"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
+            </summary>
+            <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+        </member>
+        <member name="M:SkinCare.Data.LoaiTrangThaiDonHangQuery.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the LoaiTrangThaiDonHangQuery class.
             </summary>
             <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
             <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>

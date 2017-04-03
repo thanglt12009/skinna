@@ -1632,7 +1632,7 @@
              Creates a new <see cref="T:SkinCare.Entities.KhachHangBase"/> instance.
             </summary>
         </member>
-        <member name="M:SkinCare.Entities.KhachHangBase.#ctor(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.String)">
+        <member name="M:SkinCare.Entities.KhachHangBase.#ctor(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
              Creates a new <see cref="T:SkinCare.Entities.KhachHangBase"/> instance.
             </summary>
@@ -1640,9 +1640,7 @@
             <param name="_email"></param>
             <param name="_soDienThoai"></param>
             <param name="_diaChi"></param>
-            <param name="_tuoi"></param>
             <param name="_gioiTinh"></param>
-            <param name="_tinhTrangDa"></param>
             <param name="_tayTrangToi"></param>
             <param name="_ruaMat"></param>
             <param name="_toner"></param>
@@ -1651,8 +1649,9 @@
             <param name="_sanPhamKhac"></param>
             <param name="_luuy"></param>
             <param name="_imageLink"></param>
+            <param name="_ngaysinh"></param>
         </member>
-        <member name="M:SkinCare.Entities.KhachHangBase.CreateKhachHang(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.String)">
+        <member name="M:SkinCare.Entities.KhachHangBase.CreateKhachHang(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
              A simple factory method to create a new <see cref="T:SkinCare.Entities.KhachHang"/> instance.
             </summary>
@@ -1660,9 +1659,7 @@
             <param name="_email"></param>
             <param name="_soDienThoai"></param>
             <param name="_diaChi"></param>
-            <param name="_tuoi"></param>
             <param name="_gioiTinh"></param>
-            <param name="_tinhTrangDa"></param>
             <param name="_tayTrangToi"></param>
             <param name="_ruaMat"></param>
             <param name="_toner"></param>
@@ -1671,6 +1668,7 @@
             <param name="_sanPhamKhac"></param>
             <param name="_luuy"></param>
             <param name="_imageLink"></param>
+            <param name="_ngaysinh"></param>
         </member>
         <member name="P:SkinCare.Entities.KhachHangBase.MaKhachHang">
             <summary>
@@ -1722,34 +1720,12 @@
             This property can be set to null. 
             </remarks>
         </member>
-        <member name="P:SkinCare.Entities.KhachHangBase.Tuoi">
-            <summary>
-            	Gets or sets the Tuoi property. 
-            	
-            </summary>
-            <value>This type is int.</value>
-            <remarks>
-            This property can be set to null. 
-            If this column is null it is up to the developer to check using the HasValue property
-            and perform business logic appropriately.
-            </remarks>
-        </member>
         <member name="P:SkinCare.Entities.KhachHangBase.GioiTinh">
             <summary>
             	Gets or sets the GioiTinh property. 
             	
             </summary>
             <value>This type is char.</value>
-            <remarks>
-            This property can be set to null. 
-            </remarks>
-        </member>
-        <member name="P:SkinCare.Entities.KhachHangBase.TinhTrangDa">
-            <summary>
-            	Gets or sets the TinhTrangDa property. 
-            	
-            </summary>
-            <value>This type is nvarchar.</value>
             <remarks>
             This property can be set to null. 
             </remarks>
@@ -1844,6 +1820,18 @@
             <value>This type is nvarchar.</value>
             <remarks>
             This property can be set to null. 
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.KhachHangBase.Ngaysinh">
+            <summary>
+            	Gets or sets the Ngaysinh property. 
+            	
+            </summary>
+            <value>This type is datetime.</value>
+            <remarks>
+            This property can be set to null. 
+            If this column is null it is up to the developer to check using the HasValue property
+            and perform business logic appropriately.
             </remarks>
         </member>
         <member name="M:SkinCare.Entities.KhachHangBase.AddValidationRules">
@@ -2096,19 +2084,9 @@
             DiaChi : 
             </summary>
         </member>
-        <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.Tuoi">
-            <summary>
-            Tuoi : 
-            </summary>
-        </member>
         <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.GioiTinh">
             <summary>
             GioiTinh : 
-            </summary>
-        </member>
-        <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.TinhTrangDa">
-            <summary>
-            TinhTrangDa : 
             </summary>
         </member>
         <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.TayTrangToi">
@@ -2149,6 +2127,11 @@
         <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.ImageLink">
             <summary>
             ImageLink : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.Ngaysinh">
+            <summary>
+            Ngaysinh : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.KhachHangBase.KhachHangEntityData.Clone">
@@ -2356,19 +2339,9 @@
             DiaChi : 
             </summary>
         </member>
-        <member name="F:SkinCare.Entities.KhachHangColumn.Tuoi">
-            <summary>
-            Tuoi : 
-            </summary>
-        </member>
         <member name="F:SkinCare.Entities.KhachHangColumn.GioiTinh">
             <summary>
             GioiTinh : 
-            </summary>
-        </member>
-        <member name="F:SkinCare.Entities.KhachHangColumn.TinhTrangDa">
-            <summary>
-            TinhTrangDa : 
             </summary>
         </member>
         <member name="F:SkinCare.Entities.KhachHangColumn.TayTrangToi">
@@ -2411,6 +2384,11 @@
             ImageLink : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhachHangColumn.Ngaysinh">
+            <summary>
+            Ngaysinh : 
+            </summary>
+        </member>
         <member name="T:SkinCare.Entities.IKhachHang">
             <summary>
             	The data structure representation of the 'tblKhachHang' table via interface.
@@ -2445,19 +2423,9 @@
             DiaChi : 
             </summary>
         </member>
-        <member name="P:SkinCare.Entities.IKhachHang.Tuoi">
-            <summary>
-            Tuoi : 
-            </summary>
-        </member>
         <member name="P:SkinCare.Entities.IKhachHang.GioiTinh">
             <summary>
             GioiTinh : 
-            </summary>
-        </member>
-        <member name="P:SkinCare.Entities.IKhachHang.TinhTrangDa">
-            <summary>
-            TinhTrangDa : 
             </summary>
         </member>
         <member name="P:SkinCare.Entities.IKhachHang.TayTrangToi">
@@ -2498,6 +2466,11 @@
         <member name="P:SkinCare.Entities.IKhachHang.ImageLink">
             <summary>
             ImageLink : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.IKhachHang.Ngaysinh">
+            <summary>
+            Ngaysinh : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IKhachHang.Clone">
@@ -2565,39 +2538,52 @@
              Creates a new <see cref="T:SkinCare.Entities.KhoHangSanPhamBase"/> instance.
             </summary>
         </member>
-        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.#ctor(System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String)">
+        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal})">
             <summary>
              Creates a new <see cref="T:SkinCare.Entities.KhoHangSanPhamBase"/> instance.
             </summary>
+            <param name="_maSanPham"></param>
             <param name="_tenSanPham"></param>
-            <param name="_giaTien"></param>
             <param name="_soLuongNhapVao"></param>
             <param name="_soLuongBanRa"></param>
             <param name="_soLuongTonKho"></param>
             <param name="_ngayNhapHang"></param>
             <param name="_ghiChu"></param>
+            <param name="_giaTien"></param>
         </member>
-        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.CreateKhoHangSanPham(System.String,System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String)">
+        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.CreateKhoHangSanPham(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal})">
             <summary>
              A simple factory method to create a new <see cref="T:SkinCare.Entities.KhoHangSanPham"/> instance.
             </summary>
+            <param name="_maSanPham"></param>
             <param name="_tenSanPham"></param>
-            <param name="_giaTien"></param>
             <param name="_soLuongNhapVao"></param>
             <param name="_soLuongBanRa"></param>
             <param name="_soLuongTonKho"></param>
             <param name="_ngayNhapHang"></param>
             <param name="_ghiChu"></param>
+            <param name="_giaTien"></param>
         </member>
-        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.MaSanPham">
+        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.Id">
             <summary>
-            	Gets or sets the MaSanPham property. 
+            	Gets or sets the Id property. 
             	
             </summary>
             <value>This type is int.</value>
             <remarks>
             This property can not be set to null. 
             </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.MaSanPham">
+            <summary>
+            	Gets or sets the MaSanPham property. 
+            	
+            </summary>
+            <value>This type is nvarchar.</value>
+            <remarks>
+            This property can not be set to null. 
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">If you attempt to set to null.</exception>
         </member>
         <member name="P:SkinCare.Entities.KhoHangSanPhamBase.TenSanPham">
             <summary>
@@ -2607,18 +2593,6 @@
             <value>This type is nvarchar.</value>
             <remarks>
             This property can be set to null. 
-            </remarks>
-        </member>
-        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.GiaTien">
-            <summary>
-            	Gets or sets the GiaTien property. 
-            	
-            </summary>
-            <value>This type is decimal.</value>
-            <remarks>
-            This property can be set to null. 
-            If this column is null it is up to the developer to check using the HasValue property
-            and perform business logic appropriately.
             </remarks>
         </member>
         <member name="P:SkinCare.Entities.KhoHangSanPhamBase.SoLuongNhapVao">
@@ -2677,6 +2651,18 @@
             <value>This type is nvarchar.</value>
             <remarks>
             This property can be set to null. 
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.GiaTien">
+            <summary>
+            	Gets or sets the GiaTien property. 
+            	
+            </summary>
+            <value>This type is money.</value>
+            <remarks>
+            This property can be set to null. 
+            If this column is null it is up to the developer to check using the HasValue property
+            and perform business logic appropriately.
             </remarks>
         </member>
         <member name="M:SkinCare.Entities.KhoHangSanPhamBase.AddValidationRules">
@@ -2903,20 +2889,20 @@
             	This struct is generated by a tool and should never be modified.
             </remarks>
         </member>
-        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.MaSanPham">
+        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.Id">
             <summary>			
-            MaSanPham : 
+            ID : 
             </summary>
             <remarks>Member of the primary key of the underlying table "tblKhoHangSanPham"</remarks>
+        </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.MaSanPham">
+            <summary>
+            MaSanPham : 
+            </summary>
         </member>
         <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.TenSanPham">
             <summary>
             TenSanPham : 
-            </summary>
-        </member>
-        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.GiaTien">
-            <summary>
-            GiaTien : 
             </summary>
         </member>
         <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.SoLuongNhapVao">
@@ -2942,6 +2928,11 @@
         <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.GhiChu">
             <summary>
             GhiChu : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.GiaTien">
+            <summary>
+            GiaTien : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.Clone">
@@ -3094,9 +3085,9 @@
             Gets or sets the Entity property.
             </summary>
         </member>
-        <member name="P:SkinCare.Entities.KhoHangSanPhamKey.MaSanPham">
+        <member name="P:SkinCare.Entities.KhoHangSanPhamKey.Id">
             <summary>
-            Gets or sets the MaSanPham property.
+            Gets or sets the Id property.
             </summary>
         </member>
         <member name="M:SkinCare.Entities.KhoHangSanPhamKey.Load(System.Collections.IDictionary)">
@@ -3124,6 +3115,11 @@
             Enumerate the KhoHangSanPham columns.
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.Id">
+            <summary>
+            Id : 
+            </summary>
+        </member>
         <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.MaSanPham">
             <summary>
             MaSanPham : 
@@ -3132,11 +3128,6 @@
         <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.TenSanPham">
             <summary>
             TenSanPham : 
-            </summary>
-        </member>
-        <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.GiaTien">
-            <summary>
-            GiaTien : 
             </summary>
         </member>
         <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.SoLuongNhapVao">
@@ -3164,6 +3155,11 @@
             GhiChu : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.GiaTien">
+            <summary>
+            GiaTien : 
+            </summary>
+        </member>
         <member name="T:SkinCare.Entities.IKhoHangSanPham">
             <summary>
             	The data structure representation of the 'tblKhoHangSanPham' table via interface.
@@ -3172,20 +3168,20 @@
             	This struct is generated by a tool and should never be modified.
             </remarks>
         </member>
-        <member name="P:SkinCare.Entities.IKhoHangSanPham.MaSanPham">
+        <member name="P:SkinCare.Entities.IKhoHangSanPham.Id">
             <summary>			
-            MaSanPham : 
+            ID : 
             </summary>
             <remarks>Member of the primary key of the underlying table "tblKhoHangSanPham"</remarks>
+        </member>
+        <member name="P:SkinCare.Entities.IKhoHangSanPham.MaSanPham">
+            <summary>
+            MaSanPham : 
+            </summary>
         </member>
         <member name="P:SkinCare.Entities.IKhoHangSanPham.TenSanPham">
             <summary>
             TenSanPham : 
-            </summary>
-        </member>
-        <member name="P:SkinCare.Entities.IKhoHangSanPham.GiaTien">
-            <summary>
-            GiaTien : 
             </summary>
         </member>
         <member name="P:SkinCare.Entities.IKhoHangSanPham.SoLuongNhapVao">
@@ -3211,6 +3207,11 @@
         <member name="P:SkinCare.Entities.IKhoHangSanPham.GhiChu">
             <summary>
             GhiChu : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.IKhoHangSanPham.GiaTien">
+            <summary>
+            GiaTien : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IKhoHangSanPham.Clone">
@@ -5610,6 +5611,605 @@
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IPhuongThucThanhToan.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDa">
+            <summary>
+             An object representation of the 'tblTinhTrangDa' table. [No description found the database]	
+            </summary>
+             <remarks>
+             This file is generated once and will never be overwritten.
+             </remarks>	
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDa.#ctor">
+            <summary>
+             Creates a new <see cref="T:SkinCare.Entities.TinhTrangDa"/> instance.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaBase">
+            <summary>
+             An object representation of the 'tblTinhTrangDa' table. [No description found the database]	
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.entityData">
+            <summary>
+             Hold the inner data of the entity.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase._originalData">
+            <summary>
+            	Hold the original data of the entity, as loaded from the repository.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.backupData">
+            <summary>
+            	Hold a backup of the inner data of the entity.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.entityTrackingKey">
+            <summary>
+            	Key used if Tracking is Enabled for the <see cref="T:SkinCare.Entities.EntityLocator" />.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.parentCollection">
+            <summary>
+            	Hold the parent TList&lt;entity&gt; in which this entity maybe contained.
+            </summary>
+            <remark>Mostly used for databinding</remark>
+        </member>
+        <member name="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanging">
+            <summary>
+            Occurs when a value is being changed for the specified column.
+            </summary>
+        </member>
+        <member name="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanged">
+            <summary>
+            Occurs after a value has been changed for the specified column.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.#ctor">
+            <summary>
+             Creates a new <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> instance.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.#ctor(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String)">
+            <summary>
+             Creates a new <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> instance.
+            </summary>
+            <param name="_maKhachHang"></param>
+            <param name="_ngay"></param>
+            <param name="_tinhTrang"></param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.CreateTinhTrangDa(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String)">
+            <summary>
+             A simple factory method to create a new <see cref="T:SkinCare.Entities.TinhTrangDa"/> instance.
+            </summary>
+            <param name="_maKhachHang"></param>
+            <param name="_ngay"></param>
+            <param name="_tinhTrang"></param>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.Id">
+            <summary>
+            	Gets or sets the Id property. 
+            	
+            </summary>
+            <value>This type is int.</value>
+            <remarks>
+            This property can not be set to null. 
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.MaKhachHang">
+            <summary>
+            	Gets or sets the MaKhachHang property. 
+            	
+            </summary>
+            <value>This type is int.</value>
+            <remarks>
+            This property can be set to null. 
+            If this column is null it is up to the developer to check using the HasValue property
+            and perform business logic appropriately.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.Ngay">
+            <summary>
+            	Gets or sets the Ngay property. 
+            	
+            </summary>
+            <value>This type is datetime.</value>
+            <remarks>
+            This property can be set to null. 
+            If this column is null it is up to the developer to check using the HasValue property
+            and perform business logic appropriately.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.TinhTrang">
+            <summary>
+            	Gets or sets the TinhTrang property. 
+            	
+            </summary>
+            <value>This type is nvarchar.</value>
+            <remarks>
+            This property can be set to null. 
+            </remarks>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.AddValidationRules">
+            <summary>
+            Assigns validation rules to this object based on model definition.
+            </summary>
+            <remarks>This method overrides the base class to add schema related validation.</remarks>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.TableName">
+            <summary>
+            	The name of the underlying database table.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.TableColumns">
+            <summary>
+            	The name of the underlying database table's columns.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaBase.CancelAddNewEventHandler">
+            <summary>
+            The delegate for the CancelAddNew event.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="E:SkinCare.Entities.TinhTrangDaBase.CancelAddNew">
+            <summary>
+            The CancelAddNew event.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnCancelAddNew">
+            <summary>
+            Called when [cancel add new].
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.System#ComponentModel#IEditableObject#BeginEdit">
+            <summary>
+            Begins an edit on an object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.System#ComponentModel#IEditableObject#CancelEdit">
+            <summary>
+            Discards changes since the last <c>BeginEdit</c> call.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.System#ComponentModel#IEditableObject#EndEdit">
+            <summary>
+            Pushes changes since the last <c>BeginEdit</c> or <c>IBindingList.AddNew</c> call into the underlying object.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.ParentCollection">
+            <summary>
+            Gets or sets the parent collection of this current entity, if available.
+            </summary>
+            <value>The parent collection.</value>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnEntityChanged">
+            <summary>
+            Called when the entity is changed.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Copy(System.Collections.IDictionary)">
+            <summary>
+              Returns a Typed TinhTrangDa Entity 
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Copy">
+            <summary>
+              Returns a Typed TinhTrangDa Entity 
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Clone">
+            <summary>
+             ICloneable.Clone() Member, returns the Shallow Copy of this entity.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Clone(System.Collections.IDictionary)">
+            <summary>
+             ICloneableEx.Clone() Member, returns the Shallow Copy of this entity.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.MakeCopyOf(System.Object)">
+            <summary>
+             Returns a deep copy of the child collection object passed in.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.MakeCopyOf(System.Object,System.Collections.IDictionary)">
+            <summary>
+             Returns a deep copy of the child collection object passed in.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.DeepCopy">
+            <summary>
+              Returns a Typed TinhTrangDa Entity which is a deep copy of the current entity.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.CancelChanges">
+            <summary>
+             Revert all changes and restore original values.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.AcceptChanges">
+            <summary>
+            Accepts the changes made to this object.
+            </summary>
+            <remarks>
+            After calling this method, properties: IsDirty, IsNew are false. IsDeleted flag remains unchanged as it is handled by the parent List.
+            </remarks>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.IsPropertyChanged(SkinCare.Entities.TinhTrangDaColumn)">
+            <summary>
+            Determines whether the property value has changed from the original data.
+            </summary>
+            <param name="column">The column.</param>
+            <returns>
+            	<c>true</c> if the property value has changed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.IsPropertyChanged(System.String)">
+            <summary>
+            Determines whether the property value has changed from the original data.
+            </summary>
+            <param name="columnName">The column name.</param>
+            <returns>
+            	<c>true</c> if the property value has changed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.HasDataChanged">
+            <summary>
+            Determines whether the data has changed from original.
+            </summary>
+            <returns>
+            	<c>true</c> if data has changed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.GetOriginalEntity">
+            <summary>
+              Returns a TinhTrangDa Entity with the original data.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Equals(System.Object)">
+            <summary>
+             Returns a value indicating whether this instance is equal to a specified object using value semantics.
+            </summary>
+            <param name="Object1">An object to compare to this instance.</param>
+            <returns>true if Object1 is a <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> and has the same value as this instance; otherwise, false.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type, suitable for use in hashing algorithms and data structures like a hash table.
+            Provides a hash function that is appropriate for <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> class 
+            and that ensures a better distribution in the hash table
+            </summary>
+            <returns>number (hash code) that corresponds to the value of an object</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Equals(SkinCare.Entities.TinhTrangDaBase)">
+            <summary>
+             Returns a value indicating whether this instance is equal to a specified object using value semantics.
+            </summary>
+            <param name="toObject">An object to compare to this instance.</param>
+            <returns>true if toObject is a <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> and has the same value as this instance; otherwise, false.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.ValueEquals(SkinCare.Entities.TinhTrangDaBase,SkinCare.Entities.TinhTrangDaBase)">
+            <summary>
+             Determines whether the specified <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> instances are considered equal using value semantics.
+            </summary>
+            <param name="Object1">The first <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> to compare.</param>
+            <param name="Object2">The second <see cref="T:SkinCare.Entities.TinhTrangDaBase"/> to compare. </param>
+            <returns>true if Object1 is the same instance as Object2 or if both are null references or if objA.Equals(objB) returns true; otherwise, false.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.CompareTo(System.Object)">
+            <summary>
+             Compares this instance to a specified object and returns an indication of their relative values.
+            <param name="obj">An object to compare to this instance, or a null reference (Nothing in Visual Basic).</param>
+            </summary>
+            <returns>A signed integer that indicates the relative order of this instance and obj.</returns>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.Site">
+            <summary>
+            Gets or Sets the site where this data is located.
+            </summary>
+        </member>
+        <member name="E:SkinCare.Entities.TinhTrangDaBase.Disposed">
+            <summary>
+            Notify those that care when we dispose.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Dispose">
+            <summary>
+            Clean up. Nothing here though.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.Dispose(System.Boolean)">
+            <summary>
+            Clean up.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.EntityId">
+            <summary>
+            Gets or sets the EntityId property.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.EntityState">
+            <summary>
+            	Indicates state of object
+            </summary>
+            <remarks>0=Unchanged, 1=Added, 2=Changed</remarks>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.EntityTrackingKey">
+            <summary>
+             Provides the tracking key for the <see cref="T:SkinCare.Entities.EntityLocator"/>
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.ToString">
+            <summary>
+             Returns a String that represents the current object.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData">
+            <summary>
+            	The data structure representation of the 'tblTinhTrangDa' table.
+            </summary>
+            <remarks>
+            	This struct is generated by a tool and should never be modified.
+            </remarks>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.Id">
+            <summary>			
+            ID : 
+            </summary>
+            <remarks>Member of the primary key of the underlying table "tblTinhTrangDa"</remarks>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.MaKhachHang">
+            <summary>
+            MaKhachHang : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.Ngay">
+            <summary>
+            Ngay : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.TinhTrang">
+            <summary>
+            TinhTrang : 
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.Clone(System.Collections.IDictionary)">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaBase.TinhTrangDaEntityData.EntityState">
+            <summary>
+            	Indicates state of object
+            </summary>
+            <remarks>0=Unchanged, 1=Added, 2=Changed</remarks>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnColumnChanging(SkinCare.Entities.TinhTrangDaColumn)">
+            <summary>
+            Raises the <see cref="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanging" /> event.
+            </summary>
+            <param name="column">The <see cref="T:SkinCare.Entities.TinhTrangDaColumn"/> which has raised the event.</param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnColumnChanged(SkinCare.Entities.TinhTrangDaColumn)">
+            <summary>
+            Raises the <see cref="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanged" /> event.
+            </summary>
+            <param name="column">The <see cref="T:SkinCare.Entities.TinhTrangDaColumn"/> which has raised the event.</param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnColumnChanging(SkinCare.Entities.TinhTrangDaColumn,System.Object)">
+            <summary>
+            Raises the <see cref="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanging" /> event.
+            </summary>
+            <param name="column">The <see cref="T:SkinCare.Entities.TinhTrangDaColumn"/> which has raised the event.</param>
+            <param name="value">The changed value.</param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaBase.OnColumnChanged(SkinCare.Entities.TinhTrangDaColumn,System.Object)">
+            <summary>
+            Raises the <see cref="E:SkinCare.Entities.TinhTrangDaBase.ColumnChanged" /> event.
+            </summary>
+            <param name="column">The <see cref="T:SkinCare.Entities.TinhTrangDaColumn"/> which has raised the event.</param>
+            <param name="value">The changed value.</param>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaEventArgs">
+            <summary>
+            Provides data for the ColumnChanging and ColumnChanged events.
+            </summary>
+            <remarks>
+            The ColumnChanging and ColumnChanged events occur when a change is made to the value 
+            of a property of a <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </remarks>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaEventArgs.#ctor(SkinCare.Entities.TinhTrangDaColumn)">
+            <summary>
+             Initalizes a new Instance of the TinhTrangDaEventArgs class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaEventArgs.#ctor(SkinCare.Entities.TinhTrangDaColumn,System.Object)">
+            <summary>
+             Initalizes a new Instance of the TinhTrangDaEventArgs class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaEventArgs.Column">
+            <summary>
+             The TinhTrangDaColumn that was modified, which has raised the event.
+            </summary>
+            <value cref="T:SkinCare.Entities.TinhTrangDaColumn" />
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaEventArgs.Value">
+            <summary>
+            Gets the current value of the column.
+            </summary>
+            <value>The current value of the column.</value>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaEventHandler">
+            <summary>
+             Define a delegate for all TinhTrangDa related events.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaComparer">
+            <summary>
+            Strongly Typed IComparer
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaComparer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaComparer"/> class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaComparer.#ctor(SkinCare.Entities.TinhTrangDaColumn)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TinhTrangDaComparer"/> class.
+            </summary>
+            <param name="column">The column to sort on.</param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaComparer.Equals(SkinCare.Entities.TinhTrangDa,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Determines whether the specified <see cref="T:SkinCare.Entities.TinhTrangDa"/> instances are considered equal.
+            </summary>
+            <param name="a">The first <see cref="T:SkinCare.Entities.TinhTrangDa"/> to compare.</param>
+            <param name="b">The second <c>TinhTrangDa</c> to compare.</param>
+            <returns>true if objA is the same instance as objB or if both are null references or if objA.Equals(objB) returns true; otherwise, false.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaComparer.GetHashCode(SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Gets the hash code of the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaComparer.Compare(SkinCare.Entities.TinhTrangDa,SkinCare.Entities.TinhTrangDa)">
+            <summary>
+            Performs a case-insensitive comparison of two objects of the same type and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="a">The first object to compare.</param>
+            <param name="b">The second object to compare.</param>
+            <returns></returns>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaComparer.WhichComparison">
+            <summary>
+            Gets or sets the column that will be used for comparison.
+            </summary>
+            <value>The comparison column.</value>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaKey">
+            <summary>
+            Wraps the unique identifier values for the <see cref="T:SkinCare.Entities.TinhTrangDa"/> object.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.#ctor">
+            <summary>
+            Initializes a new instance of the TinhTrangDaKey class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.#ctor(SkinCare.Entities.TinhTrangDaBase)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaKey class.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the TinhTrangDaKey class.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaKey.Entity">
+            <summary>
+            Gets or sets the Entity property.
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.TinhTrangDaKey.Id">
+            <summary>
+            Gets or sets the Id property.
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.Load(System.Collections.IDictionary)">
+            <summary>
+            Reads values from the supplied <see cref="T:System.Collections.IDictionary"/> object into
+            properties of the current object.
+            </summary>
+            <param name="values">An <see cref="T:System.Collections.IDictionary"/> instance that contains
+            the key/value pairs to be used as property values.</param>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.ToDictionary">
+            <summary>
+            Creates a new <see cref="T:System.Collections.IDictionary"/> object and populates it
+            with the property values of the current object.
+            </summary>
+            <returns>A collection of name/value pairs.</returns>
+        </member>
+        <member name="M:SkinCare.Entities.TinhTrangDaKey.ToString">
+            <summary>
+             Returns a String that represents the current object.
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.TinhTrangDaColumn">
+            <summary>
+            Enumerate the TinhTrangDa columns.
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaColumn.Id">
+            <summary>
+            Id : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaColumn.MaKhachHang">
+            <summary>
+            MaKhachHang : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaColumn.Ngay">
+            <summary>
+            Ngay : 
+            </summary>
+        </member>
+        <member name="F:SkinCare.Entities.TinhTrangDaColumn.TinhTrang">
+            <summary>
+            TinhTrang : 
+            </summary>
+        </member>
+        <member name="T:SkinCare.Entities.ITinhTrangDa">
+            <summary>
+            	The data structure representation of the 'tblTinhTrangDa' table via interface.
+            </summary>
+            <remarks>
+            	This struct is generated by a tool and should never be modified.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.ITinhTrangDa.Id">
+            <summary>			
+            ID : 
+            </summary>
+            <remarks>Member of the primary key of the underlying table "tblTinhTrangDa"</remarks>
+        </member>
+        <member name="P:SkinCare.Entities.ITinhTrangDa.MaKhachHang">
+            <summary>
+            MaKhachHang : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.ITinhTrangDa.Ngay">
+            <summary>
+            Ngay : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.ITinhTrangDa.TinhTrang">
+            <summary>
+            TinhTrang : 
+            </summary>
+        </member>
+        <member name="M:SkinCare.Entities.ITinhTrangDa.Clone">
             <summary>
             Creates a new object that is a copy of the current instance.
             </summary>

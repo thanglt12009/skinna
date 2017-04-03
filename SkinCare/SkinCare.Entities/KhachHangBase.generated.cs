@@ -85,9 +85,7 @@ namespace SkinCare.Entities
 		///<param name="_email"></param>
 		///<param name="_soDienThoai"></param>
 		///<param name="_diaChi"></param>
-		///<param name="_tuoi"></param>
 		///<param name="_gioiTinh"></param>
-		///<param name="_tinhTrangDa"></param>
 		///<param name="_tayTrangToi"></param>
 		///<param name="_ruaMat"></param>
 		///<param name="_toner"></param>
@@ -96,10 +94,11 @@ namespace SkinCare.Entities
 		///<param name="_sanPhamKhac"></param>
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
+		///<param name="_ngaysinh"></param>
 		public KhachHangBase(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
-			System.String _diaChi, System.Int32? _tuoi, System.String _gioiTinh, System.String _tinhTrangDa, 
-			System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, System.Boolean? _toner, System.Boolean? _serum, 
-			System.Boolean? _kem, System.Boolean? _sanPhamKhac, System.String _luuy, System.String _imageLink)
+			System.String _diaChi, System.String _gioiTinh, System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, 
+			System.Boolean? _toner, System.Boolean? _serum, System.Boolean? _kem, System.Boolean? _sanPhamKhac, 
+			System.String _luuy, System.String _imageLink, System.DateTime? _ngaysinh)
 		{
 			this.entityData = new KhachHangEntityData();
 			this.backupData = null;
@@ -108,9 +107,7 @@ namespace SkinCare.Entities
 			this.Email = _email;
 			this.SoDienThoai = _soDienThoai;
 			this.DiaChi = _diaChi;
-			this.Tuoi = _tuoi;
 			this.GioiTinh = _gioiTinh;
-			this.TinhTrangDa = _tinhTrangDa;
 			this.TayTrangToi = _tayTrangToi;
 			this.RuaMat = _ruaMat;
 			this.Toner = _toner;
@@ -119,6 +116,7 @@ namespace SkinCare.Entities
 			this.SanPhamKhac = _sanPhamKhac;
 			this.Luuy = _luuy;
 			this.ImageLink = _imageLink;
+			this.Ngaysinh = _ngaysinh;
 		}
 		
 		///<summary>
@@ -128,9 +126,7 @@ namespace SkinCare.Entities
 		///<param name="_email"></param>
 		///<param name="_soDienThoai"></param>
 		///<param name="_diaChi"></param>
-		///<param name="_tuoi"></param>
 		///<param name="_gioiTinh"></param>
-		///<param name="_tinhTrangDa"></param>
 		///<param name="_tayTrangToi"></param>
 		///<param name="_ruaMat"></param>
 		///<param name="_toner"></param>
@@ -139,19 +135,18 @@ namespace SkinCare.Entities
 		///<param name="_sanPhamKhac"></param>
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
+		///<param name="_ngaysinh"></param>
 		public static KhachHang CreateKhachHang(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
-			System.String _diaChi, System.Int32? _tuoi, System.String _gioiTinh, System.String _tinhTrangDa, 
-			System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, System.Boolean? _toner, System.Boolean? _serum, 
-			System.Boolean? _kem, System.Boolean? _sanPhamKhac, System.String _luuy, System.String _imageLink)
+			System.String _diaChi, System.String _gioiTinh, System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, 
+			System.Boolean? _toner, System.Boolean? _serum, System.Boolean? _kem, System.Boolean? _sanPhamKhac, 
+			System.String _luuy, System.String _imageLink, System.DateTime? _ngaysinh)
 		{
 			KhachHang newKhachHang = new KhachHang();
 			newKhachHang.TenKhachHang = _tenKhachHang;
 			newKhachHang.Email = _email;
 			newKhachHang.SoDienThoai = _soDienThoai;
 			newKhachHang.DiaChi = _diaChi;
-			newKhachHang.Tuoi = _tuoi;
 			newKhachHang.GioiTinh = _gioiTinh;
-			newKhachHang.TinhTrangDa = _tinhTrangDa;
 			newKhachHang.TayTrangToi = _tayTrangToi;
 			newKhachHang.RuaMat = _ruaMat;
 			newKhachHang.Toner = _toner;
@@ -160,6 +155,7 @@ namespace SkinCare.Entities
 			newKhachHang.SanPhamKhac = _sanPhamKhac;
 			newKhachHang.Luuy = _luuy;
 			newKhachHang.ImageLink = _imageLink;
+			newKhachHang.Ngaysinh = _ngaysinh;
 			return newKhachHang;
 		}
 				
@@ -360,46 +356,6 @@ namespace SkinCare.Entities
 		}
 		
 		/// <summary>
-		/// 	Gets or sets the Tuoi property. 
-		///		
-		/// </summary>
-		/// <value>This type is int.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Int32? Tuoi
-		{
-			get
-			{
-				return this.entityData.Tuoi; 
-			}
-			
-			set
-			{
-				if (this.entityData.Tuoi == value)
-					return;
-				
-                OnPropertyChanging("Tuoi");                    
-				OnColumnChanging(KhachHangColumn.Tuoi, this.entityData.Tuoi);
-				this.entityData.Tuoi = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.Tuoi, this.entityData.Tuoi);
-				OnPropertyChanged("Tuoi");
-			}
-		}
-		
-		/// <summary>
 		/// 	Gets or sets the GioiTinh property. 
 		///		
 		/// </summary>
@@ -434,44 +390,6 @@ namespace SkinCare.Entities
 					this.EntityState = EntityState.Changed;
 				OnColumnChanged(KhachHangColumn.GioiTinh, this.entityData.GioiTinh);
 				OnPropertyChanged("GioiTinh");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the TinhTrangDa property. 
-		///		
-		/// </summary>
-		/// <value>This type is nvarchar.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true, 200)]
-		public virtual System.String TinhTrangDa
-		{
-			get
-			{
-				return this.entityData.TinhTrangDa; 
-			}
-			
-			set
-			{
-				if (this.entityData.TinhTrangDa == value)
-					return;
-				
-                OnPropertyChanging("TinhTrangDa");                    
-				OnColumnChanging(KhachHangColumn.TinhTrangDa, this.entityData.TinhTrangDa);
-				this.entityData.TinhTrangDa = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.TinhTrangDa, this.entityData.TinhTrangDa);
-				OnPropertyChanged("TinhTrangDa");
 			}
 		}
 		
@@ -791,6 +709,46 @@ namespace SkinCare.Entities
 			}
 		}
 		
+		/// <summary>
+		/// 	Gets or sets the Ngaysinh property. 
+		///		
+		/// </summary>
+		/// <value>This type is datetime.</value>
+		/// <remarks>
+		/// This property can be set to null. 
+		/// If this column is null it is up to the developer to check using the HasValue property
+		/// and perform business logic appropriately.
+		/// </remarks>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, true)]
+		public virtual System.DateTime? Ngaysinh
+		{
+			get
+			{
+				return this.entityData.Ngaysinh; 
+			}
+			
+			set
+			{
+				if (this.entityData.Ngaysinh == value)
+					return;
+				
+                OnPropertyChanging("Ngaysinh");                    
+				OnColumnChanging(KhachHangColumn.Ngaysinh, this.entityData.Ngaysinh);
+				this.entityData.Ngaysinh = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(KhachHangColumn.Ngaysinh, this.entityData.Ngaysinh);
+				OnPropertyChanged("Ngaysinh");
+			}
+		}
+		
 		#endregion Data Properties		
 
 		#region Source Foreign Key Property
@@ -821,8 +779,6 @@ namespace SkinCare.Entities
 			ValidationRules.AddRule( CommonRules.StringMaxLength, 
 				new CommonRules.MaxLengthRuleArgs("GioiTinh", "Gioi Tinh", 1));
 			ValidationRules.AddRule( CommonRules.StringMaxLength, 
-				new CommonRules.MaxLengthRuleArgs("TinhTrangDa", "Tinh Trang Da", 200));
-			ValidationRules.AddRule( CommonRules.StringMaxLength, 
 				new CommonRules.MaxLengthRuleArgs("Luuy", "Luuy", 200));
 			ValidationRules.AddRule( CommonRules.StringMaxLength, 
 				new CommonRules.MaxLengthRuleArgs("ImageLink", "Image Link", 100));
@@ -847,7 +803,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "Tuoi", "GioiTinh", "TinhTrangDa", "TayTrangToi", "RuaMat", "Toner", "Serum", "Kem", "SanPhamKhac", "LuuY", "ImageLink"};
+				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "GioiTinh", "TayTrangToi", "RuaMat", "Toner", "Serum", "Kem", "SanPhamKhac", "LuuY", "ImageLink", "Ngaysinh"};
 			}
 		}
 		#endregion 
@@ -1000,9 +956,7 @@ namespace SkinCare.Entities
 				copy.Email = this.Email;
 				copy.SoDienThoai = this.SoDienThoai;
 				copy.DiaChi = this.DiaChi;
-				copy.Tuoi = this.Tuoi;
 				copy.GioiTinh = this.GioiTinh;
-				copy.TinhTrangDa = this.TinhTrangDa;
 				copy.TayTrangToi = this.TayTrangToi;
 				copy.RuaMat = this.RuaMat;
 				copy.Toner = this.Toner;
@@ -1011,6 +965,7 @@ namespace SkinCare.Entities
 				copy.SanPhamKhac = this.SanPhamKhac;
 				copy.Luuy = this.Luuy;
 				copy.ImageLink = this.ImageLink;
+				copy.Ngaysinh = this.Ngaysinh;
 			
 		
 			copy.EntityState = this.EntityState;
@@ -1153,12 +1108,8 @@ namespace SkinCare.Entities
 					return entityData.SoDienThoai != _originalData.SoDienThoai;
 					case KhachHangColumn.DiaChi:
 					return entityData.DiaChi != _originalData.DiaChi;
-					case KhachHangColumn.Tuoi:
-					return entityData.Tuoi != _originalData.Tuoi;
 					case KhachHangColumn.GioiTinh:
 					return entityData.GioiTinh != _originalData.GioiTinh;
-					case KhachHangColumn.TinhTrangDa:
-					return entityData.TinhTrangDa != _originalData.TinhTrangDa;
 					case KhachHangColumn.TayTrangToi:
 					return entityData.TayTrangToi != _originalData.TayTrangToi;
 					case KhachHangColumn.RuaMat:
@@ -1175,6 +1126,8 @@ namespace SkinCare.Entities
 					return entityData.Luuy != _originalData.Luuy;
 					case KhachHangColumn.ImageLink:
 					return entityData.ImageLink != _originalData.ImageLink;
+					case KhachHangColumn.Ngaysinh:
+					return entityData.Ngaysinh != _originalData.Ngaysinh;
 			
 				default:
 					return false;
@@ -1207,9 +1160,7 @@ namespace SkinCare.Entities
 			result = result || entityData.Email != _originalData.Email;
 			result = result || entityData.SoDienThoai != _originalData.SoDienThoai;
 			result = result || entityData.DiaChi != _originalData.DiaChi;
-			result = result || entityData.Tuoi != _originalData.Tuoi;
 			result = result || entityData.GioiTinh != _originalData.GioiTinh;
-			result = result || entityData.TinhTrangDa != _originalData.TinhTrangDa;
 			result = result || entityData.TayTrangToi != _originalData.TayTrangToi;
 			result = result || entityData.RuaMat != _originalData.RuaMat;
 			result = result || entityData.Toner != _originalData.Toner;
@@ -1218,6 +1169,7 @@ namespace SkinCare.Entities
 			result = result || entityData.SanPhamKhac != _originalData.SanPhamKhac;
 			result = result || entityData.Luuy != _originalData.Luuy;
 			result = result || entityData.ImageLink != _originalData.ImageLink;
+			result = result || entityData.Ngaysinh != _originalData.Ngaysinh;
 			return result;
 		}	
 		
@@ -1232,9 +1184,7 @@ namespace SkinCare.Entities
 				_originalData.Email,
 				_originalData.SoDienThoai,
 				_originalData.DiaChi,
-				_originalData.Tuoi,
 				_originalData.GioiTinh,
-				_originalData.TinhTrangDa,
 				_originalData.TayTrangToi,
 				_originalData.RuaMat,
 				_originalData.Toner,
@@ -1242,7 +1192,8 @@ namespace SkinCare.Entities
 				_originalData.Kem,
 				_originalData.SanPhamKhac,
 				_originalData.Luuy,
-				_originalData.ImageLink
+				_originalData.ImageLink,
+				_originalData.Ngaysinh
 				);
 				
 			return (KhachHang)this.Clone();
@@ -1277,9 +1228,7 @@ namespace SkinCare.Entities
 					((this.Email == null) ? string.Empty : this.Email.ToString()).GetHashCode() ^ 
 					((this.SoDienThoai == null) ? string.Empty : this.SoDienThoai.ToString()).GetHashCode() ^ 
 					((this.DiaChi == null) ? string.Empty : this.DiaChi.ToString()).GetHashCode() ^ 
-					((this.Tuoi == null) ? string.Empty : this.Tuoi.ToString()).GetHashCode() ^ 
 					((this.GioiTinh == null) ? string.Empty : this.GioiTinh.ToString()).GetHashCode() ^ 
-					((this.TinhTrangDa == null) ? string.Empty : this.TinhTrangDa.ToString()).GetHashCode() ^ 
 					((this.TayTrangToi == null) ? string.Empty : this.TayTrangToi.ToString()).GetHashCode() ^ 
 					((this.RuaMat == null) ? string.Empty : this.RuaMat.ToString()).GetHashCode() ^ 
 					((this.Toner == null) ? string.Empty : this.Toner.ToString()).GetHashCode() ^ 
@@ -1287,7 +1236,8 @@ namespace SkinCare.Entities
 					((this.Kem == null) ? string.Empty : this.Kem.ToString()).GetHashCode() ^ 
 					((this.SanPhamKhac == null) ? string.Empty : this.SanPhamKhac.ToString()).GetHashCode() ^ 
 					((this.Luuy == null) ? string.Empty : this.Luuy.ToString()).GetHashCode() ^ 
-					((this.ImageLink == null) ? string.Empty : this.ImageLink.ToString()).GetHashCode();
+					((this.ImageLink == null) ? string.Empty : this.ImageLink.ToString()).GetHashCode() ^ 
+					((this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString()).GetHashCode();
         }
 		
 		///<summary>
@@ -1358,30 +1308,12 @@ namespace SkinCare.Entities
 			{
 				equal = false;
 			}
-			if ( Object1.Tuoi != null && Object2.Tuoi != null )
-			{
-				if (Object1.Tuoi != Object2.Tuoi)
-					equal = false;
-			}
-			else if (Object1.Tuoi == null ^ Object2.Tuoi == null )
-			{
-				equal = false;
-			}
 			if ( Object1.GioiTinh != null && Object2.GioiTinh != null )
 			{
 				if (Object1.GioiTinh != Object2.GioiTinh)
 					equal = false;
 			}
 			else if (Object1.GioiTinh == null ^ Object2.GioiTinh == null )
-			{
-				equal = false;
-			}
-			if ( Object1.TinhTrangDa != null && Object2.TinhTrangDa != null )
-			{
-				if (Object1.TinhTrangDa != Object2.TinhTrangDa)
-					equal = false;
-			}
-			else if (Object1.TinhTrangDa == null ^ Object2.TinhTrangDa == null )
 			{
 				equal = false;
 			}
@@ -1454,6 +1386,15 @@ namespace SkinCare.Entities
 					equal = false;
 			}
 			else if (Object1.ImageLink == null ^ Object2.ImageLink == null )
+			{
+				equal = false;
+			}
+			if ( Object1.Ngaysinh != null && Object2.Ngaysinh != null )
+			{
+				if (Object1.Ngaysinh != Object2.Ngaysinh)
+					equal = false;
+			}
+			else if (Object1.Ngaysinh == null ^ Object2.Ngaysinh == null )
 			{
 				equal = false;
 			}
@@ -1531,20 +1472,8 @@ namespace SkinCare.Entities
             		                 
             	
             	
-            	case KhachHangColumn.Tuoi:
-            		return this.Tuoi.Value.CompareTo(rhs.Tuoi.Value);
-            		
-            		                 
-            	
-            	
             	case KhachHangColumn.GioiTinh:
             		return this.GioiTinh.CompareTo(rhs.GioiTinh);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.TinhTrangDa:
-            		return this.TinhTrangDa.CompareTo(rhs.TinhTrangDa);
             		
             		                 
             	
@@ -1593,6 +1522,12 @@ namespace SkinCare.Entities
             	
             	case KhachHangColumn.ImageLink:
             		return this.ImageLink.CompareTo(rhs.ImageLink);
+            		
+            		                 
+            	
+            	
+            	case KhachHangColumn.Ngaysinh:
+            		return this.Ngaysinh.Value.CompareTo(rhs.Ngaysinh.Value);
             		
             		                 
             }
@@ -1729,15 +1664,13 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{17}{16}- MaKhachHang: {0}{16}- TenKhachHang: {1}{16}- Email: {2}{16}- SoDienThoai: {3}{16}- DiaChi: {4}{16}- Tuoi: {5}{16}- GioiTinh: {6}{16}- TinhTrangDa: {7}{16}- TayTrangToi: {8}{16}- RuaMat: {9}{16}- Toner: {10}{16}- Serum: {11}{16}- Kem: {12}{16}- SanPhamKhac: {13}{16}- Luuy: {14}{16}- ImageLink: {15}{16}{18}", 
+				"{16}{15}- MaKhachHang: {0}{15}- TenKhachHang: {1}{15}- Email: {2}{15}- SoDienThoai: {3}{15}- DiaChi: {4}{15}- GioiTinh: {5}{15}- TayTrangToi: {6}{15}- RuaMat: {7}{15}- Toner: {8}{15}- Serum: {9}{15}- Kem: {10}{15}- SanPhamKhac: {11}{15}- Luuy: {12}{15}- ImageLink: {13}{15}- Ngaysinh: {14}{15}{17}", 
 				this.MaKhachHang,
 				(this.TenKhachHang == null) ? string.Empty : this.TenKhachHang.ToString(),
 				(this.Email == null) ? string.Empty : this.Email.ToString(),
 				(this.SoDienThoai == null) ? string.Empty : this.SoDienThoai.ToString(),
 				(this.DiaChi == null) ? string.Empty : this.DiaChi.ToString(),
-				(this.Tuoi == null) ? string.Empty : this.Tuoi.ToString(),
 				(this.GioiTinh == null) ? string.Empty : this.GioiTinh.ToString(),
-				(this.TinhTrangDa == null) ? string.Empty : this.TinhTrangDa.ToString(),
 				(this.TayTrangToi == null) ? string.Empty : this.TayTrangToi.ToString(),
 				(this.RuaMat == null) ? string.Empty : this.RuaMat.ToString(),
 				(this.Toner == null) ? string.Empty : this.Toner.ToString(),
@@ -1746,6 +1679,7 @@ namespace SkinCare.Entities
 				(this.SanPhamKhac == null) ? string.Empty : this.SanPhamKhac.ToString(),
 				(this.Luuy == null) ? string.Empty : this.Luuy.ToString(),
 				(this.ImageLink == null) ? string.Empty : this.ImageLink.ToString(),
+				(this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString(),
 				System.Environment.NewLine, 
 				this.GetType(),
 				this.Error.Length == 0 ? string.Empty : string.Format("- Error: {0}\n",this.Error));
@@ -1800,19 +1734,9 @@ namespace SkinCare.Entities
 		public System.String DiaChi = null;
 		
 		/// <summary>
-		/// Tuoi : 
-		/// </summary>
-		public System.Int32? Tuoi = null;
-		
-		/// <summary>
 		/// GioiTinh : 
 		/// </summary>
 		public System.String GioiTinh = null;
-		
-		/// <summary>
-		/// TinhTrangDa : 
-		/// </summary>
-		public System.String TinhTrangDa = null;
 		
 		/// <summary>
 		/// TayTrangToi : 
@@ -1853,6 +1777,11 @@ namespace SkinCare.Entities
 		/// ImageLink : 
 		/// </summary>
 		public System.String ImageLink = null;
+		
+		/// <summary>
+		/// Ngaysinh : 
+		/// </summary>
+		public System.DateTime? Ngaysinh = null;
 		#endregion
 			
 		#region Source Foreign Key Property
@@ -1880,9 +1809,7 @@ namespace SkinCare.Entities
 			_tmp.Email = this.Email;
 			_tmp.SoDienThoai = this.SoDienThoai;
 			_tmp.DiaChi = this.DiaChi;
-			_tmp.Tuoi = this.Tuoi;
 			_tmp.GioiTinh = this.GioiTinh;
-			_tmp.TinhTrangDa = this.TinhTrangDa;
 			_tmp.TayTrangToi = this.TayTrangToi;
 			_tmp.RuaMat = this.RuaMat;
 			_tmp.Toner = this.Toner;
@@ -1891,6 +1818,7 @@ namespace SkinCare.Entities
 			_tmp.SanPhamKhac = this.SanPhamKhac;
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
+			_tmp.Ngaysinh = this.Ngaysinh;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1921,9 +1849,7 @@ namespace SkinCare.Entities
 			_tmp.Email = this.Email;
 			_tmp.SoDienThoai = this.SoDienThoai;
 			_tmp.DiaChi = this.DiaChi;
-			_tmp.Tuoi = this.Tuoi;
 			_tmp.GioiTinh = this.GioiTinh;
-			_tmp.TinhTrangDa = this.TinhTrangDa;
 			_tmp.TayTrangToi = this.TayTrangToi;
 			_tmp.RuaMat = this.RuaMat;
 			_tmp.Toner = this.Toner;
@@ -1932,6 +1858,7 @@ namespace SkinCare.Entities
 			_tmp.SanPhamKhac = this.SanPhamKhac;
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
+			_tmp.Ngaysinh = this.Ngaysinh;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -2326,71 +2253,65 @@ namespace SkinCare.Entities
 		[ColumnEnum("DiaChi", typeof(System.String), System.Data.DbType.String, false, false, true, 200)]
 		DiaChi = 5,
 		/// <summary>
-		/// Tuoi : 
-		/// </summary>
-		[EnumTextValue("Tuoi")]
-		[ColumnEnum("Tuoi", typeof(System.Int32), System.Data.DbType.Int32, false, false, true)]
-		Tuoi = 6,
-		/// <summary>
 		/// GioiTinh : 
 		/// </summary>
 		[EnumTextValue("Gioi Tinh")]
 		[ColumnEnum("GioiTinh", typeof(System.String), System.Data.DbType.AnsiStringFixedLength, false, false, true, 1)]
-		GioiTinh = 7,
-		/// <summary>
-		/// TinhTrangDa : 
-		/// </summary>
-		[EnumTextValue("Tinh Trang Da")]
-		[ColumnEnum("TinhTrangDa", typeof(System.String), System.Data.DbType.String, false, false, true, 200)]
-		TinhTrangDa = 8,
+		GioiTinh = 6,
 		/// <summary>
 		/// TayTrangToi : 
 		/// </summary>
 		[EnumTextValue("Tay Trang Toi")]
 		[ColumnEnum("TayTrangToi", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		TayTrangToi = 9,
+		TayTrangToi = 7,
 		/// <summary>
 		/// RuaMat : 
 		/// </summary>
 		[EnumTextValue("Rua Mat")]
 		[ColumnEnum("RuaMat", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		RuaMat = 10,
+		RuaMat = 8,
 		/// <summary>
 		/// Toner : 
 		/// </summary>
 		[EnumTextValue("Toner")]
 		[ColumnEnum("Toner", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Toner = 11,
+		Toner = 9,
 		/// <summary>
 		/// Serum : 
 		/// </summary>
 		[EnumTextValue("Serum")]
 		[ColumnEnum("Serum", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Serum = 12,
+		Serum = 10,
 		/// <summary>
 		/// Kem : 
 		/// </summary>
 		[EnumTextValue("Kem")]
 		[ColumnEnum("Kem", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Kem = 13,
+		Kem = 11,
 		/// <summary>
 		/// SanPhamKhac : 
 		/// </summary>
 		[EnumTextValue("San Pham Khac")]
 		[ColumnEnum("SanPhamKhac", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		SanPhamKhac = 14,
+		SanPhamKhac = 12,
 		/// <summary>
 		/// Luuy : 
 		/// </summary>
 		[EnumTextValue("Luuy")]
 		[ColumnEnum("LuuY", typeof(System.String), System.Data.DbType.String, false, false, true, 200)]
-		Luuy = 15,
+		Luuy = 13,
 		/// <summary>
 		/// ImageLink : 
 		/// </summary>
 		[EnumTextValue("Image Link")]
 		[ColumnEnum("ImageLink", typeof(System.String), System.Data.DbType.String, false, false, true, 100)]
-		ImageLink = 16
+		ImageLink = 14,
+		/// <summary>
+		/// Ngaysinh : 
+		/// </summary>
+		[EnumTextValue("Ngaysinh")]
+		[ColumnEnum("Ngaysinh", typeof(System.DateTime), System.Data.DbType.DateTime, false, false, true)]
+		Ngaysinh = 15
 	}//End enum
 
 	#endregion KhachHangColumn Enum

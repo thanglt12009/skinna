@@ -16,10 +16,10 @@
 			>
 			<Columns>
 				<asp:CommandField ShowSelectButton="True" ShowEditButton="True" />				
-				<asp:BoundField DataField="Salt" HeaderText="Salt" SortExpression="[Salt]"  />
 				<asp:BoundField DataField="UserName" HeaderText="User Name" SortExpression="[UserName]"  />
-				<asp:BoundField DataField="Pwd" HeaderText="Pwd" SortExpression="[Pwd]"  />
 				<asp:BoundField DataField="UserRole" HeaderText="User Role" SortExpression="[UserRole]"  />
+				<asp:BoundField DataField="Pwd" HeaderText="Pwd" SortExpression="[Pwd]"  />
+				<asp:BoundField DataField="Salt" HeaderText="Salt" SortExpression="[Salt]"  />
 			</Columns>
 			<EmptyDataTemplate>
 				<b>No User Found!</b>

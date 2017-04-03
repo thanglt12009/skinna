@@ -19,7 +19,7 @@ public partial class KhoHangSanPhamEdit : System.Web.UI.Page
 		FormUtil.RedirectAfterInsertUpdate(FormView1, "KhoHangSanPhamEdit.aspx?{0}", KhoHangSanPhamDataSource);
 		FormUtil.RedirectAfterAddNew(FormView1, "KhoHangSanPhamEdit.aspx");
 		FormUtil.RedirectAfterCancel(FormView1, "KhoHangSanPham.aspx");
-		FormUtil.SetDefaultMode(FormView1, "MaSanPham");
+		FormUtil.SetDefaultMode(FormView1, "Id");
 	}
 }
 

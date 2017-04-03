@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E9B1CA34-1370-4DC2-BE03-5464FDACEACE}</ProjectGuid>
+    <ProjectGuid>{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -117,13 +117,13 @@
      
 	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
       <Name>SkinCare.Entities</Name>
-      <Project>{787E8AF0-3765-4CF4-A4FD-45A37E1B7D81}</Project>
+      <Project>{43F2C54C-AEA1-421A-A841-07345DBBEFEB}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
     <ProjectReference Include="..\SkinCare.Data\SkinCare.Data.csproj">
         <Name>SkinCare.Data</Name>
-        <Project>{7DF753C3-A265-4161-826D-19C6B5DEC559}</Project>
+        <Project>{D455767C-C47A-4DF9-B73D-B918F11F21EB}</Project>
         <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
@@ -215,6 +215,14 @@
 			
 			<Compile Include="SqlPhuongThucThanhToanProviderBase.generated.cs">
 			  <DependentUpon>SqlPhuongThucThanhToanProvider.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="SqlTinhTrangDaProvider.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			
+			<Compile Include="SqlTinhTrangDaProviderBase.generated.cs">
+			  <DependentUpon>SqlTinhTrangDaProvider.cs</DependentUpon>
 			  <SubType>Code</SubType>
 			</Compile>
 			<Compile Include="SqlTrangThaiDonHangProvider.cs">

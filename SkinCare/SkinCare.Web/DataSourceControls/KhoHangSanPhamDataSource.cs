@@ -161,7 +161,8 @@ namespace SkinCare.Web.Data
 			KhoHangSanPham item;
 			count = 0;
 			
-			System.Int32 _maSanPham;
+			System.Int32 _id;
+			System.String _maSanPham;
 
 			switch ( SelectMethod )
 			{
@@ -186,14 +187,21 @@ namespace SkinCare.Web.Data
 						results = KhoHangSanPhamProvider.Find(GetTransactionManager(), WhereClause, StartIndex, PageSize, out count);
                     break;
 				// PK
-				case KhoHangSanPhamSelectMethod.GetByMaSanPham:
-					_maSanPham = ( values["MaSanPham"] != null ) ? (System.Int32) EntityUtil.ChangeType(values["MaSanPham"], typeof(System.Int32)) : (int)0;
-					item = KhoHangSanPhamProvider.GetByMaSanPham(GetTransactionManager(), _maSanPham);
+				case KhoHangSanPhamSelectMethod.GetById:
+					_id = ( values["Id"] != null ) ? (System.Int32) EntityUtil.ChangeType(values["Id"], typeof(System.Int32)) : (int)0;
+					item = KhoHangSanPhamProvider.GetById(GetTransactionManager(), _id);
 					results = new TList<KhoHangSanPham>();
 					if ( item != null ) results.Add(item);
 					count = results.Count;
 					break;
 				// IX
+				case KhoHangSanPhamSelectMethod.GetByMaSanPham:
+					_maSanPham = ( values["MaSanPham"] != null ) ? (System.String) EntityUtil.ChangeType(values["MaSanPham"], typeof(System.String)) : string.Empty;
+					item = KhoHangSanPhamProvider.GetByMaSanPham(GetTransactionManager(), _maSanPham);
+					results = new TList<KhoHangSanPham>();
+					if ( item != null ) results.Add(item);
+					count = results.Count;
+					break;
 				// FK
 				// M:M
 				// Custom
@@ -225,7 +233,7 @@ namespace SkinCare.Web.Data
 		/// <param name="values">An IDictionary object of name/value pairs.</param>
 		protected override void GetSelectParameters(IDictionary values)
 		{
-			if ( SelectMethod == KhoHangSanPhamSelectMethod.Get || SelectMethod == KhoHangSanPhamSelectMethod.GetByMaSanPham )
+			if ( SelectMethod == KhoHangSanPhamSelectMethod.Get || SelectMethod == KhoHangSanPhamSelectMethod.GetById )
 			{
 				EntityId = GetEntityKey(values);
 			}
@@ -371,6 +379,10 @@ namespace SkinCare.Web.Data
 		/// Represents the Find method.
 		/// </summary>
 		Find,
+		/// <summary>
+		/// Represents the GetById method.
+		/// </summary>
+		GetById,
 		/// <summary>
 		/// Represents the GetByMaSanPham method.
 		/// </summary>

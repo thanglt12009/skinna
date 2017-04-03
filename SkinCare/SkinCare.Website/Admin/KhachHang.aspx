@@ -16,13 +16,12 @@
 			>
 			<Columns>
 				<asp:CommandField ShowSelectButton="True" ShowEditButton="True" />				
+				<asp:BoundField DataField="Ngaysinh" DataFormatString="{0:d}" HtmlEncode="False" HeaderText="Ngaysinh" SortExpression="[Ngaysinh]"  />
 				<asp:BoundField DataField="TenKhachHang" HeaderText="Ten Khach Hang" SortExpression="[TenKhachHang]"  />
 				<asp:BoundField DataField="Email" HeaderText="Email" SortExpression="[Email]"  />
 				<asp:BoundField DataField="SoDienThoai" HeaderText="So Dien Thoai" SortExpression="[SoDienThoai]"  />
 				<asp:BoundField DataField="DiaChi" HeaderText="Dia Chi" SortExpression="[DiaChi]"  />
-				<asp:BoundField DataField="Tuoi" HeaderText="Tuoi" SortExpression="[Tuoi]"  />
 				<asp:BoundField DataField="GioiTinh" HeaderText="Gioi Tinh" SortExpression="[GioiTinh]"  />
-				<asp:BoundField DataField="TinhTrangDa" HeaderText="Tinh Trang Da" SortExpression="[TinhTrangDa]"  />
 				<data:BoundRadioButtonField DataField="TayTrangToi" HeaderText="Tay Trang Toi" SortExpression="[TayTrangToi]"  />
 				<data:BoundRadioButtonField DataField="RuaMat" HeaderText="Rua Mat" SortExpression="[RuaMat]"  />
 				<data:BoundRadioButtonField DataField="Toner" HeaderText="Toner" SortExpression="[Toner]"  />

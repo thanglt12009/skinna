@@ -8,7 +8,7 @@
 				AutoGenerateColumns="False"					
 				OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
 				DataSourceID="KhoHangSanPhamDataSource"
-				DataKeyNames="MaSanPham"
+				DataKeyNames="Id"
 				AllowMultiColumnSorting="false"
 				DefaultSortColumnName="" 
 				DefaultSortDirection="Ascending"	
@@ -16,13 +16,14 @@
 			>
 			<Columns>
 				<asp:CommandField ShowSelectButton="True" ShowEditButton="True" />				
+				<asp:BoundField DataField="MaSanPham" HeaderText="Ma San Pham" SortExpression="[MaSanPham]"  />
 				<asp:BoundField DataField="TenSanPham" HeaderText="Ten San Pham" SortExpression="[TenSanPham]"  />
-				<asp:BoundField DataField="GiaTien" HeaderText="Gia Tien" SortExpression="[GiaTien]"  />
 				<asp:BoundField DataField="SoLuongNhapVao" HeaderText="So Luong Nhap Vao" SortExpression="[SoLuongNhapVao]"  />
 				<asp:BoundField DataField="SoLuongBanRa" HeaderText="So Luong Ban Ra" SortExpression="[SoLuongBanRa]"  />
 				<asp:BoundField DataField="SoLuongTonKho" HeaderText="So Luong Ton Kho" SortExpression="[SoLuongTonKho]"  />
 				<asp:BoundField DataField="NgayNhapHang" DataFormatString="{0:d}" HtmlEncode="False" HeaderText="Ngay Nhap Hang" SortExpression="[NgayNhapHang]"  />
 				<asp:BoundField DataField="GhiChu" HeaderText="Ghi Chu" SortExpression="[GhiChu]"  />
+				<asp:BoundField DataField="GiaTien" HeaderText="Gia Tien" SortExpression="[GiaTien]"  />
 			</Columns>
 			<EmptyDataTemplate>
 				<b>No KhoHangSanPham Found!</b>

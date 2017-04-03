@@ -4,6 +4,12 @@
 	<ItemTemplate>
 		<table border="0" cellpadding="3" cellspacing="1">
 			<tr>
+        <td class="literal"><asp:Label ID="lbldataNgaysinh" runat="server" Text="Ngaysinh:" AssociatedControlID="dataNgaysinh" /></td>
+        <td>
+					<asp:TextBox runat="server" ID="dataNgaysinh" Text='<%# Bind("Ngaysinh", "{0:d}") %>' MaxLength="10"></asp:TextBox><asp:ImageButton ID="cal_dataNgaysinh" runat="server" SkinID="CalendarImageButton" OnClientClick="javascript:showCalendarControl(this.previousSibling);return false;" />
+				</td>
+			</tr>
+			<tr>
         <td class="literal"><asp:Label ID="lbldataTenKhachHang" runat="server" Text="Ten Khach Hang:" AssociatedControlID="dataTenKhachHang" /></td>
         <td>
 					<asp:TextBox runat="server" ID="dataTenKhachHang" Text='<%# Bind("TenKhachHang") %>' MaxLength="100"></asp:TextBox>
@@ -28,21 +34,9 @@
 				</td>
 			</tr>
 			<tr>
-        <td class="literal"><asp:Label ID="lbldataTuoi" runat="server" Text="Tuoi:" AssociatedControlID="dataTuoi" /></td>
-        <td>
-					<asp:TextBox runat="server" ID="dataTuoi" Text='<%# Bind("Tuoi") %>'></asp:TextBox><asp:RangeValidator ID="RangeVal_dataTuoi" runat="server" Display="Dynamic" ControlToValidate="dataTuoi" ErrorMessage="Invalid value" MaximumValue="2147483647" MinimumValue="-2147483648" Type="Integer"></asp:RangeValidator>
-				</td>
-			</tr>
-			<tr>
         <td class="literal"><asp:Label ID="lbldataGioiTinh" runat="server" Text="Gioi Tinh:" AssociatedControlID="dataGioiTinh" /></td>
         <td>
 					<asp:TextBox runat="server" ID="dataGioiTinh" Text='<%# Bind("GioiTinh") %>' MaxLength="1"></asp:TextBox>
-				</td>
-			</tr>
-			<tr>
-        <td class="literal"><asp:Label ID="lbldataTinhTrangDa" runat="server" Text="Tinh Trang Da:" AssociatedControlID="dataTinhTrangDa" /></td>
-        <td>
-					<asp:TextBox runat="server" ID="dataTinhTrangDa" Text='<%# Bind("TinhTrangDa") %>' MaxLength="200"></asp:TextBox>
 				</td>
 			</tr>
 			<tr>

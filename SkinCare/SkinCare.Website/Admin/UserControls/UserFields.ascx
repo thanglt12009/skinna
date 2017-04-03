@@ -4,15 +4,15 @@
 	<ItemTemplate>
 		<table border="0" cellpadding="3" cellspacing="1">
 			<tr>
-        <td class="literal"><asp:Label ID="lbldataSalt" runat="server" Text="Salt:" AssociatedControlID="dataSalt" /></td>
-        <td>
-					<asp:TextBox runat="server" ID="dataSalt" Text='<%# Bind("Salt") %>' MaxLength="10"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataSalt" runat="server" Display="Dynamic" ControlToValidate="dataSalt" ErrorMessage="Required"></asp:RequiredFieldValidator>
-				</td>
-			</tr>
-			<tr>
         <td class="literal"><asp:Label ID="lbldataUserName" runat="server" Text="User Name:" AssociatedControlID="dataUserName" /></td>
         <td>
 					<asp:TextBox runat="server" ID="dataUserName" Text='<%# Bind("UserName") %>' MaxLength="15"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataUserName" runat="server" Display="Dynamic" ControlToValidate="dataUserName" ErrorMessage="Required"></asp:RequiredFieldValidator>
+				</td>
+			</tr>
+			<tr>
+        <td class="literal"><asp:Label ID="lbldataUserRole" runat="server" Text="User Role:" AssociatedControlID="dataUserRole" /></td>
+        <td>
+					<asp:TextBox runat="server" ID="dataUserRole" Text='<%# Bind("UserRole") %>' MaxLength="25"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataUserRole" runat="server" Display="Dynamic" ControlToValidate="dataUserRole" ErrorMessage="Required"></asp:RequiredFieldValidator>
 				</td>
 			</tr>
 			<tr>
@@ -22,9 +22,9 @@
 				</td>
 			</tr>
 			<tr>
-        <td class="literal"><asp:Label ID="lbldataUserRole" runat="server" Text="User Role:" AssociatedControlID="dataUserRole" /></td>
+        <td class="literal"><asp:Label ID="lbldataSalt" runat="server" Text="Salt:" AssociatedControlID="dataSalt" /></td>
         <td>
-					<asp:TextBox runat="server" ID="dataUserRole" Text='<%# Bind("UserRole") %>' MaxLength="25"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataUserRole" runat="server" Display="Dynamic" ControlToValidate="dataUserRole" ErrorMessage="Required"></asp:RequiredFieldValidator>
+					<asp:TextBox runat="server" ID="dataSalt" Text='<%# Bind("Salt") %>' MaxLength="10"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataSalt" runat="server" Display="Dynamic" ControlToValidate="dataSalt" ErrorMessage="Required"></asp:RequiredFieldValidator>
 				</td>
 			</tr>
 			

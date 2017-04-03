@@ -377,15 +377,6 @@ namespace SkinCare.Web.UI
 			get { return _entity.DiaChi; }
 		}
         /// <summary>
-        /// Gets the Tuoi
-        /// </summary>
-        /// <value>The Tuoi.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Int32? Tuoi
-		{
-			get { return _entity.Tuoi; }
-		}
-        /// <summary>
         /// Gets the GioiTinh
         /// </summary>
         /// <value>The GioiTinh.</value>
@@ -393,15 +384,6 @@ namespace SkinCare.Web.UI
 		public System.String GioiTinh
 		{
 			get { return _entity.GioiTinh; }
-		}
-        /// <summary>
-        /// Gets the TinhTrangDa
-        /// </summary>
-        /// <value>The TinhTrangDa.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.String TinhTrangDa
-		{
-			get { return _entity.TinhTrangDa; }
 		}
         /// <summary>
         /// Gets the TayTrangToi
@@ -474,6 +456,15 @@ namespace SkinCare.Web.UI
 		public System.String ImageLink
 		{
 			get { return _entity.ImageLink; }
+		}
+        /// <summary>
+        /// Gets the Ngaysinh
+        /// </summary>
+        /// <value>The Ngaysinh.</value>
+		[System.ComponentModel.Bindable(true)]
+		public System.DateTime? Ngaysinh
+		{
+			get { return _entity.Ngaysinh; }
 		}
 
         /// <summary>

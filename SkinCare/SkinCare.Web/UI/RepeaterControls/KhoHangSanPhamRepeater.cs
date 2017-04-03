@@ -332,11 +332,20 @@ namespace SkinCare.Web.UI
 		}
 		
         /// <summary>
+        /// Gets the Id
+        /// </summary>
+        /// <value>The Id.</value>
+		[System.ComponentModel.Bindable(true)]
+		public System.Int32 Id
+		{
+			get { return _entity.Id; }
+		}
+        /// <summary>
         /// Gets the MaSanPham
         /// </summary>
         /// <value>The MaSanPham.</value>
 		[System.ComponentModel.Bindable(true)]
-		public System.Int32 MaSanPham
+		public System.String MaSanPham
 		{
 			get { return _entity.MaSanPham; }
 		}
@@ -348,15 +357,6 @@ namespace SkinCare.Web.UI
 		public System.String TenSanPham
 		{
 			get { return _entity.TenSanPham; }
-		}
-        /// <summary>
-        /// Gets the GiaTien
-        /// </summary>
-        /// <value>The GiaTien.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Decimal? GiaTien
-		{
-			get { return _entity.GiaTien; }
 		}
         /// <summary>
         /// Gets the SoLuongNhapVao
@@ -402,6 +402,15 @@ namespace SkinCare.Web.UI
 		public System.String GhiChu
 		{
 			get { return _entity.GhiChu; }
+		}
+        /// <summary>
+        /// Gets the GiaTien
+        /// </summary>
+        /// <value>The GiaTien.</value>
+		[System.ComponentModel.Bindable(true)]
+		public System.Decimal? GiaTien
+		{
+			get { return _entity.GiaTien; }
 		}
 
         /// <summary>

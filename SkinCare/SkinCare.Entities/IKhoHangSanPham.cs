@@ -12,22 +12,22 @@ namespace SkinCare.Entities
 	public interface IKhoHangSanPham 
 	{
 		/// <summary>			
-		/// MaSanPham : 
+		/// ID : 
 		/// </summary>
 		/// <remarks>Member of the primary key of the underlying table "tblKhoHangSanPham"</remarks>
-		System.Int32 MaSanPham { get; set; }
+		System.Int32 Id { get; set; }
 				
 		
+		
+		/// <summary>
+		/// MaSanPham : 
+		/// </summary>
+		System.String  MaSanPham  { get; set; }
 		
 		/// <summary>
 		/// TenSanPham : 
 		/// </summary>
 		System.String  TenSanPham  { get; set; }
-		
-		/// <summary>
-		/// GiaTien : 
-		/// </summary>
-		System.Decimal?  GiaTien  { get; set; }
 		
 		/// <summary>
 		/// SoLuongNhapVao : 
@@ -53,6 +53,11 @@ namespace SkinCare.Entities
 		/// GhiChu : 
 		/// </summary>
 		System.String  GhiChu  { get; set; }
+		
+		/// <summary>
+		/// GiaTien : 
+		/// </summary>
+		System.Decimal?  GiaTien  { get; set; }
 			
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

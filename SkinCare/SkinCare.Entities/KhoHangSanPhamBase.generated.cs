@@ -81,51 +81,55 @@ namespace SkinCare.Entities
 		///<summary>
 		/// Creates a new <see cref="KhoHangSanPhamBase"/> instance.
 		///</summary>
+		///<param name="_maSanPham"></param>
 		///<param name="_tenSanPham"></param>
-		///<param name="_giaTien"></param>
 		///<param name="_soLuongNhapVao"></param>
 		///<param name="_soLuongBanRa"></param>
 		///<param name="_soLuongTonKho"></param>
 		///<param name="_ngayNhapHang"></param>
 		///<param name="_ghiChu"></param>
-		public KhoHangSanPhamBase(System.String _tenSanPham, System.Decimal? _giaTien, 
+		///<param name="_giaTien"></param>
+		public KhoHangSanPhamBase(System.String _maSanPham, System.String _tenSanPham, 
 			System.Int32? _soLuongNhapVao, System.Int32? _soLuongBanRa, System.Int32? _soLuongTonKho, 
-			System.DateTime? _ngayNhapHang, System.String _ghiChu)
+			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien)
 		{
 			this.entityData = new KhoHangSanPhamEntityData();
 			this.backupData = null;
 
+			this.MaSanPham = _maSanPham;
 			this.TenSanPham = _tenSanPham;
-			this.GiaTien = _giaTien;
 			this.SoLuongNhapVao = _soLuongNhapVao;
 			this.SoLuongBanRa = _soLuongBanRa;
 			this.SoLuongTonKho = _soLuongTonKho;
 			this.NgayNhapHang = _ngayNhapHang;
 			this.GhiChu = _ghiChu;
+			this.GiaTien = _giaTien;
 		}
 		
 		///<summary>
 		/// A simple factory method to create a new <see cref="KhoHangSanPham"/> instance.
 		///</summary>
+		///<param name="_maSanPham"></param>
 		///<param name="_tenSanPham"></param>
-		///<param name="_giaTien"></param>
 		///<param name="_soLuongNhapVao"></param>
 		///<param name="_soLuongBanRa"></param>
 		///<param name="_soLuongTonKho"></param>
 		///<param name="_ngayNhapHang"></param>
 		///<param name="_ghiChu"></param>
-		public static KhoHangSanPham CreateKhoHangSanPham(System.String _tenSanPham, System.Decimal? _giaTien, 
+		///<param name="_giaTien"></param>
+		public static KhoHangSanPham CreateKhoHangSanPham(System.String _maSanPham, System.String _tenSanPham, 
 			System.Int32? _soLuongNhapVao, System.Int32? _soLuongBanRa, System.Int32? _soLuongTonKho, 
-			System.DateTime? _ngayNhapHang, System.String _ghiChu)
+			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien)
 		{
 			KhoHangSanPham newKhoHangSanPham = new KhoHangSanPham();
+			newKhoHangSanPham.MaSanPham = _maSanPham;
 			newKhoHangSanPham.TenSanPham = _tenSanPham;
-			newKhoHangSanPham.GiaTien = _giaTien;
 			newKhoHangSanPham.SoLuongNhapVao = _soLuongNhapVao;
 			newKhoHangSanPham.SoLuongBanRa = _soLuongBanRa;
 			newKhoHangSanPham.SoLuongTonKho = _soLuongTonKho;
 			newKhoHangSanPham.NgayNhapHang = _ngayNhapHang;
 			newKhoHangSanPham.GhiChu = _ghiChu;
+			newKhoHangSanPham.GiaTien = _giaTien;
 			return newKhoHangSanPham;
 		}
 				
@@ -135,7 +139,7 @@ namespace SkinCare.Entities
 		
 		#region Data Properties		
 		/// <summary>
-		/// 	Gets or sets the MaSanPham property. 
+		/// 	Gets or sets the Id property. 
 		///		
 		/// </summary>
 		/// <value>This type is int.</value>
@@ -150,7 +154,47 @@ namespace SkinCare.Entities
 
 		[ReadOnlyAttribute(false)/*, XmlIgnoreAttribute()*/, DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
 		[DataObjectField(true, true, false)]
-		public virtual System.Int32 MaSanPham
+		public virtual System.Int32 Id
+		{
+			get
+			{
+				return this.entityData.Id; 
+			}
+			
+			set
+			{
+				if (this.entityData.Id == value)
+					return;
+				
+                OnPropertyChanging("Id");                    
+				OnColumnChanging(KhoHangSanPhamColumn.Id, this.entityData.Id);
+				this.entityData.Id = value;
+				this.EntityId.Id = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(KhoHangSanPhamColumn.Id, this.entityData.Id);
+				OnPropertyChanged("Id");
+			}
+		}
+		
+		/// <summary>
+		/// 	Gets or sets the MaSanPham property. 
+		///		
+		/// </summary>
+		/// <value>This type is nvarchar.</value>
+		/// <remarks>
+		/// This property can not be set to null. 
+		/// </remarks>
+		/// <exception cref="ArgumentNullException">If you attempt to set to null.</exception>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, false, 100)]
+		public virtual System.String MaSanPham
 		{
 			get
 			{
@@ -165,7 +209,6 @@ namespace SkinCare.Entities
                 OnPropertyChanging("MaSanPham");                    
 				OnColumnChanging(KhoHangSanPhamColumn.MaSanPham, this.entityData.MaSanPham);
 				this.entityData.MaSanPham = value;
-				this.EntityId.MaSanPham = value;
 				if (this.EntityState == EntityState.Unchanged)
 					this.EntityState = EntityState.Changed;
 				OnColumnChanged(KhoHangSanPhamColumn.MaSanPham, this.entityData.MaSanPham);
@@ -208,46 +251,6 @@ namespace SkinCare.Entities
 					this.EntityState = EntityState.Changed;
 				OnColumnChanged(KhoHangSanPhamColumn.TenSanPham, this.entityData.TenSanPham);
 				OnPropertyChanged("TenSanPham");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the GiaTien property. 
-		///		
-		/// </summary>
-		/// <value>This type is decimal.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Decimal? GiaTien
-		{
-			get
-			{
-				return this.entityData.GiaTien; 
-			}
-			
-			set
-			{
-				if (this.entityData.GiaTien == value)
-					return;
-				
-                OnPropertyChanging("GiaTien");                    
-				OnColumnChanging(KhoHangSanPhamColumn.GiaTien, this.entityData.GiaTien);
-				this.entityData.GiaTien = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhoHangSanPhamColumn.GiaTien, this.entityData.GiaTien);
-				OnPropertyChanged("GiaTien");
 			}
 		}
 		
@@ -449,6 +452,46 @@ namespace SkinCare.Entities
 			}
 		}
 		
+		/// <summary>
+		/// 	Gets or sets the GiaTien property. 
+		///		
+		/// </summary>
+		/// <value>This type is money.</value>
+		/// <remarks>
+		/// This property can be set to null. 
+		/// If this column is null it is up to the developer to check using the HasValue property
+		/// and perform business logic appropriately.
+		/// </remarks>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, true)]
+		public virtual System.Decimal? GiaTien
+		{
+			get
+			{
+				return this.entityData.GiaTien; 
+			}
+			
+			set
+			{
+				if (this.entityData.GiaTien == value)
+					return;
+				
+                OnPropertyChanging("GiaTien");                    
+				OnColumnChanging(KhoHangSanPhamColumn.GiaTien, this.entityData.GiaTien);
+				this.entityData.GiaTien = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(KhoHangSanPhamColumn.GiaTien, this.entityData.GiaTien);
+				OnPropertyChanged("GiaTien");
+			}
+		}
+		
 		#endregion Data Properties		
 
 		#region Source Foreign Key Property
@@ -468,6 +511,10 @@ namespace SkinCare.Entities
 		protected override void AddValidationRules()
 		{
 			//Validation rules based on database schema.
+			ValidationRules.AddRule( CommonRules.NotNull,
+				new ValidationRuleArgs("MaSanPham", "Ma San Pham"));
+			ValidationRules.AddRule( CommonRules.StringMaxLength, 
+				new CommonRules.MaxLengthRuleArgs("MaSanPham", "Ma San Pham", 100));
 			ValidationRules.AddRule( CommonRules.StringMaxLength, 
 				new CommonRules.MaxLengthRuleArgs("TenSanPham", "Ten San Pham", 100));
 		}
@@ -491,7 +538,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"MaSanPham", "TenSanPham", "GiaTien", "SoLuongNhapVao", "SoLuongBanRa", "SoLuongTonKho", "NgayNhapHang", "GhiChu"};
+				return new string[] {"ID", "MaSanPham", "TenSanPham", "SoLuongNhapVao", "SoLuongBanRa", "SoLuongTonKho", "NgayNhapHang", "GhiChu", "GiaTien"};
 			}
 		}
 		#endregion 
@@ -639,14 +686,15 @@ namespace SkinCare.Entities
 			KhoHangSanPham copy = new KhoHangSanPham();
 			existingCopies.Add(this, copy);
 			copy.SuppressEntityEvents = true;
+				copy.Id = this.Id;
 				copy.MaSanPham = this.MaSanPham;
 				copy.TenSanPham = this.TenSanPham;
-				copy.GiaTien = this.GiaTien;
 				copy.SoLuongNhapVao = this.SoLuongNhapVao;
 				copy.SoLuongBanRa = this.SoLuongBanRa;
 				copy.SoLuongTonKho = this.SoLuongTonKho;
 				copy.NgayNhapHang = this.NgayNhapHang;
 				copy.GhiChu = this.GhiChu;
+				copy.GiaTien = this.GiaTien;
 			
 		
 			copy.EntityState = this.EntityState;
@@ -779,12 +827,12 @@ namespace SkinCare.Entities
 		{
 			switch(column)
 			{
+					case KhoHangSanPhamColumn.Id:
+					return entityData.Id != _originalData.Id;
 					case KhoHangSanPhamColumn.MaSanPham:
 					return entityData.MaSanPham != _originalData.MaSanPham;
 					case KhoHangSanPhamColumn.TenSanPham:
 					return entityData.TenSanPham != _originalData.TenSanPham;
-					case KhoHangSanPhamColumn.GiaTien:
-					return entityData.GiaTien != _originalData.GiaTien;
 					case KhoHangSanPhamColumn.SoLuongNhapVao:
 					return entityData.SoLuongNhapVao != _originalData.SoLuongNhapVao;
 					case KhoHangSanPhamColumn.SoLuongBanRa:
@@ -795,6 +843,8 @@ namespace SkinCare.Entities
 					return entityData.NgayNhapHang != _originalData.NgayNhapHang;
 					case KhoHangSanPhamColumn.GhiChu:
 					return entityData.GhiChu != _originalData.GhiChu;
+					case KhoHangSanPhamColumn.GiaTien:
+					return entityData.GiaTien != _originalData.GiaTien;
 			
 				default:
 					return false;
@@ -822,14 +872,15 @@ namespace SkinCare.Entities
 		public bool HasDataChanged()
 		{
 			bool result = false;
+			result = result || entityData.Id != _originalData.Id;
 			result = result || entityData.MaSanPham != _originalData.MaSanPham;
 			result = result || entityData.TenSanPham != _originalData.TenSanPham;
-			result = result || entityData.GiaTien != _originalData.GiaTien;
 			result = result || entityData.SoLuongNhapVao != _originalData.SoLuongNhapVao;
 			result = result || entityData.SoLuongBanRa != _originalData.SoLuongBanRa;
 			result = result || entityData.SoLuongTonKho != _originalData.SoLuongTonKho;
 			result = result || entityData.NgayNhapHang != _originalData.NgayNhapHang;
 			result = result || entityData.GhiChu != _originalData.GhiChu;
+			result = result || entityData.GiaTien != _originalData.GiaTien;
 			return result;
 		}	
 		
@@ -840,13 +891,14 @@ namespace SkinCare.Entities
 		{
 			if (_originalData != null)
 				return CreateKhoHangSanPham(
+				_originalData.MaSanPham,
 				_originalData.TenSanPham,
-				_originalData.GiaTien,
 				_originalData.SoLuongNhapVao,
 				_originalData.SoLuongBanRa,
 				_originalData.SoLuongTonKho,
 				_originalData.NgayNhapHang,
-				_originalData.GhiChu
+				_originalData.GhiChu,
+				_originalData.GiaTien
 				);
 				
 			return (KhoHangSanPham)this.Clone();
@@ -876,14 +928,15 @@ namespace SkinCare.Entities
         /// <returns>number (hash code) that corresponds to the value of an object</returns>
         public override int GetHashCode()
         {
-			return this.MaSanPham.GetHashCode() ^ 
+			return this.Id.GetHashCode() ^ 
+					this.MaSanPham.GetHashCode() ^ 
 					((this.TenSanPham == null) ? string.Empty : this.TenSanPham.ToString()).GetHashCode() ^ 
-					((this.GiaTien == null) ? string.Empty : this.GiaTien.ToString()).GetHashCode() ^ 
 					((this.SoLuongNhapVao == null) ? string.Empty : this.SoLuongNhapVao.ToString()).GetHashCode() ^ 
 					((this.SoLuongBanRa == null) ? string.Empty : this.SoLuongBanRa.ToString()).GetHashCode() ^ 
 					((this.SoLuongTonKho == null) ? string.Empty : this.SoLuongTonKho.ToString()).GetHashCode() ^ 
 					((this.NgayNhapHang == null) ? string.Empty : this.NgayNhapHang.ToString()).GetHashCode() ^ 
-					((this.GhiChu == null) ? string.Empty : this.GhiChu.ToString()).GetHashCode();
+					((this.GhiChu == null) ? string.Empty : this.GhiChu.ToString()).GetHashCode() ^ 
+					((this.GiaTien == null) ? string.Empty : this.GiaTien.ToString()).GetHashCode();
         }
 		
 		///<summary>
@@ -916,6 +969,8 @@ namespace SkinCare.Entities
 				return false;
 				
 			bool equal = true;
+			if (Object1.Id != Object2.Id)
+				equal = false;
 			if (Object1.MaSanPham != Object2.MaSanPham)
 				equal = false;
 			if ( Object1.TenSanPham != null && Object2.TenSanPham != null )
@@ -924,15 +979,6 @@ namespace SkinCare.Entities
 					equal = false;
 			}
 			else if (Object1.TenSanPham == null ^ Object2.TenSanPham == null )
-			{
-				equal = false;
-			}
-			if ( Object1.GiaTien != null && Object2.GiaTien != null )
-			{
-				if (Object1.GiaTien != Object2.GiaTien)
-					equal = false;
-			}
-			else if (Object1.GiaTien == null ^ Object2.GiaTien == null )
 			{
 				equal = false;
 			}
@@ -981,6 +1027,15 @@ namespace SkinCare.Entities
 			{
 				equal = false;
 			}
+			if ( Object1.GiaTien != null && Object2.GiaTien != null )
+			{
+				if (Object1.GiaTien != Object2.GiaTien)
+					equal = false;
+			}
+			else if (Object1.GiaTien == null ^ Object2.GiaTien == null )
+			{
+				equal = false;
+			}
 					
 			return equal;
 		}
@@ -1025,6 +1080,12 @@ namespace SkinCare.Entities
             {
             	
             	
+            	case KhoHangSanPhamColumn.Id:
+            		return this.Id.CompareTo(rhs.Id);
+            		
+            		                 
+            	
+            	
             	case KhoHangSanPhamColumn.MaSanPham:
             		return this.MaSanPham.CompareTo(rhs.MaSanPham);
             		
@@ -1033,12 +1094,6 @@ namespace SkinCare.Entities
             	
             	case KhoHangSanPhamColumn.TenSanPham:
             		return this.TenSanPham.CompareTo(rhs.TenSanPham);
-            		
-            		                 
-            	
-            	
-            	case KhoHangSanPhamColumn.GiaTien:
-            		return this.GiaTien.Value.CompareTo(rhs.GiaTien.Value);
             		
             		                 
             	
@@ -1069,6 +1124,12 @@ namespace SkinCare.Entities
             	
             	case KhoHangSanPhamColumn.GhiChu:
             		return this.GhiChu.CompareTo(rhs.GhiChu);
+            		
+            		                 
+            	
+            	
+            	case KhoHangSanPhamColumn.GiaTien:
+            		return this.GiaTien.Value.CompareTo(rhs.GiaTien.Value);
             		
             		                 
             }
@@ -1186,7 +1247,7 @@ namespace SkinCare.Entities
 			{
 				if(entityTrackingKey == null)
 					entityTrackingKey = new System.Text.StringBuilder("KhoHangSanPham")
-					.Append("|").Append( this.MaSanPham.ToString()).ToString();
+					.Append("|").Append( this.Id.ToString()).ToString();
 				return entityTrackingKey;
 			}
 			set
@@ -1205,15 +1266,16 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{9}{8}- MaSanPham: {0}{8}- TenSanPham: {1}{8}- GiaTien: {2}{8}- SoLuongNhapVao: {3}{8}- SoLuongBanRa: {4}{8}- SoLuongTonKho: {5}{8}- NgayNhapHang: {6}{8}- GhiChu: {7}{8}{10}", 
+				"{10}{9}- Id: {0}{9}- MaSanPham: {1}{9}- TenSanPham: {2}{9}- SoLuongNhapVao: {3}{9}- SoLuongBanRa: {4}{9}- SoLuongTonKho: {5}{9}- NgayNhapHang: {6}{9}- GhiChu: {7}{9}- GiaTien: {8}{9}{11}", 
+				this.Id,
 				this.MaSanPham,
 				(this.TenSanPham == null) ? string.Empty : this.TenSanPham.ToString(),
-				(this.GiaTien == null) ? string.Empty : this.GiaTien.ToString(),
 				(this.SoLuongNhapVao == null) ? string.Empty : this.SoLuongNhapVao.ToString(),
 				(this.SoLuongBanRa == null) ? string.Empty : this.SoLuongBanRa.ToString(),
 				(this.SoLuongTonKho == null) ? string.Empty : this.SoLuongTonKho.ToString(),
 				(this.NgayNhapHang == null) ? string.Empty : this.NgayNhapHang.ToString(),
 				(this.GhiChu == null) ? string.Empty : this.GhiChu.ToString(),
+				(this.GiaTien == null) ? string.Empty : this.GiaTien.ToString(),
 				System.Environment.NewLine, 
 				this.GetType(),
 				this.Error.Length == 0 ? string.Empty : string.Format("- Error: {0}\n",this.Error));
@@ -1238,24 +1300,24 @@ namespace SkinCare.Entities
 		
 		#region Primary key(s)
 		/// <summary>			
-		/// MaSanPham : 
+		/// ID : 
 		/// </summary>
 		/// <remarks>Member of the primary key of the underlying table "tblKhoHangSanPham"</remarks>
-		public System.Int32 MaSanPham;
+		public System.Int32 Id;
 			
 		#endregion
 		
 		#region Non Primary key(s)
 		
 		/// <summary>
+		/// MaSanPham : 
+		/// </summary>
+		public System.String MaSanPham = string.Empty;
+		
+		/// <summary>
 		/// TenSanPham : 
 		/// </summary>
 		public System.String TenSanPham = null;
-		
-		/// <summary>
-		/// GiaTien : 
-		/// </summary>
-		public System.Decimal? GiaTien = null;
 		
 		/// <summary>
 		/// SoLuongNhapVao : 
@@ -1281,6 +1343,11 @@ namespace SkinCare.Entities
 		/// GhiChu : 
 		/// </summary>
 		public System.String GhiChu = null;
+		
+		/// <summary>
+		/// GiaTien : 
+		/// </summary>
+		public System.Decimal? GiaTien = null;
 		#endregion
 			
 		#region Source Foreign Key Property
@@ -1302,15 +1369,16 @@ namespace SkinCare.Entities
 		{
 			KhoHangSanPhamEntityData _tmp = new KhoHangSanPhamEntityData();
 						
-			_tmp.MaSanPham = this.MaSanPham;
+			_tmp.Id = this.Id;
 			
+			_tmp.MaSanPham = this.MaSanPham;
 			_tmp.TenSanPham = this.TenSanPham;
-			_tmp.GiaTien = this.GiaTien;
 			_tmp.SoLuongNhapVao = this.SoLuongNhapVao;
 			_tmp.SoLuongBanRa = this.SoLuongBanRa;
 			_tmp.SoLuongTonKho = this.SoLuongTonKho;
 			_tmp.NgayNhapHang = this.NgayNhapHang;
 			_tmp.GhiChu = this.GhiChu;
+			_tmp.GiaTien = this.GiaTien;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1335,15 +1403,16 @@ namespace SkinCare.Entities
 				
 			KhoHangSanPhamEntityData _tmp = new KhoHangSanPhamEntityData();
 						
-			_tmp.MaSanPham = this.MaSanPham;
+			_tmp.Id = this.Id;
 			
+			_tmp.MaSanPham = this.MaSanPham;
 			_tmp.TenSanPham = this.TenSanPham;
-			_tmp.GiaTien = this.GiaTien;
 			_tmp.SoLuongNhapVao = this.SoLuongNhapVao;
 			_tmp.SoLuongBanRa = this.SoLuongBanRa;
 			_tmp.SoLuongTonKho = this.SoLuongTonKho;
 			_tmp.NgayNhapHang = this.NgayNhapHang;
 			_tmp.GhiChu = this.GhiChu;
+			_tmp.GiaTien = this.GiaTien;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1592,7 +1661,7 @@ namespace SkinCare.Entities
 
 			if ( entity != null )
 			{
-				this.MaSanPham = entity.MaSanPham;
+				this.Id = entity.Id;
 			}
 
 			#endregion
@@ -1601,11 +1670,11 @@ namespace SkinCare.Entities
 		/// <summary>
 		/// Initializes a new instance of the KhoHangSanPhamKey class.
 		/// </summary>
-		public KhoHangSanPhamKey(System.Int32 _maSanPham)
+		public KhoHangSanPhamKey(System.Int32 _id)
 		{
 			#region Init Properties
 
-			this.MaSanPham = _maSanPham;
+			this.Id = _id;
 
 			#endregion
 		}
@@ -1626,21 +1695,21 @@ namespace SkinCare.Entities
 			set { _entity = value; }
 		}
 		
-		// member variable for the MaSanPham property
-		private System.Int32 _maSanPham;
+		// member variable for the Id property
+		private System.Int32 _id;
 		
 		/// <summary>
-		/// Gets or sets the MaSanPham property.
+		/// Gets or sets the Id property.
 		/// </summary>
-		public System.Int32 MaSanPham
+		public System.Int32 Id
 		{
-			get { return _maSanPham; }
+			get { return _id; }
 			set
 			{
 				if ( this.Entity != null )
-					this.Entity.MaSanPham = value;
+					this.Entity.Id = value;
 				
-				_maSanPham = value;
+				_id = value;
 			}
 		}
 		
@@ -1660,7 +1729,7 @@ namespace SkinCare.Entities
 
 			if ( values != null )
 			{
-				MaSanPham = ( values["MaSanPham"] != null ) ? (System.Int32) EntityUtil.ChangeType(values["MaSanPham"], typeof(System.Int32)) : (int)0;
+				Id = ( values["Id"] != null ) ? (System.Int32) EntityUtil.ChangeType(values["Id"], typeof(System.Int32)) : (int)0;
 			}
 
 			#endregion
@@ -1677,7 +1746,7 @@ namespace SkinCare.Entities
 
 			#region Init Dictionary
 
-			values.Add("MaSanPham", MaSanPham);
+			values.Add("Id", Id);
 
 			#endregion Init Dictionary
 
@@ -1689,8 +1758,8 @@ namespace SkinCare.Entities
 		///</summary>
 		public override string ToString()
 		{
-			return String.Format("MaSanPham: {0}{1}",
-								MaSanPham,
+			return String.Format("Id: {0}{1}",
+								Id,
 								System.Environment.NewLine);
 		}
 
@@ -1708,23 +1777,23 @@ namespace SkinCare.Entities
 	public enum KhoHangSanPhamColumn : int
 	{
 		/// <summary>
+		/// Id : 
+		/// </summary>
+		[EnumTextValue("Id")]
+		[ColumnEnum("ID", typeof(System.Int32), System.Data.DbType.Int32, true, true, false)]
+		Id = 1,
+		/// <summary>
 		/// MaSanPham : 
 		/// </summary>
 		[EnumTextValue("Ma San Pham")]
-		[ColumnEnum("MaSanPham", typeof(System.Int32), System.Data.DbType.Int32, true, true, false)]
-		MaSanPham = 1,
+		[ColumnEnum("MaSanPham", typeof(System.String), System.Data.DbType.String, false, false, false, 100)]
+		MaSanPham = 2,
 		/// <summary>
 		/// TenSanPham : 
 		/// </summary>
 		[EnumTextValue("Ten San Pham")]
 		[ColumnEnum("TenSanPham", typeof(System.String), System.Data.DbType.String, false, false, true, 100)]
-		TenSanPham = 2,
-		/// <summary>
-		/// GiaTien : 
-		/// </summary>
-		[EnumTextValue("Gia Tien")]
-		[ColumnEnum("GiaTien", typeof(System.Decimal), System.Data.DbType.Decimal, false, false, true)]
-		GiaTien = 3,
+		TenSanPham = 3,
 		/// <summary>
 		/// SoLuongNhapVao : 
 		/// </summary>
@@ -1754,7 +1823,13 @@ namespace SkinCare.Entities
 		/// </summary>
 		[EnumTextValue("Ghi Chu")]
 		[ColumnEnum("GhiChu", typeof(System.String), System.Data.DbType.String, false, false, true)]
-		GhiChu = 8
+		GhiChu = 8,
+		/// <summary>
+		/// GiaTien : 
+		/// </summary>
+		[EnumTextValue("Gia Tien")]
+		[ColumnEnum("GiaTien", typeof(System.Decimal), System.Data.DbType.Currency, false, false, true)]
+		GiaTien = 9
 	}//End enum
 
 	#endregion KhoHangSanPhamColumn Enum

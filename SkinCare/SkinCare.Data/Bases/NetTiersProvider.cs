@@ -20,9 +20,9 @@ namespace SkinCare.Data.Bases
 	{
 		
 		///<summary>
-		/// Current NguonDonHangProviderBase instance.
+		/// Current PhuongThucThanhToanProviderBase instance.
 		///</summary>
-		public virtual NguonDonHangProviderBase NguonDonHangProvider{get {throw new NotImplementedException();}}
+		public virtual PhuongThucThanhToanProviderBase PhuongThucThanhToanProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
 		/// Current DonHangProviderBase instance.
@@ -30,19 +30,24 @@ namespace SkinCare.Data.Bases
 		public virtual DonHangProviderBase DonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
-		/// Current PhuongThucThanhToanProviderBase instance.
+		/// Current TinhTrangDaProviderBase instance.
 		///</summary>
-		public virtual PhuongThucThanhToanProviderBase PhuongThucThanhToanProvider{get {throw new NotImplementedException();}}
+		public virtual TinhTrangDaProviderBase TinhTrangDaProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
-		/// Current LoaiTrangThaiDonHangProviderBase instance.
+		/// Current NguonDonHangProviderBase instance.
 		///</summary>
-		public virtual LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider{get {throw new NotImplementedException();}}
+		public virtual NguonDonHangProviderBase NguonDonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
 		/// Current TrangThaiDonHangProviderBase instance.
 		///</summary>
 		public virtual TrangThaiDonHangProviderBase TrangThaiDonHangProvider{get {throw new NotImplementedException();}}
+		
+		///<summary>
+		/// Current LoaiTrangThaiDonHangProviderBase instance.
+		///</summary>
+		public virtual LoaiTrangThaiDonHangProviderBase LoaiTrangThaiDonHangProvider{get {throw new NotImplementedException();}}
 		
 		///<summary>
 		/// Current DonHangChiTietProviderBase instance.

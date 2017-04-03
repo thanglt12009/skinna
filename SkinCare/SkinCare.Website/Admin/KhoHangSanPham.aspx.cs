@@ -23,7 +23,7 @@ public partial class KhoHangSanPham : System.Web.UI.Page
 
 	protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		string urlParams = string.Format("MaSanPham={0}", GridView1.SelectedDataKey.Values[0]);
+		string urlParams = string.Format("Id={0}", GridView1.SelectedDataKey.Values[0]);
 		Response.Redirect("KhoHangSanPhamEdit.aspx?" + urlParams, true);
 	}
 	

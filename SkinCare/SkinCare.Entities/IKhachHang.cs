@@ -40,19 +40,9 @@ namespace SkinCare.Entities
 		System.String  DiaChi  { get; set; }
 		
 		/// <summary>
-		/// Tuoi : 
-		/// </summary>
-		System.Int32?  Tuoi  { get; set; }
-		
-		/// <summary>
 		/// GioiTinh : 
 		/// </summary>
 		System.String  GioiTinh  { get; set; }
-		
-		/// <summary>
-		/// TinhTrangDa : 
-		/// </summary>
-		System.String  TinhTrangDa  { get; set; }
 		
 		/// <summary>
 		/// TayTrangToi : 
@@ -93,6 +83,11 @@ namespace SkinCare.Entities
 		/// ImageLink : 
 		/// </summary>
 		System.String  ImageLink  { get; set; }
+		
+		/// <summary>
+		/// Ngaysinh : 
+		/// </summary>
+		System.DateTime?  Ngaysinh  { get; set; }
 			
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

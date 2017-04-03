@@ -32,28 +32,28 @@ namespace SkinCare.Data.Bases
 		/// <returns>Returns true if operation suceeded.</returns>
 		public override bool Delete(TransactionManager transactionManager, SkinCare.Entities.KhoHangSanPhamKey key)
 		{
-			return Delete(transactionManager, key.MaSanPham);
+			return Delete(transactionManager, key.Id);
 		}
 		
 		/// <summary>
 		/// 	Deletes a row from the DataSource.
 		/// </summary>
-		/// <param name="_maSanPham">. Primary Key.</param>
+		/// <param name="_id">. Primary Key.</param>
 		/// <remarks>Deletes based on primary key(s).</remarks>
 		/// <returns>Returns true if operation suceeded.</returns>
-		public bool Delete(System.Int32 _maSanPham)
+		public bool Delete(System.Int32 _id)
 		{
-			return Delete(null, _maSanPham);
+			return Delete(null, _id);
 		}
 		
 		/// <summary>
 		/// 	Deletes a row from the DataSource.
 		/// </summary>
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_maSanPham">. Primary Key.</param>
+		/// <param name="_id">. Primary Key.</param>
 		/// <remarks>Deletes based on primary key(s).</remarks>
 		/// <returns>Returns true if operation suceeded.</returns>
-		public abstract bool Delete(TransactionManager transactionManager, System.Int32 _maSanPham);		
+		public abstract bool Delete(TransactionManager transactionManager, System.Int32 _id);		
 		
 		#endregion Delete Methods
 		
@@ -72,74 +72,74 @@ namespace SkinCare.Data.Bases
 		/// <returns>Returns an instance of the Entity class.</returns>
 		public override SkinCare.Entities.KhoHangSanPham Get(TransactionManager transactionManager, SkinCare.Entities.KhoHangSanPhamKey key, int start, int pageLength)
 		{
-			return GetByMaSanPham(transactionManager, key.MaSanPham, start, pageLength);
+			return GetById(transactionManager, key.Id, start, pageLength);
 		}
 		
 		/// <summary>
 		/// 	Gets rows from the datasource based on the primary key PK_tblKhoHangSanPham index.
 		/// </summary>
-		/// <param name="_maSanPham"></param>
+		/// <param name="_id"></param>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.Int32 _maSanPham)
+		public SkinCare.Entities.KhoHangSanPham GetById(System.Int32 _id)
 		{
 			int count = -1;
-			return GetByMaSanPham(null,_maSanPham, 0, int.MaxValue, out count);
+			return GetById(null,_id, 0, int.MaxValue, out count);
 		}
 		
 		/// <summary>
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
 		/// </summary>
-		/// <param name="_maSanPham"></param>
+		/// <param name="_id"></param>
 		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
 		/// <param name="pageLength">Number of rows to return.</param>
 		/// <remarks></remarks>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.Int32 _maSanPham, int start, int pageLength)
+		public SkinCare.Entities.KhoHangSanPham GetById(System.Int32 _id, int start, int pageLength)
 		{
 			int count = -1;
-			return GetByMaSanPham(null, _maSanPham, start, pageLength, out count);
+			return GetById(null, _id, start, pageLength, out count);
 		}
 		
 		/// <summary>
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
 		/// </summary>
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_maSanPham"></param>
+		/// <param name="_id"></param>
 		/// <remarks></remarks>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.Int32 _maSanPham)
+		public SkinCare.Entities.KhoHangSanPham GetById(TransactionManager transactionManager, System.Int32 _id)
 		{
 			int count = -1;
-			return GetByMaSanPham(transactionManager, _maSanPham, 0, int.MaxValue, out count);
+			return GetById(transactionManager, _id, 0, int.MaxValue, out count);
 		}
 		
 		/// <summary>
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
 		/// </summary>
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_maSanPham"></param>
+		/// <param name="_id"></param>
 		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
 		/// <param name="pageLength">Number of rows to return.</param>
 		/// <remarks></remarks>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.Int32 _maSanPham, int start, int pageLength)
+		public SkinCare.Entities.KhoHangSanPham GetById(TransactionManager transactionManager, System.Int32 _id, int start, int pageLength)
 		{
 			int count = -1;
-			return GetByMaSanPham(transactionManager, _maSanPham, start, pageLength, out count);
+			return GetById(transactionManager, _id, start, pageLength, out count);
 		}
 		
 		/// <summary>
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
 		/// </summary>
-		/// <param name="_maSanPham"></param>
+		/// <param name="_id"></param>
 		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
 		/// <param name="pageLength">Number of rows to return.</param>
 		/// <param name="count">out parameter to get total records for query</param>
 		/// <remarks></remarks>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.Int32 _maSanPham, int start, int pageLength, out int count)
+		public SkinCare.Entities.KhoHangSanPham GetById(System.Int32 _id, int start, int pageLength, out int count)
 		{
-			return GetByMaSanPham(null, _maSanPham, start, pageLength, out count);
+			return GetById(null, _id, start, pageLength, out count);
 		}
 		
 				
@@ -147,12 +147,91 @@ namespace SkinCare.Data.Bases
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
 		/// </summary>
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_id"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="count">The total number of records.</param>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public abstract SkinCare.Entities.KhoHangSanPham GetById(TransactionManager transactionManager, System.Int32 _id, int start, int pageLength, out int count);
+						
+		/// <summary>
+		/// 	Gets rows from the datasource based on the primary key UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="_maSanPham"></param>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.String _maSanPham)
+		{
+			int count = -1;
+			return GetByMaSanPham(null,_maSanPham, 0, int.MaxValue, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="_maSanPham"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <remarks></remarks>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.String _maSanPham, int start, int pageLength)
+		{
+			int count = -1;
+			return GetByMaSanPham(null, _maSanPham, start, pageLength, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_maSanPham"></param>
+		/// <remarks></remarks>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.String _maSanPham)
+		{
+			int count = -1;
+			return GetByMaSanPham(transactionManager, _maSanPham, 0, int.MaxValue, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_maSanPham"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <remarks></remarks>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.String _maSanPham, int start, int pageLength)
+		{
+			int count = -1;
+			return GetByMaSanPham(transactionManager, _maSanPham, start, pageLength, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="_maSanPham"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="count">out parameter to get total records for query</param>
+		/// <remarks></remarks>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		public SkinCare.Entities.KhoHangSanPham GetByMaSanPham(System.String _maSanPham, int start, int pageLength, out int count)
+		{
+			return GetByMaSanPham(null, _maSanPham, start, pageLength, out count);
+		}
+		
+				
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
 		/// <param name="_maSanPham"></param>
 		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
 		/// <param name="pageLength">Number of rows to return.</param>
 		/// <param name="count">The total number of records.</param>
 		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
-		public abstract SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.Int32 _maSanPham, int start, int pageLength, out int count);
+		public abstract SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.String _maSanPham, int start, int pageLength, out int count);
 						
 		#endregion "Get By Index Functions"
 	
@@ -247,7 +326,7 @@ namespace SkinCare.Data.Bases
 				if (useEntityFactory)
 				{
 					key = new System.Text.StringBuilder("KhoHangSanPham")
-					.Append("|").Append((System.Int32)reader[((int)KhoHangSanPhamColumn.MaSanPham - 1)]).ToString();
+					.Append("|").Append((System.Int32)reader[((int)KhoHangSanPhamColumn.Id - 1)]).ToString();
 					c = EntityManager.LocateOrCreate<KhoHangSanPham>(
 					key.ToString(), // EntityTrackingKey
 					"KhoHangSanPham",  //Creational Type
@@ -270,14 +349,15 @@ namespace SkinCare.Data.Bases
 					))
 				{
 					c.SuppressEntityEvents = true;
-					c.MaSanPham = (System.Int32)reader[((int)KhoHangSanPhamColumn.MaSanPham - 1)];
+					c.Id = (System.Int32)reader[((int)KhoHangSanPhamColumn.Id - 1)];
+					c.MaSanPham = (System.String)reader[((int)KhoHangSanPhamColumn.MaSanPham - 1)];
 					c.TenSanPham = (reader.IsDBNull(((int)KhoHangSanPhamColumn.TenSanPham - 1)))?null:(System.String)reader[((int)KhoHangSanPhamColumn.TenSanPham - 1)];
-					c.GiaTien = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GiaTien - 1)))?null:(System.Decimal?)reader[((int)KhoHangSanPhamColumn.GiaTien - 1)];
 					c.SoLuongNhapVao = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongNhapVao - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongNhapVao - 1)];
 					c.SoLuongBanRa = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongBanRa - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongBanRa - 1)];
 					c.SoLuongTonKho = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongTonKho - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongTonKho - 1)];
 					c.NgayNhapHang = (reader.IsDBNull(((int)KhoHangSanPhamColumn.NgayNhapHang - 1)))?null:(System.DateTime?)reader[((int)KhoHangSanPhamColumn.NgayNhapHang - 1)];
 					c.GhiChu = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GhiChu - 1)))?null:(System.String)reader[((int)KhoHangSanPhamColumn.GhiChu - 1)];
+					c.GiaTien = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GiaTien - 1)))?null:(System.Decimal?)reader[((int)KhoHangSanPhamColumn.GiaTien - 1)];
 					c.EntityTrackingKey = key;
 					c.AcceptChanges();
 					c.SuppressEntityEvents = false;
@@ -295,14 +375,15 @@ namespace SkinCare.Data.Bases
 		{
 			if (!reader.Read()) return;
 			
-			entity.MaSanPham = (System.Int32)reader[((int)KhoHangSanPhamColumn.MaSanPham - 1)];
+			entity.Id = (System.Int32)reader[((int)KhoHangSanPhamColumn.Id - 1)];
+			entity.MaSanPham = (System.String)reader[((int)KhoHangSanPhamColumn.MaSanPham - 1)];
 			entity.TenSanPham = (reader.IsDBNull(((int)KhoHangSanPhamColumn.TenSanPham - 1)))?null:(System.String)reader[((int)KhoHangSanPhamColumn.TenSanPham - 1)];
-			entity.GiaTien = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GiaTien - 1)))?null:(System.Decimal?)reader[((int)KhoHangSanPhamColumn.GiaTien - 1)];
 			entity.SoLuongNhapVao = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongNhapVao - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongNhapVao - 1)];
 			entity.SoLuongBanRa = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongBanRa - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongBanRa - 1)];
 			entity.SoLuongTonKho = (reader.IsDBNull(((int)KhoHangSanPhamColumn.SoLuongTonKho - 1)))?null:(System.Int32?)reader[((int)KhoHangSanPhamColumn.SoLuongTonKho - 1)];
 			entity.NgayNhapHang = (reader.IsDBNull(((int)KhoHangSanPhamColumn.NgayNhapHang - 1)))?null:(System.DateTime?)reader[((int)KhoHangSanPhamColumn.NgayNhapHang - 1)];
 			entity.GhiChu = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GhiChu - 1)))?null:(System.String)reader[((int)KhoHangSanPhamColumn.GhiChu - 1)];
+			entity.GiaTien = (reader.IsDBNull(((int)KhoHangSanPhamColumn.GiaTien - 1)))?null:(System.Decimal?)reader[((int)KhoHangSanPhamColumn.GiaTien - 1)];
 			entity.AcceptChanges();
 		}
 		
@@ -315,14 +396,15 @@ namespace SkinCare.Data.Bases
 		{
 			DataRow dataRow = dataSet.Tables[0].Rows[0];
 			
-			entity.MaSanPham = (System.Int32)dataRow["MaSanPham"];
+			entity.Id = (System.Int32)dataRow["ID"];
+			entity.MaSanPham = (System.String)dataRow["MaSanPham"];
 			entity.TenSanPham = Convert.IsDBNull(dataRow["TenSanPham"]) ? null : (System.String)dataRow["TenSanPham"];
-			entity.GiaTien = Convert.IsDBNull(dataRow["GiaTien"]) ? null : (System.Decimal?)dataRow["GiaTien"];
 			entity.SoLuongNhapVao = Convert.IsDBNull(dataRow["SoLuongNhapVao"]) ? null : (System.Int32?)dataRow["SoLuongNhapVao"];
 			entity.SoLuongBanRa = Convert.IsDBNull(dataRow["SoLuongBanRa"]) ? null : (System.Int32?)dataRow["SoLuongBanRa"];
 			entity.SoLuongTonKho = Convert.IsDBNull(dataRow["SoLuongTonKho"]) ? null : (System.Int32?)dataRow["SoLuongTonKho"];
 			entity.NgayNhapHang = Convert.IsDBNull(dataRow["NgayNhapHang"]) ? null : (System.DateTime?)dataRow["NgayNhapHang"];
 			entity.GhiChu = Convert.IsDBNull(dataRow["GhiChu"]) ? null : (System.String)dataRow["GhiChu"];
+			entity.GiaTien = Convert.IsDBNull(dataRow["GiaTien"]) ? null : (System.Decimal?)dataRow["GiaTien"];
 			entity.AcceptChanges();
 		}
 		#endregion 

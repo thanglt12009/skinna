@@ -4,15 +4,15 @@
 	<ItemTemplate>
 		<table border="0" cellpadding="3" cellspacing="1">
 			<tr>
-        <td class="literal"><asp:Label ID="lbldataTenSanPham" runat="server" Text="Ten San Pham:" AssociatedControlID="dataTenSanPham" /></td>
+        <td class="literal"><asp:Label ID="lbldataMaSanPham" runat="server" Text="Ma San Pham:" AssociatedControlID="dataMaSanPham" /></td>
         <td>
-					<asp:TextBox runat="server" ID="dataTenSanPham" Text='<%# Bind("TenSanPham") %>' MaxLength="100"></asp:TextBox>
+					<asp:TextBox runat="server" ID="dataMaSanPham" Text='<%# Bind("MaSanPham") %>' MaxLength="100"></asp:TextBox><asp:RequiredFieldValidator ID="ReqVal_dataMaSanPham" runat="server" Display="Dynamic" ControlToValidate="dataMaSanPham" ErrorMessage="Required"></asp:RequiredFieldValidator>
 				</td>
 			</tr>
 			<tr>
-        <td class="literal"><asp:Label ID="lbldataGiaTien" runat="server" Text="Gia Tien:" AssociatedControlID="dataGiaTien" /></td>
+        <td class="literal"><asp:Label ID="lbldataTenSanPham" runat="server" Text="Ten San Pham:" AssociatedControlID="dataTenSanPham" /></td>
         <td>
-					<asp:TextBox runat="server" ID="dataGiaTien" Text='<%# Bind("GiaTien") %>'></asp:TextBox><asp:RangeValidator ID="RangeVal_dataGiaTien" runat="server" Display="Dynamic" ControlToValidate="dataGiaTien" ErrorMessage="Invalid value" MaximumValue="999999999" MinimumValue="-999999999" Type="Double"></asp:RangeValidator>
+					<asp:TextBox runat="server" ID="dataTenSanPham" Text='<%# Bind("TenSanPham") %>' MaxLength="100"></asp:TextBox>
 				</td>
 			</tr>
 			<tr>
@@ -43,6 +43,12 @@
         <td class="literal"><asp:Label ID="lbldataGhiChu" runat="server" Text="Ghi Chu:" AssociatedControlID="dataGhiChu" /></td>
         <td>
 					<asp:TextBox runat="server" ID="dataGhiChu" Text='<%# Bind("GhiChu") %>'  TextMode="MultiLine"  Width="250px" Rows="5"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+        <td class="literal"><asp:Label ID="lbldataGiaTien" runat="server" Text="Gia Tien:" AssociatedControlID="dataGiaTien" /></td>
+        <td>
+					<asp:TextBox runat="server" ID="dataGiaTien" Text='<%# Bind("GiaTien") %>'></asp:TextBox><asp:RegularExpressionValidator ID="RegExVal_dataGiaTien"  runat="server" ControlToValidate="dataGiaTien" Display="Dynamic" ValidationExpression="^[-]?(\d{1,9})(?:[.,]\d{1,4})?$" ErrorMessage="Invalid Value" />
 				</td>
 			</tr>
 			

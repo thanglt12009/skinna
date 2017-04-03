@@ -1,184 +1,192 @@
 <NetTiersReport DALNameSpace="SkinCare.Data" SolutionLink="file:\\\C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.sln" ConnectionString="Data Source=YEC1E3KKO276MJL\SQLEXPRESS;Initial Catalog=SkinCare;User ID=sa;Password=123!@#" FactoryType="SkinCare.Entities.EntityFactory">
-  <initialization startTime="131333332495774685" executionTime="00:00:07.4967437">
-    <Message level="0" startTime="131333332495864688" message="Validating parameters." />
-    <Message level="0" startTime="131333332521293503" message="Loading templates." executionTime="00:00:02.4649117" />
-    <Message level="0" startTime="131333332545942620" message="Creating folders and copying dependencies." />
+  <initialization startTime="131356860451886737" executionTime="00:00:05.9339110">
+    <Message level="0" startTime="131356860451906727" message="Validating parameters." />
+    <Message level="0" startTime="131356860455066722" message="Loading templates." executionTime="00:00:04.1632409" />
+    <Message level="0" startTime="131356860496699131" message="Creating folders and copying dependencies." />
   </initialization>
   <customStoredProcedures includeCustoms="true">
     <customStoredProcedure name="_tblKhoHangSanPham_GetSanPhamFromLastThreeMonth" relatedEntity="tblKhoHangSanPham" relatedEntityType="table" />
   </customStoredProcedures>
-  <common startTime="131333332570742122" executionTime="00:00:29.7007123">
-    <File name="ListBase.cs" startTime="131333332570752106" />
-    <File name="TList.cs" startTime="131333332575141404" />
-    <File name="VList.cs" startTime="131333332578384545" />
-    <File name="WeakRefDictionary.cs" startTime="131333332580176396" />
-    <File name="TestUtility.cs" startTime="131333332581738802" />
-    <File name="IEntity.cs" startTime="131333332583402591" />
-    <File name="IEntityId.cs" startTime="131333332584556109" />
-    <File name="IEntityKey.cs" startTime="131333332584996174" />
-    <File name="EntityFactory.cs" startTime="131333332585717320" />
-    <File name="EntityFactoryBase.cs" startTime="131333332586127170" />
-    <File name="IEntityFactory.cs" startTime="131333332588334796" />
-    <File name="IEntityCacheItem.cs" startTime="131333332589235714" />
-    <File name="EntityCache.cs" startTime="131333332589495733" />
-    <File name="EntityLocator.cs" startTime="131333332590507716" />
-    <File name="EntityManager.cs" startTime="131333332591707915" />
-    <File name="BrokenRule.cs" startTime="131333332594270216" />
-    <File name="BrokenRulesList.cs" startTime="131333332595153823" />
-    <File name="CommonRules.cs" startTime="131333332596795979" />
-    <File name="ValidationRuleArgs.cs" startTime="131333332601525167" />
-    <File name="ValidationRuleHandler.cs" startTime="131333332602315589" />
-    <File name="ValidationRuleInfo.cs" startTime="131333332602986502" />
-    <File name="ValidationRules.cs" startTime="131333332604703740" />
-    <File name="EntityBaseCore.generated.cs" startTime="131333332606273946" />
-    <File name="EntityKeyBaseCore.generated.cs" startTime="131333332608843146" />
-    <File name="EntityFilter.cs" startTime="131333332609535030" />
-    <File name="EntityPropertyComparer.cs" startTime="131333332612996720" />
-    <File name="GenericTypeConverter.cs" startTime="131333332614538365" />
-    <File name="Procedures.xml" startTime="131333332615098264" />
-    <File name="Utility.cs" startTime="131333332670726705" />
-    <File name="ITransactionManager.cs" startTime="131333332674455524" />
-    <File name="TransactionManager.cs" startTime="131333332674828427" />
-    <File name="FileConfigurationSouce.cs" startTime="131333332676302671" />
-    <File name="FileConfigurationSouceElement.cs" startTime="131333332678188357" />
-    <File name="DataRepository.cs" startTime="131333332678628673" />
-    <File name="IEntityProvider.cs" startTime="131333332681975027" />
-    <File name="IEntityViewProvider.cs" startTime="131333332685624899" />
-    <File name="EntityProviderBaseCore.generated.cs" startTime="131333332686564891" />
-    <File name="EntityViewProviderBaseCore.generated.cs" startTime="131333332695189647" />
-    <File name="INetTiersProvider.cs" startTime="131333332698575332" />
-    <File name="NetTiersProvider.cs" startTime="131333332700722759" />
-    <File name="NetTiersProviderBase.cs" startTime="131333332701190808" />
-    <File name="NetTiersProviderCollection.cs" startTime="131333332704255471" />
-    <File name="NetTiersServiceSection.cs" startTime="131333332704555482" />
-    <File name="ExpressionParserBase.cs" startTime="131333332705068051" />
-    <File name="SqlExpressionParser.cs" startTime="131333332706480624" />
-    <File name="SqlStringBuilder.cs" startTime="131333332708683626" />
-    <File name="SqlUtil.cs" startTime="131333332716875057" />
-    <File name="StringTokenizer.cs" startTime="131333332719321823" />
-    <File name="SqlClient\SqlNetTiersProvider.cs" startTime="131333332721302814" />
-    <File name="StoredProcedureProvider.cs" startTime="131333332725791545" />
-    <File name="BaseDataSource.cs" startTime="131333332728143860" />
-    <File name="BaseDataSourceDesigner.cs" startTime="131333332735426739" />
-    <File name="CustomDataSource.cs" startTime="131333332737687671" />
-    <File name="CustomDataSourceDesigner.cs" startTime="131333332741317131" />
-    <File name="CustomParameter.cs" startTime="131333332741527157" />
-    <File name="DataParameter.cs" startTime="131333332742597378" />
-    <File name="EntityDataSource.cs" startTime="131333332743117416" />
-    <File name="EntityDataSourceFilter.cs" startTime="131333332749145147" />
-    <File name="EntityRelationship.cs" startTime="131333332750968415" />
-    <File name="EntityRelationshipMember.cs" startTime="131333332752830478" />
-    <File name="EntityTransactionModule.cs" startTime="131333332755755219" />
-    <File name="ILinkedDataSource.cs" startTime="131333332756789553" />
-    <File name="ManyToManyListRelationship.cs" startTime="131333332758122359" />
-    <File name="ManyToManyViewRelationship.cs" startTime="131333332758628348" />
-    <File name="OneToManyGridRelationship.cs" startTime="131333332759108912" />
-    <File name="OneToOneViewRelationship.cs" startTime="131333332760423580" />
-    <File name="ProviderDataSource.cs" startTime="131333332761187911" />
-    <File name="ProviderDataSourceDesigner.cs" startTime="131333332764192055" />
-    <File name="ReadOnlyDataSource.cs" startTime="131333332764998956" />
-    <File name="ReadOnlyDataSourceDesigner.cs" startTime="131333332767337644" />
-    <File name="SqlParameter.cs" startTime="131333332768464723" />
-    <File name="NguonDonHangDataSource.cs" startTime="131333332773032305" />
-    <File name="DonHangDataSource.cs" startTime="131333332777709612" />
-    <File name="PhuongThucThanhToanDataSource.cs" startTime="131333332778371419" />
-    <File name="LoaiTrangThaiDonHangDataSource.cs" startTime="131333332779170126" />
-    <File name="TrangThaiDonHangDataSource.cs" startTime="131333332780002554" />
-    <File name="DonHangChiTietDataSource.cs" startTime="131333332780685486" />
-    <File name="KhuyenMaiDataSource.cs" startTime="131333332781559275" />
-    <File name="KhachHangDataSource.cs" startTime="131333332782425788" />
-    <File name="UserDataSource.cs" startTime="131333332783026934" />
-    <File name="KhoHangSanPhamDataSource.cs" startTime="131333332783888418" />
-    <File name="FormUtilBase.generated.cs" startTime="131333332785997021" />
-    <File name="MultiBindableTemplate.cs" startTime="131333332792614808" />
-    <File name="MultiFormView.cs" startTime="131333332793274791" />
-    <File name="EntityGridView.cs" startTime="131333332794940148" />
-    <File name="EntityDropDownList.cs" startTime="131333332798897552" />
-    <File name="BoundEntityDropDownField.cs" startTime="131333332801592129" />
-    <File name="BoundRadioButtonField.cs" startTime="131333332806137844" />
-    <File name="GridViewSearchPanel.cs" startTime="131333332808074247" />
-    <File name="GridViewSearchPanelState.cs" startTime="131333332811507269" />
-    <File name="EntityLabel.cs" startTime="131333332812827325" />
-    <File name="HyperlinkField.cs" startTime="131333332814948056" />
-    <File name="NguonDonHangRepeater.cs" startTime="131333332818587842" />
-    <File name="DonHangRepeater.cs" startTime="131333332820270766" />
-    <File name="PhuongThucThanhToanRepeater.cs" startTime="131333332820928349" />
-    <File name="LoaiTrangThaiDonHangRepeater.cs" startTime="131333332821660271" />
-    <File name="TrangThaiDonHangRepeater.cs" startTime="131333332822309272" />
-    <File name="DonHangChiTietRepeater.cs" startTime="131333332823089192" />
-    <File name="KhuyenMaiRepeater.cs" startTime="131333332823797554" />
-    <File name="KhachHangRepeater.cs" startTime="131333332824516031" />
-    <File name="UserRepeater.cs" startTime="131333332825884644" />
-    <File name="KhoHangSanPhamRepeater.cs" startTime="131333332826938330" />
-    <File name="SkinCare.Entities.csproj" startTime="131333332855066905" />
-    <File name="SkinCare.Data.Data.csproj" startTime="131333332859082005" />
-    <File name="SkinCare.Entities.Data.SqlClient.csproj" startTime="131333332859141977" />
-    <File name="SkinCare.Web.csproj" startTime="131333332859171997" />
-    <File name="EntityHelper.cs" startTime="131333332859192004" />
-    <File name="EntityUtil.cs" startTime="131333332861620102" />
+  <common startTime="131356860511225847" executionTime="00:00:10.8312227">
+    <File name="ListBase.cs" startTime="131356860511235905" />
+    <File name="TList.cs" startTime="131356860514305908" />
+    <File name="VList.cs" startTime="131356860516185917" />
+    <File name="WeakRefDictionary.cs" startTime="131356860517035805" />
+    <File name="TestUtility.cs" startTime="131356860517445833" />
+    <File name="IEntity.cs" startTime="131356860517875857" />
+    <File name="IEntityId.cs" startTime="131356860518185846" />
+    <File name="IEntityKey.cs" startTime="131356860518245909" />
+    <File name="EntityFactory.cs" startTime="131356860518355834" />
+    <File name="EntityFactoryBase.cs" startTime="131356860518395832" />
+    <File name="IEntityFactory.cs" startTime="131356860519325807" />
+    <File name="IEntityCacheItem.cs" startTime="131356860519445836" />
+    <File name="EntityCache.cs" startTime="131356860519485851" />
+    <File name="EntityLocator.cs" startTime="131356860519785909" />
+    <File name="EntityManager.cs" startTime="131356860520065827" />
+    <File name="BrokenRule.cs" startTime="131356860521175836" />
+    <File name="BrokenRulesList.cs" startTime="131356860521295848" />
+    <File name="CommonRules.cs" startTime="131356860521485843" />
+    <File name="ValidationRuleArgs.cs" startTime="131356860523365875" />
+    <File name="ValidationRuleHandler.cs" startTime="131356860523515855" />
+    <File name="ValidationRuleInfo.cs" startTime="131356860523625854" />
+    <File name="ValidationRules.cs" startTime="131356860523865900" />
+    <File name="EntityBaseCore.generated.cs" startTime="131356860524305880" />
+    <File name="EntityKeyBaseCore.generated.cs" startTime="131356860525425816" />
+    <File name="EntityFilter.cs" startTime="131356860525555863" />
+    <File name="EntityPropertyComparer.cs" startTime="131356860527285846" />
+    <File name="GenericTypeConverter.cs" startTime="131356860527385833" />
+    <File name="Procedures.xml" startTime="131356860527475858" />
+    <File name="Utility.cs" startTime="131356860539794085" />
+    <File name="ITransactionManager.cs" startTime="131356860541004167" />
+    <File name="TransactionManager.cs" startTime="131356860541114166" />
+    <File name="FileConfigurationSouce.cs" startTime="131356860541624163" />
+    <File name="FileConfigurationSouceElement.cs" startTime="131356860542524107" />
+    <File name="DataRepository.cs" startTime="131356860542644147" />
+    <File name="IEntityProvider.cs" startTime="131356860543954136" />
+    <File name="IEntityViewProvider.cs" startTime="131356860546064075" />
+    <File name="EntityProviderBaseCore.generated.cs" startTime="131356860546424121" />
+    <File name="EntityViewProviderBaseCore.generated.cs" startTime="131356860552734116" />
+    <File name="INetTiersProvider.cs" startTime="131356860554724078" />
+    <File name="NetTiersProvider.cs" startTime="131356860555504067" />
+    <File name="NetTiersProviderBase.cs" startTime="131356860555584172" />
+    <File name="NetTiersProviderCollection.cs" startTime="131356860556624072" />
+    <File name="NetTiersServiceSection.cs" startTime="131356860556714138" />
+    <File name="ExpressionParserBase.cs" startTime="131356860556814181" />
+    <File name="SqlExpressionParser.cs" startTime="131356860557334089" />
+    <File name="SqlStringBuilder.cs" startTime="131356860558184153" />
+    <File name="SqlUtil.cs" startTime="131356860565014072" />
+    <File name="StringTokenizer.cs" startTime="131356860566684083" />
+    <File name="SqlClient\SqlNetTiersProvider.cs" startTime="131356860567664120" />
+    <File name="StoredProcedureProvider.cs" startTime="131356860569054105" />
+    <File name="BaseDataSource.cs" startTime="131356860569754087" />
+    <File name="BaseDataSourceDesigner.cs" startTime="131356860575064116" />
+    <File name="CustomDataSource.cs" startTime="131356860575994097" />
+    <File name="CustomDataSourceDesigner.cs" startTime="131356860577694089" />
+    <File name="CustomParameter.cs" startTime="131356860577754100" />
+    <File name="DataParameter.cs" startTime="131356860578094093" />
+    <File name="EntityDataSource.cs" startTime="131356860578284117" />
+    <File name="EntityDataSourceFilter.cs" startTime="131356860582174068" />
+    <File name="EntityRelationship.cs" startTime="131356860582774125" />
+    <File name="EntityRelationshipMember.cs" startTime="131356860583754111" />
+    <File name="EntityTransactionModule.cs" startTime="131356860585834105" />
+    <File name="ILinkedDataSource.cs" startTime="131356860586114114" />
+    <File name="ManyToManyListRelationship.cs" startTime="131356860586614100" />
+    <File name="ManyToManyViewRelationship.cs" startTime="131356860586764103" />
+    <File name="OneToManyGridRelationship.cs" startTime="131356860586914111" />
+    <File name="OneToOneViewRelationship.cs" startTime="131356860587114113" />
+    <File name="ProviderDataSource.cs" startTime="131356860587254104" />
+    <File name="ProviderDataSourceDesigner.cs" startTime="131356860588684081" />
+    <File name="ReadOnlyDataSource.cs" startTime="131356860588774113" />
+    <File name="ReadOnlyDataSourceDesigner.cs" startTime="131356860589404167" />
+    <File name="SqlParameter.cs" startTime="131356860589644105" />
+    <File name="PhuongThucThanhToanDataSource.cs" startTime="131356860591194111" />
+    <File name="DonHangDataSource.cs" startTime="131356860592374110" />
+    <File name="TinhTrangDaDataSource.cs" startTime="131356860592444105" />
+    <File name="NguonDonHangDataSource.cs" startTime="131356860592484103" />
+    <File name="TrangThaiDonHangDataSource.cs" startTime="131356860592514112" />
+    <File name="LoaiTrangThaiDonHangDataSource.cs" startTime="131356860592564099" />
+    <File name="DonHangChiTietDataSource.cs" startTime="131356860592604092" />
+    <File name="KhuyenMaiDataSource.cs" startTime="131356860592624082" />
+    <File name="KhachHangDataSource.cs" startTime="131356860592654079" />
+    <File name="UserDataSource.cs" startTime="131356860592684094" />
+    <File name="KhoHangSanPhamDataSource.cs" startTime="131356860592754123" />
+    <File name="FormUtilBase.generated.cs" startTime="131356860593154110" />
+    <File name="MultiBindableTemplate.cs" startTime="131356860597824073" />
+    <File name="MultiFormView.cs" startTime="131356860598074097" />
+    <File name="EntityGridView.cs" startTime="131356860598784136" />
+    <File name="EntityDropDownList.cs" startTime="131356860600664151" />
+    <File name="BoundEntityDropDownField.cs" startTime="131356860601984129" />
+    <File name="BoundRadioButtonField.cs" startTime="131356860602644107" />
+    <File name="GridViewSearchPanel.cs" startTime="131356860603004107" />
+    <File name="GridViewSearchPanelState.cs" startTime="131356860604534168" />
+    <File name="EntityLabel.cs" startTime="131356860604894157" />
+    <File name="HyperlinkField.cs" startTime="131356860605274114" />
+    <File name="PhuongThucThanhToanRepeater.cs" startTime="131356860606074150" />
+    <File name="DonHangRepeater.cs" startTime="131356860606824097" />
+    <File name="TinhTrangDaRepeater.cs" startTime="131356860606864112" />
+    <File name="NguonDonHangRepeater.cs" startTime="131356860606894104" />
+    <File name="TrangThaiDonHangRepeater.cs" startTime="131356860606924129" />
+    <File name="LoaiTrangThaiDonHangRepeater.cs" startTime="131356860606954138" />
+    <File name="DonHangChiTietRepeater.cs" startTime="131356860607014126" />
+    <File name="KhuyenMaiRepeater.cs" startTime="131356860607054085" />
+    <File name="KhachHangRepeater.cs" startTime="131356860607094111" />
+    <File name="UserRepeater.cs" startTime="131356860607274100" />
+    <File name="KhoHangSanPhamRepeater.cs" startTime="131356860607314127" />
+    <File name="SkinCare.Entities.csproj" startTime="131356860611494099" />
+    <File name="SkinCare.Data.Data.csproj" startTime="131356860614514149" />
+    <File name="SkinCare.Entities.Data.SqlClient.csproj" startTime="131356860614544146" />
+    <File name="SkinCare.Web.csproj" startTime="131356860614574109" />
+    <File name="EntityHelper.cs" startTime="131356860614594146" />
+    <File name="EntityUtil.cs" startTime="131356860616164102" />
   </common>
-  <Table name="tblDonHang" startTime="131333332867759274" executionTime="00:00:01.9376663">
-    <File name="DonHang.generated.cs" startTime="131333332867789334" executionTime="00:00:00.9278518" />
-    <File name="IDonHang.cs" startTime="131333332877077847" executionTime="00:00:00.1047836" />
-    <File name="DonHangProviderBase.generatedCore.cs" startTime="131333332878135844" executionTime="00:00:00.4409921" />
-    <File name="SqlClient\SqlDonHangProviderBase.generated.cs" startTime="131333332882707873" executionTime="00:00:00.4272274" />
+  <Table name="tblDonHang" startTime="131356860619548109" executionTime="00:00:01.0432824">
+    <File name="DonHang.generated.cs" startTime="131356860619568094" executionTime="00:00:00.4062869" />
+    <File name="IDonHang.cs" startTime="131356860623641130" executionTime="00:00:00.0329883" />
+    <File name="DonHangProviderBase.generatedCore.cs" startTime="131356860623980997" executionTime="00:00:00.3139901" />
+    <File name="SqlClient\SqlDonHangProviderBase.generated.cs" startTime="131356860627120898" executionTime="00:00:00.2860035" />
   </Table>
-  <Table name="tblDonHangChiTiet" startTime="131333332887145385" executionTime="00:00:00.3371009">
-    <File name="DonHangChiTiet.generated.cs" startTime="131333332887145385" executionTime="00:00:00.1302780" />
-    <File name="IDonHangChiTiet.cs" startTime="131333332888458366" executionTime="00:00:00.0490525" />
-    <File name="DonHangChiTietProviderBase.generatedCore.cs" startTime="131333332888968870" executionTime="00:00:00.0652023" />
-    <File name="SqlClient\SqlDonHangChiTietProviderBase.generated.cs" startTime="131333332889650810" executionTime="00:00:00.0855532" />
+  <Table name="tblDonHangChiTiet" startTime="131356860629980933" executionTime="00:00:00.0330031">
+    <File name="DonHangChiTiet.generated.cs" startTime="131356860629990928" executionTime="00:00:00.0200036" />
+    <File name="IDonHangChiTiet.cs" startTime="131356860630190964" executionTime="00:00:00.0019985" />
+    <File name="DonHangChiTietProviderBase.generatedCore.cs" startTime="131356860630210949" executionTime="00:00:00.0050016" />
+    <File name="SqlClient\SqlDonHangChiTietProviderBase.generated.cs" startTime="131356860630260965" executionTime="00:00:00.0049999" />
   </Table>
-  <Table name="tblKhachHang" startTime="131333332890516394" executionTime="00:00:00.4503545">
-    <File name="KhachHang.generated.cs" startTime="131333332890586338" executionTime="00:00:00.1899826" />
-    <File name="IKhachHang.cs" startTime="131333332892496057" executionTime="00:00:00.0420695" />
-    <File name="KhachHangProviderBase.generatedCore.cs" startTime="131333332892936931" executionTime="00:00:00.1035474" />
-    <File name="SqlClient\SqlKhachHangProviderBase.generated.cs" startTime="131333332893992230" executionTime="00:00:00.1017588" />
+  <Table name="tblKhachHang" startTime="131356860630310964" executionTime="00:00:00.1299925">
+    <File name="KhachHang.generated.cs" startTime="131356860630320965" executionTime="00:00:00.0589932" />
+    <File name="IKhachHang.cs" startTime="131356860630910897" executionTime="00:00:00.0160038" />
+    <File name="KhachHangProviderBase.generatedCore.cs" startTime="131356860631080913" executionTime="00:00:00.0209980" />
+    <File name="SqlClient\SqlKhachHangProviderBase.generated.cs" startTime="131356860631300968" executionTime="00:00:00.0309921" />
   </Table>
-  <Table name="tblKhoHangSanPham" startTime="131333332895029923" executionTime="00:00:00.3302918">
-    <File name="KhoHangSanPham.generated.cs" startTime="131333332895039804" executionTime="00:00:00.1327982" />
-    <File name="IKhoHangSanPham.cs" startTime="131333332896377793" executionTime="00:00:00.0230090" />
-    <File name="KhoHangSanPhamProviderBase.generatedCore.cs" startTime="131333332896617787" executionTime="00:00:00.0688873" />
-    <File name="SqlClient\SqlKhoHangSanPhamProviderBase.generated.cs" startTime="131333332897316661" executionTime="00:00:00.1006162" />
+  <Table name="tblKhoHangSanPham" startTime="131356860631610889" executionTime="00:00:00.0530000">
+    <File name="KhoHangSanPham.generated.cs" startTime="131356860631610889" executionTime="00:00:00.0249996" />
+    <File name="IKhoHangSanPham.cs" startTime="131356860631870903" executionTime="00:00:00.0009995" />
+    <File name="KhoHangSanPhamProviderBase.generatedCore.cs" startTime="131356860631890893" executionTime="00:00:00.0159982" />
+    <File name="SqlClient\SqlKhoHangSanPhamProviderBase.generated.cs" startTime="131356860632050875" executionTime="00:00:00.0090014" />
   </Table>
-  <Table name="tblKhuyenMai" startTime="131333332898332841" executionTime="00:00:00.3948897">
-    <File name="KhuyenMai.generated.cs" startTime="131333332898342904" executionTime="00:00:00.1583776" />
-    <File name="IKhuyenMai.cs" startTime="131333332899934897" executionTime="00:00:00.0200229" />
-    <File name="KhuyenMaiProviderBase.generatedCore.cs" startTime="131333332900140241" executionTime="00:00:00.0845804" />
-    <File name="SqlClient\SqlKhuyenMaiProviderBase.generated.cs" startTime="131333332901006047" executionTime="00:00:00.1002210" />
+  <Table name="tblKhuyenMai" startTime="131356860632140889" executionTime="00:00:00.0660000">
+    <File name="KhuyenMai.generated.cs" startTime="131356860632150873" executionTime="00:00:00.0460015" />
+    <File name="IKhuyenMai.cs" startTime="131356860632620901" executionTime="00:00:00.0010012" />
+    <File name="KhuyenMaiProviderBase.generatedCore.cs" startTime="131356860632640903" executionTime="00:00:00.0069995" />
+    <File name="SqlClient\SqlKhuyenMaiProviderBase.generated.cs" startTime="131356860632710898" executionTime="00:00:00.0089991" />
   </Table>
-  <Table name="tblLoaiTrangThaiDonHang" startTime="131333332902281738" executionTime="00:00:00.4176461">
-    <File name="LoaiTrangThaiDonHang.generated.cs" startTime="131333332902291961" executionTime="00:00:00.1402641" />
-    <File name="ILoaiTrangThaiDonHang.cs" startTime="131333332903704581" executionTime="00:00:00.0907851" />
-    <File name="LoaiTrangThaiDonHangProviderBase.generatedCore.cs" startTime="131333332904632599" executionTime="00:00:00.0801678" />
-    <File name="SqlClient\SqlLoaiTrangThaiDonHangProviderBase.generated.cs" startTime="131333332905458914" executionTime="00:00:00.0989296" />
+  <Table name="tblLoaiTrangThaiDonHang" startTime="131356860632800889" executionTime="00:00:00.0260094">
+    <File name="LoaiTrangThaiDonHang.generated.cs" startTime="131356860632810902" executionTime="00:00:00.0099987" />
+    <File name="ILoaiTrangThaiDonHang.cs" startTime="131356860632920901" executionTime="00:00:00.0010018" />
+    <File name="LoaiTrangThaiDonHangProviderBase.generatedCore.cs" startTime="131356860632940914" executionTime="00:00:00.0039958" />
+    <File name="SqlClient\SqlLoaiTrangThaiDonHangProviderBase.generated.cs" startTime="131356860632990896" executionTime="00:00:00.0070087" />
   </Table>
-  <Table name="tblNguonDonHang" startTime="131333332906458199" executionTime="00:00:00.3684089">
-    <File name="NguonDonHang.generated.cs" startTime="131333332906468200" executionTime="00:00:00.1147766" />
-    <File name="INguonDonHang.cs" startTime="131333332907626081" executionTime="00:00:00.0446764" />
-    <File name="NguonDonHangProviderBase.generatedCore.cs" startTime="131333332908092966" executionTime="00:00:00.0954509" />
-    <File name="SqlClient\SqlNguonDonHangProviderBase.generated.cs" startTime="131333332909298576" executionTime="00:00:00.0833608" />
+  <Table name="tblNguonDonHang" startTime="131356860633060983" executionTime="00:00:00.0259894">
+    <File name="NguonDonHang.generated.cs" startTime="131356860633070932" executionTime="00:00:00.0099970" />
+    <File name="INguonDonHang.cs" startTime="131356860633180880" executionTime="00:00:00.0010041" />
+    <File name="NguonDonHangProviderBase.generatedCore.cs" startTime="131356860633190921" executionTime="00:00:00.0079968" />
+    <File name="SqlClient\SqlNguonDonHangProviderBase.generated.cs" startTime="131356860633270889" executionTime="00:00:00.0049988" />
   </Table>
-  <Table name="tblPhuongThucThanhToan" startTime="131333332910142288" executionTime="00:00:00.3590203">
-    <File name="PhuongThucThanhToan.generated.cs" startTime="131333332910152295" executionTime="00:00:00.1050156" />
-    <File name="IPhuongThucThanhToan.cs" startTime="131333332911212515" executionTime="00:00:00.0540581" />
-    <File name="PhuongThucThanhToanProviderBase.generatedCore.cs" startTime="131333332911773069" executionTime="00:00:00.0988885" />
-    <File name="SqlClient\SqlPhuongThucThanhToanProviderBase.generated.cs" startTime="131333332912781939" executionTime="00:00:00.0940477" />
+  <Table name="tblPhuongThucThanhToan" startTime="131356860633320877" executionTime="00:00:00.0280038">
+    <File name="PhuongThucThanhToan.generated.cs" startTime="131356860633320877" executionTime="00:00:00.0160009" />
+    <File name="IPhuongThucThanhToan.cs" startTime="131356860633480886" executionTime="00:00:00.0010012" />
+    <File name="PhuongThucThanhToanProviderBase.generatedCore.cs" startTime="131356860633500917" executionTime="00:00:00.0049999" />
+    <File name="SqlClient\SqlPhuongThucThanhToanProviderBase.generated.cs" startTime="131356860633550916" executionTime="00:00:00.0049999" />
   </Table>
-  <Table name="tblTrangThaiDonHang" startTime="131333332913732491" executionTime="00:00:00.3295631">
-    <File name="TrangThaiDonHang.generated.cs" startTime="131333332913742446" executionTime="00:00:00.1184326" />
-    <File name="ITrangThaiDonHang.cs" startTime="131333332914926772" executionTime="00:00:00.0223624" />
-    <File name="TrangThaiDonHangProviderBase.generatedCore.cs" startTime="131333332915325344" executionTime="00:00:00.0697113" />
-    <File name="SqlClient\SqlTrangThaiDonHangProviderBase.generated.cs" startTime="131333332916032441" executionTime="00:00:00.0975639" />
+  <Table name="tblTinhTrangDa" startTime="131356860633600915" executionTime="00:00:00.0310007">
+    <File name="TinhTrangDa.generated.cs" startTime="131356860633610904" executionTime="00:00:00.0159987" />
+    <File name="ITinhTrangDa.cs" startTime="131356860633770891" executionTime="00:00:00.0010018" />
+    <File name="TinhTrangDaProviderBase.generatedCore.cs" startTime="131356860633790887" executionTime="00:00:00.0060012" />
+    <File name="SqlClient\SqlTinhTrangDaProviderBase.generated.cs" startTime="131356860633850899" executionTime="00:00:00.0060023" />
   </Table>
-  <Table name="tblUser" startTime="131333332917028122" executionTime="00:00:00.5953756">
-    <File name="User.generated.cs" startTime="131333332917037958" executionTime="00:00:00.1936084" />
-    <File name="IUser.cs" startTime="131333332918983917" executionTime="00:00:00.1077844" />
-    <File name="UserProviderBase.generatedCore.cs" startTime="131333332920081803" executionTime="00:00:00.1023375" />
-    <File name="SqlClient\SqlUserProviderBase.generated.cs" startTime="131333332921125203" executionTime="00:00:00.1622001" />
+  <Table name="tblTrangThaiDonHang" startTime="131356860633910922" executionTime="00:00:00.0319979">
+    <File name="TrangThaiDonHang.generated.cs" startTime="131356860633920900" executionTime="00:00:00.0179994" />
+    <File name="ITrangThaiDonHang.cs" startTime="131356860634100894" executionTime="00:00:00.0010013" />
+    <File name="TrangThaiDonHangProviderBase.generatedCore.cs" startTime="131356860634120896" executionTime="00:00:00.0039987" />
+    <File name="SqlClient\SqlTrangThaiDonHangProviderBase.generated.cs" startTime="131356860634170895" executionTime="00:00:00.0060006" />
+  </Table>
+  <Table name="tblUser" startTime="131356860634230901" executionTime="00:00:00.0319991">
+    <File name="User.generated.cs" startTime="131356860634230901" executionTime="00:00:00.0179989" />
+    <File name="IUser.cs" startTime="131356860634410890" executionTime="00:00:00.0020036" />
+    <File name="UserProviderBase.generatedCore.cs" startTime="131356860634430926" executionTime="00:00:00.0039952" />
+    <File name="SqlClient\SqlUserProviderBase.generated.cs" startTime="131356860634480908" executionTime="00:00:00.0069984" />
   </Table>
   <summary>
-    <objectCount>149</objectCount>
+    <objectCount>155</objectCount>
     <messageCount>0</messageCount>
   </summary>
 </NetTiersReport>

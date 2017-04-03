@@ -102,18 +102,18 @@ namespace SkinCare.Data.SqlClient
 		/// <summary>
 		/// 	Deletes a row from the DataSource.
 		/// </summary>
-		/// <param name="_maSanPham">. Primary Key.</param>	
+		/// <param name="_id">. Primary Key.</param>	
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
 		/// <remarks>Deletes based on primary key(s).</remarks>
 		/// <returns>Returns true if operation suceeded.</returns>
         /// <exception cref="System.Exception">The command could not be executed.</exception>
         /// <exception cref="System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
         /// <exception cref="System.Data.Common.DbException">The command could not be executed.</exception>
-		public override bool Delete(TransactionManager transactionManager, System.Int32 _maSanPham)
+		public override bool Delete(TransactionManager transactionManager, System.Int32 _id)
 		{
 			SqlDatabase database = new SqlDatabase(this._connectionString);
 			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.tblKhoHangSanPham_Delete", _useStoredProcedure);
-			database.AddInParameter(commandWrapper, "@MaSanPham", DbType.Int32, _maSanPham);
+			database.AddInParameter(commandWrapper, "@Id", DbType.Int32, _id);
 			
 			//Provider Data Requesting Command Event
 			OnDataRequesting(new CommandEventArgs(commandWrapper, "Delete")); 
@@ -133,7 +133,7 @@ namespace SkinCare.Data.SqlClient
 			if (DataRepository.Provider.EnableEntityTracking)
 			{
 				string entityKey = EntityLocator.ConstructKeyFromPkItems(typeof(KhoHangSanPham)
-					,_maSanPham);
+					,_id);
                 EntityManager.StopTracking(entityKey);
                 
 			}
@@ -175,14 +175,15 @@ namespace SkinCare.Data.SqlClient
 		
 		database.AddInParameter(commandWrapper, "@SearchUsingOR", DbType.Boolean, searchUsingOR);
 		
-		database.AddInParameter(commandWrapper, "@MaSanPham", DbType.Int32, DBNull.Value);
+		database.AddInParameter(commandWrapper, "@Id", DbType.Int32, DBNull.Value);
+		database.AddInParameter(commandWrapper, "@MaSanPham", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@TenSanPham", DbType.String, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@GiaTien", DbType.Decimal, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@SoLuongNhapVao", DbType.Int32, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@SoLuongBanRa", DbType.Int32, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@SoLuongTonKho", DbType.Int32, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@NgayNhapHang", DbType.DateTime, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@GhiChu", DbType.String, DBNull.Value);
+		database.AddInParameter(commandWrapper, "@GiaTien", DbType.Currency, DBNull.Value);
 	
 			// replace all instances of 'AND' and 'OR' because we already set searchUsingOR
 			whereClause = whereClause.Replace(" AND ", "|").Replace(" OR ", "|") ; 
@@ -197,6 +198,12 @@ namespace SkinCare.Data.SqlClient
 			char[] singleQuote = {'\''};
 	   		foreach (string clause in clauses)
 			{
+				if (clause.Trim().StartsWith("id ") || clause.Trim().StartsWith("id="))
+				{
+					database.SetParameterValue(commandWrapper, "@Id", 
+						clause.Trim().Remove(0,2).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
+					continue;
+				}
 				if (clause.Trim().StartsWith("masanpham ") || clause.Trim().StartsWith("masanpham="))
 				{
 					database.SetParameterValue(commandWrapper, "@MaSanPham", 
@@ -207,12 +214,6 @@ namespace SkinCare.Data.SqlClient
 				{
 					database.SetParameterValue(commandWrapper, "@TenSanPham", 
 						clause.Trim().Remove(0,10).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("giatien ") || clause.Trim().StartsWith("giatien="))
-				{
-					database.SetParameterValue(commandWrapper, "@GiaTien", 
-						clause.Trim().Remove(0,7).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
 					continue;
 				}
 				if (clause.Trim().StartsWith("soluongnhapvao ") || clause.Trim().StartsWith("soluongnhapvao="))
@@ -243,6 +244,12 @@ namespace SkinCare.Data.SqlClient
 				{
 					database.SetParameterValue(commandWrapper, "@GhiChu", 
 						clause.Trim().Remove(0,6).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
+					continue;
+				}
+				if (clause.Trim().StartsWith("giatien ") || clause.Trim().StartsWith("giatien="))
+				{
+					database.SetParameterValue(commandWrapper, "@GiaTien", 
+						clause.Trim().Remove(0,7).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
 					continue;
 				}
 	
@@ -519,10 +526,89 @@ namespace SkinCare.Data.SqlClient
 	
 		#region Get By Index Functions
 
-		#region GetByMaSanPham
+		#region GetById
 					
 		/// <summary>
 		/// 	Gets rows from the datasource based on the PK_tblKhoHangSanPham index.
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_id"></param>
+		/// <param name="start">Row number at which to start reading.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="count">out parameter to get total records for query.</param>
+		/// <returns>Returns an instance of the <see cref="SkinCare.Entities.KhoHangSanPham"/> class.</returns>
+		/// <remarks></remarks>
+        /// <exception cref="System.Exception">The command could not be executed.</exception>
+        /// <exception cref="System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+        /// <exception cref="System.Data.Common.DbException">The command could not be executed.</exception>
+		public override SkinCare.Entities.KhoHangSanPham GetById(TransactionManager transactionManager, System.Int32 _id, int start, int pageLength, out int count)
+		{
+			SqlDatabase database = new SqlDatabase(this._connectionString);
+			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.tblKhoHangSanPham_GetById", _useStoredProcedure);
+			
+				database.AddInParameter(commandWrapper, "@Id", DbType.Int32, _id);
+			
+			IDataReader reader = null;
+			TList<KhoHangSanPham> tmp = new TList<KhoHangSanPham>();
+			try
+			{
+				//Provider Data Requesting Command Event
+				OnDataRequesting(new CommandEventArgs(commandWrapper, "GetById", tmp)); 
+
+				if (transactionManager != null)
+				{
+					reader = Utility.ExecuteReader(transactionManager, commandWrapper);
+				}
+				else
+				{
+					reader = Utility.ExecuteReader(database, commandWrapper);
+				}		
+		
+				//Create collection and fill
+				Fill(reader, tmp, start, pageLength);
+				count = -1;
+				if(reader.NextResult())
+				{
+					if(reader.Read())
+					{
+						count = reader.GetInt32(0);
+					}
+				}
+				
+				//Provider Data Requested Command Event
+				OnDataRequested(new CommandEventArgs(commandWrapper, "GetById", tmp));
+			}
+			finally 
+			{
+				if (reader != null) 
+					reader.Close();
+					
+				commandWrapper = null;
+			}
+			
+			if (tmp.Count == 1)
+			{
+				return tmp[0];
+			}
+			else if (tmp.Count == 0)
+			{
+				return null;
+			}
+			else
+			{
+				throw new DataException("Cannot find the unique instance of the class.");
+			}
+			
+			//return rows;
+		}
+		
+		#endregion
+
+
+		#region GetByMaSanPham
+					
+		/// <summary>
+		/// 	Gets rows from the datasource based on the UQ__tblKhoHa__FAC7442C3D7BD0B1 index.
 		/// </summary>
 		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
 		/// <param name="_maSanPham"></param>
@@ -534,12 +620,12 @@ namespace SkinCare.Data.SqlClient
         /// <exception cref="System.Exception">The command could not be executed.</exception>
         /// <exception cref="System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
         /// <exception cref="System.Data.Common.DbException">The command could not be executed.</exception>
-		public override SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.Int32 _maSanPham, int start, int pageLength, out int count)
+		public override SkinCare.Entities.KhoHangSanPham GetByMaSanPham(TransactionManager transactionManager, System.String _maSanPham, int start, int pageLength, out int count)
 		{
 			SqlDatabase database = new SqlDatabase(this._connectionString);
 			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.tblKhoHangSanPham_GetByMaSanPham", _useStoredProcedure);
 			
-				database.AddInParameter(commandWrapper, "@MaSanPham", DbType.Int32, _maSanPham);
+				database.AddInParameter(commandWrapper, "@MaSanPham", DbType.String, _maSanPham);
 			
 			IDataReader reader = null;
 			TList<KhoHangSanPham> tmp = new TList<KhoHangSanPham>();
@@ -630,11 +716,11 @@ namespace SkinCare.Data.SqlClient
 			bulkCopy.DestinationTableName = "tblKhoHangSanPham";
 			
 			DataTable dataTable = new DataTable();
-			DataColumn col0 = dataTable.Columns.Add("MaSanPham", typeof(System.Int32));
+			DataColumn col0 = dataTable.Columns.Add("ID", typeof(System.Int32));
 			col0.AllowDBNull = false;		
-			DataColumn col1 = dataTable.Columns.Add("TenSanPham", typeof(System.String));
-			col1.AllowDBNull = true;		
-			DataColumn col2 = dataTable.Columns.Add("GiaTien", typeof(System.Decimal));
+			DataColumn col1 = dataTable.Columns.Add("MaSanPham", typeof(System.String));
+			col1.AllowDBNull = false;		
+			DataColumn col2 = dataTable.Columns.Add("TenSanPham", typeof(System.String));
 			col2.AllowDBNull = true;		
 			DataColumn col3 = dataTable.Columns.Add("SoLuongNhapVao", typeof(System.Int32));
 			col3.AllowDBNull = true;		
@@ -646,15 +732,18 @@ namespace SkinCare.Data.SqlClient
 			col6.AllowDBNull = true;		
 			DataColumn col7 = dataTable.Columns.Add("GhiChu", typeof(System.String));
 			col7.AllowDBNull = true;		
+			DataColumn col8 = dataTable.Columns.Add("GiaTien", typeof(System.Decimal));
+			col8.AllowDBNull = true;		
 			
+			bulkCopy.ColumnMappings.Add("ID", "ID");
 			bulkCopy.ColumnMappings.Add("MaSanPham", "MaSanPham");
 			bulkCopy.ColumnMappings.Add("TenSanPham", "TenSanPham");
-			bulkCopy.ColumnMappings.Add("GiaTien", "GiaTien");
 			bulkCopy.ColumnMappings.Add("SoLuongNhapVao", "SoLuongNhapVao");
 			bulkCopy.ColumnMappings.Add("SoLuongBanRa", "SoLuongBanRa");
 			bulkCopy.ColumnMappings.Add("SoLuongTonKho", "SoLuongTonKho");
 			bulkCopy.ColumnMappings.Add("NgayNhapHang", "NgayNhapHang");
 			bulkCopy.ColumnMappings.Add("GhiChu", "GhiChu");
+			bulkCopy.ColumnMappings.Add("GiaTien", "GiaTien");
 			
 			foreach(SkinCare.Entities.KhoHangSanPham entity in entities)
 			{
@@ -663,13 +752,13 @@ namespace SkinCare.Data.SqlClient
 					
 				DataRow row = dataTable.NewRow();
 				
+					row["ID"] = entity.Id;
+							
+				
 					row["MaSanPham"] = entity.MaSanPham;
 							
 				
 					row["TenSanPham"] = entity.TenSanPham;
-							
-				
-					row["GiaTien"] = entity.GiaTien.HasValue ? (object) entity.GiaTien  : System.DBNull.Value;
 							
 				
 					row["SoLuongNhapVao"] = entity.SoLuongNhapVao.HasValue ? (object) entity.SoLuongNhapVao  : System.DBNull.Value;
@@ -685,6 +774,9 @@ namespace SkinCare.Data.SqlClient
 							
 				
 					row["GhiChu"] = entity.GhiChu;
+							
+				
+					row["GiaTien"] = entity.GiaTien.HasValue ? (object) entity.GiaTien  : System.DBNull.Value;
 							
 				
 				dataTable.Rows.Add(row);
@@ -721,14 +813,15 @@ namespace SkinCare.Data.SqlClient
 			SqlDatabase database = new SqlDatabase(this._connectionString);
 			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.tblKhoHangSanPham_Insert", _useStoredProcedure);
 			
-			database.AddOutParameter(commandWrapper, "@MaSanPham", DbType.Int32, 4);
+			database.AddOutParameter(commandWrapper, "@Id", DbType.Int32, 4);
+            database.AddInParameter(commandWrapper, "@MaSanPham", DbType.String, entity.MaSanPham );
             database.AddInParameter(commandWrapper, "@TenSanPham", DbType.String, entity.TenSanPham );
-			database.AddInParameter(commandWrapper, "@GiaTien", DbType.Decimal, (entity.GiaTien.HasValue ? (object) entity.GiaTien  : System.DBNull.Value));
 			database.AddInParameter(commandWrapper, "@SoLuongNhapVao", DbType.Int32, (entity.SoLuongNhapVao.HasValue ? (object) entity.SoLuongNhapVao  : System.DBNull.Value));
 			database.AddInParameter(commandWrapper, "@SoLuongBanRa", DbType.Int32, (entity.SoLuongBanRa.HasValue ? (object) entity.SoLuongBanRa  : System.DBNull.Value));
 			database.AddInParameter(commandWrapper, "@SoLuongTonKho", DbType.Int32, (entity.SoLuongTonKho.HasValue ? (object) entity.SoLuongTonKho  : System.DBNull.Value));
 			database.AddInParameter(commandWrapper, "@NgayNhapHang", DbType.DateTime, (entity.NgayNhapHang.HasValue ? (object) entity.NgayNhapHang  : System.DBNull.Value));
             database.AddInParameter(commandWrapper, "@GhiChu", DbType.String, entity.GhiChu );
+			database.AddInParameter(commandWrapper, "@GiaTien", DbType.Currency, (entity.GiaTien.HasValue ? (object) entity.GiaTien  : System.DBNull.Value));
 			
 			int results = 0;
 			
@@ -744,8 +837,8 @@ namespace SkinCare.Data.SqlClient
 				results = Utility.ExecuteNonQuery(database,commandWrapper);
 			}
 					
-			object _maSanPham = database.GetParameterValue(commandWrapper, "@MaSanPham");
-			entity.MaSanPham = (System.Int32)_maSanPham;
+			object _id = database.GetParameterValue(commandWrapper, "@Id");
+			entity.Id = (System.Int32)_id;
 			
 			
 			entity.AcceptChanges();
@@ -777,14 +870,15 @@ namespace SkinCare.Data.SqlClient
 			SqlDatabase database = new SqlDatabase(this._connectionString);
 			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.tblKhoHangSanPham_Update", _useStoredProcedure);
 			
-            database.AddInParameter(commandWrapper, "@MaSanPham", DbType.Int32, entity.MaSanPham );
+            database.AddInParameter(commandWrapper, "@Id", DbType.Int32, entity.Id );
+            database.AddInParameter(commandWrapper, "@MaSanPham", DbType.String, entity.MaSanPham );
             database.AddInParameter(commandWrapper, "@TenSanPham", DbType.String, entity.TenSanPham );
-			database.AddInParameter(commandWrapper, "@GiaTien", DbType.Decimal, (entity.GiaTien.HasValue ? (object) entity.GiaTien : System.DBNull.Value) );
 			database.AddInParameter(commandWrapper, "@SoLuongNhapVao", DbType.Int32, (entity.SoLuongNhapVao.HasValue ? (object) entity.SoLuongNhapVao : System.DBNull.Value) );
 			database.AddInParameter(commandWrapper, "@SoLuongBanRa", DbType.Int32, (entity.SoLuongBanRa.HasValue ? (object) entity.SoLuongBanRa : System.DBNull.Value) );
 			database.AddInParameter(commandWrapper, "@SoLuongTonKho", DbType.Int32, (entity.SoLuongTonKho.HasValue ? (object) entity.SoLuongTonKho : System.DBNull.Value) );
 			database.AddInParameter(commandWrapper, "@NgayNhapHang", DbType.DateTime, (entity.NgayNhapHang.HasValue ? (object) entity.NgayNhapHang : System.DBNull.Value) );
             database.AddInParameter(commandWrapper, "@GhiChu", DbType.String, entity.GhiChu );
+			database.AddInParameter(commandWrapper, "@GiaTien", DbType.Currency, (entity.GiaTien.HasValue ? (object) entity.GiaTien : System.DBNull.Value) );
 			
 			int results = 0;
 			

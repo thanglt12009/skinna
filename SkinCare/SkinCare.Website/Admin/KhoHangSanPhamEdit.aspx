@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">Kho Hang San Pham - Add/Edit</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-		<data:MultiFormView ID="FormView1" DataKeyNames="MaSanPham" runat="server" DataSourceID="KhoHangSanPhamDataSource">
+		<data:MultiFormView ID="FormView1" DataKeyNames="Id" runat="server" DataSourceID="KhoHangSanPhamDataSource">
 		
 			<EditItemTemplatePaths>
 				<data:TemplatePath Path="~/Admin/UserControls/KhoHangSanPhamFields.ascx" />
@@ -25,10 +25,10 @@
 		</data:MultiFormView>
 		
 		<data:KhoHangSanPhamDataSource ID="KhoHangSanPhamDataSource" runat="server"
-			SelectMethod="GetByMaSanPham"
+			SelectMethod="GetById"
 		>
 			<Parameters>
-				<asp:QueryStringParameter Name="MaSanPham" QueryStringField="MaSanPham" Type="String" />
+				<asp:QueryStringParameter Name="Id" QueryStringField="Id" Type="String" />
 
 			</Parameters>
 		</data:KhoHangSanPhamDataSource>
