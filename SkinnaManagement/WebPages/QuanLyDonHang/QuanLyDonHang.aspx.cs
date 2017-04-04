@@ -105,11 +105,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 viewItem.TenKhachHang = khachHang.TenKhachHang;
                 string phiVanChuyenView = item.PhiVanChuyen.GetValueOrDefault().ToString("C", nfi);
                 viewItem.PhiVanChuyen = phiVanChuyenView.Substring(0, phiVanChuyenView.Length - 3);
-                viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") +  ConvertTime(item.NgayTaoDonHang.ToString());
-                string tongTienView = item.TongTienDonHang.GetValueOrDefault().ToString("C", nfi);
-                viewItem.TongTien = tongTienView.Substring(0, tongTienView.Length - 3);
+                viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") +  ConvertTime(item.NgayTaoDonHang.ToString());                
+                viewItem.TongTien = item.TongTienDonHang.GetValueOrDefault().ToString();
                 viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;
-                viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan;
+                viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan ?? string.Empty;
                 viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                 id++;

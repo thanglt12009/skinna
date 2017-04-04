@@ -4,6 +4,8 @@ using SkinCare.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -36,13 +38,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            //if (ChietKhau.Checked)
-            //    divChietKhau.Visible = true;
-            //if (PhiGiaoHang.Checked)
-            //    divGiaoHang.Visible = true;
+        {           
             if (!this.IsPostBack)
             {
+                TiLeChietKhau.Attributes.Add("readonly", "readonly");
                 ErrorMessage.InnerText = string.Empty;
                 TList<PhuongThucThanhToan> thanhToanList = DataRepository.PhuongThucThanhToanProvider.GetAll();
                 if (thanhToanList != null && thanhToanList.Count > 0)
@@ -72,8 +71,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 dt.Columns.Add(new DataColumn("MaSanPham", typeof(string)));
                 dt.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
                 dt.Columns.Add(new DataColumn("DonGia", typeof(string)));
+                dt.Columns.Add(new DataColumn("DonGiaView", typeof(string)));
                 dt.Columns.Add(new DataColumn("SoLuong", typeof(string)));
                 dt.Columns.Add(new DataColumn("ThanhTien", typeof(string)));
+                dt.Columns.Add(new DataColumn("ThanhTienView", typeof(string)));
                 ItemList = dt;
                 gvProducts.DataSource = ItemList;
                 gvProducts.DataBind();
@@ -151,7 +152,10 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     rdbFemale.Checked = true;
                 DOB.Value = khachHang.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");                
                 LuuY.Value = khachHang.Luuy;
-                AnhChup.ImageUrl = khachHang.ImageLink;
+                if (File.Exists(Server.MapPath(khachHang.ImageLink)))
+                    AnhChup.ImageUrl = khachHang.ImageLink;
+                else
+                    AnhChup.ImageUrl = @"~\Images\profile-pictures.png";
                 CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
                 cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
                 CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
@@ -175,31 +179,53 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         protected void SanPham_SelectedIndexChanged(object sender, EventArgs e)
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";
             if (SanPham.SelectedIndex != -1)
             {
                 KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(int.Parse(SanPham.SelectedValue));
                 if (sanPham != null)
-                    DonGia.Value = sanPham.GiaTien.ToString();
+                {
+                    string giaTienView = sanPham.GiaTien.GetValueOrDefault().ToString("C", nfi);
+                    DonGia.Value = giaTienView.Substring(0, giaTienView.Length - 3);
+                }
             }
 
         }
 
         protected void TinhTongTien()
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";
             decimal tongtien = 0;
             DataTable itemList = ItemList;
             foreach (DataRow dr in ItemList.Rows)
             {
                 tongtien += decimal.Parse(dr["ThanhTien"].ToString());
             }
-            lblTotalCredits.Text = tongtien.ToString();
+            string tongTienView = tongtien.ToString("C", nfi);
+            lblTotalCredits.Text = tongTienView.Substring(0, tongTienView.Length - 3);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.CurrencyDecimalSeparator = ",";
+            nfi.CurrencyGroupSeparator = ".";
+            nfi.CurrencySymbol = "";            
             int soLuong = 0;
             if (SanPham.SelectedIndex != -1 && !string.IsNullOrEmpty(DonGia.Value) && int.TryParse(SoLuong.Value, out soLuong))
             {
+                string donGiaView = string.Empty;
+                KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(int.Parse(SanPham.SelectedValue));
+                if (sanPham != null)
+                {
+                    donGiaView = sanPham.GiaTien.GetValueOrDefault().ToString("C", nfi);
+                }
                 DataTable itemList = ItemList;
                 if (btnAdd.Text == "Sửa Sản Phẩm")
                 {
@@ -209,9 +235,12 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         {
                             dr["MaSanPham"] = SanPham.SelectedValue;
                             dr["TenSanPham"] = SanPham.SelectedItem.Text;
-                            dr["DonGia"] = DonGia.Value;
+                            dr["DonGia"] = sanPham.GiaTien.GetValueOrDefault();
+                            dr["DonGiaView"] = donGiaView.Substring(0, donGiaView.Length - 3);
                             dr["SoLuong"] = SoLuong.Value;
-                            dr["ThanhTien"] = (decimal.Parse(DonGia.Value) * soLuong).ToString();                           
+                            dr["ThanhTien"] = (sanPham.GiaTien.GetValueOrDefault() * soLuong).ToString();
+                            string thanhTienView = decimal.Parse(dr["ThanhTien"].ToString()).ToString("C", nfi);
+                            dr["ThanhTienView"] = thanhTienView.Substring(0, thanhTienView.Length - 3); 
                         }
                     }
                 }
@@ -221,9 +250,12 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     dr = itemList.NewRow();
                     dr["MaSanPham"] = SanPham.SelectedValue;
                     dr["TenSanPham"] = SanPham.SelectedItem.Text;
-                    dr["DonGia"] = DonGia.Value;
+                    dr["DonGia"] = sanPham.GiaTien.GetValueOrDefault();
+                    dr["DonGiaView"] = donGiaView.Substring(0, donGiaView.Length - 3);
                     dr["SoLuong"] = SoLuong.Value;
-                    dr["ThanhTien"] = (decimal.Parse(DonGia.Value) * soLuong).ToString();
+                    dr["ThanhTien"] = (sanPham.GiaTien.GetValueOrDefault() * soLuong).ToString();
+                    string thanhTienView = decimal.Parse(dr["ThanhTien"].ToString()).ToString("C", nfi);
+                    dr["ThanhTienView"] = thanhTienView.Substring(0, thanhTienView.Length - 3); ;
                     itemList.Rows.Add(dr);
                 }
                 ItemList = itemList;
@@ -276,7 +308,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         {
                             SanPham.SelectedIndex = int.Parse(MaSanPham);
                             SoLuong.Value = row["SoLuong"].ToString();
-                            DonGia.Value = row["DonGia"].ToString();
+                            DonGia.Value = row["DonGiaView"].ToString();
                             btnAdd.Text = "Sửa Sản Phẩm";
                             SelectedItem = row["MaSanPham"].ToString();
                         }
@@ -306,6 +338,37 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 TinhTongTien();
             }
         }
-        
+
+        protected void rbTienChietKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbTienChietKhau.Checked)
+            {
+                TiLeChietKhau.Attributes.Add("readonly", "readonly");
+                SoTienChietKhau.Attributes.Remove("readonly");
+                TiLeChietKhau.Text = string.Empty;
+            }
+            else
+            {
+                SoTienChietKhau.Attributes.Add("readonly", "readonly");
+                TiLeChietKhau.Attributes.Remove("readonly");
+                SoTienChietKhau.Text = string.Empty;              
+            }
+        }
+
+        protected void rbTiLeChietKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbTiLeChietKhau.Checked)
+            {
+                SoTienChietKhau.Attributes.Add("readonly", "readonly");
+                TiLeChietKhau.Attributes.Remove("readonly");
+                SoTienChietKhau.Text = string.Empty;
+            }
+            else
+            {
+                TiLeChietKhau.Attributes.Add("readonly", "readonly");
+                TiLeChietKhau.Text = string.Empty;
+                SoTienChietKhau.Attributes.Remove("readonly");
+            }
+        }
     }
 }

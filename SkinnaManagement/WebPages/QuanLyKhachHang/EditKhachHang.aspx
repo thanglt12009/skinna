@@ -94,7 +94,7 @@
                                     <input id="Diachi" runat="server" class="form-control" placeholder="" />
                                      <asp:RequiredFieldValidator CssClass="error" ControlToValidate="Diachi" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>                              
-                                <asp:Button ID="btnSubmit" causesvalidation="false" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Khách hàng" />                                    
+                                <asp:Button ID="btnSubmit" causesvalidation="true" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Khách hàng" />                                    
                                 <button type="reset" id="btnReset" causesvalidation="false" runat="server" onserverclick="btnReset_ServerClick" class="btn btn-default">Quay Về</button>
                             </div>
                             <div class="col-md-6">

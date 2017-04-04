@@ -85,6 +85,15 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divChietKhau;
         
         /// <summary>
+        /// rbTienChietKhau control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbTienChietKhau;
+        
+        /// <summary>
         /// SoTienChietKhau control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SoTienChietKhau;
+        
+        /// <summary>
+        /// rbTiLeChietKhau control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbTiLeChietKhau;
         
         /// <summary>
         /// TiLeChietKhau control.

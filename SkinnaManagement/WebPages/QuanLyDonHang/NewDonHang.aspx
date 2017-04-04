@@ -4,7 +4,13 @@
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript">       
+    <script type="text/javascript">
+        function pageLoad() {
+             $("#head_SoDienThoai").focusout(function (e) {
+                e.preventDefault();
+                __doPostBack('<%=btnSoDienThoai.UniqueID%>', "");
+            });
+        }
         $(document).ready(function () {
             $('#head_ChietKhau').change(function () {
                 if ($(this).is(":checked")) {
@@ -21,15 +27,14 @@
                 else {
                     $('#divGiaoHang').hide();
                 }
-            });            
-            $("#SoDienThoai").keydown(function (e) {
+            });
+            $("#<%=SoDienThoai.ClientID%>").keypress(function (e) {
                 var code = e.keyCode || e.which;
-                if(code === 9 || code === 13)
-                {
+                if (code === 13) {
                     e.preventDefault();
                     __doPostBack('<%=btnSoDienThoai.UniqueID%>', "");
                 }
-            });            
+            });           
         });
     </script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -55,15 +60,15 @@
             <div class="col-lg-12">
                 <form role="form" runat="server">
                     <asp:ScriptManager ID="ScriptManager1" runat="server" />
-                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
-                                    <contenttemplate>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <contenttemplate>
                     <label id="ErrorMessage" runat="server" class="error"></label>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Số Điện thoại<span style="color: red">*</span></label>
-                                    <asp:TextBox id="SoDienThoai" clientidmode="Static" class="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox id="SoDienThoai"  class="form-control" runat="server"></asp:TextBox>
                                     <asp:Button ID="btnSoDienThoai" causesvalidation="false" runat="server" style="display: none" onclick="btnSoDienThoai_Click" />
                                     <asp:RequiredFieldValidator CssClass="error" ControlToValidate="SoDienThoai" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
@@ -78,21 +83,19 @@
                                     </select>
                                     <asp:RequiredFieldValidator InitialValue="0" CssClass="error" ControlToValidate="ThanhToan" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
-                                <div class="form-group">
-                                    <%--<asp:CheckBox id="ChietKhau" runat="server" Text="Chiết khấu"></asp:CheckBox>--%>
+                                <div class="form-group">                                    
                                     <div id="divChietKhau" runat="server">
                                         <div class="form-group">
-                                            <label>Số tiền chiết khấu</label>
-                                            <asp:TextBox id="SoTienChietKhau" class="form-control" runat="server"></asp:TextBox>
+                                           <asp:RadioButton GroupName="ChietKhau" id="rbTienChietKhau" Checked="true" runat="server" Text="Số tiền chiết khấu" AutoPostBack="true" OnCheckedChanged="rbTienChietKhau_CheckedChanged" />
+                                           <asp:TextBox id="SoTienChietKhau" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
-                                            <label>Tỉ lệ chiết khấu</label>
+                                            <asp:RadioButton GroupName="ChietKhau" id="rbTiLeChietKhau" runat="server" Text="Tỉ lệ chiết khấu" AutoPostBack="true" OnCheckedChanged="rbTiLeChietKhau_CheckedChanged" />                                           
                                             <asp:TextBox id="TiLeChietKhau" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <%--<asp:CheckBox id="PhiGiaoHang" runat="server" Text="Phí giao hàng"></asp:CheckBox>--%>
+                                <div class="form-group">                               
                                     <div id="divGiaoHang" runat="server">
                                         <div class="form-group">
                                             <label>Số tiền phí giao hàng</label>
@@ -154,9 +157,11 @@
                                         <columns>                
                                             <asp:BoundField ItemStyle-Width="150px" DataField="MaSanPham" Visible="false" />                                                               
                                             <asp:BoundField ItemStyle-Width="150px" DataField="TenSanPham" HeaderText="Tên sản phẩm" />
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGiaView" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" Visible="false" /> 
                                             <asp:BoundField ItemStyle-Width="150px" DataField="SoLuong" HeaderText="Số lượng" /> 
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTien" HeaderText="Thành tiền" />         
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTienView" HeaderText="Thành tiền" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTien" Visible="false" />      
                                             <asp:TemplateField>
                                                  <ItemTemplate>
                                                     <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtEdit" causesvalidation="false" runat="server" ID="lbtEdit" Text="Sửa"></asp:LinkButton>
@@ -177,13 +182,13 @@
                                      <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:Button ID="btnSubmit" causesvalidation="false" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Tạo Đơn hàng" />                                    
+                                    <asp:Button ID="btnSubmit" causesvalidation="true" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Tạo Đơn hàng" />                                    
                                     <button type="reset" runat="server" causesvalidation="false" id="btnReset" onserverclick="btnReset_ServerClick" class="btn btn-default">Quay Về</button>
                                 </div>
                             </div>
                         </div>
                         </contenttemplate>
-                                </asp:UpdatePanel> 
+                    </asp:UpdatePanel>
                 </form>
             </div>
 
