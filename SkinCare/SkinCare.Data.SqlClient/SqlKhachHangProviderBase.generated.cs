@@ -924,6 +924,47 @@ namespace SkinCare.Data.SqlClient
 		
 		#region Custom Methods
 	
+
+		#region _tblKhachHang_GetLastId
+					
+		/// <summary>
+		///	This method wraps the '_tblKhachHang_GetLastId' stored procedure. 
+		/// </summary>	
+		/// <param name="start">Row number at which to start reading.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object.</param>
+		/// <remark>This method is generated from a stored procedure.</remark>
+		/// <returns>A <see cref="DataSet"/> instance.</returns>
+		public override DataSet GetLastId(TransactionManager transactionManager, int start, int pageLength )
+		{
+			SqlDatabase database = new SqlDatabase(this._connectionString);
+			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo._tblKhachHang_GetLastId", true);
+			
+	
+			
+			DataSet ds = null;
+			
+			//Provider Data Requesting Command Event
+			OnDataRequesting(new CommandEventArgs(commandWrapper, "GetLastId", (IEntity)null));
+
+			if (transactionManager != null)
+			{	
+				ds = Utility.ExecuteDataSet(transactionManager, commandWrapper);
+			}
+			else
+			{
+				ds = Utility.ExecuteDataSet(database, commandWrapper);
+			}
+			
+			//Provider Data Requested Command Event
+			OnDataRequested(new CommandEventArgs(commandWrapper, "GetLastId", (IEntity)null));
+
+			
+
+			
+			return ds;	
+		}
+		#endregion
 		#endregion
 	}//end class
 } // end namespace

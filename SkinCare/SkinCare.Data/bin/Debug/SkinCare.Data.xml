@@ -556,6 +556,40 @@
             <param name="count">The total number of records.</param>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.KhachHang"/> class.</returns>
         </member>
+        <member name="M:SkinCare.Data.Bases.KhachHangProviderBaseCore.GetLastId">
+            <summary>
+            This method wrap the '_tblKhachHang_GetLastId' stored procedure. 
+            </summary>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhachHangProviderBaseCore.GetLastId(System.Int32,System.Int32)">
+            <summary>
+            This method wrap the '_tblKhachHang_GetLastId' stored procedure. 
+            </summary>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhachHangProviderBaseCore.GetLastId(SkinCare.Data.TransactionManager)">
+            <summary>
+            This method wrap the '_tblKhachHang_GetLastId' stored procedure. 
+            </summary>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.KhachHangProviderBaseCore.GetLastId(SkinCare.Data.TransactionManager,System.Int32,System.Int32)">
+            <summary>
+            This method wrap the '_tblKhachHang_GetLastId' stored procedure. 
+            </summary>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
         <member name="M:SkinCare.Data.Bases.KhachHangProviderBaseCore.Fill(System.Data.IDataReader,SkinCare.Entities.TList{SkinCare.Entities.KhachHang},System.Int32,System.Int32)">
             <summary>
             Fill a TList&lt;KhachHang&gt; From a DataReader.

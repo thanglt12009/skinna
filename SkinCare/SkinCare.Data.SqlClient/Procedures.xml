@@ -3125,6 +3125,29 @@
 			]]></body>
 		</procedure>
 		
+				
+		<procedure owner="dbo" name="_tblKhachHang_GetLastId"  skip="true">
+			<comment><![CDATA[-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+]]></comment>
+			<parameters>
+			</parameters>
+			<body><![CDATA[
+				
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT TOP 1 MaKhachHang from tblKhachHang
+END
+
+			]]></body>
+					</procedure>
 		
 		<procedure owner="dbo" name="tblUser_Get_List" >
 			<comment><![CDATA[/*
