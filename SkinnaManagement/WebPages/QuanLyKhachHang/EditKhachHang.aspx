@@ -58,6 +58,30 @@
                                  <div class="form-group">
                                     <label>Tình trạng da</label>
                                     <asp:TextBox id="TinhTrangDa" class="form-control" TextMode="multiline" Rows="5" runat="server" />
+                                       <asp:Button ID="btnAdd" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnAdd_Click" Text="Thêm" ValidationGroup="DetailGroup" />
+                                    <asp:Button ID="btnCancel" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnCancel_Click" Text="Hủy" ValidationGroup="DetailGroup" />                            
+                                   <asp:Gridview ID="gvTinhTrang" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowCommand="gvTinhTrang_RowCommand" >
+                                        <columns>                
+                                            <%--<asp:BoundField ItemStyle-Width="150px" DataField="ID" Visible="false" />     --%>                                                          
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="Ngay" HeaderText="Ngày" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="TinhTrang" HeaderText="Tình trạng da" />                                                
+                                            <asp:TemplateField>
+                                                 <ItemTemplate>
+                                                    <asp:LinkButton CommandArgument='<%#Eval("SoThuTu")%>' CommandName="lbtEdit" causesvalidation="false" runat="server" ID="lbtEdit" Text="Sửa"></asp:LinkButton>
+                                                 </ItemTemplate>
+                                                 <ItemStyle/>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                 <ItemTemplate>
+                                                     <asp:LinkButton CommandArgument='<%#Eval("SoThuTu")%>' CommandName="lbtRemove"  causesvalidation="false" runat="server" ID="lbtRemove" Text="Xóa"></asp:LinkButton>
+                                                 </ItemTemplate>
+                                                <ItemStyle/>
+                                            </asp:TemplateField>                                                         
+                                        </columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <RowStyle HorizontalAlign="Center" />
+                                    </asp:Gridview>
                                 </div>
                                 <div class="form-group">
                                     <label>Email <span style="color: red">*</span></label>
@@ -70,8 +94,7 @@
                                     <input id="Diachi" runat="server" class="form-control" placeholder="" />
                                      <asp:RequiredFieldValidator CssClass="error" ControlToValidate="Diachi" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>                              
-                                
-                                <button type="submit" runat="server" id="btnSubmit" onserverclick="btnSubmit_ServerClick" class="btn btn-primary">Sửa Khách hàng</button>
+                                <asp:Button ID="btnSubmit" causesvalidation="false" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Khách hàng" />                                    
                                 <button type="reset" id="btnReset" causesvalidation="false" runat="server" onserverclick="btnReset_ServerClick" class="btn btn-default">Quay Về</button>
                             </div>
                             <div class="col-md-6">

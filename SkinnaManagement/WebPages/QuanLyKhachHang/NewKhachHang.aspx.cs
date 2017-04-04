@@ -47,10 +47,10 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             }
             if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
             {
-                int total = 0;
-                DataRepository.KhachHangProvider.GetTotalItems("", out total);
-                FileUpload1.SaveAs(Server.MapPath("~/Images/") + (total + 1) + ".jpg");
-                AnhChup.ImageUrl = "~/Images/" + (total + 1) + ".jpg";
+                DataSet ds = DataRepository.KhachHangProvider.GetLastId();
+                int total = Convert.ToInt32(ds.Tables[0].Rows[0][0]) + 1;
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + total + ".jpg");
+                AnhChup.ImageUrl = "~/Images/" + total + ".jpg";
             }
         }
 

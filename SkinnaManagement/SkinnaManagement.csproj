@@ -75,15 +75,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\W10-PRO\Downloads\Skinna Project ASPNET\Skinna Project ASPNET\SkinnaManagement\SkinnaManagement\bin\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Data, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Data, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Data.SqlClient, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Data.SqlClient, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Data.SqlClient.dll</HintPath>
     </Reference>
-    <Reference Include="SkinCare.Entities, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SkinCare.Entities, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Website\Bin\SkinCare.Entities.dll</HintPath>
     </Reference>
