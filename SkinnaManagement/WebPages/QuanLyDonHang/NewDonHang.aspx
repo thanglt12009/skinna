@@ -115,7 +115,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tình trạng da</label>
-                                    <textarea id="TinhTrangDa" runat="server" class="form-control" rows="5" readonly placeholder="" />
+                                     <asp:Gridview ID="gvTinhTrang" runat="server" ShowFooter="true" AutoGenerateColumns="false">
+                                        <columns>                
+                                            <%--<asp:BoundField ItemStyle-Width="150px" DataField="ID" Visible="false" />     --%>                                                          
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="Ngay" HeaderText="Ngày" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="TinhTrang" HeaderText="Tình trạng da" />                                                                                               
+                                        </columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <RowStyle HorizontalAlign="Center" />
+                                    </asp:Gridview>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -157,7 +166,9 @@
                                         <columns>                
                                             <asp:BoundField ItemStyle-Width="150px" DataField="MaSanPham" Visible="false" />                                                               
                                             <asp:BoundField ItemStyle-Width="150px" DataField="TenSanPham" HeaderText="Tên sản phẩm" />
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGiaView" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGiaView" HeaderText="Giá bán" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="TienChietKhau" HeaderText="Số tiền chiết khấu" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="TiLeChietKhau" HeaderText="Tỉ lệ chiết khấu" />
                                             <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" Visible="false" /> 
                                             <asp:BoundField ItemStyle-Width="150px" DataField="SoLuong" HeaderText="Số lượng" /> 
                                             <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTienView" HeaderText="Thành tiền" />
@@ -178,8 +189,14 @@
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <RowStyle HorizontalAlign="Center" />
                                     </asp:Gridview>
-                                     <asp:Label ID="Label2" runat="server" Text="Tổng tiền" Font-Bold="true"></asp:Label>: 
+                                     <asp:Label ID="Label2" runat="server" Text="Tổng tiền:" Font-Bold="true"></asp:Label>                               
                                      <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="Label1" runat="server" Text="Phí ship:" Font-Bold="true"></asp:Label>
+                                     <asp:Label ID="lblPhiShip" runat="server" Font-Bold="true"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="Label3" runat="server" Text="Thanh toán:" Font-Bold="true"></asp:Label>
+                                     <asp:Label ID="lblThanhToan" runat="server" Font-Bold="true"></asp:Label>
                                 </div>
                                 <div class="col-md-6">
                                     <asp:Button ID="btnSubmit" causesvalidation="true" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Tạo Đơn hàng" />                                    

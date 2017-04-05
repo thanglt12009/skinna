@@ -36,7 +36,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 else return null;
             }
         }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {           
             if (!this.IsPostBack)
@@ -72,6 +72,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 dt.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
                 dt.Columns.Add(new DataColumn("DonGia", typeof(string)));
                 dt.Columns.Add(new DataColumn("DonGiaView", typeof(string)));
+                dt.Columns.Add(new DataColumn("TienChietKhau", typeof(string)));
+                dt.Columns.Add(new DataColumn("TiLeChietKhau", typeof(string)));
                 dt.Columns.Add(new DataColumn("SoLuong", typeof(string)));
                 dt.Columns.Add(new DataColumn("ThanhTien", typeof(string)));
                 dt.Columns.Add(new DataColumn("ThanhTienView", typeof(string)));
@@ -103,7 +105,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             decimal.TryParse(SoTienChietKhau.Text, out tienChietKhau);
             float.TryParse(TiLeChietKhau.Text, out tiLeChietKhau);
             decimal.TryParse(TienGiaoHang.Text, out phiGiaoHang);
-            decimal.TryParse(lblTotalCredits.Text, out tongtien);
+            decimal.TryParse(lblThanhToan.Text, out tongtien);
             newDonHang.TienChietKhau = tienChietKhau;
             newDonHang.TiLeChietKhau = tiLeChietKhau;
             newDonHang.TongTienDonHang = tongtien;
@@ -169,6 +171,29 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
                 cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
                 SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
+                TinhTrangDaParameterBuilder query1 = new TinhTrangDaParameterBuilder();
+                query1.Append(TinhTrangDaColumn.MaKhachHang, khachHang.MaKhachHang.ToString());
+                TList<TinhTrangDa> item = DataRepository.TinhTrangDaProvider.Find(query1.GetParameters());
+                DataTable dt = new DataTable();
+                DataRow dr = null;
+                dt.Columns.Add(new DataColumn("SoThuTu", typeof(string)));
+                dt.Columns.Add(new DataColumn("Ngay", typeof(string)));
+                dt.Columns.Add(new DataColumn("TinhTrang", typeof(string)));
+                int stt = 1;
+                if (item != null && item.Count > 0)
+                {
+                    foreach (var tinhTrang in item)
+                    {
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = tinhTrang.Ngay.GetValueOrDefault().ToString("dd/MM/yyyy");
+                        dr["TinhTrang"] = tinhTrang.TinhTrang;
+                        dt.Rows.Add(dr);
+                        stt++;
+                    }
+                }
+                gvTinhTrang.DataSource = dt;
+                gvTinhTrang.DataBind();
                 ErrorMessage.InnerText = "";
             }
             else
@@ -201,14 +226,25 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             nfi.CurrencyDecimalSeparator = ",";
             nfi.CurrencyGroupSeparator = ".";
             nfi.CurrencySymbol = "";
-            decimal tongtien = 0;
+            decimal tongTien = 0;
+            decimal phiShip = 0;
+            decimal thanhToan = 0;
+            if(!string.IsNullOrEmpty(TienGiaoHang.Text))
+            {
+                phiShip = decimal.Parse(TienGiaoHang.Text);
+            }
             DataTable itemList = ItemList;
             foreach (DataRow dr in ItemList.Rows)
             {
-                tongtien += decimal.Parse(dr["ThanhTien"].ToString());
+                tongTien += decimal.Parse(dr["ThanhTien"].ToString());
             }
-            string tongTienView = tongtien.ToString("C", nfi);
+            thanhToan = phiShip + tongTien;
+            string tongTienView = tongTien.ToString("C", nfi);
+            string phiShipView = phiShip.ToString("C", nfi);
+            string thanhToanView = thanhToan.ToString("C", nfi);
             lblTotalCredits.Text = tongTienView.Substring(0, tongTienView.Length - 3);
+            lblPhiShip.Text = phiShipView.Substring(0, phiShipView.Length - 3);
+            lblThanhToan.Text = thanhToanView.Substring(0, thanhToanView.Length - 3);
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -226,6 +262,9 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 {
                     donGiaView = sanPham.GiaTien.GetValueOrDefault().ToString("C", nfi);
                 }
+                string tienChietKhauView = "0.00";
+                if (!string.IsNullOrEmpty(SoTienChietKhau.Text))
+                    tienChietKhauView = decimal.Parse(SoTienChietKhau.Text).ToString("C", nfi);
                 DataTable itemList = ItemList;
                 if (btnAdd.Text == "Sửa Sản Phẩm")
                 {
@@ -237,8 +276,21 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                             dr["TenSanPham"] = SanPham.SelectedItem.Text;
                             dr["DonGia"] = sanPham.GiaTien.GetValueOrDefault();
                             dr["DonGiaView"] = donGiaView.Substring(0, donGiaView.Length - 3);
+                            dr["TienChietKhau"] = !rbTienChietKhau.Checked ? "0" : tienChietKhauView.Substring(0, tienChietKhauView.Length - 3);
+                            string tiLeChietKhau = string.IsNullOrEmpty(TiLeChietKhau.Text) ? "0" : TiLeChietKhau.Text;
+                            dr["TiLeChietKhau"] = !rbTiLeChietKhau.Checked ? "0" : tiLeChietKhau;
                             dr["SoLuong"] = SoLuong.Value;
-                            dr["ThanhTien"] = (sanPham.GiaTien.GetValueOrDefault() * soLuong).ToString();
+                            decimal thanhTien = sanPham.GiaTien.GetValueOrDefault() * soLuong;
+                            if(rbTienChietKhau.Checked)
+                            {
+                                string tienChietKhau = string.IsNullOrEmpty(SoTienChietKhau.Text) ? "0" : SoTienChietKhau.Text;
+                                thanhTien = thanhTien - decimal.Parse(tienChietKhau);
+                            }
+                            else
+                            {                               
+                                thanhTien = thanhTien - (thanhTien * decimal.Parse(tiLeChietKhau) / 100);
+                            }
+                            dr["ThanhTien"] = thanhTien.ToString();
                             string thanhTienView = decimal.Parse(dr["ThanhTien"].ToString()).ToString("C", nfi);
                             dr["ThanhTienView"] = thanhTienView.Substring(0, thanhTienView.Length - 3); 
                         }
@@ -252,10 +304,23 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     dr["TenSanPham"] = SanPham.SelectedItem.Text;
                     dr["DonGia"] = sanPham.GiaTien.GetValueOrDefault();
                     dr["DonGiaView"] = donGiaView.Substring(0, donGiaView.Length - 3);
+                    dr["TienChietKhau"] = !rbTienChietKhau.Checked ? "0" : tienChietKhauView.Substring(0, tienChietKhauView.Length - 3);
+                    string tiLeChietKhau = string.IsNullOrEmpty(TiLeChietKhau.Text) ? "0" : TiLeChietKhau.Text;
+                    dr["TiLeChietKhau"] = !rbTiLeChietKhau.Checked ? "0" : tiLeChietKhau;
                     dr["SoLuong"] = SoLuong.Value;
-                    dr["ThanhTien"] = (sanPham.GiaTien.GetValueOrDefault() * soLuong).ToString();
+                    decimal thanhTien = sanPham.GiaTien.GetValueOrDefault() * soLuong;
+                    if (rbTienChietKhau.Checked)
+                    {
+                        string tienChietKhau = string.IsNullOrEmpty(SoTienChietKhau.Text) ? "0" : SoTienChietKhau.Text;
+                        thanhTien = thanhTien - decimal.Parse(tienChietKhau);
+                    }
+                    else
+                    {                        
+                        thanhTien = thanhTien - (thanhTien * decimal.Parse(tiLeChietKhau) / 100);
+                    }
+                    dr["ThanhTien"] = thanhTien.ToString();
                     string thanhTienView = decimal.Parse(dr["ThanhTien"].ToString()).ToString("C", nfi);
-                    dr["ThanhTienView"] = thanhTienView.Substring(0, thanhTienView.Length - 3); ;
+                    dr["ThanhTienView"] = thanhTienView.Substring(0, thanhTienView.Length - 3); 
                     itemList.Rows.Add(dr);
                 }
                 ItemList = itemList;
@@ -306,7 +371,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     {
                         if (row["MaSanPham"].ToString() == MaSanPham)
                         {
-                            SanPham.SelectedIndex = int.Parse(MaSanPham);
+                            SanPham.SelectedValue = MaSanPham.ToString();
                             SoLuong.Value = row["SoLuong"].ToString();
                             DonGia.Value = row["DonGiaView"].ToString();
                             btnAdd.Text = "Sửa Sản Phẩm";
