@@ -116,8 +116,7 @@
                                 <div class="form-group">
                                     <label>Tình trạng da</label>
                                      <asp:Gridview ID="gvTinhTrang" runat="server" ShowFooter="true" AutoGenerateColumns="false">
-                                        <columns>                
-                                            <%--<asp:BoundField ItemStyle-Width="150px" DataField="ID" Visible="false" />     --%>                                                          
+                                        <columns>                               
                                             <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />
                                             <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="Ngay" HeaderText="Ngày" /> 
                                             <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="TinhTrang" HeaderText="Tình trạng da" />                                                                                               

@@ -6,22 +6,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#head_ChietKhau').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#divChietKhau').show();
-                }
-                else {
-                    $('#divChietKhau').hide();
-                }
-            });
-            $('#head_PhiGiaoHang').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#divGiaoHang').show();
-                }
-                else {
-                    $('#divGiaoHang').hide();
-                }
-            });
+          
         });
     </script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -68,21 +53,19 @@
                                     </select>
                                     <asp:RequiredFieldValidator InitialValue="0" CssClass="error" ControlToValidate="ThanhToan" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </div>
-                                <div class="form-group">
-                                    <%--<asp:CheckBox id="ChietKhau" runat="server" Text="Chiết khấu"></asp:CheckBox>--%>
+                               <div class="form-group">                                    
                                     <div id="divChietKhau" runat="server">
                                         <div class="form-group">
-                                            <label>Số tiền chiết khấu</label>
-                                            <asp:TextBox id="SoTienChietKhau" class="form-control" runat="server"></asp:TextBox>
+                                           <asp:RadioButton GroupName="ChietKhau" id="rbTienChietKhau" Checked="true" runat="server" Text="Số tiền chiết khấu" AutoPostBack="true" OnCheckedChanged="rbTienChietKhau_CheckedChanged" />
+                                           <asp:TextBox id="SoTienChietKhau" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
-                                            <label>Tỉ lệ chiết khấu</label>
+                                            <asp:RadioButton GroupName="ChietKhau" id="rbTiLeChietKhau" runat="server" Text="Tỉ lệ chiết khấu" AutoPostBack="true" OnCheckedChanged="rbTiLeChietKhau_CheckedChanged" />                                           
                                             <asp:TextBox id="TiLeChietKhau" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <%--<asp:CheckBox id="PhiGiaoHang" runat="server" Text="Phí giao hàng"></asp:CheckBox>--%>
+                                <div class="form-group">                                   
                                     <div id="divGiaoHang" runat="server">
                                         <div class="form-group">
                                             <label>Số tiền phí giao hàng</label>
@@ -100,10 +83,18 @@
                                     <label>Ngày sinh</label>
                                     <input id="DOB" runat="server" class="form-control" readonly placeholder="" />
                                 </div>
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label>Tình trạng da</label>
-                                    <textarea id="TinhTrangDa" runat="server" class="form-control" rows="5" readonly placeholder="" />
-                                </div>                             
+                                     <asp:Gridview ID="gvTinhTrang" runat="server" ShowFooter="true" AutoGenerateColumns="false">
+                                        <columns>                               
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="Ngay" HeaderText="Ngày" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="TinhTrang" HeaderText="Tình trạng da" />                                                                                               
+                                        </columns>
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <RowStyle HorizontalAlign="Center" />
+                                    </asp:Gridview>
+                                </div>                          
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -141,11 +132,15 @@
                                 <div class="form-group">
                                    <asp:Gridview ID="gvProducts" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowCommand="gvProducts_RowCommand" >
                                         <columns>                
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="MaSanPham" Visible="false" />                                                               
+                                           <asp:BoundField ItemStyle-Width="150px" DataField="MaSanPham" Visible="false" />                                                               
                                             <asp:BoundField ItemStyle-Width="150px" DataField="TenSanPham" HeaderText="Tên sản phẩm" />
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" HeaderText="Đơn giá" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGiaView" HeaderText="Giá bán" /> 
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="TienChietKhau" HeaderText="Số tiền chiết khấu" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="TiLeChietKhau" HeaderText="Tỉ lệ chiết khấu" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="DonGia" Visible="false" /> 
                                             <asp:BoundField ItemStyle-Width="150px" DataField="SoLuong" HeaderText="Số lượng" /> 
-                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTien" HeaderText="Thành tiền" />         
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTienView" HeaderText="Thành tiền" />
+                                            <asp:BoundField ItemStyle-Width="150px" DataField="ThanhTien" Visible="false" />          
                                             <asp:TemplateField>
                                                  <ItemTemplate>
                                                     <asp:LinkButton CommandArgument='<%#Eval("MaSanPham")%>' CommandName="lbtEdit" causesvalidation="false" runat="server" ID="lbtEdit" Text="Sửa"></asp:LinkButton>
@@ -162,8 +157,14 @@
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <RowStyle HorizontalAlign="Center" />
                                     </asp:Gridview>
-                                     <asp:Label ID="Label2" runat="server" Text="Tổng tiền" Font-Bold="true"></asp:Label>: 
+                                    <asp:Label ID="Label2" runat="server" Text="Tổng tiền:" Font-Bold="true"></asp:Label>                               
                                      <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="Label1" runat="server" Text="Phí ship:" Font-Bold="true"></asp:Label>
+                                     <asp:Label ID="lblPhiShip" runat="server" Font-Bold="true"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="Label3" runat="server" Text="Thanh toán:" Font-Bold="true"></asp:Label>
+                                     <asp:Label ID="lblThanhToan" runat="server" Font-Bold="true"></asp:Label>
                                 </div>
                                 <div class="col-md-6">
                                     <asp:Button ID="Button1" causesvalidation="false" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Đơn hàng" />                                       

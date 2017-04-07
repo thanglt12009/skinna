@@ -36,7 +36,17 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 else return null;
             }
         }
-        
+
+        private decimal ThanhTien
+        {
+            set { ViewState["ThanhTien"] = value; }
+            get
+            {
+                if (ViewState["ThanhTien"] != null) return (decimal)ViewState["ThanhTien"];
+                else return 0;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {           
             if (!this.IsPostBack)
@@ -100,15 +110,15 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             newDonHang.MaTrangThaiDonHang = 1;
             decimal tienChietKhau = 0;
             float tiLeChietKhau = 0;
-            decimal tongtien = 0;
+          
             decimal phiGiaoHang = 0;
             decimal.TryParse(SoTienChietKhau.Text, out tienChietKhau);
             float.TryParse(TiLeChietKhau.Text, out tiLeChietKhau);
             decimal.TryParse(TienGiaoHang.Text, out phiGiaoHang);
-            decimal.TryParse(lblThanhToan.Text, out tongtien);
+            
             newDonHang.TienChietKhau = tienChietKhau;
             newDonHang.TiLeChietKhau = tiLeChietKhau;
-            newDonHang.TongTienDonHang = tongtien;
+            newDonHang.TongTienDonHang = ThanhTien;
             newDonHang.PhiVanChuyen = phiGiaoHang;
             bool result = false;
             try
@@ -239,6 +249,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 tongTien += decimal.Parse(dr["ThanhTien"].ToString());
             }
             thanhToan = phiShip + tongTien;
+            ThanhTien = tongTien;
             string tongTienView = tongTien.ToString("C", nfi);
             string phiShipView = phiShip.ToString("C", nfi);
             string thanhToanView = thanhToan.ToString("C", nfi);
