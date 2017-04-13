@@ -148,6 +148,15 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Diachi;
         
         /// <summary>
+        /// LuuY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LuuY;
+        
+        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>
@@ -200,14 +209,5 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::SkinnaManagement.UserControl.SanPhamDaMua SanPhamDaMua;
-        
-        /// <summary>
-        /// LuuY control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LuuY;
     }
 }

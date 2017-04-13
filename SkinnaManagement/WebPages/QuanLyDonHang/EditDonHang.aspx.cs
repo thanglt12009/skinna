@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -81,19 +82,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         else
                             rdbFemale.Checked = true;
                         DOB.Value = khachHang.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
-                        AnhChup.ImageUrl = khachHang.ImageLink;
-                        CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-                        cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
-                        CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-                        cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
-                        CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-                        cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
-                        CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-                        cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
-                        CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-                        cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
-                        CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-                        cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+                        if (File.Exists(Server.MapPath(khachHang.ImageLink)))
+                            AnhChup.ImageUrl = khachHang.ImageLink;
+                        else
+                            AnhChup.ImageUrl = @"~\Images\profile-pictures.png";
+                                           
                         LuuY.InnerText = khachHang.Luuy;
                         SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                         TienGiaoHang.Text = donHang.PhiVanChuyen.ToString();
@@ -185,6 +178,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     }
                     gvTinhTrang.DataSource = dt1;
                     gvTinhTrang.DataBind();
+
+                    LieuTrinh.LoadLieuTrinh(khachHang.MaKhachHang);
                 }
             }
         }
@@ -234,6 +229,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
                     }
                 }
+
+
             }
             catch (Exception ex)
             {

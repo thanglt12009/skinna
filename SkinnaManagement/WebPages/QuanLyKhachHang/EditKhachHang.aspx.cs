@@ -62,18 +62,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                         AnhChup.ImageUrl = khachHang.ImageLink;
                     else
                         AnhChup.ImageUrl = @"~\Images\profile-pictures.png";
-                    CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-                    cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
-                    CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-                    cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
-                    CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-                    cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
-                    CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-                    cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
-                    CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-                    cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
-                    CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-                    cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+                   
                     LuuY.Text = khachHang.Luuy;
                     SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                     TinhTrangDaParameterBuilder query = new TinhTrangDaParameterBuilder();
@@ -100,6 +89,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     }
                     gvTinhTrang.DataSource = ItemList;
                     gvTinhTrang.DataBind();
+                    LieuTrinh.LoadLieuTrinh(khachHang.MaKhachHang);
                 }
             }
             if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
@@ -134,19 +124,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 khachHang.GioiTinh = "M";
             else
                 khachHang.GioiTinh = "F";
-            khachHang.Luuy = LuuY.Text;
-            CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-            khachHang.TayTrangToi = cbTayTrangToi.Checked;
-            CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-            khachHang.RuaMat = cbRuaMat.Checked;
-            CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-            khachHang.Toner = cbToner.Checked;
-            CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-            khachHang.Serum = cbSerum.Checked;
-            CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-            khachHang.Kem = cbKem.Checked;
-            CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-            khachHang.SanPhamKhac = cbOthers.Checked;
+            khachHang.Luuy = LuuY.Text;           
             khachHang.ImageLink = AnhChup.ImageUrl;
             bool result = false;
             try
@@ -170,6 +148,28 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                         tinhtrang.TinhTrang = row["TinhTrang"].ToString();
                         DataRepository.TinhTrangDaProvider.Insert(tinhtrang);
                     }
+                }
+                TextBox txtTayTrangToi = (TextBox)this.LieuTrinh.FindControl("txtTayTrangToi");
+                TextBox txtRuaMat = (TextBox)this.LieuTrinh.FindControl("txtRuaMat");
+                TextBox txtToner = (TextBox)this.LieuTrinh.FindControl("txtToner");
+                TextBox txtSerum = (TextBox)this.LieuTrinh.FindControl("txtSerum");
+                TextBox txtKem = (TextBox)this.LieuTrinh.FindControl("txtKem");
+                TextBox txtOthers = (TextBox)this.LieuTrinh.FindControl("txtOthers");
+                if (!string.IsNullOrEmpty(txtKem.Text) || !string.IsNullOrEmpty(txtOthers.Text) ||
+                         !string.IsNullOrEmpty(txtRuaMat.Text) || !string.IsNullOrEmpty(txtSerum.Text) ||
+                         !string.IsNullOrEmpty(txtTayTrangToi.Text) || !string.IsNullOrEmpty(txtToner.Text)
+                        )
+                {
+                    LieuTrinh lieuTrinh = new LieuTrinh();
+                    lieuTrinh.MaKhachHang = khachHang.MaKhachHang;
+                    lieuTrinh.Ngay = System.DateTime.Now;
+                    lieuTrinh.TayTrangToi = txtTayTrangToi.Text;
+                    lieuTrinh.RuaMat = txtRuaMat.Text;
+                    lieuTrinh.Toner = txtToner.Text;
+                    lieuTrinh.Serum = txtSerum.Text;
+                    lieuTrinh.Kem = txtKem.Text;
+                    lieuTrinh.SanPhamKhac = txtOthers.Text;
+                    result = DataRepository.LieuTrinhProvider.Insert(lieuTrinh);
                 }
             }
             catch (Exception)

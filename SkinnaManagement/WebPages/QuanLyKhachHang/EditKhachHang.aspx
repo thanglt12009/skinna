@@ -93,7 +93,11 @@
                                     <label>Địa chỉ <span style="color: red">*</span></label>
                                     <input id="Diachi" runat="server" class="form-control" placeholder="" />
                                      <asp:RequiredFieldValidator CssClass="error" ControlToValidate="Diachi" Display="Dynamic" runat="server" ErrorMessage="Required"></asp:RequiredFieldValidator>
-                                </div>                              
+                                </div>   
+                                 <div class="form-group">
+                                    <label>Lưu ý riêng</label>
+                                    <asp:TextBox id="LuuY" class="form-control" TextMode="multiline" Rows="5" runat="server" />
+                                </div>                           
                                 <asp:Button ID="btnSubmit" causesvalidation="true" class="btn btn-primary" runat="server" OnClick="btnSubmit_ServerClick" Text="Sửa Khách hàng" />                                    
                                 <button type="reset" id="btnReset" causesvalidation="false" runat="server" onserverclick="btnReset_ServerClick" class="btn btn-default">Quay Về</button>
                             </div>
@@ -109,10 +113,7 @@
                                 <div class="form-group">
                                     <uc1:SanPhamDaMua runat="server" ID="SanPhamDaMua" />
                                 </div>
-                                 <div class="form-group">
-                                    <label>Lưu ý riêng</label>
-                                    <asp:TextBox id="LuuY" class="form-control" TextMode="multiline" Rows="5" runat="server" />
-                                </div>
+                                
                                 <div class="form-group">
                                     <label>&nbsp;</label>
                                 </div>

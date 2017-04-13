@@ -31,6 +31,15 @@ namespace SkinnaManagement.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox cbTayTrangToi;
         
         /// <summary>
+        /// txtTayTrangToi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTayTrangToi;
+        
+        /// <summary>
         /// cbRuaMat control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace SkinnaManagement.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbRuaMat;
+        
+        /// <summary>
+        /// txtRuaMat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRuaMat;
         
         /// <summary>
         /// cbToner control.
@@ -49,6 +67,15 @@ namespace SkinnaManagement.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox cbToner;
         
         /// <summary>
+        /// txtToner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtToner;
+        
+        /// <summary>
         /// cbSerum control.
         /// </summary>
         /// <remarks>
@@ -56,6 +83,15 @@ namespace SkinnaManagement.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbSerum;
+        
+        /// <summary>
+        /// txtSerum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSerum;
         
         /// <summary>
         /// cbKem control.
@@ -67,6 +103,15 @@ namespace SkinnaManagement.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox cbKem;
         
         /// <summary>
+        /// txtKem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKem;
+        
+        /// <summary>
         /// cbOthers control.
         /// </summary>
         /// <remarks>
@@ -74,5 +119,41 @@ namespace SkinnaManagement.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbOthers;
+        
+        /// <summary>
+        /// txtOthers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOthers;
+        
+        /// <summary>
+        /// gvLieuTrinh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLieuTrinh;
+        
+        /// <summary>
+        /// dialog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dialog;
+        
+        /// <summary>
+        /// gvLieuTrinhChiTiet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLieuTrinhChiTiet;
     }
 }

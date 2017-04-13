@@ -67,18 +67,12 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             else
                 newKhachHang.GioiTinh = "F";           
             newKhachHang.Luuy = LuuY.Text;            
-            CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-            newKhachHang.TayTrangToi = cbTayTrangToi.Checked;
-            CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-            newKhachHang.RuaMat = cbRuaMat.Checked;
-            CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-            newKhachHang.Toner = cbToner.Checked;
-            CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-            newKhachHang.Serum = cbSerum.Checked;
-            CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-            newKhachHang.Kem = cbKem.Checked;
-            CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-            newKhachHang.SanPhamKhac = cbOthers.Checked;
+            TextBox txtTayTrangToi = (TextBox)this.LieuTrinh.FindControl("txtTayTrangToi");
+            TextBox txtRuaMat = (TextBox)this.LieuTrinh.FindControl("txtRuaMat");
+            TextBox txtToner = (TextBox)this.LieuTrinh.FindControl("txtToner");
+            TextBox txtSerum = (TextBox)this.LieuTrinh.FindControl("txtSerum");
+            TextBox txtKem = (TextBox)this.LieuTrinh.FindControl("txtKem");
+            TextBox txtOthers = (TextBox)this.LieuTrinh.FindControl("txtOthers");           
             newKhachHang.ImageLink = AnhChup.ImageUrl;
             bool result = false;
             try
@@ -98,9 +92,26 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                             result = DataRepository.TinhTrangDaProvider.Insert(tinhtrang);
                         }
                     }
+                    
+                    if(!string.IsNullOrEmpty(txtKem.Text) || !string.IsNullOrEmpty(txtOthers.Text) ||
+                         !string.IsNullOrEmpty(txtRuaMat.Text) || !string.IsNullOrEmpty(txtSerum.Text) ||
+                         !string.IsNullOrEmpty(txtTayTrangToi.Text) || !string.IsNullOrEmpty(txtToner.Text)
+                        )
+                    {
+                        LieuTrinh lieuTrinh = new LieuTrinh();
+                        lieuTrinh.MaKhachHang = newKhachHang.MaKhachHang;
+                        lieuTrinh.Ngay = System.DateTime.Now;
+                        lieuTrinh.TayTrangToi = txtTayTrangToi.Text;
+                        lieuTrinh.RuaMat = txtRuaMat.Text;
+                        lieuTrinh.Toner = txtToner.Text;
+                        lieuTrinh.Serum = txtSerum.Text;
+                        lieuTrinh.Kem = txtKem.Text;
+                        lieuTrinh.SanPhamKhac = txtOthers.Text;
+                        result = DataRepository.LieuTrinhProvider.Insert(lieuTrinh);
+                    }
                 }        
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ErrorMessage.InnerText = "Đã có lỗi khi tạo khách hàng.";
             }

@@ -12,22 +12,6 @@
             });
         }
         $(document).ready(function () {
-            $('#head_ChietKhau').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#divChietKhau').show();
-                }
-                else {
-                    $('#divChietKhau').hide();
-                }
-            });
-            $('#head_PhiGiaoHang').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#divGiaoHang').show();
-                }
-                else {
-                    $('#divGiaoHang').hide();
-                }
-            });
             $("#<%=SoDienThoai.ClientID%>").keypress(function (e) {
                 var code = e.keyCode || e.which;
                 if (code === 13) {

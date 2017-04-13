@@ -62,20 +62,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     {
                         ThanhToan.Items.Add(new ListItem(item.TenPhuongThucThanhToan, item.MaPhuongThucThanhToan.ToString()));
                     }
-                }
-
-                CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-                CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-                CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-                CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-                CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-                CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-                cbTayTrangToi.Enabled = false;
-                cbRuaMat.Enabled = false;
-                cbToner.Enabled = false;
-                cbSerum.Enabled = false;
-                cbKem.Enabled = false;
-                cbOthers.Enabled = false;
+                }           
                 LoadSanPhamList();
                 DataTable dt = new DataTable();
                 dt.Columns.Add(new DataColumn("MaSanPham", typeof(string)));
@@ -89,7 +76,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 dt.Columns.Add(new DataColumn("ThanhTienView", typeof(string)));
                 ItemList = dt;
                 gvProducts.DataSource = ItemList;
-                gvProducts.DataBind();
+                gvProducts.DataBind();                
             }
         }
 
@@ -102,7 +89,9 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         {
             KhachHangParameterBuilder query = new KhachHangParameterBuilder();
             query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
+
             KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
+           
             DonHang newDonHang = new DonHang();
             newDonHang.MaKhachHang = khachHang.MaKhachHang;
             newDonHang.MaPhuongThucThanhToan = int.Parse(ThanhToan.Value);
@@ -140,8 +129,32 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
                     }                  
                 }
+
+                TextBox txtTayTrangToi = (TextBox)this.LieuTrinh.FindControl("txtTayTrangToi");
+                TextBox txtRuaMat = (TextBox)this.LieuTrinh.FindControl("txtRuaMat");
+                TextBox txtToner = (TextBox)this.LieuTrinh.FindControl("txtToner");
+                TextBox txtSerum = (TextBox)this.LieuTrinh.FindControl("txtSerum");
+                TextBox txtKem = (TextBox)this.LieuTrinh.FindControl("txtKem");
+                TextBox txtOthers = (TextBox)this.LieuTrinh.FindControl("txtOthers");
+
+                if (!string.IsNullOrEmpty(txtKem.Text) || !string.IsNullOrEmpty(txtOthers.Text) ||
+                        !string.IsNullOrEmpty(txtRuaMat.Text) || !string.IsNullOrEmpty(txtSerum.Text) ||
+                        !string.IsNullOrEmpty(txtTayTrangToi.Text) || !string.IsNullOrEmpty(txtToner.Text)
+                       )
+                {
+                    LieuTrinh lieuTrinh = new LieuTrinh();
+                    lieuTrinh.MaKhachHang = khachHang.MaKhachHang;
+                    lieuTrinh.Ngay = System.DateTime.Now;
+                    lieuTrinh.TayTrangToi = txtTayTrangToi.Text;
+                    lieuTrinh.RuaMat = txtRuaMat.Text;
+                    lieuTrinh.Toner = txtToner.Text;
+                    lieuTrinh.Serum = txtSerum.Text;
+                    lieuTrinh.Kem = txtKem.Text;
+                    lieuTrinh.SanPhamKhac = txtOthers.Text;
+                    result = DataRepository.LieuTrinhProvider.Insert(lieuTrinh);
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ErrorMessage.InnerText = "Đã có lỗi khi tạo đơn hàng.";
             }
@@ -157,6 +170,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             if (list != null && list.Count > 0)
             {
                 KhachHang khachHang = list[0];
+                LieuTrinh.LoadLieuTrinh(khachHang.MaKhachHang);
                 TenKhachHang.Value = khachHang.TenKhachHang;
                 if (khachHang.GioiTinh == "M")
                     rdbMale.Checked = true;
@@ -168,18 +182,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     AnhChup.ImageUrl = khachHang.ImageLink;
                 else
                     AnhChup.ImageUrl = @"~\Images\profile-pictures.png";
-                CheckBox cbTayTrangToi = (CheckBox)this.LieuTrinh.FindControl("cbTayTrangToi");
-                cbTayTrangToi.Checked = khachHang.TayTrangToi.GetValueOrDefault(false);
-                CheckBox cbRuaMat = (CheckBox)this.LieuTrinh.FindControl("cbRuaMat");
-                cbRuaMat.Checked = khachHang.RuaMat.GetValueOrDefault(false);
-                CheckBox cbToner = (CheckBox)this.LieuTrinh.FindControl("cbToner");
-                cbToner.Checked = khachHang.Toner.GetValueOrDefault(false); ;
-                CheckBox cbSerum = (CheckBox)this.LieuTrinh.FindControl("cbSerum");
-                cbSerum.Checked = khachHang.Serum.GetValueOrDefault(false); ;
-                CheckBox cbKem = (CheckBox)this.LieuTrinh.FindControl("cbKem");
-                cbKem.Checked = khachHang.Kem.GetValueOrDefault(false); ;
-                CheckBox cbOthers = (CheckBox)this.LieuTrinh.FindControl("cbOthers");
-                cbOthers.Checked = khachHang.SanPhamKhac.GetValueOrDefault(false);
+               
                 SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                 TinhTrangDaParameterBuilder query1 = new TinhTrangDaParameterBuilder();
                 query1.Append(TinhTrangDaColumn.MaKhachHang, khachHang.MaKhachHang.ToString());
