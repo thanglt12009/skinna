@@ -418,23 +418,6 @@ namespace SkinCare.Data
 
 		#region Static properties
 		
-		#region PhuongThucThanhToanProvider
-
-		///<summary>
-		/// Gets the current instance of the Data Access Logic Component for the <see cref="PhuongThucThanhToan"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		public static PhuongThucThanhToanProviderBase PhuongThucThanhToanProvider
-		{
-			get 
-			{
-				LoadProviders();
-				return _provider.PhuongThucThanhToanProvider;
-			}
-		}
-		
-		#endregion
-		
 		#region DonHangProvider
 
 		///<summary>
@@ -452,23 +435,6 @@ namespace SkinCare.Data
 		
 		#endregion
 		
-		#region TinhTrangDaProvider
-
-		///<summary>
-		/// Gets the current instance of the Data Access Logic Component for the <see cref="TinhTrangDa"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		public static TinhTrangDaProviderBase TinhTrangDaProvider
-		{
-			get 
-			{
-				LoadProviders();
-				return _provider.TinhTrangDaProvider;
-			}
-		}
-		
-		#endregion
-		
 		#region NguonDonHangProvider
 
 		///<summary>
@@ -481,6 +447,40 @@ namespace SkinCare.Data
 			{
 				LoadProviders();
 				return _provider.NguonDonHangProvider;
+			}
+		}
+		
+		#endregion
+		
+		#region PhuongThucThanhToanProvider
+
+		///<summary>
+		/// Gets the current instance of the Data Access Logic Component for the <see cref="PhuongThucThanhToan"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		public static PhuongThucThanhToanProviderBase PhuongThucThanhToanProvider
+		{
+			get 
+			{
+				LoadProviders();
+				return _provider.PhuongThucThanhToanProvider;
+			}
+		}
+		
+		#endregion
+		
+		#region TinhTrangDaProvider
+
+		///<summary>
+		/// Gets the current instance of the Data Access Logic Component for the <see cref="TinhTrangDa"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		public static TinhTrangDaProviderBase TinhTrangDaProvider
+		{
+			get 
+			{
+				LoadProviders();
+				return _provider.TinhTrangDaProvider;
 			}
 		}
 		
@@ -520,6 +520,23 @@ namespace SkinCare.Data
 		
 		#endregion
 		
+		#region LieuTrinhProvider
+
+		///<summary>
+		/// Gets the current instance of the Data Access Logic Component for the <see cref="LieuTrinh"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		public static LieuTrinhProviderBase LieuTrinhProvider
+		{
+			get 
+			{
+				LoadProviders();
+				return _provider.LieuTrinhProvider;
+			}
+		}
+		
+		#endregion
+		
 		#region DonHangChiTietProvider
 
 		///<summary>
@@ -532,23 +549,6 @@ namespace SkinCare.Data
 			{
 				LoadProviders();
 				return _provider.DonHangChiTietProvider;
-			}
-		}
-		
-		#endregion
-		
-		#region KhuyenMaiProvider
-
-		///<summary>
-		/// Gets the current instance of the Data Access Logic Component for the <see cref="KhuyenMai"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		public static KhuyenMaiProviderBase KhuyenMaiProvider
-		{
-			get 
-			{
-				LoadProviders();
-				return _provider.KhuyenMaiProvider;
 			}
 		}
 		
@@ -571,23 +571,6 @@ namespace SkinCare.Data
 		
 		#endregion
 		
-		#region UserProvider
-
-		///<summary>
-		/// Gets the current instance of the Data Access Logic Component for the <see cref="User"/> business entity.
-		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
-		///</summary>
-		public static UserProviderBase UserProvider
-		{
-			get 
-			{
-				LoadProviders();
-				return _provider.UserProvider;
-			}
-		}
-		
-		#endregion
-		
 		#region KhoHangSanPhamProvider
 
 		///<summary>
@@ -605,79 +588,45 @@ namespace SkinCare.Data
 		
 		#endregion
 		
+		#region KhuyenMaiProvider
+
+		///<summary>
+		/// Gets the current instance of the Data Access Logic Component for the <see cref="KhuyenMai"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		public static KhuyenMaiProviderBase KhuyenMaiProvider
+		{
+			get 
+			{
+				LoadProviders();
+				return _provider.KhuyenMaiProvider;
+			}
+		}
+		
+		#endregion
+		
+		#region UserProvider
+
+		///<summary>
+		/// Gets the current instance of the Data Access Logic Component for the <see cref="User"/> business entity.
+		/// It exposes CRUD methods as well as selecting on index, foreign keys and custom stored procedures.
+		///</summary>
+		public static UserProviderBase UserProvider
+		{
+			get 
+			{
+				LoadProviders();
+				return _provider.UserProvider;
+			}
+		}
+		
+		#endregion
+		
 		
 		#endregion
 	}
 	
 	#region Query/Filters
-		
-	#region PhuongThucThanhToanFilters
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
-	/// that is used exclusively with a <see cref="PhuongThucThanhToan"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class PhuongThucThanhToanFilters : PhuongThucThanhToanFilterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
-		/// </summary>
-		public PhuongThucThanhToanFilters() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public PhuongThucThanhToanFilters(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public PhuongThucThanhToanFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion PhuongThucThanhToanFilters
-	
-	#region PhuongThucThanhToanQuery
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="PhuongThucThanhToanParameterBuilder"/> class
-	/// that is used exclusively with a <see cref="PhuongThucThanhToan"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class PhuongThucThanhToanQuery : PhuongThucThanhToanParameterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
-		/// </summary>
-		public PhuongThucThanhToanQuery() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public PhuongThucThanhToanQuery(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public PhuongThucThanhToanQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion PhuongThucThanhToanQuery
 		
 	#region DonHangFilters
 	
@@ -747,74 +696,6 @@ namespace SkinCare.Data
 
 	#endregion DonHangQuery
 		
-	#region TinhTrangDaFilters
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
-	/// that is used exclusively with a <see cref="TinhTrangDa"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class TinhTrangDaFilters : TinhTrangDaFilterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaFilters class.
-		/// </summary>
-		public TinhTrangDaFilters() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public TinhTrangDaFilters(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public TinhTrangDaFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion TinhTrangDaFilters
-	
-	#region TinhTrangDaQuery
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="TinhTrangDaParameterBuilder"/> class
-	/// that is used exclusively with a <see cref="TinhTrangDa"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class TinhTrangDaQuery : TinhTrangDaParameterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaQuery class.
-		/// </summary>
-		public TinhTrangDaQuery() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public TinhTrangDaQuery(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the TinhTrangDaQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public TinhTrangDaQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion TinhTrangDaQuery
-		
 	#region NguonDonHangFilters
 	
 	/// <summary>
@@ -882,6 +763,142 @@ namespace SkinCare.Data
 	}
 
 	#endregion NguonDonHangQuery
+		
+	#region PhuongThucThanhToanFilters
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
+	/// that is used exclusively with a <see cref="PhuongThucThanhToan"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class PhuongThucThanhToanFilters : PhuongThucThanhToanFilterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
+		/// </summary>
+		public PhuongThucThanhToanFilters() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public PhuongThucThanhToanFilters(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public PhuongThucThanhToanFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion PhuongThucThanhToanFilters
+	
+	#region PhuongThucThanhToanQuery
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="PhuongThucThanhToanParameterBuilder"/> class
+	/// that is used exclusively with a <see cref="PhuongThucThanhToan"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class PhuongThucThanhToanQuery : PhuongThucThanhToanParameterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
+		/// </summary>
+		public PhuongThucThanhToanQuery() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public PhuongThucThanhToanQuery(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the PhuongThucThanhToanQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public PhuongThucThanhToanQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion PhuongThucThanhToanQuery
+		
+	#region TinhTrangDaFilters
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
+	/// that is used exclusively with a <see cref="TinhTrangDa"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class TinhTrangDaFilters : TinhTrangDaFilterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaFilters class.
+		/// </summary>
+		public TinhTrangDaFilters() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public TinhTrangDaFilters(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public TinhTrangDaFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion TinhTrangDaFilters
+	
+	#region TinhTrangDaQuery
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="TinhTrangDaParameterBuilder"/> class
+	/// that is used exclusively with a <see cref="TinhTrangDa"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class TinhTrangDaQuery : TinhTrangDaParameterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaQuery class.
+		/// </summary>
+		public TinhTrangDaQuery() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public TinhTrangDaQuery(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the TinhTrangDaQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public TinhTrangDaQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion TinhTrangDaQuery
 		
 	#region TrangThaiDonHangFilters
 	
@@ -1019,6 +1036,74 @@ namespace SkinCare.Data
 
 	#endregion LoaiTrangThaiDonHangQuery
 		
+	#region LieuTrinhFilters
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
+	/// that is used exclusively with a <see cref="LieuTrinh"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class LieuTrinhFilters : LieuTrinhFilterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhFilters class.
+		/// </summary>
+		public LieuTrinhFilters() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public LieuTrinhFilters(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public LieuTrinhFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion LieuTrinhFilters
+	
+	#region LieuTrinhQuery
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="LieuTrinhParameterBuilder"/> class
+	/// that is used exclusively with a <see cref="LieuTrinh"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class LieuTrinhQuery : LieuTrinhParameterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhQuery class.
+		/// </summary>
+		public LieuTrinhQuery() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public LieuTrinhQuery(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the LieuTrinhQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public LieuTrinhQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion LieuTrinhQuery
+		
 	#region DonHangChiTietFilters
 	
 	/// <summary>
@@ -1086,74 +1171,6 @@ namespace SkinCare.Data
 	}
 
 	#endregion DonHangChiTietQuery
-		
-	#region KhuyenMaiFilters
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
-	/// that is used exclusively with a <see cref="KhuyenMai"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class KhuyenMaiFilters : KhuyenMaiFilterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiFilters class.
-		/// </summary>
-		public KhuyenMaiFilters() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public KhuyenMaiFilters(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public KhuyenMaiFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion KhuyenMaiFilters
-	
-	#region KhuyenMaiQuery
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="KhuyenMaiParameterBuilder"/> class
-	/// that is used exclusively with a <see cref="KhuyenMai"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class KhuyenMaiQuery : KhuyenMaiParameterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiQuery class.
-		/// </summary>
-		public KhuyenMaiQuery() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public KhuyenMaiQuery(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the KhuyenMaiQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public KhuyenMaiQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion KhuyenMaiQuery
 		
 	#region KhachHangFilters
 	
@@ -1223,74 +1240,6 @@ namespace SkinCare.Data
 
 	#endregion KhachHangQuery
 		
-	#region UserFilters
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
-	/// that is used exclusively with a <see cref="User"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class UserFilters : UserFilterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the UserFilters class.
-		/// </summary>
-		public UserFilters() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the UserFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public UserFilters(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the UserFilters class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public UserFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion UserFilters
-	
-	#region UserQuery
-	
-	/// <summary>
-	/// A strongly-typed instance of the <see cref="UserParameterBuilder"/> class
-	/// that is used exclusively with a <see cref="User"/> object.
-	/// </summary>
-	[CLSCompliant(true)]
-	public class UserQuery : UserParameterBuilder
-	{
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the UserQuery class.
-		/// </summary>
-		public UserQuery() : base() { }
-
-		/// <summary>
-		/// Initializes a new instance of the UserQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		public UserQuery(bool ignoreCase) : base(ignoreCase) { }
-
-		/// <summary>
-		/// Initializes a new instance of the UserQuery class.
-		/// </summary>
-		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
-		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
-		public UserQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
-
-		#endregion Constructors
-	}
-
-	#endregion UserQuery
-		
 	#region KhoHangSanPhamFilters
 	
 	/// <summary>
@@ -1358,6 +1307,142 @@ namespace SkinCare.Data
 	}
 
 	#endregion KhoHangSanPhamQuery
+		
+	#region KhuyenMaiFilters
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
+	/// that is used exclusively with a <see cref="KhuyenMai"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class KhuyenMaiFilters : KhuyenMaiFilterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiFilters class.
+		/// </summary>
+		public KhuyenMaiFilters() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public KhuyenMaiFilters(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public KhuyenMaiFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion KhuyenMaiFilters
+	
+	#region KhuyenMaiQuery
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="KhuyenMaiParameterBuilder"/> class
+	/// that is used exclusively with a <see cref="KhuyenMai"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class KhuyenMaiQuery : KhuyenMaiParameterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiQuery class.
+		/// </summary>
+		public KhuyenMaiQuery() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public KhuyenMaiQuery(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the KhuyenMaiQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public KhuyenMaiQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion KhuyenMaiQuery
+		
+	#region UserFilters
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="SqlFilterBuilder&lt;EntityColumn&gt;"/> class
+	/// that is used exclusively with a <see cref="User"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class UserFilters : UserFilterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the UserFilters class.
+		/// </summary>
+		public UserFilters() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the UserFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public UserFilters(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the UserFilters class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public UserFilters(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion UserFilters
+	
+	#region UserQuery
+	
+	/// <summary>
+	/// A strongly-typed instance of the <see cref="UserParameterBuilder"/> class
+	/// that is used exclusively with a <see cref="User"/> object.
+	/// </summary>
+	[CLSCompliant(true)]
+	public class UserQuery : UserParameterBuilder
+	{
+		#region Constructors
+
+		/// <summary>
+		/// Initializes a new instance of the UserQuery class.
+		/// </summary>
+		public UserQuery() : base() { }
+
+		/// <summary>
+		/// Initializes a new instance of the UserQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		public UserQuery(bool ignoreCase) : base(ignoreCase) { }
+
+		/// <summary>
+		/// Initializes a new instance of the UserQuery class.
+		/// </summary>
+		/// <param name="ignoreCase">Specifies whether to create case-insensitive statements.</param>
+		/// <param name="useAnd">Specifies whether to combine statements using AND or OR.</param>
+		public UserQuery(bool ignoreCase, bool useAnd) : base(ignoreCase, useAnd) { }
+
+		#endregion Constructors
+	}
+
+	#endregion UserQuery
 	#endregion
 
 	

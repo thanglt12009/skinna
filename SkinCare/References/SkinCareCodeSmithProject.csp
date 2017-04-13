@@ -96,6 +96,10 @@
       </table>
       <table>
         <owner>dbo</owner>
+        <name>tblLieuTrinh</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
         <name>tblLoaiTrangThaiDonHang</name>
       </table>
       <table>
@@ -105,6 +109,10 @@
       <table>
         <owner>dbo</owner>
         <name>tblPhuongThucThanhToan</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>tblTinhTrangDa</name>
       </table>
       <table>
         <owner>dbo</owner>

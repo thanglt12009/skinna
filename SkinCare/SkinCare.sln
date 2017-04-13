@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Entities", "SkinCare.Entities\SkinCare.Entities.csproj", "{43F2C54C-AEA1-421A-A841-07345DBBEFEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Entities", "SkinCare.Entities\SkinCare.Entities.csproj", "{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data", "SkinCare.Data\SkinCare.Data.csproj", "{D455767C-C47A-4DF9-B73D-B918F11F21EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data", "SkinCare.Data\SkinCare.Data.csproj", "{C3293F12-E838-4946-8503-9DD990B3F7F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data.SqlClient", "SkinCare.Data.SqlClient\SkinCare.Data.SqlClient.csproj", "{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Data.SqlClient", "SkinCare.Data.SqlClient\SkinCare.Data.SqlClient.csproj", "{8EF0CC74-FB32-4215-85E0-41789C4C2C17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Web", "SkinCare.Web\SkinCare.Web.csproj", "{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinCare.Web", "SkinCare.Web\SkinCare.Web.csproj", "{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SkinCare.Website", "SkinCare.Website\", "{81C76F54-5E91-4E50-B4E6-E4E7E930303A}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SkinCare.Website", "SkinCare.Website\", "{A2801257-1368-4CFC-A687-C7034B20D000}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		ProjectReferences = "{43F2C54C-AEA1-421A-A841-07345DBBEFEB}|SkinCare.Entities.dll;{D455767C-C47A-4DF9-B73D-B918F11F21EB}|SkinCare.Data.dll;{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}|SkinCare.Data.SqlClient.dll;{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}|SkinCare.Web.dll;"
+		ProjectReferences = "{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}|SkinCare.Entities.dll;{C3293F12-E838-4946-8503-9DD990B3F7F1}|SkinCare.Data.dll;{8EF0CC74-FB32-4215-85E0-41789C4C2C17}|SkinCare.Data.SqlClient.dll;{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}|SkinCare.Web.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SkinCare.Website"
 		Debug.AspNetCompiler.PhysicalPath = "SkinCare.Website\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SkinCare.Website\"
@@ -30,6 +30,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SkinCare.Website", "SkinCar
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "2005"
+		SlnRelativePath = "SkinCare.Website\"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetTiers", "NetTiers", "{F3A10C8D-3227-449F-A2CB-014DE2D7F415}"
@@ -43,35 +44,35 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{43F2C54C-AEA1-421A-A841-07345DBBEFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43F2C54C-AEA1-421A-A841-07345DBBEFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43F2C54C-AEA1-421A-A841-07345DBBEFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43F2C54C-AEA1-421A-A841-07345DBBEFEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D455767C-C47A-4DF9-B73D-B918F11F21EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D455767C-C47A-4DF9-B73D-B918F11F21EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D455767C-C47A-4DF9-B73D-B918F11F21EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D455767C-C47A-4DF9-B73D-B918F11F21EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81C76F54-5E91-4E50-B4E6-E4E7E930303A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81C76F54-5E91-4E50-B4E6-E4E7E930303A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81C76F54-5E91-4E50-B4E6-E4E7E930303A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{81C76F54-5E91-4E50-B4E6-E4E7E930303A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3293F12-E838-4946-8503-9DD990B3F7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3293F12-E838-4946-8503-9DD990B3F7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3293F12-E838-4946-8503-9DD990B3F7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3293F12-E838-4946-8503-9DD990B3F7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF0CC74-FB32-4215-85E0-41789C4C2C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF0CC74-FB32-4215-85E0-41789C4C2C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF0CC74-FB32-4215-85E0-41789C4C2C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF0CC74-FB32-4215-85E0-41789C4C2C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2801257-1368-4CFC-A687-C7034B20D000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2801257-1368-4CFC-A687-C7034B20D000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2801257-1368-4CFC-A687-C7034B20D000}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2801257-1368-4CFC-A687-C7034B20D000}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{43F2C54C-AEA1-421A-A841-07345DBBEFEB} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
-		{D455767C-C47A-4DF9-B73D-B918F11F21EB} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
-		{3AB24D67-C9C4-438D-B3BE-EFE0853FFC38} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
-		{FA4C7C03-7D24-4044-91F3-9BC67B8A380D} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
-		{81C76F54-5E91-4E50-B4E6-E4E7E930303A} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{C3293F12-E838-4946-8503-9DD990B3F7F1} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{8EF0CC74-FB32-4215-85E0-41789C4C2C17} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{A2801257-1368-4CFC-A687-C7034B20D000} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
 	EndGlobalSection
 EndGlobal

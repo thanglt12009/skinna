@@ -8,385 +8,6 @@ GO
 
 	
 
--- Drop the dbo.tblPhuongThucThanhToan_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets all records from the tblPhuongThucThanhToan table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Get_List
-
-AS
-
-
-				
-				SELECT
-					[MaPhuongThucThanhToan],
-					[TenPhuongThucThanhToan]
-				FROM
-					[dbo].[tblPhuongThucThanhToan]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets records from the tblPhuongThucThanhToan table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [MaPhuongThucThanhToan] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([MaPhuongThucThanhToan])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [MaPhuongThucThanhToan]'
-				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[MaPhuongThucThanhToan], O.[TenPhuongThucThanhToan]
-				FROM
-				    [dbo].[tblPhuongThucThanhToan] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[MaPhuongThucThanhToan] = PageIndex.[MaPhuongThucThanhToan]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Inserts a record into the tblPhuongThucThanhToan table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Insert
-(
-
-	@MaPhuongThucThanhToan int    OUTPUT,
-
-	@TenPhuongThucThanhToan nvarchar (100)  
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[tblPhuongThucThanhToan]
-					(
-					[TenPhuongThucThanhToan]
-					)
-				VALUES
-					(
-					@TenPhuongThucThanhToan
-					)
-				-- Get the identity value
-				SET @MaPhuongThucThanhToan = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Updates a record in the tblPhuongThucThanhToan table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Update
-(
-
-	@MaPhuongThucThanhToan int   ,
-
-	@TenPhuongThucThanhToan nvarchar (100)  
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[tblPhuongThucThanhToan]
-				SET
-					[TenPhuongThucThanhToan] = @TenPhuongThucThanhToan
-				WHERE
-[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Deletes a record in the tblPhuongThucThanhToan table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Delete
-(
-
-	@MaPhuongThucThanhToan int   
-)
-AS
-
-
-				DELETE FROM [dbo].[tblPhuongThucThanhToan] WITH (ROWLOCK) 
-				WHERE
-					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Select records from the tblPhuongThucThanhToan table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan
-(
-
-	@MaPhuongThucThanhToan int   
-)
-AS
-
-
-				SELECT
-					[MaPhuongThucThanhToan],
-					[TenPhuongThucThanhToan]
-				FROM
-					[dbo].[tblPhuongThucThanhToan]
-				WHERE
-					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblPhuongThucThanhToan_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblPhuongThucThanhToan_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Finds records in the tblPhuongThucThanhToan table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@MaPhuongThucThanhToan int   = null ,
-
-	@TenPhuongThucThanhToan nvarchar (100)  = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [MaPhuongThucThanhToan]
-	, [TenPhuongThucThanhToan]
-    FROM
-	[dbo].[tblPhuongThucThanhToan]
-    WHERE 
-	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan OR @MaPhuongThucThanhToan IS NULL)
-	AND ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan OR @TenPhuongThucThanhToan IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [MaPhuongThucThanhToan]
-	, [TenPhuongThucThanhToan]
-    FROM
-	[dbo].[tblPhuongThucThanhToan]
-    WHERE 
-	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan AND @MaPhuongThucThanhToan is not null)
-	OR ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan AND @TenPhuongThucThanhToan is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
 -- Drop the dbo.tblDonHang_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblDonHang_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.tblDonHang_Get_List
@@ -961,6 +582,767 @@ GO
 
 	
 
+-- Drop the dbo.tblNguonDonHang_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_Get_List
+
+AS
+
+
+				
+				SELECT
+					[MaNguonDonHang],
+					[TenNguonDonHang]
+				FROM
+					[dbo].[tblNguonDonHang]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblNguonDonHang table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaNguonDonHang] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaNguonDonHang])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaNguonDonHang]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaNguonDonHang], O.[TenNguonDonHang]
+				FROM
+				    [dbo].[tblNguonDonHang] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaNguonDonHang] = PageIndex.[MaNguonDonHang]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_Insert
+(
+
+	@MaNguonDonHang int   ,
+
+	@TenNguonDonHang nvarchar (50)  
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[tblNguonDonHang]
+					(
+					[MaNguonDonHang]
+					,[TenNguonDonHang]
+					)
+				VALUES
+					(
+					@MaNguonDonHang
+					,@TenNguonDonHang
+					)
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_Update
+(
+
+	@MaNguonDonHang int   ,
+
+	@OriginalMaNguonDonHang int   ,
+
+	@TenNguonDonHang nvarchar (50)  
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblNguonDonHang]
+				SET
+					[MaNguonDonHang] = @MaNguonDonHang
+					,[TenNguonDonHang] = @TenNguonDonHang
+				WHERE
+[MaNguonDonHang] = @OriginalMaNguonDonHang 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblNguonDonHang table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_Delete
+(
+
+	@MaNguonDonHang int   
+)
+AS
+
+
+				DELETE FROM [dbo].[tblNguonDonHang] WITH (ROWLOCK) 
+				WHERE
+					[MaNguonDonHang] = @MaNguonDonHang
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_GetByMaNguonDonHang procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_GetByMaNguonDonHang') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_GetByMaNguonDonHang
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblNguonDonHang table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_GetByMaNguonDonHang
+(
+
+	@MaNguonDonHang int   
+)
+AS
+
+
+				SELECT
+					[MaNguonDonHang],
+					[TenNguonDonHang]
+				FROM
+					[dbo].[tblNguonDonHang]
+				WHERE
+					[MaNguonDonHang] = @MaNguonDonHang
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblNguonDonHang_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblNguonDonHang_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblNguonDonHang table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblNguonDonHang_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@MaNguonDonHang int   = null ,
+
+	@TenNguonDonHang nvarchar (50)  = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaNguonDonHang]
+	, [TenNguonDonHang]
+    FROM
+	[dbo].[tblNguonDonHang]
+    WHERE 
+	 ([MaNguonDonHang] = @MaNguonDonHang OR @MaNguonDonHang IS NULL)
+	AND ([TenNguonDonHang] = @TenNguonDonHang OR @TenNguonDonHang IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaNguonDonHang]
+	, [TenNguonDonHang]
+    FROM
+	[dbo].[tblNguonDonHang]
+    WHERE 
+	 ([MaNguonDonHang] = @MaNguonDonHang AND @MaNguonDonHang is not null)
+	OR ([TenNguonDonHang] = @TenNguonDonHang AND @TenNguonDonHang is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Get_List
+
+AS
+
+
+				
+				SELECT
+					[MaPhuongThucThanhToan],
+					[TenPhuongThucThanhToan]
+				FROM
+					[dbo].[tblPhuongThucThanhToan]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblPhuongThucThanhToan table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaPhuongThucThanhToan] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaPhuongThucThanhToan])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaPhuongThucThanhToan]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaPhuongThucThanhToan], O.[TenPhuongThucThanhToan]
+				FROM
+				    [dbo].[tblPhuongThucThanhToan] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaPhuongThucThanhToan] = PageIndex.[MaPhuongThucThanhToan]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblPhuongThucThanhToan]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Insert
+(
+
+	@MaPhuongThucThanhToan int    OUTPUT,
+
+	@TenPhuongThucThanhToan nvarchar (100)  
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[tblPhuongThucThanhToan]
+					(
+					[TenPhuongThucThanhToan]
+					)
+				VALUES
+					(
+					@TenPhuongThucThanhToan
+					)
+				-- Get the identity value
+				SET @MaPhuongThucThanhToan = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Update
+(
+
+	@MaPhuongThucThanhToan int   ,
+
+	@TenPhuongThucThanhToan nvarchar (100)  
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblPhuongThucThanhToan]
+				SET
+					[TenPhuongThucThanhToan] = @TenPhuongThucThanhToan
+				WHERE
+[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblPhuongThucThanhToan table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Delete
+(
+
+	@MaPhuongThucThanhToan int   
+)
+AS
+
+
+				DELETE FROM [dbo].[tblPhuongThucThanhToan] WITH (ROWLOCK) 
+				WHERE
+					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblPhuongThucThanhToan table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_GetByMaPhuongThucThanhToan
+(
+
+	@MaPhuongThucThanhToan int   
+)
+AS
+
+
+				SELECT
+					[MaPhuongThucThanhToan],
+					[TenPhuongThucThanhToan]
+				FROM
+					[dbo].[tblPhuongThucThanhToan]
+				WHERE
+					[MaPhuongThucThanhToan] = @MaPhuongThucThanhToan
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblPhuongThucThanhToan_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblPhuongThucThanhToan_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblPhuongThucThanhToan_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblPhuongThucThanhToan table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblPhuongThucThanhToan_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@MaPhuongThucThanhToan int   = null ,
+
+	@TenPhuongThucThanhToan nvarchar (100)  = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaPhuongThucThanhToan]
+	, [TenPhuongThucThanhToan]
+    FROM
+	[dbo].[tblPhuongThucThanhToan]
+    WHERE 
+	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan OR @MaPhuongThucThanhToan IS NULL)
+	AND ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan OR @TenPhuongThucThanhToan IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaPhuongThucThanhToan]
+	, [TenPhuongThucThanhToan]
+    FROM
+	[dbo].[tblPhuongThucThanhToan]
+    WHERE 
+	 ([MaPhuongThucThanhToan] = @MaPhuongThucThanhToan AND @MaPhuongThucThanhToan is not null)
+	OR ([TenPhuongThucThanhToan] = @TenPhuongThucThanhToan AND @TenPhuongThucThanhToan is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.tblTinhTrangDa_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblTinhTrangDa_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.tblTinhTrangDa_Get_List
@@ -1356,388 +1738,6 @@ AS
 	OR ([MaKhachHang] = @MaKhachHang AND @MaKhachHang is not null)
 	OR ([Ngay] = @Ngay AND @Ngay is not null)
 	OR ([TinhTrang] = @TinhTrang AND @TinhTrang is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets all records from the tblNguonDonHang table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_Get_List
-
-AS
-
-
-				
-				SELECT
-					[MaNguonDonHang],
-					[TenNguonDonHang]
-				FROM
-					[dbo].[tblNguonDonHang]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets records from the tblNguonDonHang table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [MaNguonDonHang] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([MaNguonDonHang])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [MaNguonDonHang]'
-				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[MaNguonDonHang], O.[TenNguonDonHang]
-				FROM
-				    [dbo].[tblNguonDonHang] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[MaNguonDonHang] = PageIndex.[MaNguonDonHang]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[tblNguonDonHang]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Inserts a record into the tblNguonDonHang table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_Insert
-(
-
-	@MaNguonDonHang int   ,
-
-	@TenNguonDonHang nvarchar (50)  
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[tblNguonDonHang]
-					(
-					[MaNguonDonHang]
-					,[TenNguonDonHang]
-					)
-				VALUES
-					(
-					@MaNguonDonHang
-					,@TenNguonDonHang
-					)
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Updates a record in the tblNguonDonHang table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_Update
-(
-
-	@MaNguonDonHang int   ,
-
-	@OriginalMaNguonDonHang int   ,
-
-	@TenNguonDonHang nvarchar (50)  
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[tblNguonDonHang]
-				SET
-					[MaNguonDonHang] = @MaNguonDonHang
-					,[TenNguonDonHang] = @TenNguonDonHang
-				WHERE
-[MaNguonDonHang] = @OriginalMaNguonDonHang 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Deletes a record in the tblNguonDonHang table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_Delete
-(
-
-	@MaNguonDonHang int   
-)
-AS
-
-
-				DELETE FROM [dbo].[tblNguonDonHang] WITH (ROWLOCK) 
-				WHERE
-					[MaNguonDonHang] = @MaNguonDonHang
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_GetByMaNguonDonHang procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_GetByMaNguonDonHang') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_GetByMaNguonDonHang
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Select records from the tblNguonDonHang table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_GetByMaNguonDonHang
-(
-
-	@MaNguonDonHang int   
-)
-AS
-
-
-				SELECT
-					[MaNguonDonHang],
-					[TenNguonDonHang]
-				FROM
-					[dbo].[tblNguonDonHang]
-				WHERE
-					[MaNguonDonHang] = @MaNguonDonHang
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblNguonDonHang_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblNguonDonHang_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblNguonDonHang_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Finds records in the tblNguonDonHang table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblNguonDonHang_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@MaNguonDonHang int   = null ,
-
-	@TenNguonDonHang nvarchar (50)  = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [MaNguonDonHang]
-	, [TenNguonDonHang]
-    FROM
-	[dbo].[tblNguonDonHang]
-    WHERE 
-	 ([MaNguonDonHang] = @MaNguonDonHang OR @MaNguonDonHang IS NULL)
-	AND ([TenNguonDonHang] = @TenNguonDonHang OR @TenNguonDonHang IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [MaNguonDonHang]
-	, [TenNguonDonHang]
-    FROM
-	[dbo].[tblNguonDonHang]
-    WHERE 
-	 ([MaNguonDonHang] = @MaNguonDonHang AND @MaNguonDonHang is not null)
-	OR ([TenNguonDonHang] = @TenNguonDonHang AND @TenNguonDonHang is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -2531,6 +2531,490 @@ GO
 
 	
 
+-- Drop the dbo.tblLieuTrinh_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblLieuTrinh table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[MaKhachHang],
+					[Ngay],
+					[TayTrangToi],
+					[RuaMat],
+					[Toner],
+					[Serum],
+					[Kem],
+					[SanPhamKhac]
+				FROM
+					[dbo].[tblLieuTrinh]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblLieuTrinh table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblLieuTrinh]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[MaKhachHang], O.[Ngay], O.[TayTrangToi], O.[RuaMat], O.[Toner], O.[Serum], O.[Kem], O.[SanPhamKhac]
+				FROM
+				    [dbo].[tblLieuTrinh] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblLieuTrinh]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblLieuTrinh table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@MaKhachHang int   ,
+
+	@Ngay datetime   ,
+
+	@TayTrangToi nvarchar (100)  ,
+
+	@RuaMat nvarchar (100)  ,
+
+	@Toner nvarchar (100)  ,
+
+	@Serum nvarchar (100)  ,
+
+	@Kem nvarchar (100)  ,
+
+	@SanPhamKhac nvarchar (100)  
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[tblLieuTrinh]
+					(
+					[MaKhachHang]
+					,[Ngay]
+					,[TayTrangToi]
+					,[RuaMat]
+					,[Toner]
+					,[Serum]
+					,[Kem]
+					,[SanPhamKhac]
+					)
+				VALUES
+					(
+					@MaKhachHang
+					,@Ngay
+					,@TayTrangToi
+					,@RuaMat
+					,@Toner
+					,@Serum
+					,@Kem
+					,@SanPhamKhac
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblLieuTrinh table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_Update
+(
+
+	@Id int   ,
+
+	@MaKhachHang int   ,
+
+	@Ngay datetime   ,
+
+	@TayTrangToi nvarchar (100)  ,
+
+	@RuaMat nvarchar (100)  ,
+
+	@Toner nvarchar (100)  ,
+
+	@Serum nvarchar (100)  ,
+
+	@Kem nvarchar (100)  ,
+
+	@SanPhamKhac nvarchar (100)  
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblLieuTrinh]
+				SET
+					[MaKhachHang] = @MaKhachHang
+					,[Ngay] = @Ngay
+					,[TayTrangToi] = @TayTrangToi
+					,[RuaMat] = @RuaMat
+					,[Toner] = @Toner
+					,[Serum] = @Serum
+					,[Kem] = @Kem
+					,[SanPhamKhac] = @SanPhamKhac
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblLieuTrinh table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[tblLieuTrinh] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblLieuTrinh table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[MaKhachHang],
+					[Ngay],
+					[TayTrangToi],
+					[RuaMat],
+					[Toner],
+					[Serum],
+					[Kem],
+					[SanPhamKhac]
+				FROM
+					[dbo].[tblLieuTrinh]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblLieuTrinh_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblLieuTrinh_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblLieuTrinh_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblLieuTrinh table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblLieuTrinh_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@MaKhachHang int   = null ,
+
+	@Ngay datetime   = null ,
+
+	@TayTrangToi nvarchar (100)  = null ,
+
+	@RuaMat nvarchar (100)  = null ,
+
+	@Toner nvarchar (100)  = null ,
+
+	@Serum nvarchar (100)  = null ,
+
+	@Kem nvarchar (100)  = null ,
+
+	@SanPhamKhac nvarchar (100)  = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [MaKhachHang]
+	, [Ngay]
+	, [TayTrangToi]
+	, [RuaMat]
+	, [Toner]
+	, [Serum]
+	, [Kem]
+	, [SanPhamKhac]
+    FROM
+	[dbo].[tblLieuTrinh]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([MaKhachHang] = @MaKhachHang OR @MaKhachHang IS NULL)
+	AND ([Ngay] = @Ngay OR @Ngay IS NULL)
+	AND ([TayTrangToi] = @TayTrangToi OR @TayTrangToi IS NULL)
+	AND ([RuaMat] = @RuaMat OR @RuaMat IS NULL)
+	AND ([Toner] = @Toner OR @Toner IS NULL)
+	AND ([Serum] = @Serum OR @Serum IS NULL)
+	AND ([Kem] = @Kem OR @Kem IS NULL)
+	AND ([SanPhamKhac] = @SanPhamKhac OR @SanPhamKhac IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [MaKhachHang]
+	, [Ngay]
+	, [TayTrangToi]
+	, [RuaMat]
+	, [Toner]
+	, [Serum]
+	, [Kem]
+	, [SanPhamKhac]
+    FROM
+	[dbo].[tblLieuTrinh]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([MaKhachHang] = @MaKhachHang AND @MaKhachHang is not null)
+	OR ([Ngay] = @Ngay AND @Ngay is not null)
+	OR ([TayTrangToi] = @TayTrangToi AND @TayTrangToi is not null)
+	OR ([RuaMat] = @RuaMat AND @RuaMat is not null)
+	OR ([Toner] = @Toner AND @Toner is not null)
+	OR ([Serum] = @Serum AND @Serum is not null)
+	OR ([Kem] = @Kem AND @Kem is not null)
+	OR ([SanPhamKhac] = @SanPhamKhac AND @SanPhamKhac is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.tblDonHangChiTiet_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblDonHangChiTiet_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.tblDonHangChiTiet_Get_List
@@ -2970,478 +3454,6 @@ GO
 
 	
 
--- Drop the dbo.tblKhuyenMai_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets all records from the tblKhuyenMai table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_Get_List
-
-AS
-
-
-				
-				SELECT
-					[MaKhuyenMai],
-					[MaLoaiKhuyenMai],
-					[TenKhuyenMai],
-					[GiaGiam],
-					[NgayTaoKhuyenMai],
-					[NgayBatDauKhuyenMai],
-					[NgayKetThucKhuyenMai],
-					[Active]
-				FROM
-					[dbo].[tblKhuyenMai]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets records from the tblKhuyenMai table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [MaKhuyenMai] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([MaKhuyenMai])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [MaKhuyenMai]'
-				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[MaKhuyenMai], O.[MaLoaiKhuyenMai], O.[TenKhuyenMai], O.[GiaGiam], O.[NgayTaoKhuyenMai], O.[NgayBatDauKhuyenMai], O.[NgayKetThucKhuyenMai], O.[Active]
-				FROM
-				    [dbo].[tblKhuyenMai] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[MaKhuyenMai] = PageIndex.[MaKhuyenMai]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Inserts a record into the tblKhuyenMai table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_Insert
-(
-
-	@MaKhuyenMai int   ,
-
-	@MaLoaiKhuyenMai int   ,
-
-	@TenKhuyenMai nvarchar (100)  ,
-
-	@GiaGiam decimal (18, 3)  ,
-
-	@NgayTaoKhuyenMai datetime   ,
-
-	@NgayBatDauKhuyenMai datetime   ,
-
-	@NgayKetThucKhuyenMai datetime   ,
-
-	@Active bit   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[tblKhuyenMai]
-					(
-					[MaKhuyenMai]
-					,[MaLoaiKhuyenMai]
-					,[TenKhuyenMai]
-					,[GiaGiam]
-					,[NgayTaoKhuyenMai]
-					,[NgayBatDauKhuyenMai]
-					,[NgayKetThucKhuyenMai]
-					,[Active]
-					)
-				VALUES
-					(
-					@MaKhuyenMai
-					,@MaLoaiKhuyenMai
-					,@TenKhuyenMai
-					,@GiaGiam
-					,@NgayTaoKhuyenMai
-					,@NgayBatDauKhuyenMai
-					,@NgayKetThucKhuyenMai
-					,@Active
-					)
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Updates a record in the tblKhuyenMai table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_Update
-(
-
-	@MaKhuyenMai int   ,
-
-	@OriginalMaKhuyenMai int   ,
-
-	@MaLoaiKhuyenMai int   ,
-
-	@TenKhuyenMai nvarchar (100)  ,
-
-	@GiaGiam decimal (18, 3)  ,
-
-	@NgayTaoKhuyenMai datetime   ,
-
-	@NgayBatDauKhuyenMai datetime   ,
-
-	@NgayKetThucKhuyenMai datetime   ,
-
-	@Active bit   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[tblKhuyenMai]
-				SET
-					[MaKhuyenMai] = @MaKhuyenMai
-					,[MaLoaiKhuyenMai] = @MaLoaiKhuyenMai
-					,[TenKhuyenMai] = @TenKhuyenMai
-					,[GiaGiam] = @GiaGiam
-					,[NgayTaoKhuyenMai] = @NgayTaoKhuyenMai
-					,[NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai
-					,[NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai
-					,[Active] = @Active
-				WHERE
-[MaKhuyenMai] = @OriginalMaKhuyenMai 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Deletes a record in the tblKhuyenMai table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_Delete
-(
-
-	@MaKhuyenMai int   
-)
-AS
-
-
-				DELETE FROM [dbo].[tblKhuyenMai] WITH (ROWLOCK) 
-				WHERE
-					[MaKhuyenMai] = @MaKhuyenMai
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_GetByMaKhuyenMai procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_GetByMaKhuyenMai') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_GetByMaKhuyenMai
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Select records from the tblKhuyenMai table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_GetByMaKhuyenMai
-(
-
-	@MaKhuyenMai int   
-)
-AS
-
-
-				SELECT
-					[MaKhuyenMai],
-					[MaLoaiKhuyenMai],
-					[TenKhuyenMai],
-					[GiaGiam],
-					[NgayTaoKhuyenMai],
-					[NgayBatDauKhuyenMai],
-					[NgayKetThucKhuyenMai],
-					[Active]
-				FROM
-					[dbo].[tblKhuyenMai]
-				WHERE
-					[MaKhuyenMai] = @MaKhuyenMai
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblKhuyenMai_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblKhuyenMai_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Finds records in the tblKhuyenMai table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblKhuyenMai_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@MaKhuyenMai int   = null ,
-
-	@MaLoaiKhuyenMai int   = null ,
-
-	@TenKhuyenMai nvarchar (100)  = null ,
-
-	@GiaGiam decimal (18, 3)  = null ,
-
-	@NgayTaoKhuyenMai datetime   = null ,
-
-	@NgayBatDauKhuyenMai datetime   = null ,
-
-	@NgayKetThucKhuyenMai datetime   = null ,
-
-	@Active bit   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [MaKhuyenMai]
-	, [MaLoaiKhuyenMai]
-	, [TenKhuyenMai]
-	, [GiaGiam]
-	, [NgayTaoKhuyenMai]
-	, [NgayBatDauKhuyenMai]
-	, [NgayKetThucKhuyenMai]
-	, [Active]
-    FROM
-	[dbo].[tblKhuyenMai]
-    WHERE 
-	 ([MaKhuyenMai] = @MaKhuyenMai OR @MaKhuyenMai IS NULL)
-	AND ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai OR @MaLoaiKhuyenMai IS NULL)
-	AND ([TenKhuyenMai] = @TenKhuyenMai OR @TenKhuyenMai IS NULL)
-	AND ([GiaGiam] = @GiaGiam OR @GiaGiam IS NULL)
-	AND ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai OR @NgayTaoKhuyenMai IS NULL)
-	AND ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai OR @NgayBatDauKhuyenMai IS NULL)
-	AND ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai OR @NgayKetThucKhuyenMai IS NULL)
-	AND ([Active] = @Active OR @Active IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [MaKhuyenMai]
-	, [MaLoaiKhuyenMai]
-	, [TenKhuyenMai]
-	, [GiaGiam]
-	, [NgayTaoKhuyenMai]
-	, [NgayBatDauKhuyenMai]
-	, [NgayKetThucKhuyenMai]
-	, [Active]
-    FROM
-	[dbo].[tblKhuyenMai]
-    WHERE 
-	 ([MaKhuyenMai] = @MaKhuyenMai AND @MaKhuyenMai is not null)
-	OR ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai AND @MaLoaiKhuyenMai is not null)
-	OR ([TenKhuyenMai] = @TenKhuyenMai AND @TenKhuyenMai is not null)
-	OR ([GiaGiam] = @GiaGiam AND @GiaGiam is not null)
-	OR ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai AND @NgayTaoKhuyenMai is not null)
-	OR ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai AND @NgayBatDauKhuyenMai is not null)
-	OR ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai AND @NgayKetThucKhuyenMai is not null)
-	OR ([Active] = @Active AND @Active is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
 -- Drop the dbo.tblKhachHang_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhachHang_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.tblKhachHang_Get_List
@@ -3469,12 +3481,6 @@ AS
 					[SoDienThoai],
 					[DiaChi],
 					[GioiTinh],
-					[TayTrangToi],
-					[RuaMat],
-					[Toner],
-					[Serum],
-					[Kem],
-					[SanPhamKhac],
 					[LuuY],
 					[ImageLink],
 					[Ngaysinh]
@@ -3563,7 +3569,7 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[TayTrangToi], O.[RuaMat], O.[Toner], O.[Serum], O.[Kem], O.[SanPhamKhac], O.[LuuY], O.[ImageLink], O.[Ngaysinh]
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh]
 				FROM
 				    [dbo].[tblKhachHang] O,
 				    #PageIndex PageIndex
@@ -3624,18 +3630,6 @@ CREATE PROCEDURE dbo.tblKhachHang_Insert
 
 	@GioiTinh char (1)  ,
 
-	@TayTrangToi bit   ,
-
-	@RuaMat bit   ,
-
-	@Toner bit   ,
-
-	@Serum bit   ,
-
-	@Kem bit   ,
-
-	@SanPhamKhac bit   ,
-
 	@Luuy nvarchar (200)  ,
 
 	@ImageLink nvarchar (100)  ,
@@ -3653,12 +3647,6 @@ AS
 					,[SoDienThoai]
 					,[DiaChi]
 					,[GioiTinh]
-					,[TayTrangToi]
-					,[RuaMat]
-					,[Toner]
-					,[Serum]
-					,[Kem]
-					,[SanPhamKhac]
 					,[LuuY]
 					,[ImageLink]
 					,[Ngaysinh]
@@ -3670,12 +3658,6 @@ AS
 					,@SoDienThoai
 					,@DiaChi
 					,@GioiTinh
-					,@TayTrangToi
-					,@RuaMat
-					,@Toner
-					,@Serum
-					,@Kem
-					,@SanPhamKhac
 					,@Luuy
 					,@ImageLink
 					,@Ngaysinh
@@ -3725,18 +3707,6 @@ CREATE PROCEDURE dbo.tblKhachHang_Update
 
 	@GioiTinh char (1)  ,
 
-	@TayTrangToi bit   ,
-
-	@RuaMat bit   ,
-
-	@Toner bit   ,
-
-	@Serum bit   ,
-
-	@Kem bit   ,
-
-	@SanPhamKhac bit   ,
-
 	@Luuy nvarchar (200)  ,
 
 	@ImageLink nvarchar (100)  ,
@@ -3757,12 +3727,6 @@ AS
 					,[SoDienThoai] = @SoDienThoai
 					,[DiaChi] = @DiaChi
 					,[GioiTinh] = @GioiTinh
-					,[TayTrangToi] = @TayTrangToi
-					,[RuaMat] = @RuaMat
-					,[Toner] = @Toner
-					,[Serum] = @Serum
-					,[Kem] = @Kem
-					,[SanPhamKhac] = @SanPhamKhac
 					,[LuuY] = @Luuy
 					,[ImageLink] = @ImageLink
 					,[Ngaysinh] = @Ngaysinh
@@ -3848,12 +3812,6 @@ AS
 					[SoDienThoai],
 					[DiaChi],
 					[GioiTinh],
-					[TayTrangToi],
-					[RuaMat],
-					[Toner],
-					[Serum],
-					[Kem],
-					[SanPhamKhac],
 					[LuuY],
 					[ImageLink],
 					[Ngaysinh]
@@ -3906,18 +3864,6 @@ CREATE PROCEDURE dbo.tblKhachHang_Find
 
 	@GioiTinh char (1)  = null ,
 
-	@TayTrangToi bit   = null ,
-
-	@RuaMat bit   = null ,
-
-	@Toner bit   = null ,
-
-	@Serum bit   = null ,
-
-	@Kem bit   = null ,
-
-	@SanPhamKhac bit   = null ,
-
 	@Luuy nvarchar (200)  = null ,
 
 	@ImageLink nvarchar (100)  = null ,
@@ -3937,12 +3883,6 @@ AS
 	, [SoDienThoai]
 	, [DiaChi]
 	, [GioiTinh]
-	, [TayTrangToi]
-	, [RuaMat]
-	, [Toner]
-	, [Serum]
-	, [Kem]
-	, [SanPhamKhac]
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
@@ -3955,12 +3895,6 @@ AS
 	AND ([SoDienThoai] = @SoDienThoai OR @SoDienThoai IS NULL)
 	AND ([DiaChi] = @DiaChi OR @DiaChi IS NULL)
 	AND ([GioiTinh] = @GioiTinh OR @GioiTinh IS NULL)
-	AND ([TayTrangToi] = @TayTrangToi OR @TayTrangToi IS NULL)
-	AND ([RuaMat] = @RuaMat OR @RuaMat IS NULL)
-	AND ([Toner] = @Toner OR @Toner IS NULL)
-	AND ([Serum] = @Serum OR @Serum IS NULL)
-	AND ([Kem] = @Kem OR @Kem IS NULL)
-	AND ([SanPhamKhac] = @SanPhamKhac OR @SanPhamKhac IS NULL)
 	AND ([LuuY] = @Luuy OR @Luuy IS NULL)
 	AND ([ImageLink] = @ImageLink OR @ImageLink IS NULL)
 	AND ([Ngaysinh] = @Ngaysinh OR @Ngaysinh IS NULL)
@@ -3975,12 +3909,6 @@ AS
 	, [SoDienThoai]
 	, [DiaChi]
 	, [GioiTinh]
-	, [TayTrangToi]
-	, [RuaMat]
-	, [Toner]
-	, [Serum]
-	, [Kem]
-	, [SanPhamKhac]
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
@@ -3993,439 +3921,9 @@ AS
 	OR ([SoDienThoai] = @SoDienThoai AND @SoDienThoai is not null)
 	OR ([DiaChi] = @DiaChi AND @DiaChi is not null)
 	OR ([GioiTinh] = @GioiTinh AND @GioiTinh is not null)
-	OR ([TayTrangToi] = @TayTrangToi AND @TayTrangToi is not null)
-	OR ([RuaMat] = @RuaMat AND @RuaMat is not null)
-	OR ([Toner] = @Toner AND @Toner is not null)
-	OR ([Serum] = @Serum AND @Serum is not null)
-	OR ([Kem] = @Kem AND @Kem is not null)
-	OR ([SanPhamKhac] = @SanPhamKhac AND @SanPhamKhac is not null)
 	OR ([LuuY] = @Luuy AND @Luuy is not null)
 	OR ([ImageLink] = @ImageLink AND @ImageLink is not null)
 	OR ([Ngaysinh] = @Ngaysinh AND @Ngaysinh is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets all records from the tblUser table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_Get_List
-
-AS
-
-
-				
-				SELECT
-					[UserId],
-					[UserName],
-					[UserRole],
-					[Pwd],
-					[Salt]
-				FROM
-					[dbo].[tblUser]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Gets records from the tblUser table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [UserId] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([UserId])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [UserId]'
-				SET @SQL = @SQL + ' FROM [dbo].[tblUser]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[UserId], O.[UserName], O.[UserRole], O.[Pwd], O.[Salt]
-				FROM
-				    [dbo].[tblUser] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[UserId] = PageIndex.[UserId]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[tblUser]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Inserts a record into the tblUser table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_Insert
-(
-
-	@UserId int    OUTPUT,
-
-	@UserName varchar (15)  ,
-
-	@UserRole varchar (25)  ,
-
-	@Pwd varchar (50)  ,
-
-	@Salt char (10)  
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[tblUser]
-					(
-					[UserName]
-					,[UserRole]
-					,[Pwd]
-					,[Salt]
-					)
-				VALUES
-					(
-					@UserName
-					,@UserRole
-					,@Pwd
-					,@Salt
-					)
-				-- Get the identity value
-				SET @UserId = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Updates a record in the tblUser table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_Update
-(
-
-	@UserId int   ,
-
-	@UserName varchar (15)  ,
-
-	@UserRole varchar (25)  ,
-
-	@Pwd varchar (50)  ,
-
-	@Salt char (10)  
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[tblUser]
-				SET
-					[UserName] = @UserName
-					,[UserRole] = @UserRole
-					,[Pwd] = @Pwd
-					,[Salt] = @Salt
-				WHERE
-[UserId] = @UserId 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Deletes a record in the tblUser table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_Delete
-(
-
-	@UserId int   
-)
-AS
-
-
-				DELETE FROM [dbo].[tblUser] WITH (ROWLOCK) 
-				WHERE
-					[UserId] = @UserId
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_GetByUserId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_GetByUserId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_GetByUserId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Select records from the tblUser table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_GetByUserId
-(
-
-	@UserId int   
-)
-AS
-
-
-				SELECT
-					[UserId],
-					[UserName],
-					[UserRole],
-					[Pwd],
-					[Salt]
-				FROM
-					[dbo].[tblUser]
-				WHERE
-					[UserId] = @UserId
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.tblUser_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.tblUser_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By:  ()
--- Purpose: Finds records in the tblUser table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.tblUser_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@UserId int   = null ,
-
-	@UserName varchar (15)  = null ,
-
-	@UserRole varchar (25)  = null ,
-
-	@Pwd varchar (50)  = null ,
-
-	@Salt char (10)  = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [UserId]
-	, [UserName]
-	, [UserRole]
-	, [Pwd]
-	, [Salt]
-    FROM
-	[dbo].[tblUser]
-    WHERE 
-	 ([UserId] = @UserId OR @UserId IS NULL)
-	AND ([UserName] = @UserName OR @UserName IS NULL)
-	AND ([UserRole] = @UserRole OR @UserRole IS NULL)
-	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
-	AND ([Salt] = @Salt OR @Salt IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [UserId]
-	, [UserName]
-	, [UserRole]
-	, [Pwd]
-	, [Salt]
-    FROM
-	[dbo].[tblUser]
-    WHERE 
-	 ([UserId] = @UserId AND @UserId is not null)
-	OR ([UserName] = @UserName AND @UserName is not null)
-	OR ([UserRole] = @UserRole AND @UserRole is not null)
-	OR ([Pwd] = @Pwd AND @Pwd is not null)
-	OR ([Salt] = @Salt AND @Salt is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -4960,6 +4458,902 @@ AS
 	OR ([NgayNhapHang] = @NgayNhapHang AND @NgayNhapHang is not null)
 	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
 	OR ([GiaTien] = @GiaTien AND @GiaTien is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_Get_List
+
+AS
+
+
+				
+				SELECT
+					[MaKhuyenMai],
+					[MaLoaiKhuyenMai],
+					[TenKhuyenMai],
+					[GiaGiam],
+					[NgayTaoKhuyenMai],
+					[NgayBatDauKhuyenMai],
+					[NgayKetThucKhuyenMai],
+					[Active]
+				FROM
+					[dbo].[tblKhuyenMai]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblKhuyenMai table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [MaKhuyenMai] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([MaKhuyenMai])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [MaKhuyenMai]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[MaKhuyenMai], O.[MaLoaiKhuyenMai], O.[TenKhuyenMai], O.[GiaGiam], O.[NgayTaoKhuyenMai], O.[NgayBatDauKhuyenMai], O.[NgayKetThucKhuyenMai], O.[Active]
+				FROM
+				    [dbo].[tblKhuyenMai] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[MaKhuyenMai] = PageIndex.[MaKhuyenMai]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblKhuyenMai]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_Insert
+(
+
+	@MaKhuyenMai int   ,
+
+	@MaLoaiKhuyenMai int   ,
+
+	@TenKhuyenMai nvarchar (100)  ,
+
+	@GiaGiam decimal (18, 3)  ,
+
+	@NgayTaoKhuyenMai datetime   ,
+
+	@NgayBatDauKhuyenMai datetime   ,
+
+	@NgayKetThucKhuyenMai datetime   ,
+
+	@Active bit   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[tblKhuyenMai]
+					(
+					[MaKhuyenMai]
+					,[MaLoaiKhuyenMai]
+					,[TenKhuyenMai]
+					,[GiaGiam]
+					,[NgayTaoKhuyenMai]
+					,[NgayBatDauKhuyenMai]
+					,[NgayKetThucKhuyenMai]
+					,[Active]
+					)
+				VALUES
+					(
+					@MaKhuyenMai
+					,@MaLoaiKhuyenMai
+					,@TenKhuyenMai
+					,@GiaGiam
+					,@NgayTaoKhuyenMai
+					,@NgayBatDauKhuyenMai
+					,@NgayKetThucKhuyenMai
+					,@Active
+					)
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_Update
+(
+
+	@MaKhuyenMai int   ,
+
+	@OriginalMaKhuyenMai int   ,
+
+	@MaLoaiKhuyenMai int   ,
+
+	@TenKhuyenMai nvarchar (100)  ,
+
+	@GiaGiam decimal (18, 3)  ,
+
+	@NgayTaoKhuyenMai datetime   ,
+
+	@NgayBatDauKhuyenMai datetime   ,
+
+	@NgayKetThucKhuyenMai datetime   ,
+
+	@Active bit   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblKhuyenMai]
+				SET
+					[MaKhuyenMai] = @MaKhuyenMai
+					,[MaLoaiKhuyenMai] = @MaLoaiKhuyenMai
+					,[TenKhuyenMai] = @TenKhuyenMai
+					,[GiaGiam] = @GiaGiam
+					,[NgayTaoKhuyenMai] = @NgayTaoKhuyenMai
+					,[NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai
+					,[NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai
+					,[Active] = @Active
+				WHERE
+[MaKhuyenMai] = @OriginalMaKhuyenMai 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblKhuyenMai table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_Delete
+(
+
+	@MaKhuyenMai int   
+)
+AS
+
+
+				DELETE FROM [dbo].[tblKhuyenMai] WITH (ROWLOCK) 
+				WHERE
+					[MaKhuyenMai] = @MaKhuyenMai
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_GetByMaKhuyenMai procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_GetByMaKhuyenMai') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_GetByMaKhuyenMai
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblKhuyenMai table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_GetByMaKhuyenMai
+(
+
+	@MaKhuyenMai int   
+)
+AS
+
+
+				SELECT
+					[MaKhuyenMai],
+					[MaLoaiKhuyenMai],
+					[TenKhuyenMai],
+					[GiaGiam],
+					[NgayTaoKhuyenMai],
+					[NgayBatDauKhuyenMai],
+					[NgayKetThucKhuyenMai],
+					[Active]
+				FROM
+					[dbo].[tblKhuyenMai]
+				WHERE
+					[MaKhuyenMai] = @MaKhuyenMai
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblKhuyenMai_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblKhuyenMai_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblKhuyenMai_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblKhuyenMai table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblKhuyenMai_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@MaKhuyenMai int   = null ,
+
+	@MaLoaiKhuyenMai int   = null ,
+
+	@TenKhuyenMai nvarchar (100)  = null ,
+
+	@GiaGiam decimal (18, 3)  = null ,
+
+	@NgayTaoKhuyenMai datetime   = null ,
+
+	@NgayBatDauKhuyenMai datetime   = null ,
+
+	@NgayKetThucKhuyenMai datetime   = null ,
+
+	@Active bit   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [MaKhuyenMai]
+	, [MaLoaiKhuyenMai]
+	, [TenKhuyenMai]
+	, [GiaGiam]
+	, [NgayTaoKhuyenMai]
+	, [NgayBatDauKhuyenMai]
+	, [NgayKetThucKhuyenMai]
+	, [Active]
+    FROM
+	[dbo].[tblKhuyenMai]
+    WHERE 
+	 ([MaKhuyenMai] = @MaKhuyenMai OR @MaKhuyenMai IS NULL)
+	AND ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai OR @MaLoaiKhuyenMai IS NULL)
+	AND ([TenKhuyenMai] = @TenKhuyenMai OR @TenKhuyenMai IS NULL)
+	AND ([GiaGiam] = @GiaGiam OR @GiaGiam IS NULL)
+	AND ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai OR @NgayTaoKhuyenMai IS NULL)
+	AND ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai OR @NgayBatDauKhuyenMai IS NULL)
+	AND ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai OR @NgayKetThucKhuyenMai IS NULL)
+	AND ([Active] = @Active OR @Active IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [MaKhuyenMai]
+	, [MaLoaiKhuyenMai]
+	, [TenKhuyenMai]
+	, [GiaGiam]
+	, [NgayTaoKhuyenMai]
+	, [NgayBatDauKhuyenMai]
+	, [NgayKetThucKhuyenMai]
+	, [Active]
+    FROM
+	[dbo].[tblKhuyenMai]
+    WHERE 
+	 ([MaKhuyenMai] = @MaKhuyenMai AND @MaKhuyenMai is not null)
+	OR ([MaLoaiKhuyenMai] = @MaLoaiKhuyenMai AND @MaLoaiKhuyenMai is not null)
+	OR ([TenKhuyenMai] = @TenKhuyenMai AND @TenKhuyenMai is not null)
+	OR ([GiaGiam] = @GiaGiam AND @GiaGiam is not null)
+	OR ([NgayTaoKhuyenMai] = @NgayTaoKhuyenMai AND @NgayTaoKhuyenMai is not null)
+	OR ([NgayBatDauKhuyenMai] = @NgayBatDauKhuyenMai AND @NgayBatDauKhuyenMai is not null)
+	OR ([NgayKetThucKhuyenMai] = @NgayKetThucKhuyenMai AND @NgayKetThucKhuyenMai is not null)
+	OR ([Active] = @Active AND @Active is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the tblUser table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_Get_List
+
+AS
+
+
+				
+				SELECT
+					[UserId],
+					[UserName],
+					[UserRole],
+					[Pwd],
+					[Salt]
+				FROM
+					[dbo].[tblUser]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the tblUser table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [UserId] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([UserId])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [UserId]'
+				SET @SQL = @SQL + ' FROM [dbo].[tblUser]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[UserId], O.[UserName], O.[UserRole], O.[Pwd], O.[Salt]
+				FROM
+				    [dbo].[tblUser] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[UserId] = PageIndex.[UserId]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[tblUser]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the tblUser table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_Insert
+(
+
+	@UserId int    OUTPUT,
+
+	@UserName varchar (15)  ,
+
+	@UserRole varchar (25)  ,
+
+	@Pwd varchar (50)  ,
+
+	@Salt char (10)  
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[tblUser]
+					(
+					[UserName]
+					,[UserRole]
+					,[Pwd]
+					,[Salt]
+					)
+				VALUES
+					(
+					@UserName
+					,@UserRole
+					,@Pwd
+					,@Salt
+					)
+				-- Get the identity value
+				SET @UserId = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the tblUser table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_Update
+(
+
+	@UserId int   ,
+
+	@UserName varchar (15)  ,
+
+	@UserRole varchar (25)  ,
+
+	@Pwd varchar (50)  ,
+
+	@Salt char (10)  
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[tblUser]
+				SET
+					[UserName] = @UserName
+					,[UserRole] = @UserRole
+					,[Pwd] = @Pwd
+					,[Salt] = @Salt
+				WHERE
+[UserId] = @UserId 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the tblUser table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_Delete
+(
+
+	@UserId int   
+)
+AS
+
+
+				DELETE FROM [dbo].[tblUser] WITH (ROWLOCK) 
+				WHERE
+					[UserId] = @UserId
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_GetByUserId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_GetByUserId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_GetByUserId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the tblUser table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_GetByUserId
+(
+
+	@UserId int   
+)
+AS
+
+
+				SELECT
+					[UserId],
+					[UserName],
+					[UserRole],
+					[Pwd],
+					[Salt]
+				FROM
+					[dbo].[tblUser]
+				WHERE
+					[UserId] = @UserId
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.tblUser_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.tblUser_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.tblUser_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the tblUser table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.tblUser_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@UserId int   = null ,
+
+	@UserName varchar (15)  = null ,
+
+	@UserRole varchar (25)  = null ,
+
+	@Pwd varchar (50)  = null ,
+
+	@Salt char (10)  = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [UserId]
+	, [UserName]
+	, [UserRole]
+	, [Pwd]
+	, [Salt]
+    FROM
+	[dbo].[tblUser]
+    WHERE 
+	 ([UserId] = @UserId OR @UserId IS NULL)
+	AND ([UserName] = @UserName OR @UserName IS NULL)
+	AND ([UserRole] = @UserRole OR @UserRole IS NULL)
+	AND ([Pwd] = @Pwd OR @Pwd IS NULL)
+	AND ([Salt] = @Salt OR @Salt IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [UserId]
+	, [UserName]
+	, [UserRole]
+	, [Pwd]
+	, [Salt]
+    FROM
+	[dbo].[tblUser]
+    WHERE 
+	 ([UserId] = @UserId AND @UserId is not null)
+	OR ([UserName] = @UserName AND @UserName is not null)
+	OR ([UserRole] = @UserRole AND @UserRole is not null)
+	OR ([Pwd] = @Pwd AND @Pwd is not null)
+	OR ([Salt] = @Salt AND @Salt is not null)
 	SELECT @@ROWCOUNT			
   END
 				

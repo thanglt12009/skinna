@@ -86,19 +86,12 @@ namespace SkinCare.Entities
 		///<param name="_soDienThoai"></param>
 		///<param name="_diaChi"></param>
 		///<param name="_gioiTinh"></param>
-		///<param name="_tayTrangToi"></param>
-		///<param name="_ruaMat"></param>
-		///<param name="_toner"></param>
-		///<param name="_serum"></param>
-		///<param name="_kem"></param>
-		///<param name="_sanPhamKhac"></param>
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
 		///<param name="_ngaysinh"></param>
 		public KhachHangBase(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
-			System.String _diaChi, System.String _gioiTinh, System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, 
-			System.Boolean? _toner, System.Boolean? _serum, System.Boolean? _kem, System.Boolean? _sanPhamKhac, 
-			System.String _luuy, System.String _imageLink, System.DateTime? _ngaysinh)
+			System.String _diaChi, System.String _gioiTinh, System.String _luuy, System.String _imageLink, 
+			System.DateTime? _ngaysinh)
 		{
 			this.entityData = new KhachHangEntityData();
 			this.backupData = null;
@@ -108,12 +101,6 @@ namespace SkinCare.Entities
 			this.SoDienThoai = _soDienThoai;
 			this.DiaChi = _diaChi;
 			this.GioiTinh = _gioiTinh;
-			this.TayTrangToi = _tayTrangToi;
-			this.RuaMat = _ruaMat;
-			this.Toner = _toner;
-			this.Serum = _serum;
-			this.Kem = _kem;
-			this.SanPhamKhac = _sanPhamKhac;
 			this.Luuy = _luuy;
 			this.ImageLink = _imageLink;
 			this.Ngaysinh = _ngaysinh;
@@ -127,19 +114,12 @@ namespace SkinCare.Entities
 		///<param name="_soDienThoai"></param>
 		///<param name="_diaChi"></param>
 		///<param name="_gioiTinh"></param>
-		///<param name="_tayTrangToi"></param>
-		///<param name="_ruaMat"></param>
-		///<param name="_toner"></param>
-		///<param name="_serum"></param>
-		///<param name="_kem"></param>
-		///<param name="_sanPhamKhac"></param>
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
 		///<param name="_ngaysinh"></param>
 		public static KhachHang CreateKhachHang(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
-			System.String _diaChi, System.String _gioiTinh, System.Boolean? _tayTrangToi, System.Boolean? _ruaMat, 
-			System.Boolean? _toner, System.Boolean? _serum, System.Boolean? _kem, System.Boolean? _sanPhamKhac, 
-			System.String _luuy, System.String _imageLink, System.DateTime? _ngaysinh)
+			System.String _diaChi, System.String _gioiTinh, System.String _luuy, System.String _imageLink, 
+			System.DateTime? _ngaysinh)
 		{
 			KhachHang newKhachHang = new KhachHang();
 			newKhachHang.TenKhachHang = _tenKhachHang;
@@ -147,12 +127,6 @@ namespace SkinCare.Entities
 			newKhachHang.SoDienThoai = _soDienThoai;
 			newKhachHang.DiaChi = _diaChi;
 			newKhachHang.GioiTinh = _gioiTinh;
-			newKhachHang.TayTrangToi = _tayTrangToi;
-			newKhachHang.RuaMat = _ruaMat;
-			newKhachHang.Toner = _toner;
-			newKhachHang.Serum = _serum;
-			newKhachHang.Kem = _kem;
-			newKhachHang.SanPhamKhac = _sanPhamKhac;
 			newKhachHang.Luuy = _luuy;
 			newKhachHang.ImageLink = _imageLink;
 			newKhachHang.Ngaysinh = _ngaysinh;
@@ -394,246 +368,6 @@ namespace SkinCare.Entities
 		}
 		
 		/// <summary>
-		/// 	Gets or sets the TayTrangToi property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? TayTrangToi
-		{
-			get
-			{
-				return this.entityData.TayTrangToi; 
-			}
-			
-			set
-			{
-				if (this.entityData.TayTrangToi == value)
-					return;
-				
-                OnPropertyChanging("TayTrangToi");                    
-				OnColumnChanging(KhachHangColumn.TayTrangToi, this.entityData.TayTrangToi);
-				this.entityData.TayTrangToi = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.TayTrangToi, this.entityData.TayTrangToi);
-				OnPropertyChanged("TayTrangToi");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the RuaMat property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? RuaMat
-		{
-			get
-			{
-				return this.entityData.RuaMat; 
-			}
-			
-			set
-			{
-				if (this.entityData.RuaMat == value)
-					return;
-				
-                OnPropertyChanging("RuaMat");                    
-				OnColumnChanging(KhachHangColumn.RuaMat, this.entityData.RuaMat);
-				this.entityData.RuaMat = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.RuaMat, this.entityData.RuaMat);
-				OnPropertyChanged("RuaMat");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the Toner property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? Toner
-		{
-			get
-			{
-				return this.entityData.Toner; 
-			}
-			
-			set
-			{
-				if (this.entityData.Toner == value)
-					return;
-				
-                OnPropertyChanging("Toner");                    
-				OnColumnChanging(KhachHangColumn.Toner, this.entityData.Toner);
-				this.entityData.Toner = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.Toner, this.entityData.Toner);
-				OnPropertyChanged("Toner");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the Serum property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? Serum
-		{
-			get
-			{
-				return this.entityData.Serum; 
-			}
-			
-			set
-			{
-				if (this.entityData.Serum == value)
-					return;
-				
-                OnPropertyChanging("Serum");                    
-				OnColumnChanging(KhachHangColumn.Serum, this.entityData.Serum);
-				this.entityData.Serum = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.Serum, this.entityData.Serum);
-				OnPropertyChanged("Serum");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the Kem property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? Kem
-		{
-			get
-			{
-				return this.entityData.Kem; 
-			}
-			
-			set
-			{
-				if (this.entityData.Kem == value)
-					return;
-				
-                OnPropertyChanging("Kem");                    
-				OnColumnChanging(KhachHangColumn.Kem, this.entityData.Kem);
-				this.entityData.Kem = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.Kem, this.entityData.Kem);
-				OnPropertyChanged("Kem");
-			}
-		}
-		
-		/// <summary>
-		/// 	Gets or sets the SanPhamKhac property. 
-		///		
-		/// </summary>
-		/// <value>This type is bit.</value>
-		/// <remarks>
-		/// This property can be set to null. 
-		/// If this column is null it is up to the developer to check using the HasValue property
-		/// and perform business logic appropriately.
-		/// </remarks>
-		
-		
-
-
-
-
-		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
-		[DataObjectField(false, false, true)]
-		public virtual System.Boolean? SanPhamKhac
-		{
-			get
-			{
-				return this.entityData.SanPhamKhac; 
-			}
-			
-			set
-			{
-				if (this.entityData.SanPhamKhac == value)
-					return;
-				
-                OnPropertyChanging("SanPhamKhac");                    
-				OnColumnChanging(KhachHangColumn.SanPhamKhac, this.entityData.SanPhamKhac);
-				this.entityData.SanPhamKhac = value;
-				if (this.EntityState == EntityState.Unchanged)
-					this.EntityState = EntityState.Changed;
-				OnColumnChanged(KhachHangColumn.SanPhamKhac, this.entityData.SanPhamKhac);
-				OnPropertyChanged("SanPhamKhac");
-			}
-		}
-		
-		/// <summary>
 		/// 	Gets or sets the Luuy property. 
 		///		
 		/// </summary>
@@ -803,7 +537,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "GioiTinh", "TayTrangToi", "RuaMat", "Toner", "Serum", "Kem", "SanPhamKhac", "LuuY", "ImageLink", "Ngaysinh"};
+				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "GioiTinh", "LuuY", "ImageLink", "Ngaysinh"};
 			}
 		}
 		#endregion 
@@ -957,12 +691,6 @@ namespace SkinCare.Entities
 				copy.SoDienThoai = this.SoDienThoai;
 				copy.DiaChi = this.DiaChi;
 				copy.GioiTinh = this.GioiTinh;
-				copy.TayTrangToi = this.TayTrangToi;
-				copy.RuaMat = this.RuaMat;
-				copy.Toner = this.Toner;
-				copy.Serum = this.Serum;
-				copy.Kem = this.Kem;
-				copy.SanPhamKhac = this.SanPhamKhac;
 				copy.Luuy = this.Luuy;
 				copy.ImageLink = this.ImageLink;
 				copy.Ngaysinh = this.Ngaysinh;
@@ -1110,18 +838,6 @@ namespace SkinCare.Entities
 					return entityData.DiaChi != _originalData.DiaChi;
 					case KhachHangColumn.GioiTinh:
 					return entityData.GioiTinh != _originalData.GioiTinh;
-					case KhachHangColumn.TayTrangToi:
-					return entityData.TayTrangToi != _originalData.TayTrangToi;
-					case KhachHangColumn.RuaMat:
-					return entityData.RuaMat != _originalData.RuaMat;
-					case KhachHangColumn.Toner:
-					return entityData.Toner != _originalData.Toner;
-					case KhachHangColumn.Serum:
-					return entityData.Serum != _originalData.Serum;
-					case KhachHangColumn.Kem:
-					return entityData.Kem != _originalData.Kem;
-					case KhachHangColumn.SanPhamKhac:
-					return entityData.SanPhamKhac != _originalData.SanPhamKhac;
 					case KhachHangColumn.Luuy:
 					return entityData.Luuy != _originalData.Luuy;
 					case KhachHangColumn.ImageLink:
@@ -1161,12 +877,6 @@ namespace SkinCare.Entities
 			result = result || entityData.SoDienThoai != _originalData.SoDienThoai;
 			result = result || entityData.DiaChi != _originalData.DiaChi;
 			result = result || entityData.GioiTinh != _originalData.GioiTinh;
-			result = result || entityData.TayTrangToi != _originalData.TayTrangToi;
-			result = result || entityData.RuaMat != _originalData.RuaMat;
-			result = result || entityData.Toner != _originalData.Toner;
-			result = result || entityData.Serum != _originalData.Serum;
-			result = result || entityData.Kem != _originalData.Kem;
-			result = result || entityData.SanPhamKhac != _originalData.SanPhamKhac;
 			result = result || entityData.Luuy != _originalData.Luuy;
 			result = result || entityData.ImageLink != _originalData.ImageLink;
 			result = result || entityData.Ngaysinh != _originalData.Ngaysinh;
@@ -1185,12 +895,6 @@ namespace SkinCare.Entities
 				_originalData.SoDienThoai,
 				_originalData.DiaChi,
 				_originalData.GioiTinh,
-				_originalData.TayTrangToi,
-				_originalData.RuaMat,
-				_originalData.Toner,
-				_originalData.Serum,
-				_originalData.Kem,
-				_originalData.SanPhamKhac,
 				_originalData.Luuy,
 				_originalData.ImageLink,
 				_originalData.Ngaysinh
@@ -1229,12 +933,6 @@ namespace SkinCare.Entities
 					((this.SoDienThoai == null) ? string.Empty : this.SoDienThoai.ToString()).GetHashCode() ^ 
 					((this.DiaChi == null) ? string.Empty : this.DiaChi.ToString()).GetHashCode() ^ 
 					((this.GioiTinh == null) ? string.Empty : this.GioiTinh.ToString()).GetHashCode() ^ 
-					((this.TayTrangToi == null) ? string.Empty : this.TayTrangToi.ToString()).GetHashCode() ^ 
-					((this.RuaMat == null) ? string.Empty : this.RuaMat.ToString()).GetHashCode() ^ 
-					((this.Toner == null) ? string.Empty : this.Toner.ToString()).GetHashCode() ^ 
-					((this.Serum == null) ? string.Empty : this.Serum.ToString()).GetHashCode() ^ 
-					((this.Kem == null) ? string.Empty : this.Kem.ToString()).GetHashCode() ^ 
-					((this.SanPhamKhac == null) ? string.Empty : this.SanPhamKhac.ToString()).GetHashCode() ^ 
 					((this.Luuy == null) ? string.Empty : this.Luuy.ToString()).GetHashCode() ^ 
 					((this.ImageLink == null) ? string.Empty : this.ImageLink.ToString()).GetHashCode() ^ 
 					((this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString()).GetHashCode();
@@ -1314,60 +1012,6 @@ namespace SkinCare.Entities
 					equal = false;
 			}
 			else if (Object1.GioiTinh == null ^ Object2.GioiTinh == null )
-			{
-				equal = false;
-			}
-			if ( Object1.TayTrangToi != null && Object2.TayTrangToi != null )
-			{
-				if (Object1.TayTrangToi != Object2.TayTrangToi)
-					equal = false;
-			}
-			else if (Object1.TayTrangToi == null ^ Object2.TayTrangToi == null )
-			{
-				equal = false;
-			}
-			if ( Object1.RuaMat != null && Object2.RuaMat != null )
-			{
-				if (Object1.RuaMat != Object2.RuaMat)
-					equal = false;
-			}
-			else if (Object1.RuaMat == null ^ Object2.RuaMat == null )
-			{
-				equal = false;
-			}
-			if ( Object1.Toner != null && Object2.Toner != null )
-			{
-				if (Object1.Toner != Object2.Toner)
-					equal = false;
-			}
-			else if (Object1.Toner == null ^ Object2.Toner == null )
-			{
-				equal = false;
-			}
-			if ( Object1.Serum != null && Object2.Serum != null )
-			{
-				if (Object1.Serum != Object2.Serum)
-					equal = false;
-			}
-			else if (Object1.Serum == null ^ Object2.Serum == null )
-			{
-				equal = false;
-			}
-			if ( Object1.Kem != null && Object2.Kem != null )
-			{
-				if (Object1.Kem != Object2.Kem)
-					equal = false;
-			}
-			else if (Object1.Kem == null ^ Object2.Kem == null )
-			{
-				equal = false;
-			}
-			if ( Object1.SanPhamKhac != null && Object2.SanPhamKhac != null )
-			{
-				if (Object1.SanPhamKhac != Object2.SanPhamKhac)
-					equal = false;
-			}
-			else if (Object1.SanPhamKhac == null ^ Object2.SanPhamKhac == null )
 			{
 				equal = false;
 			}
@@ -1474,42 +1118,6 @@ namespace SkinCare.Entities
             	
             	case KhachHangColumn.GioiTinh:
             		return this.GioiTinh.CompareTo(rhs.GioiTinh);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.TayTrangToi:
-            		return this.TayTrangToi.Value.CompareTo(rhs.TayTrangToi.Value);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.RuaMat:
-            		return this.RuaMat.Value.CompareTo(rhs.RuaMat.Value);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.Toner:
-            		return this.Toner.Value.CompareTo(rhs.Toner.Value);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.Serum:
-            		return this.Serum.Value.CompareTo(rhs.Serum.Value);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.Kem:
-            		return this.Kem.Value.CompareTo(rhs.Kem.Value);
-            		
-            		                 
-            	
-            	
-            	case KhachHangColumn.SanPhamKhac:
-            		return this.SanPhamKhac.Value.CompareTo(rhs.SanPhamKhac.Value);
             		
             		                 
             	
@@ -1664,19 +1272,13 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{16}{15}- MaKhachHang: {0}{15}- TenKhachHang: {1}{15}- Email: {2}{15}- SoDienThoai: {3}{15}- DiaChi: {4}{15}- GioiTinh: {5}{15}- TayTrangToi: {6}{15}- RuaMat: {7}{15}- Toner: {8}{15}- Serum: {9}{15}- Kem: {10}{15}- SanPhamKhac: {11}{15}- Luuy: {12}{15}- ImageLink: {13}{15}- Ngaysinh: {14}{15}{17}", 
+				"{10}{9}- MaKhachHang: {0}{9}- TenKhachHang: {1}{9}- Email: {2}{9}- SoDienThoai: {3}{9}- DiaChi: {4}{9}- GioiTinh: {5}{9}- Luuy: {6}{9}- ImageLink: {7}{9}- Ngaysinh: {8}{9}{11}", 
 				this.MaKhachHang,
 				(this.TenKhachHang == null) ? string.Empty : this.TenKhachHang.ToString(),
 				(this.Email == null) ? string.Empty : this.Email.ToString(),
 				(this.SoDienThoai == null) ? string.Empty : this.SoDienThoai.ToString(),
 				(this.DiaChi == null) ? string.Empty : this.DiaChi.ToString(),
 				(this.GioiTinh == null) ? string.Empty : this.GioiTinh.ToString(),
-				(this.TayTrangToi == null) ? string.Empty : this.TayTrangToi.ToString(),
-				(this.RuaMat == null) ? string.Empty : this.RuaMat.ToString(),
-				(this.Toner == null) ? string.Empty : this.Toner.ToString(),
-				(this.Serum == null) ? string.Empty : this.Serum.ToString(),
-				(this.Kem == null) ? string.Empty : this.Kem.ToString(),
-				(this.SanPhamKhac == null) ? string.Empty : this.SanPhamKhac.ToString(),
 				(this.Luuy == null) ? string.Empty : this.Luuy.ToString(),
 				(this.ImageLink == null) ? string.Empty : this.ImageLink.ToString(),
 				(this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString(),
@@ -1739,36 +1341,6 @@ namespace SkinCare.Entities
 		public System.String GioiTinh = null;
 		
 		/// <summary>
-		/// TayTrangToi : 
-		/// </summary>
-		public System.Boolean? TayTrangToi = null;
-		
-		/// <summary>
-		/// RuaMat : 
-		/// </summary>
-		public System.Boolean? RuaMat = null;
-		
-		/// <summary>
-		/// Toner : 
-		/// </summary>
-		public System.Boolean? Toner = null;
-		
-		/// <summary>
-		/// Serum : 
-		/// </summary>
-		public System.Boolean? Serum = null;
-		
-		/// <summary>
-		/// Kem : 
-		/// </summary>
-		public System.Boolean? Kem = null;
-		
-		/// <summary>
-		/// SanPhamKhac : 
-		/// </summary>
-		public System.Boolean? SanPhamKhac = null;
-		
-		/// <summary>
 		/// LuuY : 
 		/// </summary>
 		public System.String Luuy = null;
@@ -1810,12 +1382,6 @@ namespace SkinCare.Entities
 			_tmp.SoDienThoai = this.SoDienThoai;
 			_tmp.DiaChi = this.DiaChi;
 			_tmp.GioiTinh = this.GioiTinh;
-			_tmp.TayTrangToi = this.TayTrangToi;
-			_tmp.RuaMat = this.RuaMat;
-			_tmp.Toner = this.Toner;
-			_tmp.Serum = this.Serum;
-			_tmp.Kem = this.Kem;
-			_tmp.SanPhamKhac = this.SanPhamKhac;
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
 			_tmp.Ngaysinh = this.Ngaysinh;
@@ -1850,12 +1416,6 @@ namespace SkinCare.Entities
 			_tmp.SoDienThoai = this.SoDienThoai;
 			_tmp.DiaChi = this.DiaChi;
 			_tmp.GioiTinh = this.GioiTinh;
-			_tmp.TayTrangToi = this.TayTrangToi;
-			_tmp.RuaMat = this.RuaMat;
-			_tmp.Toner = this.Toner;
-			_tmp.Serum = this.Serum;
-			_tmp.Kem = this.Kem;
-			_tmp.SanPhamKhac = this.SanPhamKhac;
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
 			_tmp.Ngaysinh = this.Ngaysinh;
@@ -2259,59 +1819,23 @@ namespace SkinCare.Entities
 		[ColumnEnum("GioiTinh", typeof(System.String), System.Data.DbType.AnsiStringFixedLength, false, false, true, 1)]
 		GioiTinh = 6,
 		/// <summary>
-		/// TayTrangToi : 
-		/// </summary>
-		[EnumTextValue("Tay Trang Toi")]
-		[ColumnEnum("TayTrangToi", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		TayTrangToi = 7,
-		/// <summary>
-		/// RuaMat : 
-		/// </summary>
-		[EnumTextValue("Rua Mat")]
-		[ColumnEnum("RuaMat", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		RuaMat = 8,
-		/// <summary>
-		/// Toner : 
-		/// </summary>
-		[EnumTextValue("Toner")]
-		[ColumnEnum("Toner", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Toner = 9,
-		/// <summary>
-		/// Serum : 
-		/// </summary>
-		[EnumTextValue("Serum")]
-		[ColumnEnum("Serum", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Serum = 10,
-		/// <summary>
-		/// Kem : 
-		/// </summary>
-		[EnumTextValue("Kem")]
-		[ColumnEnum("Kem", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		Kem = 11,
-		/// <summary>
-		/// SanPhamKhac : 
-		/// </summary>
-		[EnumTextValue("San Pham Khac")]
-		[ColumnEnum("SanPhamKhac", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, true)]
-		SanPhamKhac = 12,
-		/// <summary>
 		/// Luuy : 
 		/// </summary>
 		[EnumTextValue("Luuy")]
 		[ColumnEnum("LuuY", typeof(System.String), System.Data.DbType.String, false, false, true, 200)]
-		Luuy = 13,
+		Luuy = 7,
 		/// <summary>
 		/// ImageLink : 
 		/// </summary>
 		[EnumTextValue("Image Link")]
 		[ColumnEnum("ImageLink", typeof(System.String), System.Data.DbType.String, false, false, true, 100)]
-		ImageLink = 14,
+		ImageLink = 8,
 		/// <summary>
 		/// Ngaysinh : 
 		/// </summary>
 		[EnumTextValue("Ngaysinh")]
 		[ColumnEnum("Ngaysinh", typeof(System.DateTime), System.Data.DbType.DateTime, false, false, true)]
-		Ngaysinh = 15
+		Ngaysinh = 9
 	}//End enum
 
 	#endregion KhachHangColumn Enum

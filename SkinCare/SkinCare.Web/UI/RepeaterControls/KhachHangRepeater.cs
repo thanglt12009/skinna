@@ -386,60 +386,6 @@ namespace SkinCare.Web.UI
 			get { return _entity.GioiTinh; }
 		}
         /// <summary>
-        /// Gets the TayTrangToi
-        /// </summary>
-        /// <value>The TayTrangToi.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? TayTrangToi
-		{
-			get { return _entity.TayTrangToi; }
-		}
-        /// <summary>
-        /// Gets the RuaMat
-        /// </summary>
-        /// <value>The RuaMat.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? RuaMat
-		{
-			get { return _entity.RuaMat; }
-		}
-        /// <summary>
-        /// Gets the Toner
-        /// </summary>
-        /// <value>The Toner.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? Toner
-		{
-			get { return _entity.Toner; }
-		}
-        /// <summary>
-        /// Gets the Serum
-        /// </summary>
-        /// <value>The Serum.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? Serum
-		{
-			get { return _entity.Serum; }
-		}
-        /// <summary>
-        /// Gets the Kem
-        /// </summary>
-        /// <value>The Kem.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? Kem
-		{
-			get { return _entity.Kem; }
-		}
-        /// <summary>
-        /// Gets the SanPhamKhac
-        /// </summary>
-        /// <value>The SanPhamKhac.</value>
-		[System.ComponentModel.Bindable(true)]
-		public System.Boolean? SanPhamKhac
-		{
-			get { return _entity.SanPhamKhac; }
-		}
-        /// <summary>
         /// Gets the Luuy
         /// </summary>
         /// <value>The Luuy.</value>

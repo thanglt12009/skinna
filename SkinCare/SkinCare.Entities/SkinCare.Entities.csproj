@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{43F2C54C-AEA1-421A-A841-07345DBBEFEB}</ProjectGuid>
+    <ProjectGuid>{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -207,6 +207,19 @@
 			</Compile>
 			<Compile Include="IKhuyenMai.cs">
 			  <DependentUpon>KhuyenMai.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+		
+		
+			<Compile Include="LieuTrinh.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="LieuTrinhBase.generated.cs">
+			  <DependentUpon>LieuTrinh.cs</DependentUpon>
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="ILieuTrinh.cs">
+			  <DependentUpon>LieuTrinh.cs</DependentUpon>
 			  <SubType>Code</SubType>
 			</Compile>
 		

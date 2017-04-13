@@ -8,6 +8,5 @@ C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCar
 C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
-C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\obj\Debug\SkinCare.Entities.csprojResolveAssemblyReference.cache
 C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\obj\Debug\SkinCare.Entities.dll
 C:\Users\W10-PRO\Documents\CodeSmith Generator\Templates\NetTiers\Output\SkinCare.Entities\obj\Debug\SkinCare.Entities.pdb

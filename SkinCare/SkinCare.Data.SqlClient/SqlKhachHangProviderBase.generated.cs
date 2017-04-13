@@ -181,12 +181,6 @@ namespace SkinCare.Data.SqlClient
 		database.AddInParameter(commandWrapper, "@SoDienThoai", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@DiaChi", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@GioiTinh", DbType.AnsiStringFixedLength, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@TayTrangToi", DbType.Boolean, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@RuaMat", DbType.Boolean, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@Toner", DbType.Boolean, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@Serum", DbType.Boolean, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@Kem", DbType.Boolean, DBNull.Value);
-		database.AddInParameter(commandWrapper, "@SanPhamKhac", DbType.Boolean, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@Luuy", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, DBNull.Value);
@@ -238,42 +232,6 @@ namespace SkinCare.Data.SqlClient
 				{
 					database.SetParameterValue(commandWrapper, "@GioiTinh", 
 						clause.Trim().Remove(0,8).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("taytrangtoi ") || clause.Trim().StartsWith("taytrangtoi="))
-				{
-					database.SetParameterValue(commandWrapper, "@TayTrangToi", 
-						clause.Trim().Remove(0,11).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("ruamat ") || clause.Trim().StartsWith("ruamat="))
-				{
-					database.SetParameterValue(commandWrapper, "@RuaMat", 
-						clause.Trim().Remove(0,6).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("toner ") || clause.Trim().StartsWith("toner="))
-				{
-					database.SetParameterValue(commandWrapper, "@Toner", 
-						clause.Trim().Remove(0,5).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("serum ") || clause.Trim().StartsWith("serum="))
-				{
-					database.SetParameterValue(commandWrapper, "@Serum", 
-						clause.Trim().Remove(0,5).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("kem ") || clause.Trim().StartsWith("kem="))
-				{
-					database.SetParameterValue(commandWrapper, "@Kem", 
-						clause.Trim().Remove(0,3).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
-					continue;
-				}
-				if (clause.Trim().StartsWith("sanphamkhac ") || clause.Trim().StartsWith("sanphamkhac="))
-				{
-					database.SetParameterValue(commandWrapper, "@SanPhamKhac", 
-						clause.Trim().Remove(0,11).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
 					continue;
 				}
 				if (clause.Trim().StartsWith("luuy ") || clause.Trim().StartsWith("luuy="))
@@ -691,24 +649,12 @@ namespace SkinCare.Data.SqlClient
 			col4.AllowDBNull = true;		
 			DataColumn col5 = dataTable.Columns.Add("GioiTinh", typeof(System.String));
 			col5.AllowDBNull = true;		
-			DataColumn col6 = dataTable.Columns.Add("TayTrangToi", typeof(System.Boolean));
+			DataColumn col6 = dataTable.Columns.Add("LuuY", typeof(System.String));
 			col6.AllowDBNull = true;		
-			DataColumn col7 = dataTable.Columns.Add("RuaMat", typeof(System.Boolean));
+			DataColumn col7 = dataTable.Columns.Add("ImageLink", typeof(System.String));
 			col7.AllowDBNull = true;		
-			DataColumn col8 = dataTable.Columns.Add("Toner", typeof(System.Boolean));
+			DataColumn col8 = dataTable.Columns.Add("Ngaysinh", typeof(System.DateTime));
 			col8.AllowDBNull = true;		
-			DataColumn col9 = dataTable.Columns.Add("Serum", typeof(System.Boolean));
-			col9.AllowDBNull = true;		
-			DataColumn col10 = dataTable.Columns.Add("Kem", typeof(System.Boolean));
-			col10.AllowDBNull = true;		
-			DataColumn col11 = dataTable.Columns.Add("SanPhamKhac", typeof(System.Boolean));
-			col11.AllowDBNull = true;		
-			DataColumn col12 = dataTable.Columns.Add("LuuY", typeof(System.String));
-			col12.AllowDBNull = true;		
-			DataColumn col13 = dataTable.Columns.Add("ImageLink", typeof(System.String));
-			col13.AllowDBNull = true;		
-			DataColumn col14 = dataTable.Columns.Add("Ngaysinh", typeof(System.DateTime));
-			col14.AllowDBNull = true;		
 			
 			bulkCopy.ColumnMappings.Add("MaKhachHang", "MaKhachHang");
 			bulkCopy.ColumnMappings.Add("TenKhachHang", "TenKhachHang");
@@ -716,12 +662,6 @@ namespace SkinCare.Data.SqlClient
 			bulkCopy.ColumnMappings.Add("SoDienThoai", "SoDienThoai");
 			bulkCopy.ColumnMappings.Add("DiaChi", "DiaChi");
 			bulkCopy.ColumnMappings.Add("GioiTinh", "GioiTinh");
-			bulkCopy.ColumnMappings.Add("TayTrangToi", "TayTrangToi");
-			bulkCopy.ColumnMappings.Add("RuaMat", "RuaMat");
-			bulkCopy.ColumnMappings.Add("Toner", "Toner");
-			bulkCopy.ColumnMappings.Add("Serum", "Serum");
-			bulkCopy.ColumnMappings.Add("Kem", "Kem");
-			bulkCopy.ColumnMappings.Add("SanPhamKhac", "SanPhamKhac");
 			bulkCopy.ColumnMappings.Add("LuuY", "LuuY");
 			bulkCopy.ColumnMappings.Add("ImageLink", "ImageLink");
 			bulkCopy.ColumnMappings.Add("Ngaysinh", "Ngaysinh");
@@ -749,24 +689,6 @@ namespace SkinCare.Data.SqlClient
 							
 				
 					row["GioiTinh"] = entity.GioiTinh;
-							
-				
-					row["TayTrangToi"] = entity.TayTrangToi.HasValue ? (object) entity.TayTrangToi  : System.DBNull.Value;
-							
-				
-					row["RuaMat"] = entity.RuaMat.HasValue ? (object) entity.RuaMat  : System.DBNull.Value;
-							
-				
-					row["Toner"] = entity.Toner.HasValue ? (object) entity.Toner  : System.DBNull.Value;
-							
-				
-					row["Serum"] = entity.Serum.HasValue ? (object) entity.Serum  : System.DBNull.Value;
-							
-				
-					row["Kem"] = entity.Kem.HasValue ? (object) entity.Kem  : System.DBNull.Value;
-							
-				
-					row["SanPhamKhac"] = entity.SanPhamKhac.HasValue ? (object) entity.SanPhamKhac  : System.DBNull.Value;
 							
 				
 					row["LuuY"] = entity.Luuy;
@@ -818,12 +740,6 @@ namespace SkinCare.Data.SqlClient
             database.AddInParameter(commandWrapper, "@SoDienThoai", DbType.String, entity.SoDienThoai );
             database.AddInParameter(commandWrapper, "@DiaChi", DbType.String, entity.DiaChi );
             database.AddInParameter(commandWrapper, "@GioiTinh", DbType.AnsiStringFixedLength, entity.GioiTinh );
-			database.AddInParameter(commandWrapper, "@TayTrangToi", DbType.Boolean, (entity.TayTrangToi.HasValue ? (object) entity.TayTrangToi  : System.DBNull.Value));
-			database.AddInParameter(commandWrapper, "@RuaMat", DbType.Boolean, (entity.RuaMat.HasValue ? (object) entity.RuaMat  : System.DBNull.Value));
-			database.AddInParameter(commandWrapper, "@Toner", DbType.Boolean, (entity.Toner.HasValue ? (object) entity.Toner  : System.DBNull.Value));
-			database.AddInParameter(commandWrapper, "@Serum", DbType.Boolean, (entity.Serum.HasValue ? (object) entity.Serum  : System.DBNull.Value));
-			database.AddInParameter(commandWrapper, "@Kem", DbType.Boolean, (entity.Kem.HasValue ? (object) entity.Kem  : System.DBNull.Value));
-			database.AddInParameter(commandWrapper, "@SanPhamKhac", DbType.Boolean, (entity.SanPhamKhac.HasValue ? (object) entity.SanPhamKhac  : System.DBNull.Value));
             database.AddInParameter(commandWrapper, "@Luuy", DbType.String, entity.Luuy );
             database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, entity.ImageLink );
 			database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, (entity.Ngaysinh.HasValue ? (object) entity.Ngaysinh  : System.DBNull.Value));
@@ -881,12 +797,6 @@ namespace SkinCare.Data.SqlClient
             database.AddInParameter(commandWrapper, "@SoDienThoai", DbType.String, entity.SoDienThoai );
             database.AddInParameter(commandWrapper, "@DiaChi", DbType.String, entity.DiaChi );
             database.AddInParameter(commandWrapper, "@GioiTinh", DbType.AnsiStringFixedLength, entity.GioiTinh );
-			database.AddInParameter(commandWrapper, "@TayTrangToi", DbType.Boolean, (entity.TayTrangToi.HasValue ? (object) entity.TayTrangToi : System.DBNull.Value) );
-			database.AddInParameter(commandWrapper, "@RuaMat", DbType.Boolean, (entity.RuaMat.HasValue ? (object) entity.RuaMat : System.DBNull.Value) );
-			database.AddInParameter(commandWrapper, "@Toner", DbType.Boolean, (entity.Toner.HasValue ? (object) entity.Toner : System.DBNull.Value) );
-			database.AddInParameter(commandWrapper, "@Serum", DbType.Boolean, (entity.Serum.HasValue ? (object) entity.Serum : System.DBNull.Value) );
-			database.AddInParameter(commandWrapper, "@Kem", DbType.Boolean, (entity.Kem.HasValue ? (object) entity.Kem : System.DBNull.Value) );
-			database.AddInParameter(commandWrapper, "@SanPhamKhac", DbType.Boolean, (entity.SanPhamKhac.HasValue ? (object) entity.SanPhamKhac : System.DBNull.Value) );
             database.AddInParameter(commandWrapper, "@Luuy", DbType.String, entity.Luuy );
             database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, entity.ImageLink );
 			database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, (entity.Ngaysinh.HasValue ? (object) entity.Ngaysinh : System.DBNull.Value) );

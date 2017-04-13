@@ -45,36 +45,6 @@ namespace SkinCare.Entities
 		System.String  GioiTinh  { get; set; }
 		
 		/// <summary>
-		/// TayTrangToi : 
-		/// </summary>
-		System.Boolean?  TayTrangToi  { get; set; }
-		
-		/// <summary>
-		/// RuaMat : 
-		/// </summary>
-		System.Boolean?  RuaMat  { get; set; }
-		
-		/// <summary>
-		/// Toner : 
-		/// </summary>
-		System.Boolean?  Toner  { get; set; }
-		
-		/// <summary>
-		/// Serum : 
-		/// </summary>
-		System.Boolean?  Serum  { get; set; }
-		
-		/// <summary>
-		/// Kem : 
-		/// </summary>
-		System.Boolean?  Kem  { get; set; }
-		
-		/// <summary>
-		/// SanPhamKhac : 
-		/// </summary>
-		System.Boolean?  SanPhamKhac  { get; set; }
-		
-		/// <summary>
 		/// LuuY : 
 		/// </summary>
 		System.String  Luuy  { get; set; }

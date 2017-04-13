@@ -8,6 +8,7 @@
 	<siteMapNode url="~/Admin/KhachHang.aspx" title="Khach Hang"  description="" />
 	<siteMapNode url="~/Admin/KhoHangSanPham.aspx" title="Kho Hang San Pham"  description="" />
 	<siteMapNode url="~/Admin/KhuyenMai.aspx" title="Khuyen Mai"  description="" />
+	<siteMapNode url="~/Admin/LieuTrinh.aspx" title="Lieu Trinh"  description="" />
 	<siteMapNode url="~/Admin/LoaiTrangThaiDonHang.aspx" title="Loai Trang Thai Don Hang"  description="" />
 	<siteMapNode url="~/Admin/NguonDonHang.aspx" title="Nguon Don Hang"  description="" />
 	<siteMapNode url="~/Admin/PhuongThucThanhToan.aspx" title="Phuong Thuc Thanh Toan"  description="" />

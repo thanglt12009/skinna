@@ -16,20 +16,14 @@
 			>
 			<Columns>
 				<asp:CommandField ShowSelectButton="True" ShowEditButton="True" />				
-				<asp:BoundField DataField="Ngaysinh" DataFormatString="{0:d}" HtmlEncode="False" HeaderText="Ngaysinh" SortExpression="[Ngaysinh]"  />
 				<asp:BoundField DataField="TenKhachHang" HeaderText="Ten Khach Hang" SortExpression="[TenKhachHang]"  />
 				<asp:BoundField DataField="Email" HeaderText="Email" SortExpression="[Email]"  />
 				<asp:BoundField DataField="SoDienThoai" HeaderText="So Dien Thoai" SortExpression="[SoDienThoai]"  />
 				<asp:BoundField DataField="DiaChi" HeaderText="Dia Chi" SortExpression="[DiaChi]"  />
 				<asp:BoundField DataField="GioiTinh" HeaderText="Gioi Tinh" SortExpression="[GioiTinh]"  />
-				<data:BoundRadioButtonField DataField="TayTrangToi" HeaderText="Tay Trang Toi" SortExpression="[TayTrangToi]"  />
-				<data:BoundRadioButtonField DataField="RuaMat" HeaderText="Rua Mat" SortExpression="[RuaMat]"  />
-				<data:BoundRadioButtonField DataField="Toner" HeaderText="Toner" SortExpression="[Toner]"  />
-				<data:BoundRadioButtonField DataField="Serum" HeaderText="Serum" SortExpression="[Serum]"  />
-				<data:BoundRadioButtonField DataField="Kem" HeaderText="Kem" SortExpression="[Kem]"  />
-				<data:BoundRadioButtonField DataField="SanPhamKhac" HeaderText="San Pham Khac" SortExpression="[SanPhamKhac]"  />
 				<asp:BoundField DataField="Luuy" HeaderText="Luuy" SortExpression="[LuuY]"  />
 				<asp:BoundField DataField="ImageLink" HeaderText="Image Link" SortExpression="[ImageLink]"  />
+				<asp:BoundField DataField="Ngaysinh" DataFormatString="{0:d}" HtmlEncode="False" HeaderText="Ngaysinh" SortExpression="[Ngaysinh]"  />
 			</Columns>
 			<EmptyDataTemplate>
 				<b>No KhachHang Found!</b>

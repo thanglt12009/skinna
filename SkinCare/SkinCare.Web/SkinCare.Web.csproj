@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>12.0.21005.1</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FA4C7C03-7D24-4044-91F3-9BC67B8A380D}</ProjectGuid>
+    <ProjectGuid>{C57B13FB-5154-40E4-9BCA-4CB9C3D7B417}</ProjectGuid>
     <ProjectType>Local</ProjectType>
 	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
@@ -100,13 +100,13 @@
      
 	<ProjectReference Include="..\SkinCare.Entities\SkinCare.Entities.csproj">
       <Name>SkinCare.Entities</Name>
-      <Project>{43F2C54C-AEA1-421A-A841-07345DBBEFEB}</Project>
+      <Project>{B399C53C-ECCF-4BC8-ADFA-BDA7169E6CF0}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
     <ProjectReference Include="..\SkinCare.Data\SkinCare.Data.csproj">
         <Name>SkinCare.Data</Name>
-        <Project>{D455767C-C47A-4DF9-B73D-B918F11F21EB}</Project>
+        <Project>{C3293F12-E838-4946-8503-9DD990B3F7F1}</Project>
         <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
 	
@@ -236,6 +236,12 @@
 			  <SubType>Code</SubType>
 			</Compile>
 			<Compile Include="UI\RepeaterControls\KhuyenMaiRepeater.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="DataSourceControls\LieuTrinhDataSource.cs">
+			  <SubType>Code</SubType>
+			</Compile>
+			<Compile Include="UI\RepeaterControls\LieuTrinhRepeater.cs">
 			  <SubType>Code</SubType>
 			</Compile>
 			<Compile Include="DataSourceControls\LoaiTrangThaiDonHangDataSource.cs">
