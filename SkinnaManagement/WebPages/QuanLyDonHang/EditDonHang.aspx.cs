@@ -186,6 +186,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         protected void btnSubmit_ServerClick(object sender, EventArgs e)
         {
+            KhachHangParameterBuilder query1 = new KhachHangParameterBuilder();
+            query1.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Value);
+
+            KhachHang khachHang = DataRepository.KhachHangProvider.Find(query1.GetParameters())[0];
+
             int maDonHang = 0;
             int.TryParse(Request.QueryString["id"], out maDonHang);
             DonHang editDonHang = DataRepository.DonHangProvider.GetByMaDonHang(maDonHang);
@@ -229,7 +234,29 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
                     }
                 }
+                TextBox txtTayTrangToi = (TextBox)this.LieuTrinh.FindControl("txtTayTrangToi");
+                TextBox txtRuaMat = (TextBox)this.LieuTrinh.FindControl("txtRuaMat");
+                TextBox txtToner = (TextBox)this.LieuTrinh.FindControl("txtToner");
+                TextBox txtSerum = (TextBox)this.LieuTrinh.FindControl("txtSerum");
+                TextBox txtKem = (TextBox)this.LieuTrinh.FindControl("txtKem");
+                TextBox txtOthers = (TextBox)this.LieuTrinh.FindControl("txtOthers");
 
+                if (!string.IsNullOrEmpty(txtKem.Text) || !string.IsNullOrEmpty(txtOthers.Text) ||
+                        !string.IsNullOrEmpty(txtRuaMat.Text) || !string.IsNullOrEmpty(txtSerum.Text) ||
+                        !string.IsNullOrEmpty(txtTayTrangToi.Text) || !string.IsNullOrEmpty(txtToner.Text)
+                       )
+                {
+                    LieuTrinh lieuTrinh = new LieuTrinh();
+                    lieuTrinh.MaKhachHang = khachHang.MaKhachHang;
+                    lieuTrinh.Ngay = System.DateTime.Now.Date;
+                    lieuTrinh.TayTrangToi = txtTayTrangToi.Text;
+                    lieuTrinh.RuaMat = txtRuaMat.Text;
+                    lieuTrinh.Toner = txtToner.Text;
+                    lieuTrinh.Serum = txtSerum.Text;
+                    lieuTrinh.Kem = txtKem.Text;
+                    lieuTrinh.SanPhamKhac = txtOthers.Text;
+                    result = DataRepository.LieuTrinhProvider.Insert(lieuTrinh);
+                }
 
             }
             catch (Exception ex)

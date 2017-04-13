@@ -16,6 +16,8 @@
     <!--Icons-->
     <script src='<%= ResolveUrl("~/js/lumino.glyphs.js") %>'></script>
     <script src='<%= ResolveUrl("~/js/jquery-1.11.1.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/jquery-migrate-1.2.1.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/jquery-ui-1.10.4.custom.min.js") %>'></script>
     <script src='<%= ResolveUrl("~/js/bootstrap.min.js") %>'></script>
     <script type="text/javascript" src='<%= ResolveUrl("~/js/datatables.min.js") %>'></script>
     <script src='<%= ResolveUrl("js/bootstrap-datepicker.js") %>'></script>

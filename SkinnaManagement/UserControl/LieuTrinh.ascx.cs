@@ -24,6 +24,7 @@ namespace SkinnaManagement.UserControl
                 txtTayTrangToi.Attributes.Add("readonly", "readonly");
                 txtToner.Attributes.Add("readonly", "readonly");
             }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs", "AccountStatement_InitDialogs();", true);
         }
 
         protected void cbTayTrangToi_CheckedChanged(object sender, EventArgs e)
@@ -108,7 +109,79 @@ namespace SkinnaManagement.UserControl
         {
             if (e.CommandName == "lbtView")
             {
-                dialog.Visible = true;
+                LinkButton lbtView = (LinkButton)e.CommandSource;
+                string Ngay = lbtView.CommandArgument;
+                GridViewRow gvr =  (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
+                int rowIndex = gvr.RowIndex;
+                int maKhachHang = Convert.ToInt32(gvLieuTrinh.DataKeys[rowIndex].Values[0]);
+
+                DataTable dt = new DataTable();
+                DataRow dr = null;
+                dt.Columns.Add(new DataColumn("SoThuTu", typeof(string)));
+                dt.Columns.Add(new DataColumn("Ngay", typeof(string)));
+                dt.Columns.Add(new DataColumn("LoaiLieuTrinh", typeof(string)));
+                dt.Columns.Add(new DataColumn("ThongTin", typeof(string)));
+                LieuTrinhParameterBuilder query = new LieuTrinhParameterBuilder();
+                query.Append(LieuTrinhColumn.MaKhachHang, maKhachHang.ToString());
+                query.Append(LieuTrinhColumn.Ngay, Ngay.ToString());
+                TList<SkinCare.Entities.LieuTrinh> list = DataRepository.LieuTrinhProvider.Find(query.GetParameters());
+                int stt = 1;
+                if (list != null && list.Count > 0)
+                {
+                    foreach (var item in list)
+                    {
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = item.Ngay.GetValueOrDefault().ToString("dd/MM/yyyy");
+                        dr["LoaiLieuTrinh"] = "Tẩy trang tối";
+                        dr["ThongTin"] = item.TayTrangToi;
+                        dt.Rows.Add(dr);
+                        stt++;
+
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = "";
+                        dr["LoaiLieuTrinh"] = "Rửa mặt";
+                        dr["ThongTin"] = item.RuaMat;
+                        dt.Rows.Add(dr);
+                        stt++;
+
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = "";
+                        dr["LoaiLieuTrinh"] = "Toner";
+                        dr["ThongTin"] = item.Toner;
+                        dt.Rows.Add(dr);
+                        stt++;
+
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = "";
+                        dr["LoaiLieuTrinh"] = "Serum";
+                        dr["ThongTin"] = item.Serum;
+                        dt.Rows.Add(dr);
+                        stt++;
+
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = "";
+                        dr["LoaiLieuTrinh"] = "Kem";
+                        dr["ThongTin"] = item.Kem;
+                        dt.Rows.Add(dr);
+                        stt++;
+
+                        dr = dt.NewRow();
+                        dr["SoThuTu"] = stt;
+                        dr["Ngay"] = "";
+                        dr["LoaiLieuTrinh"] = "Sản phẩm khác";
+                        dr["ThongTin"] = item.SanPhamKhac;
+                        dt.Rows.Add(dr);
+                        stt++;
+                    }
+                }
+                gvLieuTrinhChiTiet.DataSource = dt;
+                gvLieuTrinhChiTiet.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs1", "ShowDialog();", true);
             }
         }
 
@@ -116,6 +189,7 @@ namespace SkinnaManagement.UserControl
         {
             DataTable dt = new DataTable();
             DataRow dr = null;
+            dt.Columns.Add(new DataColumn("MaKhachHang", typeof(int)));
             dt.Columns.Add(new DataColumn("SoThuTu", typeof(string)));
             dt.Columns.Add(new DataColumn("Ngay", typeof(string)));
             LieuTrinhParameterBuilder query = new LieuTrinhParameterBuilder();
@@ -127,6 +201,7 @@ namespace SkinnaManagement.UserControl
                 foreach (var item in list)
                 {
                     dr = dt.NewRow();
+                    dr["MaKhachHang"] = maKhachHang;
                     dr["SoThuTu"] = stt;
                     dr["Ngay"] = item.Ngay.GetValueOrDefault().ToString("dd/MM/yyyy");
                     dt.Rows.Add(dr);

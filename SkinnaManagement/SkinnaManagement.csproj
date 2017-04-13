@@ -113,6 +113,7 @@
     <Content Include="css\datatables.min.css" />
     <Content Include="css\datepicker.css" />
     <Content Include="css\datepicker3.css" />
+    <Content Include="css\jquery-ui.css" />
     <Content Include="css\styles.css" />
     <Content Include="js\datatables.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -126,6 +127,9 @@
     <Content Include="js\easypiechart.js" />
     <Content Include="js\html5shiv.min.js" />
     <Content Include="js\jquery-1.11.1.min.js" />
+    <Content Include="js\jquery-1.9.1.js" />
+    <Content Include="js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="js\lumino.glyphs.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="list_page.txt" />

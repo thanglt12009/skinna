@@ -162,7 +162,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 {
                     LieuTrinh lieuTrinh = new LieuTrinh();
                     lieuTrinh.MaKhachHang = khachHang.MaKhachHang;
-                    lieuTrinh.Ngay = System.DateTime.Now;
+                    lieuTrinh.Ngay = System.DateTime.Now.Date;
                     lieuTrinh.TayTrangToi = txtTayTrangToi.Text;
                     lieuTrinh.RuaMat = txtRuaMat.Text;
                     lieuTrinh.Toner = txtToner.Text;

@@ -1,12 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditDonHang.aspx.cs" Inherits="SkinnaManagement.WebPages.QuanLyDonHang.EditDonHang" %>
+
 <%@ Register Src="~/UserControl/LieuTrinh.ascx" TagPrefix="uc1" TagName="LieuTrinh" %>
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src='<%= ResolveUrl("~/js/jquery-migrate-1.2.1.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/jquery-ui-1.10.4.custom.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/bootstrap.min.js") %>'></script>
     <script type="text/javascript">
         $(document).ready(function () {
-          
+
         });
     </script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -32,8 +36,8 @@
             <div class="col-lg-12">
                 <form role="form" runat="server">
                     <asp:ScriptManager ID="ScriptManager1" runat="server" />
-                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" >
-                                    <contenttemplate>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <contenttemplate>
                     <label id="ErrorMessage" runat="server" class="error"></label>
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -173,7 +177,7 @@
                             </div>
                         </div>
                         </contenttemplate>
-                                </asp:UpdatePanel> 
+                    </asp:UpdatePanel>
                 </form>
             </div>
 
