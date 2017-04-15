@@ -34,7 +34,7 @@ namespace SkinnaManagement.UserControl
                 txtTayTrangToi.Attributes.Add("readonly", "readonly");
                 txtToner.Attributes.Add("readonly", "readonly");
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs", "AccountStatement_InitDialogs();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs3", "LieuTrinh_InitDialogs();", true);
         }
 
         protected void cbTayTrangToi_CheckedChanged(object sender, EventArgs e)
@@ -192,7 +192,7 @@ namespace SkinnaManagement.UserControl
                 ItemList = dt;
                 gvLieuTrinhChiTiet.DataSource = dt;
                 gvLieuTrinhChiTiet.DataBind();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs1", "ShowDialog();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs4", "ShowDialog1();", true);
             }
         }
 
@@ -228,7 +228,7 @@ namespace SkinnaManagement.UserControl
             gvLieuTrinhChiTiet.PageIndex = e.NewPageIndex;
             gvLieuTrinhChiTiet.DataSource = ItemList;
             gvLieuTrinhChiTiet.DataBind();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs1", "ShowDialog();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs5", "ShowDialog1();", true);
         }
     }
 }

@@ -2,17 +2,12 @@
 
 <link rel="stylesheet" href="/css/jquery-ui.css" />
 <script type="text/javascript">
-    $(document).ready(function () {
-        //$("#head_LieuTrinh_btnReset").click(function () {
-           
-        //});
-    });
-    function ShowDialog()
+    function ShowDialog1()
     {
-        AccountStatement_InitDialogs()
+        LieuTrinh_InitDialogs()
         $('#dlgLieuTrinh').dialog("open");
     }
-    function AccountStatement_InitDialogs() {
+    function LieuTrinh_InitDialogs() {
         $('#dlgLieuTrinh').dialog({
             autoOpen: false,
             "width": 710,

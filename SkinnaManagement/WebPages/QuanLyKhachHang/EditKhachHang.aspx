@@ -4,7 +4,10 @@
 <%@ Register Src="~/UserControl/SanPhamDaMua.ascx" TagPrefix="uc1" TagName="SanPhamDaMua" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src='<%= ResolveUrl("~/js/jquery-migrate-1.2.1.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/jquery-ui-1.10.4.custom.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/js/bootstrap.min.js") %>'></script>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <ol class="breadcrumb">
