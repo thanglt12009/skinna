@@ -113,8 +113,10 @@
     <Content Include="css\datatables.min.css" />
     <Content Include="css\datepicker.css" />
     <Content Include="css\datepicker3.css" />
+    <Content Include="css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\styles.css" />
+    <Content Include="Images\x.png" />
     <Content Include="js\datatables.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="js\bootstrap-datepicker.js" />
@@ -302,7 +304,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="tables\" />
     <Folder Include="template_html\css\" />
     <Folder Include="template_html\fonts\" />
