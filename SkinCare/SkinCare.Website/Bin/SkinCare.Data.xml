@@ -333,6 +333,44 @@
             <param name="count">The total number of records.</param>
             <returns>Returns an instance of the <see cref="T:SkinCare.Entities.DonHangChiTiet"/> class.</returns>
         </member>
+        <member name="M:SkinCare.Data.Bases.DonHangChiTietProviderBaseCore.GetAllProducts(System.Nullable{System.Int32})">
+            <summary>
+            This method wrap the '_tblDonHangChiTiet_GetAllProducts' stored procedure. 
+            </summary>
+            <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.DonHangChiTietProviderBaseCore.GetAllProducts(System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            This method wrap the '_tblDonHangChiTiet_GetAllProducts' stored procedure. 
+            </summary>
+            <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.DonHangChiTietProviderBaseCore.GetAllProducts(SkinCare.Data.TransactionManager,System.Nullable{System.Int32})">
+            <summary>
+            This method wrap the '_tblDonHangChiTiet_GetAllProducts' stored procedure. 
+            </summary>
+            <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
+        <member name="M:SkinCare.Data.Bases.DonHangChiTietProviderBaseCore.GetAllProducts(SkinCare.Data.TransactionManager,System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            This method wrap the '_tblDonHangChiTiet_GetAllProducts' stored procedure. 
+            </summary>
+            <param name="maKhachHang"> A <c>System.Int32?</c> instance.</param>
+            <param name="start">Row number at which to start reading, the first row is 0.</param>
+            <param name="pageLength">Number of rows to return.</param>
+            <param name="transactionManager"><see cref="T:SkinCare.Data.TransactionManager"/> object</param>
+            <remark>This method is generate from a stored procedure.</remark>
+            <returns>A <see cref="T:System.Data.DataSet"/> instance.</returns>
+        </member>
         <member name="M:SkinCare.Data.Bases.DonHangChiTietProviderBaseCore.Fill(System.Data.IDataReader,SkinCare.Entities.TList{SkinCare.Entities.DonHangChiTiet},System.Int32,System.Int32)">
             <summary>
             Fill a TList&lt;DonHangChiTiet&gt; From a DataReader.

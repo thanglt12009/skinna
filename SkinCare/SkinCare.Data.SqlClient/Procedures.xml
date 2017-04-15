@@ -2685,6 +2685,25 @@
 			]]></body>
 		</procedure>
 		
+				
+		<procedure owner="dbo" name="_tblDonHangChiTiet_GetAllProducts"  skip="true">
+			<comment><![CDATA[-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+]]></comment>
+			<parameters>
+				<parameter name="@MaKhachHang" type="int" direction="Input" size="4" precision="10" scale="0" param="" nulldefault="null"/>
+			</parameters>
+			<body><![CDATA[
+				
+anPham
+	WHERE MaKhachHang = @MaKhachHang
+END
+
+			]]></body>
+					</procedure>
 		
 		<procedure owner="dbo" name="tblKhachHang_Get_List" >
 			<comment><![CDATA[/*
