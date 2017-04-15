@@ -26,6 +26,16 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
         }
 
+        private DataTable TinhTrangList
+        {
+            set { ViewState["TinhTrangList"] = value; }
+            get
+            {
+                if (ViewState["TinhTrangList"] != null) return (DataTable)ViewState["TinhTrangList"];
+                else return null;
+            }
+        }
+
         private string SelectedItem
         {
             set { ViewState["SelectedItem"] = value; }
@@ -176,7 +186,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                             stt++;
                         }
                     }
-                    gvTinhTrang.DataSource = dt1;
+                    TinhTrangList = dt1;
+                    gvTinhTrang.DataSource = TinhTrangList;
                     gvTinhTrang.DataBind();
 
                     LieuTrinh.LoadLieuTrinh(khachHang.MaKhachHang);
@@ -205,6 +216,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             decimal.TryParse(lblTotalCredits.Text, out tongtien);
             editDonHang.TienChietKhau = tienChietKhau;
             editDonHang.TiLeChietKhau = tiLeChietKhau;
+            TinhTongTien();
             editDonHang.TongTienDonHang = ThanhTien;
             editDonHang.PhiVanChuyen = phiGiaoHang;
             bool result = false;           
@@ -498,6 +510,13 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 TiLeChietKhau.Text = string.Empty;
                 SoTienChietKhau.Attributes.Remove("readonly");
             }
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvTinhTrang.PageIndex = e.NewPageIndex;
+            gvTinhTrang.DataSource = TinhTrangList;
+            gvTinhTrang.DataBind();
         }
     }
 }

@@ -148,6 +148,12 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                     dr["TinhTrang"] = TinhTrangDa.Text;
                     itemList.Rows.InsertAt(dr, 0);
                 }
+                int stt = 1;    
+                foreach (DataRow row in itemList.Rows)
+                {
+                    row["SoThuTu"] = stt;
+                    stt++;
+                }
                 ItemList = itemList;
                 gvTinhTrang.DataSource = ItemList;
                 gvTinhTrang.DataBind();
@@ -159,6 +165,7 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         {
             ResetItemDetails();
         }
+
         protected void gvTinhTrang_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "lbtEdit")
@@ -206,6 +213,13 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         {
             TinhTrangDa.Text = string.Empty;
             btnAdd.Text = "Thêm";
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvTinhTrang.PageIndex = e.NewPageIndex;
+            gvTinhTrang.DataSource = ItemList;
+            gvTinhTrang.DataBind();
         }
     }
 }

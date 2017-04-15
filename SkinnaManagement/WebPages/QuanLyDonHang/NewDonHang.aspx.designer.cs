@@ -175,42 +175,6 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang {
         protected global::System.Web.UI.WebControls.GridView gvTinhTrang;
         
         /// <summary>
-        /// AnhChup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image AnhChup;
-        
-        /// <summary>
-        /// LieuTrinh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::SkinnaManagement.UserControl.LieuTrinh LieuTrinh;
-        
-        /// <summary>
-        /// SanPhamDaMua control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::SkinnaManagement.UserControl.SanPhamDaMua SanPhamDaMua;
-        
-        /// <summary>
-        /// LuuY control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea LuuY;
-        
-        /// <summary>
         /// SanPham control.
         /// </summary>
         /// <remarks>
@@ -254,6 +218,42 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// AnhChup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image AnhChup;
+        
+        /// <summary>
+        /// LieuTrinh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SkinnaManagement.UserControl.LieuTrinh LieuTrinh;
+        
+        /// <summary>
+        /// SanPhamDaMua control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SkinnaManagement.UserControl.SanPhamDaMua SanPhamDaMua;
+        
+        /// <summary>
+        /// LuuY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea LuuY;
         
         /// <summary>
         /// gvProducts control.

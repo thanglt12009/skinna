@@ -73,7 +73,7 @@
         </asp:GridView>
     </div>
     <div id="dlgLieuTrinh" title="Liệu Trình chi tiết" runat="server" clientidmode="Static">
-        <asp:GridView ID="gvLieuTrinhChiTiet" runat="server" AutoGenerateColumns="false">
+        <asp:GridView ID="gvLieuTrinhChiTiet"  AllowPaging="true" OnPageIndexChanging="OnPageIndexChanging" PageSize="12" runat="server" AutoGenerateColumns="false">
             <Columns>               
                 <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />
                 <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="Ngay" HeaderText="Ngày liệu trình" />

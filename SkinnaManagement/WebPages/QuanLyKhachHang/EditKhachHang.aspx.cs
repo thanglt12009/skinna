@@ -265,5 +265,11 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             btnAdd.Text = "Thêm";
         }
 
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvTinhTrang.PageIndex = e.NewPageIndex;
+            gvTinhTrang.DataSource = ItemList;
+            gvTinhTrang.DataBind();
+        }
     }
 }

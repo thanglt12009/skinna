@@ -60,7 +60,7 @@
                                     <asp:TextBox id="TinhTrangDa" class="form-control" TextMode="multiline" Rows="5" runat="server" />                                       
                                     <asp:Button ID="btnAdd" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnAdd_Click" Text="Thêm" ValidationGroup="DetailGroup" />
                                     <asp:Button ID="btnCancel" causesvalidation="false" class="btn btn-default" runat="server" OnClick="btnCancel_Click" Text="Hủy" ValidationGroup="DetailGroup" />                            
-                                   <asp:Gridview ID="gvTinhTrang" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowCommand="gvTinhTrang_RowCommand" >
+                                   <asp:Gridview ID="gvTinhTrang" runat="server" AllowPaging="true" OnPageIndexChanging="OnPageIndexChanging" PageSize="4" AutoGenerateColumns="false" OnRowCommand="gvTinhTrang_RowCommand" >
                                         <columns>                
                                             <%--<asp:BoundField ItemStyle-Width="150px" DataField="ID" Visible="false" />     --%>                                                          
                                             <asp:BoundField ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataField="SoThuTu" HeaderText="STT" />

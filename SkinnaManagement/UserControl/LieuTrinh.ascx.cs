@@ -13,6 +13,16 @@ namespace SkinnaManagement.UserControl
 {
     public partial class LieuTrinh : System.Web.UI.UserControl
     {
+        private DataTable ItemList
+        {
+            set { ViewState["ItemList"] = value; }
+            get
+            {
+                if (ViewState["ItemList"] != null) return (DataTable)ViewState["ItemList"];
+                else return null;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
@@ -179,6 +189,7 @@ namespace SkinnaManagement.UserControl
                         stt++;
                     }
                 }
+                ItemList = dt;
                 gvLieuTrinhChiTiet.DataSource = dt;
                 gvLieuTrinhChiTiet.DataBind();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs1", "ShowDialog();", true);
@@ -210,6 +221,14 @@ namespace SkinnaManagement.UserControl
             }
             gvLieuTrinh.DataSource = dt;
             gvLieuTrinh.DataBind();
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvLieuTrinhChiTiet.PageIndex = e.NewPageIndex;
+            gvLieuTrinhChiTiet.DataSource = ItemList;
+            gvLieuTrinhChiTiet.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "InitiateDialogs1", "ShowDialog();", true);
         }
     }
 }

@@ -27,6 +27,16 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
         }
 
+        private DataTable TinhTrangList
+        {
+            set { ViewState["TinhTrangList"] = value; }
+            get
+            {
+                if (ViewState["TinhTrangList"] != null) return (DataTable)ViewState["TinhTrangList"];
+                else return null;
+            }
+        }
+
         private string SelectedItem
         {
             set { ViewState["SelectedItem"] = value; }
@@ -205,7 +215,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         stt++;
                     }
                 }
-                gvTinhTrang.DataSource = dt;
+                TinhTrangList = dt;
+                gvTinhTrang.DataSource = TinhTrangList;
                 gvTinhTrang.DataBind();
                 ErrorMessage.InnerText = "";
             }
@@ -448,6 +459,13 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 TiLeChietKhau.Text = string.Empty;
                 SoTienChietKhau.Attributes.Remove("readonly");
             }
+        }
+
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvTinhTrang.PageIndex = e.NewPageIndex;
+            gvTinhTrang.DataSource = TinhTrangList;
+            gvTinhTrang.DataBind();
         }
     }
 }
