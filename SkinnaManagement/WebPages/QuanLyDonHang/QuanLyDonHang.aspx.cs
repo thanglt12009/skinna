@@ -110,6 +110,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 viewItem.TongTien = tongTienDonHangView.Substring(0, tongTienDonHangView.Length - 3);
                 viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;
                 viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan ?? string.Empty;
+                viewItem.TongTienDecimal = item.TongTienDonHang.GetValueOrDefault();
                 viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
                 lst.Add(viewItem);
                 id++;
@@ -146,6 +147,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 List<DonHangView> data = SkinnaManagement.WebPages.QuanLyDonHang.QuanLyDonHang.LoadData();
                 // Total record count.  
                 int totalRecords = data.Count;
+                if (pageSize == -1)
+                    pageSize = totalRecords;
                 // Verification.  
                 if (!string.IsNullOrEmpty(search) && !string.IsNullOrWhiteSpace(search))
                 {
@@ -165,11 +168,19 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 int recFilter = data.Count;
                 // Apply pagination.  
                 data = data.Skip(startRec).Take(pageSize).ToList();
+                decimal TongThu = SumTongThu(data);
+                
                 // Loading drop down lists.  
                 result.draw = Convert.ToInt32(draw);
                 result.recordsTotal = totalRecords;
                 result.recordsFiltered = recFilter;
                 result.data = data;
+                NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+                nfi.CurrencyDecimalSeparator = ",";
+                nfi.CurrencyGroupSeparator = ".";
+                nfi.CurrencySymbol = "";
+                string tongTienDonHangView = TongThu.ToString("C", nfi);
+                result.sum = tongTienDonHangView.Substring(0, tongTienDonHangView.Length - 3); 
             }
             catch (Exception ex)
             {
@@ -177,6 +188,16 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
             // Return info.  
             return result;
+        }
+
+        private static decimal SumTongThu(List<DonHangView> data)
+        {
+            decimal tongThu = 0;
+            foreach(var item in data)
+            {
+                tongThu += item.TongTienDecimal;
+            }
+            return tongThu;
         }
         #endregion
     }

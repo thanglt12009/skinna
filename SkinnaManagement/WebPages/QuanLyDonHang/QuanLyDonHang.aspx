@@ -6,6 +6,7 @@
         $(document).ready(function () {
             $('#DonHangTable').DataTable(
             {
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "columnDefs": [
 
                   { "width": "5%", "targets": [0] },
@@ -33,6 +34,8 @@
                           json.recordsTotal = json.d.recordsTotal;
                           json.recordsFiltered = json.d.recordsFiltered;
                           json.data = json.d.data;
+                          var sum = json.d.sum;
+                          $('#<%=lblTotalCredits.ClientID%>').html(sum); 
                           var return_data = json;
                           return return_data.data;
                       }
