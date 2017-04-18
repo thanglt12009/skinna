@@ -2,9 +2,30 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../js/jquery-1.11.1.min.js"></script>
+
     <script type="text/javascript">
+        $(function () {
+            $("#from").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 3,
+                format: 'dd/mm/yyyy',
+                onClose: function (selectedDate) {
+                    $("#to").datepicker("option", "minDate", selectedDate);
+                }
+            });
+            $("#to").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                format: 'dd/mm/yyyy',
+                numberOfMonths: 3,
+                onClose: function (selectedDate) {
+                    $("#from").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+        });
         $(document).ready(function () {
-            $('#DonHangTable').DataTable(
+            var table = $('#DonHangTable').DataTable(
             {
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "columnDefs": [
@@ -35,14 +56,14 @@
                           json.recordsFiltered = json.d.recordsFiltered;
                           json.data = json.d.data;
                           var sum = json.d.sum;
-                          $('#<%=lblTotalCredits.ClientID%>').html(sum); 
+                          $('#<%=lblTotalCredits.ClientID%>').html(sum);
                           var return_data = json;
                           return return_data.data;
                       }
                   },
                 "columns": [
                       { "data": "MaDonHang" },
-                      { "data": "TenKhachHang" },                     
+                      { "data": "TenKhachHang" },
                       { "data": "NgayDatHang" },
                       { "data": "TongTien" },
                       { "data": "PhiVanChuyen" },
@@ -50,6 +71,111 @@
                       { "data": "PhuongThucThanhToan" },
                       { "data": "Edit" }
                 ]
+            });
+            // Add event listeners to the two range filtering inputs
+            $("#from").datepicker().on('changeDate', function () {
+                table.destroy();
+                table = $('#DonHangTable').DataTable(
+            {
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "columnDefs": [
+
+                  { "width": "5%", "targets": [0] },
+
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+
+                ],
+                "language":
+                  {
+                      "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+                  },
+                "processing": true,
+                "serverSide": true,
+                "ajax":
+                  {
+                      "url": "QuanLyDonHang.aspx/GetData",
+                      "contentType": "application/json",
+                      "type": "GET",
+                      "dataType": "JSON",
+                      "data": function (d) {
+                          d.from = $("#from").val();
+                          d.to = $("#to").val();
+                          return d;
+                      },
+                      "dataSrc": function (json) {
+                          json.draw = json.d.draw;
+                          json.recordsTotal = json.d.recordsTotal;
+                          json.recordsFiltered = json.d.recordsFiltered;
+                          json.data = json.d.data;
+                          var sum = json.d.sum;
+                          $('#<%=lblTotalCredits.ClientID%>').html(sum);
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  },
+                "columns": [
+                      { "data": "MaDonHang" },
+                      { "data": "TenKhachHang" },
+                      { "data": "NgayDatHang" },
+                      { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
+                      { "data": "TrangThaiDonHang" },
+                      { "data": "PhuongThucThanhToan" },
+                      { "data": "Edit" }
+                ]
+            });
+            });
+            $("#to").datepicker().on('changeDate', function () {
+                table.destroy();
+                table = $('#DonHangTable').DataTable(
+           {
+               "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+               "columnDefs": [
+
+                 { "width": "5%", "targets": [0] },
+
+                 { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+
+               ],
+               "language":
+                 {
+                     "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+                 },
+               "processing": true,
+               "serverSide": true,
+               "ajax":
+                 {
+                     "url": "QuanLyDonHang.aspx/GetData",
+                     "contentType": "application/json",
+                     "type": "GET",
+                     "dataType": "JSON",
+                     "data": function (d) {
+                         d.from = $("#from").val();
+                         d.to = $("#to").val();
+                         return d;
+                     },
+                     "dataSrc": function (json) {
+                         json.draw = json.d.draw;
+                         json.recordsTotal = json.d.recordsTotal;
+                         json.recordsFiltered = json.d.recordsFiltered;
+                         json.data = json.d.data;
+                         var sum = json.d.sum;
+                         $('#<%=lblTotalCredits.ClientID%>').html(sum);
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  },
+                "columns": [
+                      { "data": "MaDonHang" },
+                      { "data": "TenKhachHang" },
+                      { "data": "NgayDatHang" },
+                      { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
+                      { "data": "TrangThaiDonHang" },
+                      { "data": "PhuongThucThanhToan" },
+                      { "data": "Edit" }
+                ]
+            });
             });
         });
     </script>
@@ -65,11 +191,18 @@
             <asp:Label ID="lblTotalCredits" runat="server" Font-Bold="true"></asp:Label>
             <br />
             <br />
+            <div id="startfrom">
+                <label for="from">From</label>
+                <input type="text" id="from" name="From">
+                <label for="to">to</label>
+                <input type="text" id="to" name="To">
+            </div>
+            <br />
             <table class="table table-striped table-bordered table-hover" id="DonHangTable">
                 <thead>
                     <tr>
                         <th>Mã Đơn Hàng</th>
-                        <th>Tên Khách Hàng</th>                        
+                        <th>Tên Khách Hàng</th>
                         <th>Ngày Đặt Hàng</th>
                         <th>Tổng tiền</th>
                         <th>Phí ship</th>

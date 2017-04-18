@@ -15,11 +15,11 @@ namespace SkinnaManagement.App.DAL
 
         public string NgayDatHang { get; set; }
 
+        public DateTime NgayDatHangDateTime { get; set; }
+
         public string TongTien { get; set; }
 
-        public decimal TongTienDecimal { get; set; }
-
-        //public string NguonDonHang { get; set; }
+        public decimal TongTienDecimal { get; set; }       
 
         public string TrangThaiDonHang { get; set; }
 

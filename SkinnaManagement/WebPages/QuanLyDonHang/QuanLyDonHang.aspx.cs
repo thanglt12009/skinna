@@ -105,6 +105,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 viewItem.TenKhachHang = khachHang.TenKhachHang;
                 string phiVanChuyenView = item.PhiVanChuyen.GetValueOrDefault().ToString("C", nfi);
                 viewItem.PhiVanChuyen = phiVanChuyenView.Substring(0, phiVanChuyenView.Length - 3);
+                viewItem.NgayDatHangDateTime = item.NgayTaoDonHang.GetValueOrDefault();
                 viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") +  ConvertTime(item.NgayTaoDonHang.ToString());
                 string tongTienDonHangView = item.TongTienDonHang.GetValueOrDefault().ToString("C", nfi);
                 viewItem.TongTien = tongTienDonHangView.Substring(0, tongTienDonHangView.Length - 3);
@@ -136,15 +137,32 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             DataTablesDonHang result = new DataTablesDonHang();
             try
             {
+                DateTime fromDate = new DateTime();
+                DateTime toDate = new DateTime();
                 // Initialization.  
                 string search = HttpContext.Current.Request.Params["search[value]"];
                 string draw = HttpContext.Current.Request.Params["draw"];
+                string from = HttpContext.Current.Request.Params["from"];
+                if (!string.IsNullOrEmpty(from))
+                    fromDate = DateTime.Parse(from);
+                string to = HttpContext.Current.Request.Params["to"];
+                if (!string.IsNullOrEmpty(to))
+                    toDate = DateTime.Parse(to);
                 string order = HttpContext.Current.Request.Params["order[0][column]"];
                 string orderDir = HttpContext.Current.Request.Params["order[0][dir]"];
                 int startRec = Convert.ToInt32(HttpContext.Current.Request.Params["start"]);
                 int pageSize = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
                 // Loading.  
                 List<DonHangView> data = SkinnaManagement.WebPages.QuanLyDonHang.QuanLyDonHang.LoadData();
+                if (!string.IsNullOrEmpty(from) && !string.IsNullOrEmpty(to))
+                {
+                    data = data.Where(p => p.NgayDatHangDateTime > fromDate).ToList();
+                    data = data.Where(p => p.NgayDatHangDateTime < toDate).ToList();
+                }
+                else if (!string.IsNullOrEmpty(from))
+                    data = data.Where(p => p.NgayDatHangDateTime > fromDate).ToList();
+                else if (!string.IsNullOrEmpty(to))
+                    data = data.Where(p => p.NgayDatHangDateTime < toDate).ToList();
                 // Total record count.  
                 int totalRecords = data.Count;
                 if (pageSize == -1)
@@ -189,7 +207,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             // Return info.  
             return result;
         }
-
+      
         private static decimal SumTongThu(List<DonHangView> data)
         {
             decimal tongThu = 0;
