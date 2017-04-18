@@ -17,6 +17,8 @@ namespace SkinnaManagement.App.DAL
 
         public string TongTien { get; set; }
 
+        public decimal TongTienDecimal { get; set; }
+
         //public string NguonDonHang { get; set; }
 
         public string TrangThaiDonHang { get; set; }
@@ -34,5 +36,7 @@ namespace SkinnaManagement.App.DAL
         public int recordsFiltered { get; set; }
 
         public List<DonHangView> data { get; set; }
+
+        public string sum { get; set; }
     }
 }
