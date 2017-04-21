@@ -133,7 +133,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Ảnh chụp</label>
-                                    <asp:Image ID="AnhChup" runat="server"></asp:Image>
+                                    <asp:Image ID="AnhChup" runat="server" style="height:200px;width:200px"></asp:Image>
                                 </div>
                                 <div class="form-group">
                                     <uc1:LieuTrinh runat="server" ID="LieuTrinh" />
