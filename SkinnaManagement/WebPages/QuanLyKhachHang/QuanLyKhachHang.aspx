@@ -8,6 +8,7 @@
         $(document).ready(function () {
             $('#KhachHangTable').DataTable(
             {
+                "pageLength": 50,
                 "columnDefs": [
 
                   { "width": "5%", "targets": [0] },

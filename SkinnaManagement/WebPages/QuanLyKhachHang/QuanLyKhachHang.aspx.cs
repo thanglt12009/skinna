@@ -107,8 +107,8 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
                 {                   
                     case "0":
                         // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaKhachHang).ToList()
-                                                             : data.OrderBy(p => p.MaKhachHang).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderBy(p => p.MaKhachHang).ToList()
+                                                             : data.OrderByDescending(p => p.MaKhachHang).ToList();
                         break;
                     case "1":
                         // Setting.  

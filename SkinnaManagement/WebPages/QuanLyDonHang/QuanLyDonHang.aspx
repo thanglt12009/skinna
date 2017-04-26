@@ -27,6 +27,7 @@
         $(document).ready(function () {
             var table = $('#DonHangTable').DataTable(
             {
+                "pageLength": 50,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "columnDefs": [
 
@@ -73,10 +74,66 @@
                 ]
             });
             // Add event listeners to the two range filtering inputs
+            $("#from").keyup(function () {
+                if (!this.value) {
+                    table.destroy();
+                    table = $('#DonHangTable').DataTable(
+                {
+                    "pageLength": 50,
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    "columnDefs": [
+
+                      { "width": "5%", "targets": [0] },
+
+                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+
+                    ],
+                    "language":
+                      {
+                          "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+                      },
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax":
+                      {
+                          "url": "QuanLyDonHang.aspx/GetData",
+                          "contentType": "application/json",
+                          "type": "GET",
+                          "dataType": "JSON",
+                          "data": function (d) {
+                              d.from = $("#from").val();
+                              d.to = $("#to").val();
+                              return d;
+                          },
+                          "dataSrc": function (json) {
+                              json.draw = json.d.draw;
+                              json.recordsTotal = json.d.recordsTotal;
+                              json.recordsFiltered = json.d.recordsFiltered;
+                              json.data = json.d.data;
+                              var sum = json.d.sum;
+                              $('#<%=lblTotalCredits.ClientID%>').html(sum);
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  },
+                "columns": [
+                      { "data": "MaDonHang" },
+                      { "data": "TenKhachHang" },
+                      { "data": "NgayDatHang" },
+                      { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
+                      { "data": "TrangThaiDonHang" },
+                      { "data": "PhuongThucThanhToan" },
+                      { "data": "Edit" }
+                ]
+            });
+          }
+            });
             $("#from").datepicker().on('changeDate', function () {
                 table.destroy();
                 table = $('#DonHangTable').DataTable(
             {
+                "pageLength": 50,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "columnDefs": [
 
@@ -125,10 +182,66 @@
                 ]
             });
             });
+              $("#to").keyup(function () {
+                if (!this.value) {
+                    table.destroy();
+                    table = $('#DonHangTable').DataTable(
+                {
+                    "pageLength": 50,
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    "columnDefs": [
+
+                      { "width": "5%", "targets": [0] },
+
+                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+
+                    ],
+                    "language":
+                      {
+                          "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+                      },
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax":
+                      {
+                          "url": "QuanLyDonHang.aspx/GetData",
+                          "contentType": "application/json",
+                          "type": "GET",
+                          "dataType": "JSON",
+                          "data": function (d) {
+                              d.from = $("#from").val();
+                              d.to = $("#to").val();
+                              return d;
+                          },
+                          "dataSrc": function (json) {
+                              json.draw = json.d.draw;
+                              json.recordsTotal = json.d.recordsTotal;
+                              json.recordsFiltered = json.d.recordsFiltered;
+                              json.data = json.d.data;
+                              var sum = json.d.sum;
+                              $('#<%=lblTotalCredits.ClientID%>').html(sum);
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  },
+                "columns": [
+                      { "data": "MaDonHang" },
+                      { "data": "TenKhachHang" },
+                      { "data": "NgayDatHang" },
+                      { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
+                      { "data": "TrangThaiDonHang" },
+                      { "data": "PhuongThucThanhToan" },
+                      { "data": "Edit" }
+                ]
+            });
+          }
+            });
             $("#to").datepicker().on('changeDate', function () {
                 table.destroy();
                 table = $('#DonHangTable').DataTable(
            {
+               "pageLength": 50,
                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                "columnDefs": [
 
@@ -161,21 +274,21 @@
                          json.data = json.d.data;
                          var sum = json.d.sum;
                          $('#<%=lblTotalCredits.ClientID%>').html(sum);
-                          var return_data = json;
-                          return return_data.data;
-                      }
-                  },
-                "columns": [
-                      { "data": "MaDonHang" },
-                      { "data": "TenKhachHang" },
-                      { "data": "NgayDatHang" },
-                      { "data": "TongTien" },
-                      { "data": "PhiVanChuyen" },
-                      { "data": "TrangThaiDonHang" },
-                      { "data": "PhuongThucThanhToan" },
-                      { "data": "Edit" }
-                ]
-            });
+                         var return_data = json;
+                         return return_data.data;
+                     }
+                 },
+               "columns": [
+                     { "data": "MaDonHang" },
+                     { "data": "TenKhachHang" },
+                     { "data": "NgayDatHang" },
+                     { "data": "TongTien" },
+                     { "data": "PhiVanChuyen" },
+                     { "data": "TrangThaiDonHang" },
+                     { "data": "PhuongThucThanhToan" },
+                     { "data": "Edit" }
+               ]
+           });
             });
         });
     </script>

@@ -35,15 +35,17 @@ namespace SkinnaManagement.WebPages.QuanLyKhoHang
                 switch (order)
                 {
                     case "0":
-                        // Setting. 
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaSanPham).ToList()
-                                                             : data.OrderBy(p => p.MaSanPham).ToList();
-                        break;
-                    case "1":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TenSP).ToList()
                                                              : data.OrderBy(p => p.TenSP).ToList();
                         break;
+
+                    case "1":
+                        // Setting. 
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaSanPham).ToList()
+                                                             : data.OrderBy(p => p.MaSanPham).ToList();
+                        break;
+                   
                     case "2":
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayNhapHang).ToList()

@@ -133,6 +133,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Ảnh chụp</label>
+                                    <asp:FileUpload ID="FileUpload1" ClientIDMode="Static" onchange="this.form.submit()" runat="server" />
                                     <asp:Image ID="AnhChup" runat="server" style="height:200px;width:200px"></asp:Image>
                                 </div>
                                 <div class="form-group">

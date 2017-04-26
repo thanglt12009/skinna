@@ -193,6 +193,18 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     LieuTrinh.LoadLieuTrinh(khachHang.MaKhachHang);
                 }
             }
+            if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
+            {
+                KhachHangParameterBuilder query = new KhachHangParameterBuilder();
+                query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Value);
+
+                KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
+                if (khachHang != null)
+                {
+                    FileUpload1.SaveAs(Server.MapPath("~/Images/") + khachHang.MaKhachHang + ".jpg");
+                    AnhChup.ImageUrl = "~/Images/" + khachHang.MaKhachHang + ".jpg";
+                }
+            }
         }
 
         protected void btnSubmit_ServerClick(object sender, EventArgs e)

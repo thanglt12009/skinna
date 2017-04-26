@@ -6,6 +6,7 @@
         $(document).ready(function () {
             $('#KhoHangTable').DataTable(
             {
+                "pageLength": 50,
                 "columnDefs": [
 
                   { "width": "5%", "targets": [0] },
@@ -50,9 +51,7 @@
             });
         });
         function pageLoad() {
-            $("#btSelectAll").click(function () {
-                $('input:checkbox').not(this).prop('checked', this.checked);
-            });
+           
         }
     </script>
     <form runat="server">

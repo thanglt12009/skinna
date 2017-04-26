@@ -36,8 +36,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 {
                     case "0":
                         // Setting. 
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaDonHang).ToList()
-                                                             : data.OrderBy(p => p.MaDonHang).ToList();
+                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderBy(p => p.MaDonHang).ToList()
+                                                             : data.OrderByDescending(p => p.MaDonHang).ToList();
                         break;
                     case "1":
                         // Setting.  
@@ -154,6 +154,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 int pageSize = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
                 // Loading.  
                 List<DonHangView> data = SkinnaManagement.WebPages.QuanLyDonHang.QuanLyDonHang.LoadData();
+             
                 if (!string.IsNullOrEmpty(from) && !string.IsNullOrEmpty(to))
                 {
                     data = data.Where(p => p.NgayDatHangDateTime > fromDate).ToList();
