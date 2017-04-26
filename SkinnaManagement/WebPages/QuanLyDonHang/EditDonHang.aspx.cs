@@ -26,6 +26,16 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
         }
 
+        private DataTable ItemOldList
+        {
+            set { ViewState["ItemOldList"] = value; }
+            get
+            {
+                if (ViewState["ItemOldList"] != null) return (DataTable)ViewState["ItemOldList"];
+                else return null;
+            }
+        }
+
         private DataTable TinhTrangList
         {
             set { ViewState["TinhTrangList"] = value; }
@@ -79,11 +89,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 }
                 LoadSanPhamList();
                 DonHang donHang = DataRepository.DonHangProvider.GetByMaDonHang(maDonHang);
-                if(donHang != null)
+                if (donHang != null)
                 {
                     ThanhToan.Value = donHang.MaPhuongThucThanhToan.GetValueOrDefault(0).ToString();
                     KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(donHang.MaKhachHang.GetValueOrDefault(0));
-                    if(khachHang != null)
+                    if (khachHang != null)
                     {
                         SoDienThoai.Value = khachHang.SoDienThoai;
                         TenKhachHang.Value = khachHang.TenKhachHang;
@@ -96,7 +106,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                             AnhChup.ImageUrl = khachHang.ImageLink;
                         else
                             AnhChup.ImageUrl = @"~\Images\profile-pictures.png";
-                                           
+
                         LuuY.InnerText = khachHang.Luuy;
                         SanPhamDaMua.GetSanPhamDaMua(khachHang.MaKhachHang);
                         TienGiaoHang.Text = donHang.PhiVanChuyen.ToString();
@@ -106,7 +116,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         rbTienChietKhau.Checked = true;
                         SoTienChietKhau.Text = donHang.TienChietKhau.ToString();
                         TiLeChietKhau.Attributes.Add("readonly", "readonly");
-                        SoTienChietKhau.Attributes.Remove("readonly");                        
+                        SoTienChietKhau.Attributes.Remove("readonly");
                     }
                     else
                     {
@@ -137,7 +147,8 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                     DonHangChiTietParameterBuilder query = new DonHangChiTietParameterBuilder();
                     query.Append(DonHangChiTietColumn.MaDonHang, maDonHang.ToString());
                     TList<DonHangChiTiet> list = DataRepository.DonHangChiTietProvider.Find(query.GetParameters());
-                    ItemList = dt;                    
+                    ItemList = dt;
+                    ItemOldList = ItemList;
                     string tienChietKhauView = "0.00";
                     if (!string.IsNullOrEmpty(SoTienChietKhau.Text))
                         tienChietKhauView = decimal.Parse(SoTienChietKhau.Text).ToString("C", nfi);
@@ -146,7 +157,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         foreach (var donhang in list)
                         {
                             KhoHangSanPham sanPham = DataRepository.KhoHangSanPhamProvider.GetById(donhang.MaSanPham.GetValueOrDefault(-1));
-                            dr = dt.NewRow();                         
+                            dr = dt.NewRow();
                             dr["MaSanPham"] = sanPham.Id.ToString();
                             dr["TenSanPham"] = sanPham.TenSanPham;
                             dr["DonGia"] = donhang.DonGia.ToString();
@@ -231,17 +242,30 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             TinhTongTien();
             editDonHang.TongTienDonHang = ThanhTien;
             editDonHang.PhiVanChuyen = phiGiaoHang;
-            bool result = false;           
+            bool result = false;
             try
             {
                 result = DataRepository.DonHangProvider.Update(editDonHang);
                 DonHangChiTietParameterBuilder query = new DonHangChiTietParameterBuilder();
                 query.Append(DonHangChiTietColumn.MaDonHang, editDonHang.MaDonHang.ToString());
                 TList<DonHangChiTiet> list = DataRepository.DonHangChiTietProvider.Find(query.GetParameters());
-                foreach(var donhang in list)
+                foreach (var donhang in list)
                 {
                     DataRepository.DonHangChiTietProvider.Delete(donhang);
                 }
+
+                DataTable itemOldList = ItemOldList;
+                if (itemOldList.Rows.Count > 0)
+                {
+                    foreach (DataRow row in itemOldList.Rows)
+                    {
+                        KhoHangSanPham khohangSanPham = DataRepository.KhoHangSanPhamProvider.GetById(int.Parse(row["MaSanPham"].ToString()));
+                        khohangSanPham.SoLuongBanRa = khohangSanPham.SoLuongBanRa - int.Parse(row["SoLuong"].ToString());
+                        khohangSanPham.SoLuongTonKho = khohangSanPham.SoLuongTonKho + int.Parse(row["SoLuong"].ToString());
+                        result = DataRepository.KhoHangSanPhamProvider.Update(khohangSanPham);
+                    }
+                }
+
                 DataTable itemList = ItemList;
                 if (itemList.Rows.Count > 0)
                 {
@@ -256,6 +280,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         sanpham.SoLuong = soluong;
                         sanpham.ThanhTien = decimal.Parse(row["ThanhTien"].ToString());
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
+
+                        KhoHangSanPham khohangSanPham = DataRepository.KhoHangSanPhamProvider.GetById(sanpham.MaSanPham.GetValueOrDefault());
+                        khohangSanPham.SoLuongBanRa = khohangSanPham.SoLuongBanRa + sanpham.SoLuong;
+                        khohangSanPham.SoLuongTonKho = khohangSanPham.SoLuongTonKho - sanpham.SoLuong;
+                        result = DataRepository.KhoHangSanPhamProvider.Update(khohangSanPham);
                     }
                 }
                 TextBox txtTayTrangToi = (TextBox)this.LieuTrinh.FindControl("txtTayTrangToi");
@@ -287,7 +316,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             {
                 ErrorMessage.InnerText = "Đã có lỗi khi sửa đơn hàng.";
             }
-            if(result)
+            if (result)
                 Response.Redirect("QuanLyDonHang.aspx");
         }
 
@@ -337,6 +366,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            ErrorMessage.InnerText = "";
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.CurrencyDecimalSeparator = ",";
             nfi.CurrencyGroupSeparator = ".";
@@ -349,6 +379,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 if (sanPham != null)
                 {
                     donGiaView = sanPham.GiaTien.GetValueOrDefault().ToString("C", nfi);
+                    if (sanPham.SoLuongTonKho < int.Parse(SoLuong.Value))
+                    {
+                        ErrorMessage.InnerText = "Hiện tại sản phẩm này không đủ.";
+                        return;
+                    }
                 }
                 string tienChietKhauView = "0.00";
                 if (!string.IsNullOrEmpty(SoTienChietKhau.Text))

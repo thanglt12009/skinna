@@ -149,6 +149,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         sanpham.SoLuong = soluong;
                         sanpham.ThanhTien = decimal.Parse(row["ThanhTien"].ToString());
                         result = DataRepository.DonHangChiTietProvider.Insert(sanpham);
+
+                        KhoHangSanPham khohangSanPham = DataRepository.KhoHangSanPhamProvider.GetById(sanpham.MaSanPham.GetValueOrDefault());
+                        khohangSanPham.SoLuongBanRa = khohangSanPham.SoLuongBanRa + sanpham.SoLuong;
+                        khohangSanPham.SoLuongTonKho = khohangSanPham.SoLuongTonKho - sanpham.SoLuong;
+                        result = DataRepository.KhoHangSanPhamProvider.Update(khohangSanPham);
                     }                  
                 }
 
@@ -286,6 +291,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            ErrorMessage.InnerText = "";
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.CurrencyDecimalSeparator = ",";
             nfi.CurrencyGroupSeparator = ".";
@@ -298,6 +304,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                 if (sanPham != null)
                 {
                     donGiaView = sanPham.GiaTien.GetValueOrDefault().ToString("C", nfi);
+                    if(sanPham.SoLuongTonKho < int.Parse(SoLuong.Value))
+                    {
+                        ErrorMessage.InnerText = "Hiện tại sản phẩm này không đủ.";
+                        return;
+                    }
                 }
                 string tienChietKhauView = "0.00";
                 if (!string.IsNullOrEmpty(SoTienChietKhau.Text))
