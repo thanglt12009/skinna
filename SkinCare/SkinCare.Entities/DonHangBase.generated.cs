@@ -95,11 +95,12 @@ namespace SkinCare.Entities
 		///<param name="_ghiChu"></param>
 		///<param name="_tienChietKhau"></param>
 		///<param name="_tiLeChietKhau"></param>
+		///<param name="_isDeleted"></param>
 		public DonHangBase(System.Int32? _maKhachHang, System.Int32? _maNguonDonHang, System.Int32? _maTrangThaiDonHang, 
 			System.String _nguoiDatHang, System.Int32? _maPhuongThucThanhToan, System.String _cachThucNhanHang, 
 			System.Decimal? _phiVanChuyen, System.Decimal? _tongTienDonHang, System.DateTime? _ngayTaoDonHang, 
 			System.String _maKhuyenMai, System.String _maVoucher, System.String _ghiChu, System.Decimal? _tienChietKhau, 
-			System.Double? _tiLeChietKhau)
+			System.Double? _tiLeChietKhau, System.Boolean _isDeleted)
 		{
 			this.entityData = new DonHangEntityData();
 			this.backupData = null;
@@ -118,6 +119,7 @@ namespace SkinCare.Entities
 			this.GhiChu = _ghiChu;
 			this.TienChietKhau = _tienChietKhau;
 			this.TiLeChietKhau = _tiLeChietKhau;
+			this.IsDeleted = _isDeleted;
 		}
 		
 		///<summary>
@@ -137,11 +139,12 @@ namespace SkinCare.Entities
 		///<param name="_ghiChu"></param>
 		///<param name="_tienChietKhau"></param>
 		///<param name="_tiLeChietKhau"></param>
+		///<param name="_isDeleted"></param>
 		public static DonHang CreateDonHang(System.Int32? _maKhachHang, System.Int32? _maNguonDonHang, System.Int32? _maTrangThaiDonHang, 
 			System.String _nguoiDatHang, System.Int32? _maPhuongThucThanhToan, System.String _cachThucNhanHang, 
 			System.Decimal? _phiVanChuyen, System.Decimal? _tongTienDonHang, System.DateTime? _ngayTaoDonHang, 
 			System.String _maKhuyenMai, System.String _maVoucher, System.String _ghiChu, System.Decimal? _tienChietKhau, 
-			System.Double? _tiLeChietKhau)
+			System.Double? _tiLeChietKhau, System.Boolean _isDeleted)
 		{
 			DonHang newDonHang = new DonHang();
 			newDonHang.MaKhachHang = _maKhachHang;
@@ -158,6 +161,7 @@ namespace SkinCare.Entities
 			newDonHang.GhiChu = _ghiChu;
 			newDonHang.TienChietKhau = _tienChietKhau;
 			newDonHang.TiLeChietKhau = _tiLeChietKhau;
+			newDonHang.IsDeleted = _isDeleted;
 			return newDonHang;
 		}
 				
@@ -755,6 +759,44 @@ namespace SkinCare.Entities
 			}
 		}
 		
+		/// <summary>
+		/// 	Gets or sets the IsDeleted property. 
+		///		
+		/// </summary>
+		/// <value>This type is bit.</value>
+		/// <remarks>
+		/// This property can not be set to null. 
+		/// </remarks>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, false)]
+		public virtual System.Boolean IsDeleted
+		{
+			get
+			{
+				return this.entityData.IsDeleted; 
+			}
+			
+			set
+			{
+				if (this.entityData.IsDeleted == value)
+					return;
+				
+                OnPropertyChanging("IsDeleted");                    
+				OnColumnChanging(DonHangColumn.IsDeleted, this.entityData.IsDeleted);
+				this.entityData.IsDeleted = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(DonHangColumn.IsDeleted, this.entityData.IsDeleted);
+				OnPropertyChanged("IsDeleted");
+			}
+		}
+		
 		#endregion Data Properties		
 
 		#region Source Foreign Key Property
@@ -803,7 +845,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"MaDonHang", "MaKhachHang", "MaNguonDonHang", "MaTrangThaiDonHang", "NguoiDatHang", "MaPhuongThucThanhToan", "CachThucNhanHang", "PhiVanChuyen", "TongTienDonHang", "NgayTaoDonHang", "MaKhuyenMai", "MaVoucher", "GhiChu", "TienChietKhau", "TiLeChietKhau"};
+				return new string[] {"MaDonHang", "MaKhachHang", "MaNguonDonHang", "MaTrangThaiDonHang", "NguoiDatHang", "MaPhuongThucThanhToan", "CachThucNhanHang", "PhiVanChuyen", "TongTienDonHang", "NgayTaoDonHang", "MaKhuyenMai", "MaVoucher", "GhiChu", "TienChietKhau", "TiLeChietKhau", "IsDeleted"};
 			}
 		}
 		#endregion 
@@ -966,6 +1008,7 @@ namespace SkinCare.Entities
 				copy.GhiChu = this.GhiChu;
 				copy.TienChietKhau = this.TienChietKhau;
 				copy.TiLeChietKhau = this.TiLeChietKhau;
+				copy.IsDeleted = this.IsDeleted;
 			
 		
 			copy.EntityState = this.EntityState;
@@ -1128,6 +1171,8 @@ namespace SkinCare.Entities
 					return entityData.TienChietKhau != _originalData.TienChietKhau;
 					case DonHangColumn.TiLeChietKhau:
 					return entityData.TiLeChietKhau != _originalData.TiLeChietKhau;
+					case DonHangColumn.IsDeleted:
+					return entityData.IsDeleted != _originalData.IsDeleted;
 			
 				default:
 					return false;
@@ -1170,6 +1215,7 @@ namespace SkinCare.Entities
 			result = result || entityData.GhiChu != _originalData.GhiChu;
 			result = result || entityData.TienChietKhau != _originalData.TienChietKhau;
 			result = result || entityData.TiLeChietKhau != _originalData.TiLeChietKhau;
+			result = result || entityData.IsDeleted != _originalData.IsDeleted;
 			return result;
 		}	
 		
@@ -1193,7 +1239,8 @@ namespace SkinCare.Entities
 				_originalData.MaVoucher,
 				_originalData.GhiChu,
 				_originalData.TienChietKhau,
-				_originalData.TiLeChietKhau
+				_originalData.TiLeChietKhau,
+				_originalData.IsDeleted
 				);
 				
 			return (DonHang)this.Clone();
@@ -1237,7 +1284,8 @@ namespace SkinCare.Entities
 					((this.MaVoucher == null) ? string.Empty : this.MaVoucher.ToString()).GetHashCode() ^ 
 					((this.GhiChu == null) ? string.Empty : this.GhiChu.ToString()).GetHashCode() ^ 
 					((this.TienChietKhau == null) ? string.Empty : this.TienChietKhau.ToString()).GetHashCode() ^ 
-					((this.TiLeChietKhau == null) ? string.Empty : this.TiLeChietKhau.ToString()).GetHashCode();
+					((this.TiLeChietKhau == null) ? string.Empty : this.TiLeChietKhau.ToString()).GetHashCode() ^ 
+					this.IsDeleted.GetHashCode();
         }
 		
 		///<summary>
@@ -1398,6 +1446,8 @@ namespace SkinCare.Entities
 			{
 				equal = false;
 			}
+			if (Object1.IsDeleted != Object2.IsDeleted)
+				equal = false;
 					
 			return equal;
 		}
@@ -1528,6 +1578,12 @@ namespace SkinCare.Entities
             	
             	case DonHangColumn.TiLeChietKhau:
             		return this.TiLeChietKhau.Value.CompareTo(rhs.TiLeChietKhau.Value);
+            		
+            		                 
+            	
+            	
+            	case DonHangColumn.IsDeleted:
+            		return this.IsDeleted.CompareTo(rhs.IsDeleted);
             		
             		                 
             }
@@ -1664,7 +1720,7 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{16}{15}- MaDonHang: {0}{15}- MaKhachHang: {1}{15}- MaNguonDonHang: {2}{15}- MaTrangThaiDonHang: {3}{15}- NguoiDatHang: {4}{15}- MaPhuongThucThanhToan: {5}{15}- CachThucNhanHang: {6}{15}- PhiVanChuyen: {7}{15}- TongTienDonHang: {8}{15}- NgayTaoDonHang: {9}{15}- MaKhuyenMai: {10}{15}- MaVoucher: {11}{15}- GhiChu: {12}{15}- TienChietKhau: {13}{15}- TiLeChietKhau: {14}{15}{17}", 
+				"{17}{16}- MaDonHang: {0}{16}- MaKhachHang: {1}{16}- MaNguonDonHang: {2}{16}- MaTrangThaiDonHang: {3}{16}- NguoiDatHang: {4}{16}- MaPhuongThucThanhToan: {5}{16}- CachThucNhanHang: {6}{16}- PhiVanChuyen: {7}{16}- TongTienDonHang: {8}{16}- NgayTaoDonHang: {9}{16}- MaKhuyenMai: {10}{16}- MaVoucher: {11}{16}- GhiChu: {12}{16}- TienChietKhau: {13}{16}- TiLeChietKhau: {14}{16}- IsDeleted: {15}{16}{18}", 
 				this.MaDonHang,
 				(this.MaKhachHang == null) ? string.Empty : this.MaKhachHang.ToString(),
 				(this.MaNguonDonHang == null) ? string.Empty : this.MaNguonDonHang.ToString(),
@@ -1680,6 +1736,7 @@ namespace SkinCare.Entities
 				(this.GhiChu == null) ? string.Empty : this.GhiChu.ToString(),
 				(this.TienChietKhau == null) ? string.Empty : this.TienChietKhau.ToString(),
 				(this.TiLeChietKhau == null) ? string.Empty : this.TiLeChietKhau.ToString(),
+				this.IsDeleted,
 				System.Environment.NewLine, 
 				this.GetType(),
 				this.Error.Length == 0 ? string.Empty : string.Format("- Error: {0}\n",this.Error));
@@ -1782,6 +1839,11 @@ namespace SkinCare.Entities
 		/// TiLeChietKhau : 
 		/// </summary>
 		public System.Double? TiLeChietKhau = null;
+		
+		/// <summary>
+		/// IsDeleted : 
+		/// </summary>
+		public System.Boolean IsDeleted = false;
 		#endregion
 			
 		#region Source Foreign Key Property
@@ -1819,6 +1881,7 @@ namespace SkinCare.Entities
 			_tmp.GhiChu = this.GhiChu;
 			_tmp.TienChietKhau = this.TienChietKhau;
 			_tmp.TiLeChietKhau = this.TiLeChietKhau;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1859,6 +1922,7 @@ namespace SkinCare.Entities
 			_tmp.GhiChu = this.GhiChu;
 			_tmp.TienChietKhau = this.TienChietKhau;
 			_tmp.TiLeChietKhau = this.TiLeChietKhau;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -2311,7 +2375,13 @@ namespace SkinCare.Entities
 		/// </summary>
 		[EnumTextValue("Ti Le Chiet Khau")]
 		[ColumnEnum("TiLeChietKhau", typeof(System.Double), System.Data.DbType.Double, false, false, true)]
-		TiLeChietKhau = 15
+		TiLeChietKhau = 15,
+		/// <summary>
+		/// IsDeleted : 
+		/// </summary>
+		[EnumTextValue("Is Deleted")]
+		[ColumnEnum("IsDeleted", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, false)]
+		IsDeleted = 16
 	}//End enum
 
 	#endregion DonHangColumn Enum

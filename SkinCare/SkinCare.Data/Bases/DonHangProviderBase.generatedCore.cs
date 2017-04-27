@@ -234,6 +234,7 @@ namespace SkinCare.Data.Bases
 					c.GhiChu = (reader.IsDBNull(((int)DonHangColumn.GhiChu - 1)))?null:(System.String)reader[((int)DonHangColumn.GhiChu - 1)];
 					c.TienChietKhau = (reader.IsDBNull(((int)DonHangColumn.TienChietKhau - 1)))?null:(System.Decimal?)reader[((int)DonHangColumn.TienChietKhau - 1)];
 					c.TiLeChietKhau = (reader.IsDBNull(((int)DonHangColumn.TiLeChietKhau - 1)))?null:(System.Double?)reader[((int)DonHangColumn.TiLeChietKhau - 1)];
+					c.IsDeleted = (System.Boolean)reader[((int)DonHangColumn.IsDeleted - 1)];
 					c.EntityTrackingKey = key;
 					c.AcceptChanges();
 					c.SuppressEntityEvents = false;
@@ -266,6 +267,7 @@ namespace SkinCare.Data.Bases
 			entity.GhiChu = (reader.IsDBNull(((int)DonHangColumn.GhiChu - 1)))?null:(System.String)reader[((int)DonHangColumn.GhiChu - 1)];
 			entity.TienChietKhau = (reader.IsDBNull(((int)DonHangColumn.TienChietKhau - 1)))?null:(System.Decimal?)reader[((int)DonHangColumn.TienChietKhau - 1)];
 			entity.TiLeChietKhau = (reader.IsDBNull(((int)DonHangColumn.TiLeChietKhau - 1)))?null:(System.Double?)reader[((int)DonHangColumn.TiLeChietKhau - 1)];
+			entity.IsDeleted = (System.Boolean)reader[((int)DonHangColumn.IsDeleted - 1)];
 			entity.AcceptChanges();
 		}
 		
@@ -293,6 +295,7 @@ namespace SkinCare.Data.Bases
 			entity.GhiChu = Convert.IsDBNull(dataRow["GhiChu"]) ? null : (System.String)dataRow["GhiChu"];
 			entity.TienChietKhau = Convert.IsDBNull(dataRow["TienChietKhau"]) ? null : (System.Decimal?)dataRow["TienChietKhau"];
 			entity.TiLeChietKhau = Convert.IsDBNull(dataRow["TiLeChietKhau"]) ? null : (System.Double?)dataRow["TiLeChietKhau"];
+			entity.IsDeleted = (System.Boolean)dataRow["IsDeleted"];
 			entity.AcceptChanges();
 		}
 		#endregion 

@@ -275,6 +275,7 @@ namespace SkinCare.Data.Bases
 					c.Luuy = (reader.IsDBNull(((int)KhachHangColumn.Luuy - 1)))?null:(System.String)reader[((int)KhachHangColumn.Luuy - 1)];
 					c.ImageLink = (reader.IsDBNull(((int)KhachHangColumn.ImageLink - 1)))?null:(System.String)reader[((int)KhachHangColumn.ImageLink - 1)];
 					c.Ngaysinh = (reader.IsDBNull(((int)KhachHangColumn.Ngaysinh - 1)))?null:(System.DateTime?)reader[((int)KhachHangColumn.Ngaysinh - 1)];
+					c.IsDeleted = (System.Boolean)reader[((int)KhachHangColumn.IsDeleted - 1)];
 					c.EntityTrackingKey = key;
 					c.AcceptChanges();
 					c.SuppressEntityEvents = false;
@@ -301,6 +302,7 @@ namespace SkinCare.Data.Bases
 			entity.Luuy = (reader.IsDBNull(((int)KhachHangColumn.Luuy - 1)))?null:(System.String)reader[((int)KhachHangColumn.Luuy - 1)];
 			entity.ImageLink = (reader.IsDBNull(((int)KhachHangColumn.ImageLink - 1)))?null:(System.String)reader[((int)KhachHangColumn.ImageLink - 1)];
 			entity.Ngaysinh = (reader.IsDBNull(((int)KhachHangColumn.Ngaysinh - 1)))?null:(System.DateTime?)reader[((int)KhachHangColumn.Ngaysinh - 1)];
+			entity.IsDeleted = (System.Boolean)reader[((int)KhachHangColumn.IsDeleted - 1)];
 			entity.AcceptChanges();
 		}
 		
@@ -322,6 +324,7 @@ namespace SkinCare.Data.Bases
 			entity.Luuy = Convert.IsDBNull(dataRow["LuuY"]) ? null : (System.String)dataRow["LuuY"];
 			entity.ImageLink = Convert.IsDBNull(dataRow["ImageLink"]) ? null : (System.String)dataRow["ImageLink"];
 			entity.Ngaysinh = Convert.IsDBNull(dataRow["Ngaysinh"]) ? null : (System.DateTime?)dataRow["Ngaysinh"];
+			entity.IsDeleted = (System.Boolean)dataRow["isDeleted"];
 			entity.AcceptChanges();
 		}
 		#endregion 

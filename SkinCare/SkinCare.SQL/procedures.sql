@@ -43,7 +43,8 @@ AS
 					[MaVoucher],
 					[GhiChu],
 					[TienChietKhau],
-					[TiLeChietKhau]
+					[TiLeChietKhau],
+					[IsDeleted]
 				FROM
 					[dbo].[tblDonHang]
 					
@@ -129,7 +130,7 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau]
+				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau], O.[IsDeleted]
 				FROM
 				    [dbo].[tblDonHang] O,
 				    #PageIndex PageIndex
@@ -206,7 +207,9 @@ CREATE PROCEDURE dbo.tblDonHang_Insert
 
 	@TienChietKhau decimal (18, 3)  ,
 
-	@TiLeChietKhau float   
+	@TiLeChietKhau float   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -228,6 +231,7 @@ AS
 					,[GhiChu]
 					,[TienChietKhau]
 					,[TiLeChietKhau]
+					,[IsDeleted]
 					)
 				VALUES
 					(
@@ -245,6 +249,7 @@ AS
 					,@GhiChu
 					,@TienChietKhau
 					,@TiLeChietKhau
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @MaDonHang = SCOPE_IDENTITY()
@@ -307,7 +312,9 @@ CREATE PROCEDURE dbo.tblDonHang_Update
 
 	@TienChietKhau decimal (18, 3)  ,
 
-	@TiLeChietKhau float   
+	@TiLeChietKhau float   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -332,6 +339,7 @@ AS
 					,[GhiChu] = @GhiChu
 					,[TienChietKhau] = @TienChietKhau
 					,[TiLeChietKhau] = @TiLeChietKhau
+					,[IsDeleted] = @IsDeleted
 				WHERE
 [MaDonHang] = @MaDonHang 
 				
@@ -422,7 +430,8 @@ AS
 					[MaVoucher],
 					[GhiChu],
 					[TienChietKhau],
-					[TiLeChietKhau]
+					[TiLeChietKhau],
+					[IsDeleted]
 				FROM
 					[dbo].[tblDonHang]
 				WHERE
@@ -488,7 +497,9 @@ CREATE PROCEDURE dbo.tblDonHang_Find
 
 	@TienChietKhau decimal (18, 3)  = null ,
 
-	@TiLeChietKhau float   = null 
+	@TiLeChietKhau float   = null ,
+
+	@IsDeleted bit   = null 
 )
 AS
 
@@ -512,6 +523,7 @@ AS
 	, [GhiChu]
 	, [TienChietKhau]
 	, [TiLeChietKhau]
+	, [IsDeleted]
     FROM
 	[dbo].[tblDonHang]
     WHERE 
@@ -530,6 +542,7 @@ AS
 	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
 	AND ([TienChietKhau] = @TienChietKhau OR @TienChietKhau IS NULL)
 	AND ([TiLeChietKhau] = @TiLeChietKhau OR @TiLeChietKhau IS NULL)
+	AND ([IsDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -550,6 +563,7 @@ AS
 	, [GhiChu]
 	, [TienChietKhau]
 	, [TiLeChietKhau]
+	, [IsDeleted]
     FROM
 	[dbo].[tblDonHang]
     WHERE 
@@ -568,6 +582,7 @@ AS
 	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
 	OR ([TienChietKhau] = @TienChietKhau AND @TienChietKhau is not null)
 	OR ([TiLeChietKhau] = @TiLeChietKhau AND @TiLeChietKhau is not null)
+	OR ([IsDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -3483,7 +3498,8 @@ AS
 					[GioiTinh],
 					[LuuY],
 					[ImageLink],
-					[Ngaysinh]
+					[Ngaysinh],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhachHang]
 					
@@ -3569,7 +3585,7 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh]
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhachHang] O,
 				    #PageIndex PageIndex
@@ -3634,7 +3650,9 @@ CREATE PROCEDURE dbo.tblKhachHang_Insert
 
 	@ImageLink nvarchar (100)  ,
 
-	@Ngaysinh datetime   
+	@Ngaysinh datetime   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -3650,6 +3668,7 @@ AS
 					,[LuuY]
 					,[ImageLink]
 					,[Ngaysinh]
+					,[isDeleted]
 					)
 				VALUES
 					(
@@ -3661,6 +3680,7 @@ AS
 					,@Luuy
 					,@ImageLink
 					,@Ngaysinh
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @MaKhachHang = SCOPE_IDENTITY()
@@ -3711,7 +3731,9 @@ CREATE PROCEDURE dbo.tblKhachHang_Update
 
 	@ImageLink nvarchar (100)  ,
 
-	@Ngaysinh datetime   
+	@Ngaysinh datetime   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -3730,6 +3752,7 @@ AS
 					,[LuuY] = @Luuy
 					,[ImageLink] = @ImageLink
 					,[Ngaysinh] = @Ngaysinh
+					,[isDeleted] = @IsDeleted
 				WHERE
 [MaKhachHang] = @MaKhachHang 
 				
@@ -3814,7 +3837,8 @@ AS
 					[GioiTinh],
 					[LuuY],
 					[ImageLink],
-					[Ngaysinh]
+					[Ngaysinh],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhachHang]
 				WHERE
@@ -3868,7 +3892,9 @@ CREATE PROCEDURE dbo.tblKhachHang_Find
 
 	@ImageLink nvarchar (100)  = null ,
 
-	@Ngaysinh datetime   = null 
+	@Ngaysinh datetime   = null ,
+
+	@IsDeleted bit   = null 
 )
 AS
 
@@ -3886,6 +3912,7 @@ AS
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhachHang]
     WHERE 
@@ -3898,6 +3925,7 @@ AS
 	AND ([LuuY] = @Luuy OR @Luuy IS NULL)
 	AND ([ImageLink] = @ImageLink OR @ImageLink IS NULL)
 	AND ([Ngaysinh] = @Ngaysinh OR @Ngaysinh IS NULL)
+	AND ([isDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -3912,6 +3940,7 @@ AS
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhachHang]
     WHERE 
@@ -3924,6 +3953,7 @@ AS
 	OR ([LuuY] = @Luuy AND @Luuy is not null)
 	OR ([ImageLink] = @ImageLink AND @ImageLink is not null)
 	OR ([Ngaysinh] = @Ngaysinh AND @Ngaysinh is not null)
+	OR ([isDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -3967,7 +3997,8 @@ AS
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 					
@@ -4053,7 +4084,7 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien]
+				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhoHangSanPham] O,
 				    #PageIndex PageIndex
@@ -4118,7 +4149,9 @@ CREATE PROCEDURE dbo.tblKhoHangSanPham_Insert
 
 	@GhiChu nvarchar (MAX)  ,
 
-	@GiaTien money   
+	@GiaTien money   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -4134,6 +4167,7 @@ AS
 					,[NgayNhapHang]
 					,[GhiChu]
 					,[GiaTien]
+					,[isDeleted]
 					)
 				VALUES
 					(
@@ -4145,6 +4179,7 @@ AS
 					,@NgayNhapHang
 					,@GhiChu
 					,@GiaTien
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @Id = SCOPE_IDENTITY()
@@ -4195,7 +4230,9 @@ CREATE PROCEDURE dbo.tblKhoHangSanPham_Update
 
 	@GhiChu nvarchar (MAX)  ,
 
-	@GiaTien money   
+	@GiaTien money   ,
+
+	@IsDeleted bit   
 )
 AS
 
@@ -4214,6 +4251,7 @@ AS
 					,[NgayNhapHang] = @NgayNhapHang
 					,[GhiChu] = @GhiChu
 					,[GiaTien] = @GiaTien
+					,[isDeleted] = @IsDeleted
 				WHERE
 [ID] = @Id 
 				
@@ -4298,7 +4336,8 @@ AS
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 				WHERE
@@ -4348,7 +4387,8 @@ AS
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 				WHERE
@@ -4402,7 +4442,9 @@ CREATE PROCEDURE dbo.tblKhoHangSanPham_Find
 
 	@GhiChu nvarchar (MAX)  = null ,
 
-	@GiaTien money   = null 
+	@GiaTien money   = null ,
+
+	@IsDeleted bit   = null 
 )
 AS
 
@@ -4420,6 +4462,7 @@ AS
 	, [NgayNhapHang]
 	, [GhiChu]
 	, [GiaTien]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhoHangSanPham]
     WHERE 
@@ -4432,6 +4475,7 @@ AS
 	AND ([NgayNhapHang] = @NgayNhapHang OR @NgayNhapHang IS NULL)
 	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
 	AND ([GiaTien] = @GiaTien OR @GiaTien IS NULL)
+	AND ([isDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -4446,6 +4490,7 @@ AS
 	, [NgayNhapHang]
 	, [GhiChu]
 	, [GiaTien]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhoHangSanPham]
     WHERE 
@@ -4458,6 +4503,7 @@ AS
 	OR ([NgayNhapHang] = @NgayNhapHang AND @NgayNhapHang is not null)
 	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
 	OR ([GiaTien] = @GiaTien AND @GiaTien is not null)
+	OR ([isDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				

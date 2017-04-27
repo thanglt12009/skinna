@@ -6937,6 +6937,12 @@
             </summary>
             <value>The TiLeChietKhau.</value>
         </member>
+        <member name="P:SkinCare.Web.UI.DonHangItem.IsDeleted">
+            <summary>
+            Gets the IsDeleted
+            </summary>
+            <value>The IsDeleted.</value>
+        </member>
         <member name="P:SkinCare.Web.UI.DonHangItem.Entity">
             <summary>
             Gets a <see cref="T:SkinCare.Entities.DonHang"></see> object
@@ -7263,6 +7269,12 @@
             </summary>
             <value>The Ngaysinh.</value>
         </member>
+        <member name="P:SkinCare.Web.UI.KhachHangItem.IsDeleted">
+            <summary>
+            Gets the IsDeleted
+            </summary>
+            <value>The IsDeleted.</value>
+        </member>
         <member name="P:SkinCare.Web.UI.KhachHangItem.Entity">
             <summary>
             Gets a <see cref="T:SkinCare.Entities.KhachHang"></see> object
@@ -7434,6 +7446,12 @@
             Gets the GiaTien
             </summary>
             <value>The GiaTien.</value>
+        </member>
+        <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.IsDeleted">
+            <summary>
+            Gets the IsDeleted
+            </summary>
+            <value>The IsDeleted.</value>
         </member>
         <member name="P:SkinCare.Web.UI.KhoHangSanPhamItem.Entity">
             <summary>

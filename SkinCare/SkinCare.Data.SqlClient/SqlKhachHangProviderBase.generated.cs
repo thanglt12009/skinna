@@ -184,6 +184,7 @@ namespace SkinCare.Data.SqlClient
 		database.AddInParameter(commandWrapper, "@Luuy", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, DBNull.Value);
 		database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, DBNull.Value);
+		database.AddInParameter(commandWrapper, "@IsDeleted", DbType.Boolean, DBNull.Value);
 	
 			// replace all instances of 'AND' and 'OR' because we already set searchUsingOR
 			whereClause = whereClause.Replace(" AND ", "|").Replace(" OR ", "|") ; 
@@ -250,6 +251,12 @@ namespace SkinCare.Data.SqlClient
 				{
 					database.SetParameterValue(commandWrapper, "@Ngaysinh", 
 						clause.Trim().Remove(0,8).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
+					continue;
+				}
+				if (clause.Trim().StartsWith("isdeleted ") || clause.Trim().StartsWith("isdeleted="))
+				{
+					database.SetParameterValue(commandWrapper, "@IsDeleted", 
+						clause.Trim().Remove(0,9).Trim().TrimStart(equalSign).Trim().Trim(singleQuote));
 					continue;
 				}
 	
@@ -655,6 +662,8 @@ namespace SkinCare.Data.SqlClient
 			col7.AllowDBNull = true;		
 			DataColumn col8 = dataTable.Columns.Add("Ngaysinh", typeof(System.DateTime));
 			col8.AllowDBNull = true;		
+			DataColumn col9 = dataTable.Columns.Add("isDeleted", typeof(System.Boolean));
+			col9.AllowDBNull = false;		
 			
 			bulkCopy.ColumnMappings.Add("MaKhachHang", "MaKhachHang");
 			bulkCopy.ColumnMappings.Add("TenKhachHang", "TenKhachHang");
@@ -665,6 +674,7 @@ namespace SkinCare.Data.SqlClient
 			bulkCopy.ColumnMappings.Add("LuuY", "LuuY");
 			bulkCopy.ColumnMappings.Add("ImageLink", "ImageLink");
 			bulkCopy.ColumnMappings.Add("Ngaysinh", "Ngaysinh");
+			bulkCopy.ColumnMappings.Add("isDeleted", "isDeleted");
 			
 			foreach(SkinCare.Entities.KhachHang entity in entities)
 			{
@@ -698,6 +708,9 @@ namespace SkinCare.Data.SqlClient
 							
 				
 					row["Ngaysinh"] = entity.Ngaysinh.HasValue ? (object) entity.Ngaysinh  : System.DBNull.Value;
+							
+				
+					row["isDeleted"] = entity.IsDeleted;
 							
 				
 				dataTable.Rows.Add(row);
@@ -743,6 +756,7 @@ namespace SkinCare.Data.SqlClient
             database.AddInParameter(commandWrapper, "@Luuy", DbType.String, entity.Luuy );
             database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, entity.ImageLink );
 			database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, (entity.Ngaysinh.HasValue ? (object) entity.Ngaysinh  : System.DBNull.Value));
+            database.AddInParameter(commandWrapper, "@IsDeleted", DbType.Boolean, entity.IsDeleted );
 			
 			int results = 0;
 			
@@ -800,6 +814,7 @@ namespace SkinCare.Data.SqlClient
             database.AddInParameter(commandWrapper, "@Luuy", DbType.String, entity.Luuy );
             database.AddInParameter(commandWrapper, "@ImageLink", DbType.String, entity.ImageLink );
 			database.AddInParameter(commandWrapper, "@Ngaysinh", DbType.DateTime, (entity.Ngaysinh.HasValue ? (object) entity.Ngaysinh : System.DBNull.Value) );
+            database.AddInParameter(commandWrapper, "@IsDeleted", DbType.Boolean, entity.IsDeleted );
 			
 			int results = 0;
 			

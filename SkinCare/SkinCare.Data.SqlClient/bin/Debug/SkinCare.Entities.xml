@@ -63,7 +63,7 @@
              Creates a new <see cref="T:SkinCare.Entities.DonHangBase"/> instance.
             </summary>
         </member>
-        <member name="M:SkinCare.Entities.DonHangBase.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Double})">
+        <member name="M:SkinCare.Entities.DonHangBase.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Double},System.Boolean)">
             <summary>
              Creates a new <see cref="T:SkinCare.Entities.DonHangBase"/> instance.
             </summary>
@@ -81,8 +81,9 @@
             <param name="_ghiChu"></param>
             <param name="_tienChietKhau"></param>
             <param name="_tiLeChietKhau"></param>
+            <param name="_isDeleted"></param>
         </member>
-        <member name="M:SkinCare.Entities.DonHangBase.CreateDonHang(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Double})">
+        <member name="M:SkinCare.Entities.DonHangBase.CreateDonHang(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Double},System.Boolean)">
             <summary>
              A simple factory method to create a new <see cref="T:SkinCare.Entities.DonHang"/> instance.
             </summary>
@@ -100,6 +101,7 @@
             <param name="_ghiChu"></param>
             <param name="_tienChietKhau"></param>
             <param name="_tiLeChietKhau"></param>
+            <param name="_isDeleted"></param>
         </member>
         <member name="P:SkinCare.Entities.DonHangBase.MaDonHang">
             <summary>
@@ -267,6 +269,16 @@
             This property can be set to null. 
             If this column is null it is up to the developer to check using the HasValue property
             and perform business logic appropriately.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.DonHangBase.IsDeleted">
+            <summary>
+            	Gets or sets the IsDeleted property. 
+            	
+            </summary>
+            <value>This type is bit.</value>
+            <remarks>
+            This property can not be set to null. 
             </remarks>
         </member>
         <member name="M:SkinCare.Entities.DonHangBase.AddValidationRules">
@@ -569,6 +581,11 @@
             TiLeChietKhau : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.DonHangBase.DonHangEntityData.IsDeleted">
+            <summary>
+            IsDeleted : 
+            </summary>
+        </member>
         <member name="M:SkinCare.Entities.DonHangBase.DonHangEntityData.Clone">
             <summary>
             Creates a new object that is a copy of the current instance.
@@ -824,6 +841,11 @@
             TiLeChietKhau : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.DonHangColumn.IsDeleted">
+            <summary>
+            IsDeleted : 
+            </summary>
+        </member>
         <member name="T:SkinCare.Entities.IDonHang">
             <summary>
             	The data structure representation of the 'tblDonHang' table via interface.
@@ -906,6 +928,11 @@
         <member name="P:SkinCare.Entities.IDonHang.TiLeChietKhau">
             <summary>
             TiLeChietKhau : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.IDonHang.IsDeleted">
+            <summary>
+            IsDeleted : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IDonHang.Clone">
@@ -1632,7 +1659,7 @@
              Creates a new <see cref="T:SkinCare.Entities.KhachHangBase"/> instance.
             </summary>
         </member>
-        <member name="M:SkinCare.Entities.KhachHangBase.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+        <member name="M:SkinCare.Entities.KhachHangBase.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Boolean)">
             <summary>
              Creates a new <see cref="T:SkinCare.Entities.KhachHangBase"/> instance.
             </summary>
@@ -1644,8 +1671,9 @@
             <param name="_luuy"></param>
             <param name="_imageLink"></param>
             <param name="_ngaysinh"></param>
+            <param name="_isDeleted"></param>
         </member>
-        <member name="M:SkinCare.Entities.KhachHangBase.CreateKhachHang(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+        <member name="M:SkinCare.Entities.KhachHangBase.CreateKhachHang(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Boolean)">
             <summary>
              A simple factory method to create a new <see cref="T:SkinCare.Entities.KhachHang"/> instance.
             </summary>
@@ -1657,6 +1685,7 @@
             <param name="_luuy"></param>
             <param name="_imageLink"></param>
             <param name="_ngaysinh"></param>
+            <param name="_isDeleted"></param>
         </member>
         <member name="P:SkinCare.Entities.KhachHangBase.MaKhachHang">
             <summary>
@@ -1748,6 +1777,16 @@
             This property can be set to null. 
             If this column is null it is up to the developer to check using the HasValue property
             and perform business logic appropriately.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.KhachHangBase.IsDeleted">
+            <summary>
+            	Gets or sets the IsDeleted property. 
+            	
+            </summary>
+            <value>This type is bit.</value>
+            <remarks>
+            This property can not be set to null. 
             </remarks>
         </member>
         <member name="M:SkinCare.Entities.KhachHangBase.AddValidationRules">
@@ -2020,6 +2059,11 @@
             Ngaysinh : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhachHangBase.KhachHangEntityData.IsDeleted">
+            <summary>
+            isDeleted : 
+            </summary>
+        </member>
         <member name="M:SkinCare.Entities.KhachHangBase.KhachHangEntityData.Clone">
             <summary>
             Creates a new object that is a copy of the current instance.
@@ -2245,6 +2289,11 @@
             Ngaysinh : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhachHangColumn.IsDeleted">
+            <summary>
+            IsDeleted : 
+            </summary>
+        </member>
         <member name="T:SkinCare.Entities.IKhachHang">
             <summary>
             	The data structure representation of the 'tblKhachHang' table via interface.
@@ -2297,6 +2346,11 @@
         <member name="P:SkinCare.Entities.IKhachHang.Ngaysinh">
             <summary>
             Ngaysinh : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.IKhachHang.IsDeleted">
+            <summary>
+            isDeleted : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IKhachHang.Clone">
@@ -2364,7 +2418,7 @@
              Creates a new <see cref="T:SkinCare.Entities.KhoHangSanPhamBase"/> instance.
             </summary>
         </member>
-        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal})">
+        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal},System.Boolean)">
             <summary>
              Creates a new <see cref="T:SkinCare.Entities.KhoHangSanPhamBase"/> instance.
             </summary>
@@ -2376,8 +2430,9 @@
             <param name="_ngayNhapHang"></param>
             <param name="_ghiChu"></param>
             <param name="_giaTien"></param>
+            <param name="_isDeleted"></param>
         </member>
-        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.CreateKhoHangSanPham(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal})">
+        <member name="M:SkinCare.Entities.KhoHangSanPhamBase.CreateKhoHangSanPham(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.String,System.Nullable{System.Decimal},System.Boolean)">
             <summary>
              A simple factory method to create a new <see cref="T:SkinCare.Entities.KhoHangSanPham"/> instance.
             </summary>
@@ -2389,6 +2444,7 @@
             <param name="_ngayNhapHang"></param>
             <param name="_ghiChu"></param>
             <param name="_giaTien"></param>
+            <param name="_isDeleted"></param>
         </member>
         <member name="P:SkinCare.Entities.KhoHangSanPhamBase.Id">
             <summary>
@@ -2489,6 +2545,16 @@
             This property can be set to null. 
             If this column is null it is up to the developer to check using the HasValue property
             and perform business logic appropriately.
+            </remarks>
+        </member>
+        <member name="P:SkinCare.Entities.KhoHangSanPhamBase.IsDeleted">
+            <summary>
+            	Gets or sets the IsDeleted property. 
+            	
+            </summary>
+            <value>This type is bit.</value>
+            <remarks>
+            This property can not be set to null. 
             </remarks>
         </member>
         <member name="M:SkinCare.Entities.KhoHangSanPhamBase.AddValidationRules">
@@ -2761,6 +2827,11 @@
             GiaTien : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.IsDeleted">
+            <summary>
+            isDeleted : 
+            </summary>
+        </member>
         <member name="M:SkinCare.Entities.KhoHangSanPhamBase.KhoHangSanPhamEntityData.Clone">
             <summary>
             Creates a new object that is a copy of the current instance.
@@ -2986,6 +3057,11 @@
             GiaTien : 
             </summary>
         </member>
+        <member name="F:SkinCare.Entities.KhoHangSanPhamColumn.IsDeleted">
+            <summary>
+            IsDeleted : 
+            </summary>
+        </member>
         <member name="T:SkinCare.Entities.IKhoHangSanPham">
             <summary>
             	The data structure representation of the 'tblKhoHangSanPham' table via interface.
@@ -3038,6 +3114,11 @@
         <member name="P:SkinCare.Entities.IKhoHangSanPham.GiaTien">
             <summary>
             GiaTien : 
+            </summary>
+        </member>
+        <member name="P:SkinCare.Entities.IKhoHangSanPham.IsDeleted">
+            <summary>
+            isDeleted : 
             </summary>
         </member>
         <member name="M:SkinCare.Entities.IKhoHangSanPham.Clone">

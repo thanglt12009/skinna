@@ -58,6 +58,11 @@ namespace SkinCare.Entities
 		/// GiaTien : 
 		/// </summary>
 		System.Decimal?  GiaTien  { get; set; }
+		
+		/// <summary>
+		/// isDeleted : 
+		/// </summary>
+		System.Boolean  IsDeleted  { get; set; }
 			
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

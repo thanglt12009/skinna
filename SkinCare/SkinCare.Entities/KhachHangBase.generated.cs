@@ -89,9 +89,10 @@ namespace SkinCare.Entities
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
 		///<param name="_ngaysinh"></param>
+		///<param name="_isDeleted"></param>
 		public KhachHangBase(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
 			System.String _diaChi, System.String _gioiTinh, System.String _luuy, System.String _imageLink, 
-			System.DateTime? _ngaysinh)
+			System.DateTime? _ngaysinh, System.Boolean _isDeleted)
 		{
 			this.entityData = new KhachHangEntityData();
 			this.backupData = null;
@@ -104,6 +105,7 @@ namespace SkinCare.Entities
 			this.Luuy = _luuy;
 			this.ImageLink = _imageLink;
 			this.Ngaysinh = _ngaysinh;
+			this.IsDeleted = _isDeleted;
 		}
 		
 		///<summary>
@@ -117,9 +119,10 @@ namespace SkinCare.Entities
 		///<param name="_luuy"></param>
 		///<param name="_imageLink"></param>
 		///<param name="_ngaysinh"></param>
+		///<param name="_isDeleted"></param>
 		public static KhachHang CreateKhachHang(System.String _tenKhachHang, System.String _email, System.String _soDienThoai, 
 			System.String _diaChi, System.String _gioiTinh, System.String _luuy, System.String _imageLink, 
-			System.DateTime? _ngaysinh)
+			System.DateTime? _ngaysinh, System.Boolean _isDeleted)
 		{
 			KhachHang newKhachHang = new KhachHang();
 			newKhachHang.TenKhachHang = _tenKhachHang;
@@ -130,6 +133,7 @@ namespace SkinCare.Entities
 			newKhachHang.Luuy = _luuy;
 			newKhachHang.ImageLink = _imageLink;
 			newKhachHang.Ngaysinh = _ngaysinh;
+			newKhachHang.IsDeleted = _isDeleted;
 			return newKhachHang;
 		}
 				
@@ -483,6 +487,44 @@ namespace SkinCare.Entities
 			}
 		}
 		
+		/// <summary>
+		/// 	Gets or sets the IsDeleted property. 
+		///		
+		/// </summary>
+		/// <value>This type is bit.</value>
+		/// <remarks>
+		/// This property can not be set to null. 
+		/// </remarks>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, false)]
+		public virtual System.Boolean IsDeleted
+		{
+			get
+			{
+				return this.entityData.IsDeleted; 
+			}
+			
+			set
+			{
+				if (this.entityData.IsDeleted == value)
+					return;
+				
+                OnPropertyChanging("IsDeleted");                    
+				OnColumnChanging(KhachHangColumn.IsDeleted, this.entityData.IsDeleted);
+				this.entityData.IsDeleted = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(KhachHangColumn.IsDeleted, this.entityData.IsDeleted);
+				OnPropertyChanged("IsDeleted");
+			}
+		}
+		
 		#endregion Data Properties		
 
 		#region Source Foreign Key Property
@@ -537,7 +579,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "GioiTinh", "LuuY", "ImageLink", "Ngaysinh"};
+				return new string[] {"MaKhachHang", "TenKhachHang", "Email", "SoDienThoai", "DiaChi", "GioiTinh", "LuuY", "ImageLink", "Ngaysinh", "isDeleted"};
 			}
 		}
 		#endregion 
@@ -694,6 +736,7 @@ namespace SkinCare.Entities
 				copy.Luuy = this.Luuy;
 				copy.ImageLink = this.ImageLink;
 				copy.Ngaysinh = this.Ngaysinh;
+				copy.IsDeleted = this.IsDeleted;
 			
 		
 			copy.EntityState = this.EntityState;
@@ -844,6 +887,8 @@ namespace SkinCare.Entities
 					return entityData.ImageLink != _originalData.ImageLink;
 					case KhachHangColumn.Ngaysinh:
 					return entityData.Ngaysinh != _originalData.Ngaysinh;
+					case KhachHangColumn.IsDeleted:
+					return entityData.IsDeleted != _originalData.IsDeleted;
 			
 				default:
 					return false;
@@ -880,6 +925,7 @@ namespace SkinCare.Entities
 			result = result || entityData.Luuy != _originalData.Luuy;
 			result = result || entityData.ImageLink != _originalData.ImageLink;
 			result = result || entityData.Ngaysinh != _originalData.Ngaysinh;
+			result = result || entityData.IsDeleted != _originalData.IsDeleted;
 			return result;
 		}	
 		
@@ -897,7 +943,8 @@ namespace SkinCare.Entities
 				_originalData.GioiTinh,
 				_originalData.Luuy,
 				_originalData.ImageLink,
-				_originalData.Ngaysinh
+				_originalData.Ngaysinh,
+				_originalData.IsDeleted
 				);
 				
 			return (KhachHang)this.Clone();
@@ -935,7 +982,8 @@ namespace SkinCare.Entities
 					((this.GioiTinh == null) ? string.Empty : this.GioiTinh.ToString()).GetHashCode() ^ 
 					((this.Luuy == null) ? string.Empty : this.Luuy.ToString()).GetHashCode() ^ 
 					((this.ImageLink == null) ? string.Empty : this.ImageLink.ToString()).GetHashCode() ^ 
-					((this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString()).GetHashCode();
+					((this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString()).GetHashCode() ^ 
+					this.IsDeleted.GetHashCode();
         }
 		
 		///<summary>
@@ -1042,6 +1090,8 @@ namespace SkinCare.Entities
 			{
 				equal = false;
 			}
+			if (Object1.IsDeleted != Object2.IsDeleted)
+				equal = false;
 					
 			return equal;
 		}
@@ -1136,6 +1186,12 @@ namespace SkinCare.Entities
             	
             	case KhachHangColumn.Ngaysinh:
             		return this.Ngaysinh.Value.CompareTo(rhs.Ngaysinh.Value);
+            		
+            		                 
+            	
+            	
+            	case KhachHangColumn.IsDeleted:
+            		return this.IsDeleted.CompareTo(rhs.IsDeleted);
             		
             		                 
             }
@@ -1272,7 +1328,7 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{10}{9}- MaKhachHang: {0}{9}- TenKhachHang: {1}{9}- Email: {2}{9}- SoDienThoai: {3}{9}- DiaChi: {4}{9}- GioiTinh: {5}{9}- Luuy: {6}{9}- ImageLink: {7}{9}- Ngaysinh: {8}{9}{11}", 
+				"{11}{10}- MaKhachHang: {0}{10}- TenKhachHang: {1}{10}- Email: {2}{10}- SoDienThoai: {3}{10}- DiaChi: {4}{10}- GioiTinh: {5}{10}- Luuy: {6}{10}- ImageLink: {7}{10}- Ngaysinh: {8}{10}- IsDeleted: {9}{10}{12}", 
 				this.MaKhachHang,
 				(this.TenKhachHang == null) ? string.Empty : this.TenKhachHang.ToString(),
 				(this.Email == null) ? string.Empty : this.Email.ToString(),
@@ -1282,6 +1338,7 @@ namespace SkinCare.Entities
 				(this.Luuy == null) ? string.Empty : this.Luuy.ToString(),
 				(this.ImageLink == null) ? string.Empty : this.ImageLink.ToString(),
 				(this.Ngaysinh == null) ? string.Empty : this.Ngaysinh.ToString(),
+				this.IsDeleted,
 				System.Environment.NewLine, 
 				this.GetType(),
 				this.Error.Length == 0 ? string.Empty : string.Format("- Error: {0}\n",this.Error));
@@ -1354,6 +1411,11 @@ namespace SkinCare.Entities
 		/// Ngaysinh : 
 		/// </summary>
 		public System.DateTime? Ngaysinh = null;
+		
+		/// <summary>
+		/// isDeleted : 
+		/// </summary>
+		public System.Boolean IsDeleted = false;
 		#endregion
 			
 		#region Source Foreign Key Property
@@ -1385,6 +1447,7 @@ namespace SkinCare.Entities
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
 			_tmp.Ngaysinh = this.Ngaysinh;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1419,6 +1482,7 @@ namespace SkinCare.Entities
 			_tmp.Luuy = this.Luuy;
 			_tmp.ImageLink = this.ImageLink;
 			_tmp.Ngaysinh = this.Ngaysinh;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1835,7 +1899,13 @@ namespace SkinCare.Entities
 		/// </summary>
 		[EnumTextValue("Ngaysinh")]
 		[ColumnEnum("Ngaysinh", typeof(System.DateTime), System.Data.DbType.DateTime, false, false, true)]
-		Ngaysinh = 9
+		Ngaysinh = 9,
+		/// <summary>
+		/// IsDeleted : 
+		/// </summary>
+		[EnumTextValue("Is Deleted")]
+		[ColumnEnum("isDeleted", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, false)]
+		IsDeleted = 10
 	}//End enum
 
 	#endregion KhachHangColumn Enum

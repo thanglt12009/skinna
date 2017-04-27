@@ -4,6 +4,12 @@
 	<ItemTemplate>
 		<table border="0" cellpadding="3" cellspacing="1">
 			<tr>
+        <td class="literal"><asp:Label ID="lbldataIsDeleted" runat="server" Text="Is Deleted:" AssociatedControlID="dataIsDeleted" /></td>
+        <td>
+					<asp:RadioButtonList runat="server" ID="dataIsDeleted" SelectedValue='<%# Bind("IsDeleted") %>' RepeatDirection="Horizontal"><asp:ListItem Value="True" Text="Yes" Selected="True"></asp:ListItem><asp:ListItem Value="False" Text="No"></asp:ListItem></asp:RadioButtonList>
+				</td>
+			</tr>
+			<tr>
         <td class="literal"><asp:Label ID="lbldataMaKhachHang" runat="server" Text="Ma Khach Hang:" AssociatedControlID="dataMaKhachHang" /></td>
         <td>
 					<asp:TextBox runat="server" ID="dataMaKhachHang" Text='<%# Bind("MaKhachHang") %>'></asp:TextBox><asp:RangeValidator ID="RangeVal_dataMaKhachHang" runat="server" Display="Dynamic" ControlToValidate="dataMaKhachHang" ErrorMessage="Invalid value" MaximumValue="2147483647" MinimumValue="-2147483648" Type="Integer"></asp:RangeValidator>

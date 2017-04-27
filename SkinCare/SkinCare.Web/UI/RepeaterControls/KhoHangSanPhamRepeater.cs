@@ -412,6 +412,15 @@ namespace SkinCare.Web.UI
 		{
 			get { return _entity.GiaTien; }
 		}
+        /// <summary>
+        /// Gets the IsDeleted
+        /// </summary>
+        /// <value>The IsDeleted.</value>
+		[System.ComponentModel.Bindable(true)]
+		public System.Boolean IsDeleted
+		{
+			get { return _entity.IsDeleted; }
+		}
 
         /// <summary>
         /// Gets a <see cref="T:SkinCare.Entities.KhoHangSanPham"></see> object

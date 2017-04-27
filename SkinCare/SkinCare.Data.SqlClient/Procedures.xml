@@ -31,7 +31,8 @@
 					[MaVoucher],
 					[GhiChu],
 					[TienChietKhau],
-					[TiLeChietKhau]
+					[TiLeChietKhau],
+					[IsDeleted]
 				FROM
 					[dbo].[tblDonHang]
 					
@@ -97,7 +98,7 @@
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau]
+				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau], O.[IsDeleted]
 				FROM
 				    [dbo].[tblDonHang] O,
 				    #PageIndex PageIndex
@@ -145,6 +146,7 @@
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
 				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
 				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -164,6 +166,7 @@
 					,[GhiChu]
 					,[TienChietKhau]
 					,[TiLeChietKhau]
+					,[IsDeleted]
 					)
 				VALUES
 					(
@@ -181,6 +184,7 @@
 					,@GhiChu
 					,@TienChietKhau
 					,@TiLeChietKhau
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @MaDonHang = SCOPE_IDENTITY()
@@ -213,6 +217,7 @@
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
 				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault=""/>
 				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -235,6 +240,7 @@
 					,[GhiChu] = @GhiChu
 					,[TienChietKhau] = @TienChietKhau
 					,[TiLeChietKhau] = @TiLeChietKhau
+					,[IsDeleted] = @IsDeleted
 				WHERE
 [MaDonHang] = @MaDonHang 
 				
@@ -287,7 +293,8 @@
 					[MaVoucher],
 					[GhiChu],
 					[TienChietKhau],
-					[TiLeChietKhau]
+					[TiLeChietKhau],
+					[IsDeleted]
 				FROM
 					[dbo].[tblDonHang]
 				WHERE
@@ -323,6 +330,7 @@
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault="null"/>
 				<parameter name="@TienChietKhau" type="decimal" direction="Input" size="9" precision="18" scale="3" param="(18, 3)" nulldefault="null"/>
 				<parameter name="@TiLeChietKhau" type="float" direction="Input" size="8" precision="53" scale="0" param="" nulldefault="null"/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -344,6 +352,7 @@
 	, [GhiChu]
 	, [TienChietKhau]
 	, [TiLeChietKhau]
+	, [IsDeleted]
     FROM
 	[dbo].[tblDonHang]
     WHERE 
@@ -362,6 +371,7 @@
 	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
 	AND ([TienChietKhau] = @TienChietKhau OR @TienChietKhau IS NULL)
 	AND ([TiLeChietKhau] = @TiLeChietKhau OR @TiLeChietKhau IS NULL)
+	AND ([IsDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -382,6 +392,7 @@
 	, [GhiChu]
 	, [TienChietKhau]
 	, [TiLeChietKhau]
+	, [IsDeleted]
     FROM
 	[dbo].[tblDonHang]
     WHERE 
@@ -400,6 +411,7 @@
 	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
 	OR ([TienChietKhau] = @TienChietKhau AND @TienChietKhau is not null)
 	OR ([TiLeChietKhau] = @TiLeChietKhau AND @TiLeChietKhau is not null)
+	OR ([IsDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				]]></body>
@@ -434,7 +446,7 @@
 				ORDER BY {1}
 				
 				-- Return paged results
-				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau]
+				SELECT O.[MaDonHang], O.[MaKhachHang], O.[MaNguonDonHang], O.[MaTrangThaiDonHang], O.[NguoiDatHang], O.[MaPhuongThucThanhToan], O.[CachThucNhanHang], O.[PhiVanChuyen], O.[TongTienDonHang], O.[NgayTaoDonHang], O.[MaKhuyenMai], O.[MaVoucher], O.[GhiChu], O.[TienChietKhau], O.[TiLeChietKhau], O.[IsDeleted]
 				FROM
 				    [dbo].[tblDonHang] O,
 				    #PageIndex PageIndex
@@ -2726,7 +2738,8 @@ END
 					[GioiTinh],
 					[LuuY],
 					[ImageLink],
-					[Ngaysinh]
+					[Ngaysinh],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhachHang]
 					
@@ -2792,7 +2805,7 @@ END
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh]
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhachHang] O,
 				    #PageIndex PageIndex
@@ -2834,6 +2847,7 @@ END
 				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
 				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
 				<parameter name="@Ngaysinh" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -2847,6 +2861,7 @@ END
 					,[LuuY]
 					,[ImageLink]
 					,[Ngaysinh]
+					,[isDeleted]
 					)
 				VALUES
 					(
@@ -2858,6 +2873,7 @@ END
 					,@Luuy
 					,@ImageLink
 					,@Ngaysinh
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @MaKhachHang = SCOPE_IDENTITY()
@@ -2884,6 +2900,7 @@ END
 				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
 				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
 				<parameter name="@Ngaysinh" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -2900,6 +2917,7 @@ END
 					,[LuuY] = @Luuy
 					,[ImageLink] = @ImageLink
 					,[Ngaysinh] = @Ngaysinh
+					,[isDeleted] = @IsDeleted
 				WHERE
 [MaKhachHang] = @MaKhachHang 
 				
@@ -2946,7 +2964,8 @@ END
 					[GioiTinh],
 					[LuuY],
 					[ImageLink],
-					[Ngaysinh]
+					[Ngaysinh],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhachHang]
 				WHERE
@@ -2976,6 +2995,7 @@ END
 				<parameter name="@Luuy" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault="null"/>
 				<parameter name="@ImageLink" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault="null"/>
 				<parameter name="@Ngaysinh" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -2991,6 +3011,7 @@ END
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhachHang]
     WHERE 
@@ -3003,6 +3024,7 @@ END
 	AND ([LuuY] = @Luuy OR @Luuy IS NULL)
 	AND ([ImageLink] = @ImageLink OR @ImageLink IS NULL)
 	AND ([Ngaysinh] = @Ngaysinh OR @Ngaysinh IS NULL)
+	AND ([isDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -3017,6 +3039,7 @@ END
 	, [LuuY]
 	, [ImageLink]
 	, [Ngaysinh]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhachHang]
     WHERE 
@@ -3029,6 +3052,7 @@ END
 	OR ([LuuY] = @Luuy AND @Luuy is not null)
 	OR ([ImageLink] = @ImageLink AND @ImageLink is not null)
 	OR ([Ngaysinh] = @Ngaysinh AND @Ngaysinh is not null)
+	OR ([isDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				]]></body>
@@ -3063,7 +3087,7 @@ END
 				ORDER BY {1}
 				
 				-- Return paged results
-				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh]
+				SELECT O.[MaKhachHang], O.[TenKhachHang], O.[Email], O.[SoDienThoai], O.[DiaChi], O.[GioiTinh], O.[LuuY], O.[ImageLink], O.[Ngaysinh], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhachHang] O,
 				    #PageIndex PageIndex
@@ -3127,7 +3151,8 @@ END
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 					
@@ -3193,7 +3218,7 @@ END
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien]
+				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhoHangSanPham] O,
 				    #PageIndex PageIndex
@@ -3235,6 +3260,7 @@ END
 				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
 				<parameter name="@GiaTien" type="money" direction="Input" size="8" precision="19" scale="4" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -3248,6 +3274,7 @@ END
 					,[NgayNhapHang]
 					,[GhiChu]
 					,[GiaTien]
+					,[isDeleted]
 					)
 				VALUES
 					(
@@ -3259,6 +3286,7 @@ END
 					,@NgayNhapHang
 					,@GhiChu
 					,@GiaTien
+					,@IsDeleted
 					)
 				-- Get the identity value
 				SET @Id = SCOPE_IDENTITY()
@@ -3285,6 +3313,7 @@ END
 				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault=""/>
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
 				<parameter name="@GiaTien" type="money" direction="Input" size="8" precision="19" scale="4" param="" nulldefault=""/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault=""/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -3301,6 +3330,7 @@ END
 					,[NgayNhapHang] = @NgayNhapHang
 					,[GhiChu] = @GhiChu
 					,[GiaTien] = @GiaTien
+					,[isDeleted] = @IsDeleted
 				WHERE
 [ID] = @Id 
 				
@@ -3347,7 +3377,8 @@ END
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 				WHERE
@@ -3379,7 +3410,8 @@ END
 					[SoLuongTonKho],
 					[NgayNhapHang],
 					[GhiChu],
-					[GiaTien]
+					[GiaTien],
+					[isDeleted]
 				FROM
 					[dbo].[tblKhoHangSanPham]
 				WHERE
@@ -3409,6 +3441,7 @@ END
 				<parameter name="@NgayNhapHang" type="datetime" direction="Input" size="8" precision="23" scale="3" param="" nulldefault="null"/>
 				<parameter name="@GhiChu" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault="null"/>
 				<parameter name="@GiaTien" type="money" direction="Input" size="8" precision="19" scale="4" param="" nulldefault="null"/>
+				<parameter name="@IsDeleted" type="bit" direction="Input" size="1" precision="1" scale="0" param="" nulldefault="null"/>
 			</parameters>
 			<body><![CDATA[
 				
@@ -3424,6 +3457,7 @@ END
 	, [NgayNhapHang]
 	, [GhiChu]
 	, [GiaTien]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhoHangSanPham]
     WHERE 
@@ -3436,6 +3470,7 @@ END
 	AND ([NgayNhapHang] = @NgayNhapHang OR @NgayNhapHang IS NULL)
 	AND ([GhiChu] = @GhiChu OR @GhiChu IS NULL)
 	AND ([GiaTien] = @GiaTien OR @GiaTien IS NULL)
+	AND ([isDeleted] = @IsDeleted OR @IsDeleted IS NULL)
 						
   END
   ELSE
@@ -3450,6 +3485,7 @@ END
 	, [NgayNhapHang]
 	, [GhiChu]
 	, [GiaTien]
+	, [isDeleted]
     FROM
 	[dbo].[tblKhoHangSanPham]
     WHERE 
@@ -3462,6 +3498,7 @@ END
 	OR ([NgayNhapHang] = @NgayNhapHang AND @NgayNhapHang is not null)
 	OR ([GhiChu] = @GhiChu AND @GhiChu is not null)
 	OR ([GiaTien] = @GiaTien AND @GiaTien is not null)
+	OR ([isDeleted] = @IsDeleted AND @IsDeleted is not null)
 	SELECT @@ROWCOUNT			
   END
 				]]></body>
@@ -3496,7 +3533,7 @@ END
 				ORDER BY {1}
 				
 				-- Return paged results
-				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien]
+				SELECT O.[ID], O.[MaSanPham], O.[TenSanPham], O.[SoLuongNhapVao], O.[SoLuongBanRa], O.[SoLuongTonKho], O.[NgayNhapHang], O.[GhiChu], O.[GiaTien], O.[isDeleted]
 				FROM
 				    [dbo].[tblKhoHangSanPham] O,
 				    #PageIndex PageIndex

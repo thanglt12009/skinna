@@ -89,9 +89,11 @@ namespace SkinCare.Entities
 		///<param name="_ngayNhapHang"></param>
 		///<param name="_ghiChu"></param>
 		///<param name="_giaTien"></param>
+		///<param name="_isDeleted"></param>
 		public KhoHangSanPhamBase(System.String _maSanPham, System.String _tenSanPham, 
 			System.Int32? _soLuongNhapVao, System.Int32? _soLuongBanRa, System.Int32? _soLuongTonKho, 
-			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien)
+			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien, 
+			System.Boolean _isDeleted)
 		{
 			this.entityData = new KhoHangSanPhamEntityData();
 			this.backupData = null;
@@ -104,6 +106,7 @@ namespace SkinCare.Entities
 			this.NgayNhapHang = _ngayNhapHang;
 			this.GhiChu = _ghiChu;
 			this.GiaTien = _giaTien;
+			this.IsDeleted = _isDeleted;
 		}
 		
 		///<summary>
@@ -117,9 +120,11 @@ namespace SkinCare.Entities
 		///<param name="_ngayNhapHang"></param>
 		///<param name="_ghiChu"></param>
 		///<param name="_giaTien"></param>
+		///<param name="_isDeleted"></param>
 		public static KhoHangSanPham CreateKhoHangSanPham(System.String _maSanPham, System.String _tenSanPham, 
 			System.Int32? _soLuongNhapVao, System.Int32? _soLuongBanRa, System.Int32? _soLuongTonKho, 
-			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien)
+			System.DateTime? _ngayNhapHang, System.String _ghiChu, System.Decimal? _giaTien, 
+			System.Boolean _isDeleted)
 		{
 			KhoHangSanPham newKhoHangSanPham = new KhoHangSanPham();
 			newKhoHangSanPham.MaSanPham = _maSanPham;
@@ -130,6 +135,7 @@ namespace SkinCare.Entities
 			newKhoHangSanPham.NgayNhapHang = _ngayNhapHang;
 			newKhoHangSanPham.GhiChu = _ghiChu;
 			newKhoHangSanPham.GiaTien = _giaTien;
+			newKhoHangSanPham.IsDeleted = _isDeleted;
 			return newKhoHangSanPham;
 		}
 				
@@ -492,6 +498,44 @@ namespace SkinCare.Entities
 			}
 		}
 		
+		/// <summary>
+		/// 	Gets or sets the IsDeleted property. 
+		///		
+		/// </summary>
+		/// <value>This type is bit.</value>
+		/// <remarks>
+		/// This property can not be set to null. 
+		/// </remarks>
+		
+		
+
+
+
+
+		[DescriptionAttribute(@""), System.ComponentModel.Bindable( System.ComponentModel.BindableSupport.Yes)]
+		[DataObjectField(false, false, false)]
+		public virtual System.Boolean IsDeleted
+		{
+			get
+			{
+				return this.entityData.IsDeleted; 
+			}
+			
+			set
+			{
+				if (this.entityData.IsDeleted == value)
+					return;
+				
+                OnPropertyChanging("IsDeleted");                    
+				OnColumnChanging(KhoHangSanPhamColumn.IsDeleted, this.entityData.IsDeleted);
+				this.entityData.IsDeleted = value;
+				if (this.EntityState == EntityState.Unchanged)
+					this.EntityState = EntityState.Changed;
+				OnColumnChanged(KhoHangSanPhamColumn.IsDeleted, this.entityData.IsDeleted);
+				OnPropertyChanged("IsDeleted");
+			}
+		}
+		
 		#endregion Data Properties		
 
 		#region Source Foreign Key Property
@@ -538,7 +582,7 @@ namespace SkinCare.Entities
 		{
 			get
 			{
-				return new string[] {"ID", "MaSanPham", "TenSanPham", "SoLuongNhapVao", "SoLuongBanRa", "SoLuongTonKho", "NgayNhapHang", "GhiChu", "GiaTien"};
+				return new string[] {"ID", "MaSanPham", "TenSanPham", "SoLuongNhapVao", "SoLuongBanRa", "SoLuongTonKho", "NgayNhapHang", "GhiChu", "GiaTien", "isDeleted"};
 			}
 		}
 		#endregion 
@@ -695,6 +739,7 @@ namespace SkinCare.Entities
 				copy.NgayNhapHang = this.NgayNhapHang;
 				copy.GhiChu = this.GhiChu;
 				copy.GiaTien = this.GiaTien;
+				copy.IsDeleted = this.IsDeleted;
 			
 		
 			copy.EntityState = this.EntityState;
@@ -845,6 +890,8 @@ namespace SkinCare.Entities
 					return entityData.GhiChu != _originalData.GhiChu;
 					case KhoHangSanPhamColumn.GiaTien:
 					return entityData.GiaTien != _originalData.GiaTien;
+					case KhoHangSanPhamColumn.IsDeleted:
+					return entityData.IsDeleted != _originalData.IsDeleted;
 			
 				default:
 					return false;
@@ -881,6 +928,7 @@ namespace SkinCare.Entities
 			result = result || entityData.NgayNhapHang != _originalData.NgayNhapHang;
 			result = result || entityData.GhiChu != _originalData.GhiChu;
 			result = result || entityData.GiaTien != _originalData.GiaTien;
+			result = result || entityData.IsDeleted != _originalData.IsDeleted;
 			return result;
 		}	
 		
@@ -898,7 +946,8 @@ namespace SkinCare.Entities
 				_originalData.SoLuongTonKho,
 				_originalData.NgayNhapHang,
 				_originalData.GhiChu,
-				_originalData.GiaTien
+				_originalData.GiaTien,
+				_originalData.IsDeleted
 				);
 				
 			return (KhoHangSanPham)this.Clone();
@@ -936,7 +985,8 @@ namespace SkinCare.Entities
 					((this.SoLuongTonKho == null) ? string.Empty : this.SoLuongTonKho.ToString()).GetHashCode() ^ 
 					((this.NgayNhapHang == null) ? string.Empty : this.NgayNhapHang.ToString()).GetHashCode() ^ 
 					((this.GhiChu == null) ? string.Empty : this.GhiChu.ToString()).GetHashCode() ^ 
-					((this.GiaTien == null) ? string.Empty : this.GiaTien.ToString()).GetHashCode();
+					((this.GiaTien == null) ? string.Empty : this.GiaTien.ToString()).GetHashCode() ^ 
+					this.IsDeleted.GetHashCode();
         }
 		
 		///<summary>
@@ -1036,6 +1086,8 @@ namespace SkinCare.Entities
 			{
 				equal = false;
 			}
+			if (Object1.IsDeleted != Object2.IsDeleted)
+				equal = false;
 					
 			return equal;
 		}
@@ -1130,6 +1182,12 @@ namespace SkinCare.Entities
             	
             	case KhoHangSanPhamColumn.GiaTien:
             		return this.GiaTien.Value.CompareTo(rhs.GiaTien.Value);
+            		
+            		                 
+            	
+            	
+            	case KhoHangSanPhamColumn.IsDeleted:
+            		return this.IsDeleted.CompareTo(rhs.IsDeleted);
             		
             		                 
             }
@@ -1266,7 +1324,7 @@ namespace SkinCare.Entities
 		public override string ToString()
 		{
 			return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-				"{10}{9}- Id: {0}{9}- MaSanPham: {1}{9}- TenSanPham: {2}{9}- SoLuongNhapVao: {3}{9}- SoLuongBanRa: {4}{9}- SoLuongTonKho: {5}{9}- NgayNhapHang: {6}{9}- GhiChu: {7}{9}- GiaTien: {8}{9}{11}", 
+				"{11}{10}- Id: {0}{10}- MaSanPham: {1}{10}- TenSanPham: {2}{10}- SoLuongNhapVao: {3}{10}- SoLuongBanRa: {4}{10}- SoLuongTonKho: {5}{10}- NgayNhapHang: {6}{10}- GhiChu: {7}{10}- GiaTien: {8}{10}- IsDeleted: {9}{10}{12}", 
 				this.Id,
 				this.MaSanPham,
 				(this.TenSanPham == null) ? string.Empty : this.TenSanPham.ToString(),
@@ -1276,6 +1334,7 @@ namespace SkinCare.Entities
 				(this.NgayNhapHang == null) ? string.Empty : this.NgayNhapHang.ToString(),
 				(this.GhiChu == null) ? string.Empty : this.GhiChu.ToString(),
 				(this.GiaTien == null) ? string.Empty : this.GiaTien.ToString(),
+				this.IsDeleted,
 				System.Environment.NewLine, 
 				this.GetType(),
 				this.Error.Length == 0 ? string.Empty : string.Format("- Error: {0}\n",this.Error));
@@ -1348,6 +1407,11 @@ namespace SkinCare.Entities
 		/// GiaTien : 
 		/// </summary>
 		public System.Decimal? GiaTien = null;
+		
+		/// <summary>
+		/// isDeleted : 
+		/// </summary>
+		public System.Boolean IsDeleted = false;
 		#endregion
 			
 		#region Source Foreign Key Property
@@ -1379,6 +1443,7 @@ namespace SkinCare.Entities
 			_tmp.NgayNhapHang = this.NgayNhapHang;
 			_tmp.GhiChu = this.GhiChu;
 			_tmp.GiaTien = this.GiaTien;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1413,6 +1478,7 @@ namespace SkinCare.Entities
 			_tmp.NgayNhapHang = this.NgayNhapHang;
 			_tmp.GhiChu = this.GhiChu;
 			_tmp.GiaTien = this.GiaTien;
+			_tmp.IsDeleted = this.IsDeleted;
 			
 			#region Source Parent Composite Entities
 			#endregion
@@ -1829,7 +1895,13 @@ namespace SkinCare.Entities
 		/// </summary>
 		[EnumTextValue("Gia Tien")]
 		[ColumnEnum("GiaTien", typeof(System.Decimal), System.Data.DbType.Currency, false, false, true)]
-		GiaTien = 9
+		GiaTien = 9,
+		/// <summary>
+		/// IsDeleted : 
+		/// </summary>
+		[EnumTextValue("Is Deleted")]
+		[ColumnEnum("isDeleted", typeof(System.Boolean), System.Data.DbType.Boolean, false, false, false)]
+		IsDeleted = 10
 	}//End enum
 
 	#endregion KhoHangSanPhamColumn Enum

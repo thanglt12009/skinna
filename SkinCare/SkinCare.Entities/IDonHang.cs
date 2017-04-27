@@ -88,6 +88,11 @@ namespace SkinCare.Entities
 		/// TiLeChietKhau : 
 		/// </summary>
 		System.Double?  TiLeChietKhau  { get; set; }
+		
+		/// <summary>
+		/// IsDeleted : 
+		/// </summary>
+		System.Boolean  IsDeleted  { get; set; }
 			
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

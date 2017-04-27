@@ -58,6 +58,11 @@ namespace SkinCare.Entities
 		/// Ngaysinh : 
 		/// </summary>
 		System.DateTime?  Ngaysinh  { get; set; }
+		
+		/// <summary>
+		/// isDeleted : 
+		/// </summary>
+		System.Boolean  IsDeleted  { get; set; }
 			
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

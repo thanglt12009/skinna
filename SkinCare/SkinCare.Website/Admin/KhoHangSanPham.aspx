@@ -16,6 +16,7 @@
 			>
 			<Columns>
 				<asp:CommandField ShowSelectButton="True" ShowEditButton="True" />				
+				<data:BoundRadioButtonField DataField="IsDeleted" HeaderText="Is Deleted" SortExpression="[isDeleted]"  />
 				<asp:BoundField DataField="MaSanPham" HeaderText="Ma San Pham" SortExpression="[MaSanPham]"  />
 				<asp:BoundField DataField="TenSanPham" HeaderText="Ten San Pham" SortExpression="[TenSanPham]"  />
 				<asp:BoundField DataField="SoLuongNhapVao" HeaderText="So Luong Nhap Vao" SortExpression="[SoLuongNhapVao]"  />
