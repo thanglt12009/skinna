@@ -398,10 +398,11 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
         private void LoadSanPhamList()
         {
             TList<KhoHangSanPham> sanPhamList = DataRepository.KhoHangSanPhamProvider.GetAll();
-            if (sanPhamList != null && sanPhamList.Count > 0)
+            List<KhoHangSanPham> sanPhamList1 = sanPhamList.OrderBy(x => x.TenSanPham).ToList();
+            if (sanPhamList1 != null && sanPhamList1.Count > 0)
             {
                 SanPham.Items.Add(new ListItem("Chọn sản phẩm", "-1"));
-                foreach (var item in sanPhamList)
+                foreach (var item in sanPhamList1)
                 {
                     SanPham.Items.Add(new ListItem(item.TenSanPham, item.Id.ToString()));
                 }
