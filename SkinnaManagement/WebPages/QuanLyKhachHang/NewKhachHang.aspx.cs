@@ -48,7 +48,11 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
             {
                 DataSet ds = DataRepository.KhachHangProvider.GetLastId();
-                int total = Convert.ToInt32(ds.Tables[0].Rows[0][0]) + 1;
+                int total = 0;
+                if (ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0][0] != null)
+                {
+                    total = Convert.ToInt32(ds.Tables[0].Rows[0][0]) + 1;                   
+                }                
                 FileUpload1.SaveAs(Server.MapPath("~/Images/") + total + ".jpg");
                 AnhChup.ImageUrl = "~/Images/" + total + ".jpg";
             }

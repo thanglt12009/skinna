@@ -24,6 +24,8 @@ namespace SkinnaManagement.App.DAL
         public string TongTienTon { get; set; }
 
         public string Edit { get; set; }
+
+        public string Delete { get; set; }
     }
     public class DataTablesKhoHangSanPham
     {

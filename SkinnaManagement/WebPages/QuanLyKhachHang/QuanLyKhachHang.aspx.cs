@@ -161,24 +161,28 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
             TList<KhachHang> khachHanglist = DataRepository.KhachHangProvider.GetAll();           
             foreach (var item in khachHanglist)
             {
-                DonHangParameterBuilder query = new DonHangParameterBuilder();
-                query.Append(DonHangColumn.MaKhachHang, item.MaKhachHang.ToString());
-                TList<DonHang> donHangList = DataRepository.DonHangProvider.Find(query.GetParameters());
-                decimal tongTien = 0;
-                foreach(var donHang in donHangList)
+                if (!item.IsDeleted)
                 {
-                    tongTien += donHang.TongTienDonHang.GetValueOrDefault(0);
+                    DonHangParameterBuilder query = new DonHangParameterBuilder();
+                    query.Append(DonHangColumn.MaKhachHang, item.MaKhachHang.ToString());
+                    TList<DonHang> donHangList = DataRepository.DonHangProvider.Find(query.GetParameters());
+                    decimal tongTien = 0;
+                    foreach (var donHang in donHangList)
+                    {
+                        tongTien += donHang.TongTienDonHang.GetValueOrDefault(0);
+                    }
+                    KhachHangView viewItem = new KhachHangView();
+                    viewItem.MaKhachHang = item.MaKhachHang;
+                    viewItem.TenKhachHang = item.TenKhachHang;
+                    viewItem.SoDienThoai = item.SoDienThoai;
+                    viewItem.NgaySinh = item.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
+                    string tongTienView = tongTien.ToString("C", nfi);
+                    viewItem.TongTien = tongTienView.Substring(0, tongTienView.Length - 3);
+                    viewItem.DiaChi = item.DiaChi;
+                    viewItem.Edit = "<a href=\"EditKhachHang.aspx?id=" + item.MaKhachHang + "\">Chi tiết</a>";
+                    viewItem.Delete = "<a href=\"javascript:XoaKhachHang(" + item.MaKhachHang + ");void(0);\">Xóa</a>";
+                    lst.Add(viewItem);
                 }
-                KhachHangView viewItem = new KhachHangView();               
-                viewItem.MaKhachHang  = item.MaKhachHang;
-                viewItem.TenKhachHang = item.TenKhachHang;
-                viewItem.SoDienThoai = item.SoDienThoai;
-                viewItem.NgaySinh = item.Ngaysinh.GetValueOrDefault().ToString("dd/MM/yyyy");
-                string tongTienView = tongTien.ToString("C", nfi);
-                viewItem.TongTien = tongTienView.Substring(0, tongTienView.Length - 3);                
-                viewItem.DiaChi = item.DiaChi;                            
-                viewItem.Edit = "<a href=\"EditKhachHang.aspx?id=" + item.MaKhachHang + "\">Chi tiết</a>";
-                lst.Add(viewItem);              
             }
             return lst;
 
@@ -237,5 +241,12 @@ namespace SkinnaManagement.WebPages.QuanLyKhachHang
         }
         #endregion
 
+        [WebMethod]
+        public static void XoaKhachHang(string id)
+        {              
+            KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(int.Parse(id));
+            khachHang.IsDeleted = true;
+            DataRepository.KhachHangProvider.Update(khachHang);
+        }
     }
 }

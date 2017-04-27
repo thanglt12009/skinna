@@ -64,11 +64,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.TrangThaiDonHang).ToList()
                                                              : data.OrderBy(p => p.TrangThaiDonHang).ToList();
                         break;
-                    case "6":
-                        // Setting.  
-                        lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.PhuongThucThanhToan).ToList()
-                                                             : data.OrderBy(p => p.PhuongThucThanhToan).ToList();
-                        break;                        
+                   
                     default:
                         // Setting.  
                         lst = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.MaDonHang).ToList()
@@ -76,7 +72,7 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -96,25 +92,28 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             int id = 0; 
             foreach (var item in donHanglist)
             {
-                KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(item.MaKhachHang.GetValueOrDefault(0));
-                NguonDonHang nguonDonHang = DataRepository.NguonDonHangProvider.GetByMaNguonDonHang(item.MaNguonDonHang.GetValueOrDefault(0));
-                TrangThaiDonHang trangThaiDonHang = DataRepository.TrangThaiDonHangProvider.GetByMaTrangThaiDonHang(item.MaTrangThaiDonHang.GetValueOrDefault(0));
-                PhuongThucThanhToan phuongThuc = DataRepository.PhuongThucThanhToanProvider.GetByMaPhuongThucThanhToan(item.MaPhuongThucThanhToan.GetValueOrDefault(0));
-                DonHangView viewItem = new DonHangView();
-                viewItem.MaDonHang = item.MaDonHang;
-                viewItem.TenKhachHang = khachHang.TenKhachHang;
-                string phiVanChuyenView = item.PhiVanChuyen.GetValueOrDefault().ToString("C", nfi);
-                viewItem.PhiVanChuyen = phiVanChuyenView.Substring(0, phiVanChuyenView.Length - 3);
-                viewItem.NgayDatHangDateTime = item.NgayTaoDonHang.GetValueOrDefault();
-                viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") +  ConvertTime(item.NgayTaoDonHang.ToString());
-                string tongTienDonHangView = item.TongTienDonHang.GetValueOrDefault().ToString("C", nfi);
-                viewItem.TongTien = tongTienDonHangView.Substring(0, tongTienDonHangView.Length - 3);
-                viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;
-                viewItem.PhuongThucThanhToan = phuongThuc.TenPhuongThucThanhToan ?? string.Empty;
-                viewItem.TongTienDecimal = item.TongTienDonHang.GetValueOrDefault();
-                viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
-                lst.Add(viewItem);
-                id++;
+                if (!item.IsDeleted)
+                {
+                    KhachHang khachHang = DataRepository.KhachHangProvider.GetByMaKhachHang(item.MaKhachHang.GetValueOrDefault(0));
+                    NguonDonHang nguonDonHang = DataRepository.NguonDonHangProvider.GetByMaNguonDonHang(item.MaNguonDonHang.GetValueOrDefault(0));
+                    TrangThaiDonHang trangThaiDonHang = DataRepository.TrangThaiDonHangProvider.GetByMaTrangThaiDonHang(item.MaTrangThaiDonHang.GetValueOrDefault(0));
+                    PhuongThucThanhToan phuongThuc = DataRepository.PhuongThucThanhToanProvider.GetByMaPhuongThucThanhToan(item.MaPhuongThucThanhToan.GetValueOrDefault(0));
+                    DonHangView viewItem = new DonHangView();
+                    viewItem.MaDonHang = item.MaDonHang;
+                    viewItem.TenKhachHang = khachHang.TenKhachHang;
+                    string phiVanChuyenView = item.PhiVanChuyen.GetValueOrDefault().ToString("C", nfi);
+                    viewItem.PhiVanChuyen = phiVanChuyenView.Substring(0, phiVanChuyenView.Length - 3);
+                    viewItem.NgayDatHangDateTime = item.NgayTaoDonHang.GetValueOrDefault();
+                    viewItem.NgayDatHang = item.NgayTaoDonHang.GetValueOrDefault().ToString("dd/MM/yyyy") + ConvertTime(item.NgayTaoDonHang.ToString());
+                    string tongTienDonHangView = item.TongTienDonHang.GetValueOrDefault().ToString("C", nfi);
+                    viewItem.TongTien = tongTienDonHangView.Substring(0, tongTienDonHangView.Length - 3);
+                    viewItem.TrangThaiDonHang = trangThaiDonHang.TenLoaiTrangThaiDonHang;                   
+                    viewItem.TongTienDecimal = item.TongTienDonHang.GetValueOrDefault();
+                    viewItem.Edit = "<a href=\"EditDonHang.aspx?id=" + item.MaDonHang + "\">Chi tiết</a>";
+                    viewItem.Delete = "<a href=\"javascript:XoaDonHang(" + item.MaDonHang + ");void(0);\">Xóa</a>";
+                    lst.Add(viewItem);
+                    id++;
+                }
             }
             return lst;
 
@@ -208,7 +207,16 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             // Return info.  
             return result;
         }
-      
+
+        [WebMethod]
+        public static void XoaDonHang(string id)
+        {
+            DonHang donHang = DataRepository.DonHangProvider.GetByMaDonHang(int.Parse(id));
+            donHang.IsDeleted = true;
+            DataRepository.DonHangProvider.Update(donHang);
+        }
+
+
         private static decimal SumTongThu(List<DonHangView> data)
         {
             decimal tongThu = 0;

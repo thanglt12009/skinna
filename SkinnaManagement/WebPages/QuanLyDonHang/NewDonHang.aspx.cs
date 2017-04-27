@@ -90,14 +90,17 @@ namespace SkinnaManagement.WebPages.QuanLyDonHang
             }
             if (IsPostBack && FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName.Length > 0)
             {
-                KhachHangParameterBuilder query = new KhachHangParameterBuilder();
-                query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
-
-                KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
-                if (khachHang != null)
+                if (!string.IsNullOrEmpty(SoDienThoai.Text))
                 {
-                    FileUpload1.SaveAs(Server.MapPath("~/Images/") + khachHang.MaKhachHang + ".jpg");
-                    AnhChup.ImageUrl = "~/Images/" + khachHang.MaKhachHang + ".jpg";
+                    KhachHangParameterBuilder query = new KhachHangParameterBuilder();
+                    query.Append(KhachHangColumn.SoDienThoai, SoDienThoai.Text);
+
+                    KhachHang khachHang = DataRepository.KhachHangProvider.Find(query.GetParameters())[0];
+                    if (khachHang != null)
+                    {
+                        FileUpload1.SaveAs(Server.MapPath("~/Images/") + khachHang.MaKhachHang + ".jpg");
+                        AnhChup.ImageUrl = "~/Images/" + khachHang.MaKhachHang + ".jpg";
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@
     <script src="../../js/jquery-1.11.1.min.js"></script>
 
     <script type="text/javascript">
+        var table;
         $(function () {
             $("#from").datepicker({
                 defaultDate: "+1w",
@@ -25,7 +26,7 @@
             });
         });
         $(document).ready(function () {
-            var table = $('#DonHangTable').DataTable(
+            table = $('#DonHangTable').DataTable(
             {
                 "pageLength": 50,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -33,7 +34,7 @@
 
                   { "width": "5%", "targets": [0] },
 
-                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
 
                 ],
                 "language":
@@ -69,8 +70,8 @@
                       { "data": "TongTien" },
                       { "data": "PhiVanChuyen" },
                       { "data": "TrangThaiDonHang" },
-                      { "data": "PhuongThucThanhToan" },
-                      { "data": "Edit" }
+                      { "data": "Edit" },
+                      { "data": "Delete" }
                 ]
             });
             // Add event listeners to the two range filtering inputs
@@ -85,7 +86,7 @@
 
                       { "width": "5%", "targets": [0] },
 
-                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
 
                     ],
                     "language":
@@ -123,8 +124,8 @@
                       { "data": "TongTien" },
                       { "data": "PhiVanChuyen" },
                       { "data": "TrangThaiDonHang" },
-                      { "data": "PhuongThucThanhToan" },
-                      { "data": "Edit" }
+                      { "data": "Edit" },
+                      { "data": "Delete" }
                 ]
             });
           }
@@ -139,7 +140,7 @@
 
                   { "width": "5%", "targets": [0] },
 
-                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
 
                 ],
                 "language":
@@ -177,8 +178,8 @@
                       { "data": "TongTien" },
                       { "data": "PhiVanChuyen" },
                       { "data": "TrangThaiDonHang" },
-                      { "data": "PhuongThucThanhToan" },
-                      { "data": "Edit" }
+                      { "data": "Edit" },
+                      { "data": "Delete" }
                 ]
             });
             });
@@ -193,7 +194,7 @@
 
                       { "width": "5%", "targets": [0] },
 
-                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                      { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
 
                     ],
                     "language":
@@ -230,9 +231,9 @@
                       { "data": "NgayDatHang" },
                       { "data": "TongTien" },
                       { "data": "PhiVanChuyen" },
-                      { "data": "TrangThaiDonHang" },
-                      { "data": "PhuongThucThanhToan" },
-                      { "data": "Edit" }
+                      { "data": "TrangThaiDonHang" },                      
+                      { "data": "Edit" },
+                      { "data": "Delete" }
                 ]
             });
           }
@@ -247,7 +248,7 @@
 
                  { "width": "5%", "targets": [0] },
 
-                 { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+                 { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
 
                ],
                "language":
@@ -285,14 +286,72 @@
                      { "data": "TongTien" },
                      { "data": "PhiVanChuyen" },
                      { "data": "TrangThaiDonHang" },
-                     { "data": "PhuongThucThanhToan" },
-                     { "data": "Edit" }
+                     { "data": "Edit" },
+                     { "data": "Delete" }
                ]
            });
             });
         });
+        function OnSuccess(result, context, method) {
+            table.destroy();
+           table = $('#DonHangTable').DataTable(
+            {
+                "pageLength": 50,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "columnDefs": [
+
+                  { "width": "5%", "targets": [0] },
+
+                  { "className": "text-center custom-middle-align", "targets": [0, 1, 2, 3, 4, 5, 6] },
+
+                ],
+                "language":
+                  {
+                      "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+                  },
+                "processing": true,
+                "serverSide": true,
+                "ajax":
+                  {
+                      "url": "QuanLyDonHang.aspx/GetData",
+                      "contentType": "application/json",
+                      "type": "GET",
+                      "dataType": "JSON",
+                      "data": function (d) {
+                          return d;
+                      },
+                      "dataSrc": function (json) {
+                          json.draw = json.d.draw;
+                          json.recordsTotal = json.d.recordsTotal;
+                          json.recordsFiltered = json.d.recordsFiltered;
+                          json.data = json.d.data;
+                          var sum = json.d.sum;
+                          $('#<%=lblTotalCredits.ClientID%>').html(sum);
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  },
+                "columns": [
+                      { "data": "MaDonHang" },
+                      { "data": "TenKhachHang" },
+                      { "data": "NgayDatHang" },
+                      { "data": "TongTien" },
+                      { "data": "PhiVanChuyen" },
+                      { "data": "TrangThaiDonHang" },
+                      { "data": "Edit" },
+                      { "data": "Delete" }
+                ]
+            });
+        }
+        function OnFailed(error, context, method) {
+
+        }
+        function XoaDonHang(id) {
+            PageMethods.XoaDonHang(id, OnSuccess, OnFailed, null);
+        }
     </script>
     <form runat="server">
+        <asp:ScriptManager ID="Main" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
             <div class="row">
                 <div class="col-lg-12">
@@ -319,8 +378,8 @@
                         <th>Ngày Đặt Hàng</th>
                         <th>Tổng tiền</th>
                         <th>Phí ship</th>
-                        <th>Trạng thái đơn hàng</th>
-                        <th>Phương thức thanh toán</th>
+                        <th>Trạng thái đơn hàng</th>                        
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
